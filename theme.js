@@ -9,7 +9,7 @@
     if (sun) sun.setAttribute("data-show", light ? "true" : "false");
     if (moon) moon.setAttribute("data-show", light ? "false" : "true");
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", light ? "#ffffff" : "#0e0e0c");
+    if (meta) meta.setAttribute("content", light ? "#ffffff" : "#0a0a0a");
   }
   paint();
   button.addEventListener("click", function () {
