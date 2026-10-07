@@ -4,19 +4,18 @@
   var sun = button.querySelector('[data-show]');
   var moon = button.querySelectorAll(".icon-swap")[1];
   function paint() {
-    var dark = document.documentElement.classList.contains("dark");
-    // De knop heet "Donkere weergave": ingedrukt = donker aan.
-    button.setAttribute("aria-pressed", dark ? "true" : "false");
-    if (sun) sun.setAttribute("data-show", dark ? "false" : "true");
-    if (moon) moon.setAttribute("data-show", dark ? "true" : "false");
+    var light = !document.documentElement.classList.contains("dark");
+    button.setAttribute("aria-pressed", light ? "true" : "false");
+    if (sun) sun.setAttribute("data-show", light ? "true" : "false");
+    if (moon) moon.setAttribute("data-show", light ? "false" : "true");
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", dark ? "#0a0a0a" : "#ffffff");
+    if (meta) meta.setAttribute("content", light ? "#ffffff" : "#0a0a0a");
   }
   paint();
   button.addEventListener("click", function () {
-    var dark = !document.documentElement.classList.contains("dark");
-    document.documentElement.classList.toggle("dark", dark);
-    try { localStorage.setItem("wv-theme", dark ? "dark" : "light"); } catch (e) {}
+    var nextLight = document.documentElement.classList.contains("dark");
+    document.documentElement.classList.toggle("dark", !nextLight);
+    try { localStorage.setItem("wv-theme", nextLight ? "light" : "dark"); } catch (e) {}
     paint();
   });
 })();
