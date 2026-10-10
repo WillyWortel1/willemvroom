@@ -182,10 +182,11 @@ muteBtn.addEventListener('click',e=>{e.stopPropagation();toggleMute();muteBtn.bl
 if(isTouch)document.querySelector('#touch .act').prepend(muteBtn);
 
 /* ---------- invoer ---------- */
-const keys={left:0,right:0,fire:0};const pressed={fire:false,start:false,pause:false};
+const keys={left:0,right:0,fire:0};const pressed={fire:false,start:false,pause:false};let fireQ=0,lastFireT=-1e9;const MAXSHOTS=6,FIRECD=80,AUTOFIRE=150;
+function pressFire(){const t=performance.now();if(t-lastFireT<FIRECD)return;lastFireT=t;fireQ=Math.min(fireQ+1,MAXSHOTS);} // elke tik/druk = direct 1 schot; 80 ms tegen dubbel-tik
 const KM={ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'fire'};
 addEventListener('keydown',e=>{const k=KM[e.code];
-  if(k){keys[k]=1;e.preventDefault();if(k==='fire'&&!e.repeat){pressed.fire=true;pressed.start=true;}}
+  if(k){keys[k]=1;e.preventDefault();if(k==='fire'&&!e.repeat){pressFire();pressed.start=true;}}
   if(e.code==='ArrowUp'||e.code==='ArrowDown')e.preventDefault();
   if(e.repeat)return;
   if(e.code==='Enter'){pressed.start=true;e.preventDefault();}
@@ -197,7 +198,7 @@ addEventListener('blur',()=>{keys.left=keys.right=keys.fire=0;if(mode==='play')p
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode==='play')paused=true;});
 document.querySelectorAll('#bF,#bP').forEach(b=>{const k=b.dataset.k;
   const down=e=>{e.preventDefault();audio();b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}
-    if(k==='pause'){pressed.pause=true;return;}keys.fire=1;pressed.fire=true;pressed.start=true;};
+    if(k==='pause'){pressed.pause=true;return;}keys.fire=1;pressFire();pressed.start=true;};
   const up=e=>{e.preventDefault();b.classList.remove('on');if(k==='fire')keys.fire=0;};
   b.addEventListener('pointerdown',down);b.addEventListener('pointerup',up);b.addEventListener('pointercancel',up);b.addEventListener('lostpointercapture',up);});
 cv.addEventListener('pointerdown',()=>{audio();if(mode==='title'||mode==='over')pressed.start=true;else if(paused)pressed.pause=true;});
@@ -224,14 +225,14 @@ document.addEventListener('touchmove',e=>{e.preventDefault();},{passive:false});
 const PY=216,GROUND=239,TOPY=28,BX=[32,78,124,170],BY=192,BW=22,BH=16;
 let mode='title',paused=false,timer=0,frame=0,wave=1,score=0,lives=3,extraGiven=false,newRecord=false;
 let aliens=[],ptr=0,dir=1,dropping=false,lastBeat=-99,beatIx=0,freezeA=false;
-let P={x:20,alive:true,deadT:0},shot=null,bombs=[],bombT=0,bombKind=0,ufo=null,ufoT=0,shotsFired=0,fx=[],bunkers=[],ground=[],pops=[];
+let P={x:20,alive:true,deadT:0},shots=[],bombs=[],bombT=0,bombKind=0,ufo=null,ufoT=0,shotsFired=0,fx=[],bunkers=[],ground=[],pops=[];
 function alienRow(r){return r===0?'A':r<3?'B':'C';}
 function pts(t){return t==='A'?30:t==='B'?20:10;}
 function startY(){return 56+8*Math.min(wave-1,8);}
 function makeWave(){
   aliens=[];const y0=startY();
   for(let r=4;r>=0;r--)for(let c=0;c<11;c++){const t=alienRow(r),s=SPR[t][0];aliens.push({t:t,c:c,r:r,x:24+c*16,y:y0+r*16,w:s.w,ox:Math.floor((12-s.w)/2),alive:true,f:0});}
-  ptr=0;dir=1;dropping=false;bombs=[];shot=null;ufo=null;sirenOff();ufoT=1200;bombT=90;fx=[];
+  ptr=0;dir=1;dropping=false;bombs=[];shots=[];fireQ=0;ufo=null;sirenOff();ufoT=1200;bombT=90;fx=[];
   bunkers=BX.map(()=>{const a=new Uint8Array(BW*BH);for(let y=0;y<BH;y++)for(let x=0;x<BW;x++){let on=1;
     if(y<4&&(x<4-y||x>17+y))on=0;if(y>=12&&x>=6&&x<=15)on=0;if(y===11&&x>=7&&x<=14)on=0;if(y===10&&x>=8&&x<=13)on=0;a[y*BW+x]=on;}return a;});
   ground=new Uint8Array(W).fill(1);
@@ -288,17 +289,18 @@ function update(){
   else if(mode==='over'){timer++;if(timer>90&&pressed.start)mode='title';}
   clear();
 }
-function clear(){pressed.fire=pressed.start=pressed.pause=false;}
+function clear(){if(mode!=='play')fireQ=0;pressed.fire=pressed.start=pressed.pause=false;}
 function updatePlay(){
   if(!P.alive){P.deadT++;if(P.deadT>=120){if(lives<=0){mode='over';timer=0;sfx.over();}else{P.alive=true;P.x=20;bombs=[];}}return;}
   if(keys.left)P.x=Math.max(8,P.x-1);if(keys.right)P.x=Math.min(W-21,P.x+1);
-  if((pressed.fire||keys.fire&&isTouch)&&!shot){shot={x:P.x+6,y:PY-4};shotsFired++;sfx.shot();}
+  if(keys.fire&&performance.now()-lastFireT>=AUTOFIRE){lastFireT=performance.now();fireQ=Math.min(fireQ+1,MAXSHOTS);} // vasthouden = autovuur elke 150 ms
+  if(fireQ>0){fireQ--;if(shots.length<MAXSHOTS){shots.push({x:P.x+6,y:PY-4});shotsFired++;sfx.shot();}}
   if(!freezeA)stepFormation();
   // invasie
   for(const a of aliens)if(a.alive){if(a.y+8>=PY){P.alive=false;P.deadT=0;lives=0;sfx.die();sirenOff();return;}
     for(let i=0;i<4;i++){const lx0=a.x+a.ox-BX[i],ly0=a.y-BY;for(let y=Math.max(0,ly0);y<Math.min(BH,ly0+8);y++)for(let x=Math.max(0,lx0);x<Math.min(BW,lx0+a.w);x++)bunkers[i][y*BW+x]=0;}}
   // schot
-  if(shot){for(let s=0;s<4&&shot;s++){shot.y--;
+  for(let si=shots.length-1;si>=0;si--){let shot=shots[si];for(let s=0;s<4&&shot;s++){shot.y--;
     const b=bunkerAt(shot.x,shot.y);if(b){erode(b[0],b[1],b[2],true);fx.push({x:shot.x-3,y:shot.y-3,t:10,s:'spark'});shot=null;break;}
     for(const a of aliens)if(a.alive&&shot.x>=a.x+a.ox&&shot.x<a.x+a.ox+a.w&&shot.y>=a.y&&shot.y<a.y+8){a.alive=false;addScore(pts(a.t));fx.push({x:a.x,y:a.y,t:16,s:'boom'});sfx.hit();shot=null;break;}
     if(!shot)break;
@@ -306,7 +308,7 @@ function updatePlay(){
     if(!shot)break;
     if(ufo&&shot.x>=ufo.x&&shot.x<ufo.x+16&&shot.y>=40&&shot.y<46){const v=[50,100,150,300][Math.floor(Math.random()*4)];addScore(v);pops.push({x:ufo.x+8,y:40,t:70,s:String(v)});sfx.ufoHit();sirenOff();ufo=null;shot=null;break;}
     if(shot.y<=TOPY){fx.push({x:shot.x-3,y:TOPY,t:10,s:'spark'});shot=null;}
-  }}
+  }if(!shot)shots.splice(si,1);}
   // bommen
   if(--bombT<=0){bombT=bombReload();fireBomb();}
   const v=bombSpeed();
@@ -337,7 +339,7 @@ function drawWorld(){
   if(mode!=='title'){
     if(P.alive)spr(SPR.player,P.x,PY);else if(P.deadT<100)spr(SPR.pdie[Math.floor(P.deadT/6)%2],P.x,PY);
   }
-  if(shot){ctx.fillStyle='#fff';ctx.fillRect(shot.x,shot.y,1,4);}
+  ctx.fillStyle='#fff';for(const sh of shots)ctx.fillRect(sh.x,sh.y,1,4);
   for(const b of bombs)spr(BOMBS[b.kind][b.f],b.x-1,b.y);
   for(const e of fx)spr(SPR[e.s],e.x,e.y);
   for(const p of pops)text(p.s,p.x,p.y,'#fff',1,'center');
@@ -379,7 +381,7 @@ function render(){
 let last=performance.now(),acc=0;const STEP=1000/60;
 function tick(now){acc+=Math.min(250,now-last);last=now;let n=0;while(acc>=STEP&&n<5){update();acc-=STEP;n++;}if(n>=5)acc=0;render();requestAnimationFrame(tick);}
 makeWave();
-if(DEBUG)window.__inv={state:()=>({mode:mode,paused:paused,wave:wave,score:score,lives:lives,px:P.x,palive:P.alive,shot:!!shot,bombs:bombs.length,ufo:ufo?ufo.x:null,alive:alive(),
+if(DEBUG)window.__inv={state:()=>({mode:mode,paused:paused,wave:wave,score:score,lives:lives,px:P.x,palive:P.alive,shot:shots.length>0,shots:shots.length,fired:shotsFired,bombs:bombs.length,ufo:ufo?ufo.x:null,alive:alive(),
    topY:Math.min(...aliens.filter(a=>a.alive).map(a=>a.y).concat([999])),bunkers:[0,1,2,3].map(bunkerCount),hi:hiScore,muted:muted}),
   aliens:()=>aliens.filter(a=>a.alive).map(a=>({x:a.x+a.ox,w:a.w,y:a.y,t:a.t})),freeze:v=>{freezeA=v;},setX:x=>{P.x=x;},killAll:()=>{aliens.forEach(a=>a.alive=false);},clearColumn:x=>{aliens.forEach(a=>{if(x>=a.x+a.ox-2&&x<a.x+a.ox+a.w+2)a.alive=false;});},
   killAllBut:n=>{let k=0;aliens.forEach(a=>{if(a.alive&&k++>=n)a.alive=false;});},bomb:(x,y,kind)=>bombs.push({x:x,y:y,kind:kind||'zig',f:0,acc:0}),noBombs:()=>{bombT=1e9;bombs=[];},
