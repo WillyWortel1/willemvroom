@@ -14,7 +14,7 @@ canvas{position:fixed;left:0;top:0;display:block}
 #bMute{top:max(6px,env(safe-area-inset-top));right:6px}
 #bLaunch{display:none;right:8px;bottom:calc(8px + env(safe-area-inset-bottom));width:96px;height:52px;border-radius:14px;font-size:14px;color:#fff;background:radial-gradient(circle at 40% 30%,#ff7ac4,#d11f7a 60%,#7a0a44);border-color:#ffb3df;box-shadow:0 0 14px #ff3fa4}
 #bLaunch.on{transform:translateY(2px);filter:brightness(1.3)}
-body.touch #bLaunch{display:block}
+body.touch.ready #bLaunch{display:block}
 </style>
 </head>
 <body>
@@ -274,13 +274,14 @@ addEventListener('blur',()=>{held.L.clear();held.R.clear();held.P.clear();setFli
 document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode!=='title')paused=true;});
 // aanraken: linkerhelft = linkerflipper, rechterhelft = rechterflipper (multi-touch)
 const tp=new Map();
-function isUI(e){return e.target&&e.target.closest&&e.target.closest('.ui');}
+function inRect(el,e){const r=el.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;}
+function isUI(e){const el=e.target&&e.target.closest&&e.target.closest('.ui');return !!el&&inRect(el,e);} // aanraking net naast een knop (vinger-correctie) telt als flipper
 document.addEventListener('pointerdown',e=>{if(isUI(e))return;e.preventDefault();audio();
   if(paused){pauseReq=true;return;}if(mode==='title'||mode==='over'){startReq=true;return;}
   const side=e.clientX<innerWidth/2?'L':'R';tp.set(e.pointerId,side);held[side].add('p'+e.pointerId);setFlip();},{passive:false});
 const pend=e=>{const s=tp.get(e.pointerId);if(!s)return;tp.delete(e.pointerId);held[s].delete('p'+e.pointerId);setFlip();};
 document.addEventListener('pointerup',pend);document.addEventListener('pointercancel',pend);
-function uiBtn(id,down,up){const b=document.getElementById(id);b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();audio();b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}down();});
+function uiBtn(id,down,up){const b=document.getElementById(id);b.addEventListener('pointerdown',e=>{if(!inRect(b,e))return;e.preventDefault();e.stopPropagation();audio();b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}down();});
   const u=e=>{b.classList.remove('on');if(up)up();};b.addEventListener('pointerup',u);b.addEventListener('pointercancel',u);b.addEventListener('lostpointercapture',u);
   b.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();down();if(up)up();}});}
 uiBtn('bPause',()=>{pauseReq=true;});uiBtn('bMute',()=>toggleMute());
@@ -416,9 +417,11 @@ function drawDMD(){
   const x=(OX+(TW-DW*2.3)/2*S)*DPR,y=(OYs+4*S)*DPR;ctx.shadowColor='#ff8a00';ctx.shadowBlur=10*DPR;ctx.drawImage(dmdCan,x,y);ctx.shadowBlur=0;
   ctx.strokeStyle='#5a3a1a';ctx.lineWidth=2*DPR;ctx.strokeRect(x-2*DPR,y-2*DPR,dmdCan.width+4*DPR,dmdCan.height+4*DPR);
 }
+let readyCls=null;const bL=document.getElementById('bLaunch');
+function updLaunchBtn(){const r=mode==='play'&&ball.on&&!launched&&ball.x>268||bL.classList.contains('on')&&mode==='play'&&ball.x>268&&ball.y>150;if(r!==readyCls){readyCls=r;document.body.classList.toggle('ready',r);}}
 function loop(now){const dt=Math.min(0.05,(now-last)/1000);last=now;fpsLog.push(dt);if(fpsLog.length>240)fpsLog.shift();
-  for(let i=0;i<simSpeed;i++)frameUpdate(dt);render();requestAnimationFrame(loop);}
-if(DEBUG)window.__fl={state:()=>({mode:mode,paused:paused,score:score,ball:ballNo,extra:extraBalls,on:ball.on,x:ball.x,y:ball.y,vx:ball.vx,vy:ball.vy,atPl:atPlunger(),launched:launched,
+  for(let i=0;i<simSpeed;i++)frameUpdate(dt);updLaunchBtn();render();requestAnimationFrame(loop);}
+if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held,flipL:FL.held,mode:mode,paused:paused,score:score,ball:ballNo,extra:extraBalls,on:ball.on,x:ball.x,y:ball.y,vx:ball.vx,vy:ball.vy,atPl:atPlunger(),launched:launched,
     save:mode==='play'&&launched&&simT<saveUntil,mult:mult,bonus:bonus,tilt:tilt,tilted:tilted,kickback:kickback,glitches:glitches,stuck:stuckNudges,targets:targets.map(t=>t.up),lanes:lanes.map(l=>l.lit),hi:hiScore,msg:msg,
     fps:fpsLog.length?fpsLog.length/fpsLog.reduce((a,b)=>a+b,0):0,muted:muted}),
   place:(x,y,vx,vy)=>{ball.x=x;ball.y=y;ball.vx=vx||0;ball.vy=vy||0;ball.on=true;},setLaunched:(v,save)=>{launched=v;lastLaunch=simT;saveUntil=simT+(save||0);},
