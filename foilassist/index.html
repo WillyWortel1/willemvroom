@@ -3,7 +3,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-7">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-8">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -38,7 +38,7 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <footer>
 <details><summary><b>Hoe de sterren werken</b></summary>
 <p>Een <b>indicatie</b> voor foil assist (golffoilen/downwinden met motorhulp), berekend uit de modelgegevens hierboven. Vandaag: het huidige uur op de spot; andere dagen: het beste van 9, 13 en 17 uur. Start op 5 sterren, daarna aftrek:</p>
-<ul><li>Golven: &lt;0,3 m −3; 0,3–0,6 m −1,5; 0,6–2 m ideaal; 2–3 m −1; &gt;3 m −2,5. Periode &lt;5 s −1, 5–7 s −0,5, ≥7 s geen aftrek.</li>
+<ul><li>Golven: &lt;0,3 m −3; 0,3–0,6 m −1,5; 0,8–1,5 m ideaal; 0,6–0,8 en 1,5–2 m −0,5; 2–3 m −1; &gt;3 m −2,5. Periode &lt;5 s −1,5; 5–7 s −1; 7–9 s −0,5; ≥9 s geen aftrek. Sorteren gebeurt op de onafgeronde score.</li>
 <li>Wind: &gt;25 kn −2; 15–25 kn −1,5 als hij uit dezelfde richting als de golven komt (aanlandig, choppy), anders −0,5; 8–15 kn aanlandig −0,5; lichte wind geen aftrek. Vlagen &gt;30 kn −0,5. (Aanlandig wordt geschat uit wind- t.o.v. golfrichting; de kustoriëntatie per spot zit er niet in.)</li>
 <li>Stroming: &gt;1,5 kn −1; 0,8–1,5 kn −0,5.</li>
 <li>Regen &gt;0,5 mm/u −0,5, &gt;2 mm/u −1; onweer −2. Donker: 0 sterren.</li></ul>
@@ -46,9 +46,9 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <p><b>Bronnen:</b> golven, stroming, watertemperatuur en zeeniveau: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind en weer: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). Hoog- en laagwater zijn afgeleid uit het voorspelde zeeniveau van het model (inclusief getij); dit is een schatting en kan tot een half uur of meer afwijken van de officiële tijden van <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>. Kaart: Leaflet met OpenStreetMap-tegels. Spots en beschrijvingen: foil.guide, ophetwater.nl, Foil School Nederland.</p>
 <p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
 </footer>
-<script src="leaflet/leaflet.js?v=20261014-7"></script>
+<script src="leaflet/leaflet.js?v=20261014-8"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-7"></script>
+<script src="spots.js?v=20261014-8"></script>
 <script>
 const SL=[9,13,17],R=['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -76,19 +76,20 @@ function render(){const dates=[...new Set(M[0].hourly.time.map(t=>t.slice(0,10))
 function score(k,i){const m=M[k].hourly,w=F[k].hourly;if(i<0)return null;let s=5;
  const H=m.wave_height[i],P=m.wave_period[i],wd=w.wind_direction_10m[i],ws=w.wind_speed_10m[i],g=w.wind_gusts_10m[i],c=m.ocean_current_velocity[i],r=w.precipitation[i],wc=w.weather_code[i];
  if(w.is_day&&w.is_day[i]===0)return 0;
- if(H!=null){if(H<0.3)s-=3;else if(H<0.6)s-=1.5;else if(H>3)s-=2.5;else if(H>2)s-=1;
-  if(H>=0.3&&P!=null){if(P<5)s-=1;else if(P<7)s-=0.5;}}
+ if(H!=null){if(H<0.3)s-=3;else if(H<0.6)s-=1.5;else if(H>3)s-=2.5;else if(H>2)s-=1;else if(H<0.8||H>1.5)s-=0.5;
+  if(H>=0.3&&P!=null){if(P<5)s-=1.5;else if(P<7)s-=1;else if(P<9)s-=0.5;}}
  let on=false;if(wd!=null&&m.wave_direction[i]!=null){let d=Math.abs(wd-m.wave_direction[i])%360;if(d>180)d=360-d;on=d<60;}
  if(ws!=null){if(ws>25)s-=2;else if(ws>15)s-=on?1.5:0.5;else if(ws>8&&on)s-=0.5;}
  if(g!=null&&g>30)s-=0.5;
  if(c!=null){const ck=c/1.852;if(ck>1.5)s-=1;else if(ck>0.8)s-=0.5;}
  if(wc!=null&&wc>=95)s-=2;else if(r!=null){if(r>2)s-=1;else if(r>0.5)s-=0.5;}
- return Math.max(0,Math.min(5,Math.round(s*2)/2));}
+ return Math.max(0,Math.min(5,s));}
 function rating(k,date){const m=M[k].hourly;
  if(day==0){const t=new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00';return {v:score(k,m.time.indexOf(t)),t:'nu ('+t.slice(11)+')'};}
  let best=null,bt='';SL.forEach(hh=>{const v=score(k,m.time.indexOf(`${date}T${String(hh).padStart(2,'0')}:00`));if(v!=null&&(best==null||v>best)){best=v;bt=hh+':00';}});return {v:best,t:'beste ('+bt+')'};}
-const stars=v=>v==null?'–':'<span class="st">'+'★'.repeat(Math.floor(v))+(v%1?'<span style="opacity:.6">★</span>':'')+'<span style="opacity:.3">'+'★'.repeat(5-Math.ceil(v))+'</span></span> '+v.toFixed(1).replace('.',',');
-const scol=v=>v==null?'#888':['#d9534f','#e8743b','#f0ad4e','#d4c84a','#8cc152','#2ecc71'][Math.round(v)];
+const R2=v=>v==null?null:Math.round(v*2)/2;
+const stars=x=>{const v=R2(x);return v==null?'–':'<span class="st">'+'★'.repeat(Math.floor(v))+(v%1?'<span style="opacity:.6">★</span>':'')+'<span style="opacity:.3">'+'★'.repeat(5-Math.ceil(v))+'</span></span> '+v.toFixed(1).replace('.',',')};
+const scol=x=>{const v=R2(x);return v==null?'#888':['#d9534f','#e8743b','#f0ad4e','#d4c84a','#8cc152','#2ecc71'][Math.round(v)]};
 function zeeAfst(k){const s=spots[k],m=M[k],km=Math.hypot((m.latitude-s.lat)*111,(m.longitude-s.lon)*111*Math.cos(s.lat*Math.PI/180));return km>5?`<p class="info" style="color:var(--m);font-size:.75rem">Golf-/zeedata uit modelvak ~${Math.round(km)} km van de spot (verder op zee).</p>`:''}
 function cardH(k,date,full){const s=spots[k];const m=M[k].hourly,w=F[k].hourly;
   const idx=SL.map(h=>m.time.indexOf(`${date}T${String(h).padStart(2,'0')}:00`));
@@ -106,7 +107,7 @@ let map,layer,openK=null,lastLand=null,curDate;
 function drawMap(){if(!map){map=L.map('map',{zoomControl:true});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);layer=L.layerGroup().addTo(map);}
  layer.clearLayers();const pts=[];spots.forEach((s,k)=>{if(land!='Alle'&&s.land!=land)return;pts.push([s.lat,s.lon]);
   const w=F[k].hourly,i=Math.max(0,w.time.indexOf(curDate+'T13:00'));
-  L.circleMarker([s.lat,s.lon],{radius:(land=='Alle'?7:10),color:'#fff',weight:2,fillColor:scol(rating(k,curDate).v),fillOpacity:.9}).bindTooltip(`${s.naam} · ${rating(k,curDate).v??'–'}★`,{direction:'top'}).on('click',()=>openS(k)).addTo(layer);});
+  L.circleMarker([s.lat,s.lon],{radius:(land=='Alle'?7:10),color:'#fff',weight:2,fillColor:scol(rating(k,curDate).v),fillOpacity:.9}).bindTooltip(`${s.naam} · ${R2(rating(k,curDate).v)??'–'}★`,{direction:'top'}).on('click',()=>openS(k)).addTo(layer);});
  if(lastLand!==land){map.fitBounds(pts,{padding:[30,30],maxZoom:10});lastLand=land;}}
 function openS(k){openK=k;document.getElementById('sc').innerHTML=cardH(k,curDate,true);document.getElementById('sheet').classList.add('open');}
 function closeS(){openK=null;document.getElementById('sheet').classList.remove('open');}
