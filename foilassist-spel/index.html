@@ -8,7 +8,7 @@
 <title>FOILASSIST!</title>
 <style>
 html,body{margin:0;height:100%;background:#0b2a4a;overflow:hidden;touch-action:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-canvas{position:fixed;left:0;top:0;display:block}
+canvas{position:fixed;left:0;top:0;display:block}#g{background:#8fd0f0}
 .top{position:fixed;z-index:9;top:max(6px,env(safe-area-inset-top));background:rgba(5,25,45,.7);color:#e8fbff;border:2px solid #4fd1ff;border-radius:8px;font:bold 12px system-ui,sans-serif;padding:6px 9px;cursor:pointer}
 #bPause{left:6px}#bLang{right:76px}#bMute{right:6px}
 #pad{position:fixed;z-index:5;left:0;right:0;bottom:calc(10px + env(safe-area-inset-bottom));height:150px;display:none;pointer-events:none}
@@ -44,7 +44,7 @@ body.playing.touchui #pad{display:flex}
 </style>
 </head>
 <body>
-<canvas id="c"></canvas>
+<canvas id="g"></canvas><canvas id="c"></canvas>
 <button class="top" id="bPause" type="button">II</button>
 <button class="top" id="bLang" type="button">EN</button>
 <button class="top" id="bMute" type="button">🔊</button>
@@ -304,7 +304,7 @@ function proj(x,z,y){const c=Math.cos(CAM.th),s=Math.sin(CAM.th),f=x*s+z*c,sd=x*
 const XS=(()=>{const a=[];for(let i=-60;i<=60;i++){const u=i/60;a.push(Math.sign(u)*u*u*400);}return a;})();
 function humpProf(u,top){const L=u<0?top*2.4:top*7;return 0.5*(1+Math.cos(Math.PI*Math.min(1,Math.abs(u)/L)));}
 function projC(x,z,y){const c=Math.cos(CAM.th),s=Math.sin(CAM.th);let f=x*s+z*c;const sd=x*c-z*s;if(f<-1.5)return null;f=Math.max(f,0.6);return [W/2+sd/f*CAM.F,CAM.hz+(CAM.h-y)/f*CAM.F,f];}
-function curlWave(z,top,tm,o){ // golf als glooiend profiel in wereldruimte: steile voorkant, lange zachte rug
+let W3=null;function curlWave(z,top,tm,o){if(W3){W3.push({z,top,o:o||{}});return;} // golf als glooiend profiel in wereldruimte: steile voorkant, lange zachte rug
  o=o||{};top*=2.2;const peel=o.peel===undefined?-1e9:o.peel,sg=o.dir||1,ww=!!o.ww,a=o.alpha||0.95;
  const Lf=top*2.4,Lb=top*7,US=[-1,-0.85,-0.7,-0.56,-0.43,-0.31,-0.2,-0.1,0,0.05,0.11,0.18,0.26,0.35,0.45,0.56,0.68,0.8,0.9,1];
  const prof=u=>{const L=u<0?Lf:Lb;return 0.5*(1+Math.cos(Math.PI*Math.min(1,Math.abs(u)/L)));};
@@ -328,7 +328,7 @@ function curlWave(z,top,tm,o){ // golf als glooiend profiel in wereldruimte: ste
   if(!ww){ctx.fillStyle='rgba(150,240,220,.35)';ctx.beginPath();let on=false;for(const c of crestPts){if(!c){on=false;continue;}const d=(c.x-peel)*sg;if(d>-2&&d<50){const r=Math.min(10,CAM.F/c.p[2]*0.25)*(1-d/50);if(!on){ctx.moveTo(c.p[0],c.p[1]);on=true;}ctx.lineTo(c.p[0]-sg*r*0.3,c.p[1]+r);}}ctx.closePath();ctx.fill();
    ctx.fillStyle='rgba(255,255,255,.7)';for(const c of crestPts){if(!c)continue;if(Math.abs(c.x-peel)<5){for(let k=0;k<3;k++){const ph=(tm*1.7+k*0.33)%1;ctx.fillRect(c.p[0]+Math.sin(k*7+tm*3)*6,c.p[1]-ph*CAM.F/c.p[2]*0.5,2,2);}}}}}
 }
-function crest(z,top,fill,lipCol,foam,tm,bump){ // lange golfkam op afstand z (camera-relatief), evenwijdig aan de kust
+function crest(z,top,fill,lipCol,foam,tm,bump){if(W3)return; // lange golfkam op afstand z (camera-relatief), evenwijdig aan de kust
  top*=2.2;let seg=[];const segs=[];for(const x of XS){const y=top*(1+(bump||0)*Math.sin(x*0.08+tm*1.5));const a=proj(x,z,y),b=proj(x,z,0);if(a&&b)seg.push([a,b]);else if(seg.length){segs.push(seg);seg=[];}}if(seg.length)segs.push(seg);
  for(const sg of segs){if(sg.length<2)continue;ctx.beginPath();ctx.moveTo(sg[0][0][0],sg[0][0][1]);for(const p of sg)ctx.lineTo(p[0][0],p[0][1]);for(let i=sg.length-1;i>=0;i--)ctx.lineTo(sg[i][1][0],sg[i][1][1]+2);ctx.closePath();ctx.fillStyle=fill;ctx.fill();
   if(lipCol){ctx.strokeStyle=lipCol;ctx.lineWidth=Math.max(1.5,Math.min(9,CAM.F/sg[sg.length>>1][0][2]*0.12));ctx.beginPath();ctx.moveTo(sg[0][0][0],sg[0][0][1]);for(const p of sg)ctx.lineTo(p[0][0],p[0][1]);ctx.stroke();}
@@ -348,7 +348,9 @@ function draw(){
  if(play){pitch+=Math.max(-30,Math.min(30,(P.acc||0)*0.35));CAM.F*=1-0.14*spd;}
  const hz=H*0.38+pitch;CAM.hz=hz;const vib=play?(spd*spd*1.6+(P.judder>0?P.judder*12:0)):0;
  ctx.save();if(vib)ctx.translate((Math.random()-.5)*vib,(Math.random()-.5)*vib);ctx.translate(W/2,H*0.6);ctx.rotate(roll);ctx.translate(-W/2,-H*0.6);
- const E=Math.max(W,H)*0.4;
+ const E=Math.max(W,H)*0.4;const U3=!!(window.F3D&&F3D.ok);
+ if(U3){ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,cv.width,cv.height);ctx.restore();W3=[];}
+ if(!U3){
  const sky=ctx.createLinearGradient(0,hz-H*0.6,0,hz);sky.addColorStop(0,lerpC('3d4652','2f8fe0',mood));sky.addColorStop(1,lerpC('8a939c','d8f3ff',mood));ctx.fillStyle=sky;ctx.fillRect(-E,-E,W+2*E,hz+E+2);
  const az=(a)=>{let r=a-CAM.th;while(r>Math.PI)r-=2*Math.PI;while(r<-Math.PI)r+=2*Math.PI;return Math.abs(r)<1.3?W/2+Math.tan(r)*CAM.F:null;};
  if(mood>0.3){const sx=az(0.7);if(sx!==null){ctx.globalAlpha=Math.min(1,(mood-0.3)*2);ctx.fillStyle='#fff3b0';ctx.beginPath();ctx.arc(sx,hz-H*0.2,(20+mood*14)*PX,0,7);ctx.fill();ctx.globalAlpha=1;}}
@@ -362,7 +364,10 @@ function draw(){
  const rz=play?P.rz:tm*3;ctx.strokeStyle='rgba(255,255,255,.16)';ctx.lineWidth=1.5;
  for(let n=-14;n<=14;n++){const z=n*7-(rz%7);let first=true;ctx.beginPath();for(const x of XS){const p=proj(x,z,0.02*Math.sin(x*0.3+tm*2+n));if(!p){first=true;continue;}if(first){ctx.moveTo(p[0],p[1]);first=false;}else ctx.lineTo(p[0],p[1]);}ctx.stroke();}
  if(mood>0.7){ctx.fillStyle='rgba(255,255,255,.9)';for(let i=0;i<14;i++){const sx=(Math.sin(i*91.3)*0.5+0.5)*W,sy=hz+(H-hz)*((Math.sin(i*13.7)*0.5+0.5)*0.6),a=Math.sin(tm*5+i*2);if(a>0.6){ctx.fillRect(sx-4,sy,8,1.5);ctx.fillRect(sx,sy-4,1.5,8);}}}
+ }
+ const shoreZ3=play?-(140+(P.phase==='paddle'?P.prog/PX*0.12:110)):-200;
  if(play)drawWorld(tm);else{const z=40-((tm*8)%45);curlWave(z,1.6,tm,{peel:((tm*6)%120)-60});}
+ if(U3){const dt3=Math.min(.05,tm-(draw.lt||tm));draw.lt=tm;window.__faShout=t('shout');F3D.frame({tm,dt:dt3,W,H,F:CAM.F,hz,roll,th:CAM.th,camH:CAM.h,mood,play,waves:W3,shoreZ:shoreZ3,rz:play?P.rz:tm*3,haz:play&&G.mode==='play'?haz:[],barrel:play&&P.barrel?P.barrel:null});W3=null;}
  if(play)drawHaz(tm);
  if(play)drawSpeed(tm,hz,spd);
  ctx.restore();
@@ -388,7 +393,7 @@ function drawWorld(tm){
 }
 function waveBearing(){ // relatieve hoek naar de dichtstbijzijnde golf (zeezijde = +z)
  let w=null;for(const v of waves)if(v.dx>0&&(!w||v.dx<w.dx))w=v;if(!w)return null;let r=0-P.th;while(r>Math.PI)r-=2*Math.PI;while(r<-Math.PI)r+=2*Math.PI;return {rel:r,m:Math.round(w.dx*PXM)};}
-function drawHaz(tm){for(const h of haz.slice().sort((a,b)=>(b.dist||99)-(a.dist||99))){const p=proj(h.x,h.z,h.y);if(!p)continue;const s=Math.min(4,CAM.F/p[2]*0.028);ctx.save();ctx.translate(p[0],p[1]);ctx.scale(s,s);
+function drawHaz(tm){if(W3)return;for(const h of haz.slice().sort((a,b)=>(b.dist||99)-(a.dist||99))){const p=proj(h.x,h.z,h.y);if(!p)continue;const s=Math.min(4,CAM.F/p[2]*0.028);ctx.save();ctx.translate(p[0],p[1]);ctx.scale(s,s);
 
  if(h.type==='fin'){ctx.fillStyle='#4b5563';ctx.beginPath();ctx.moveTo(-14,0);ctx.quadraticCurveTo(0,-34,10,-40);ctx.quadraticCurveTo(6,-14,16,0);ctx.fill();ctx.fillStyle='#fff';ctx.fillRect(-20,0,40,3);ctx.font='bold 14px system-ui';ctx.fillText('😬',-8,-44);}
  else if(h.type==='gull'){const up=-(H*0.5/(s*PX))*Math.min(1,h.d/5);ctx.translate(0,up);const f=Math.sin(tm*14)*10;ctx.strokeStyle='#222';ctx.fillStyle='#fff';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(-30,f);ctx.quadraticCurveTo(-14,-10,0,0);ctx.quadraticCurveTo(14,-10,30,f);ctx.stroke();ctx.beginPath();ctx.ellipse(0,2,9,6,0,0,7);ctx.fill();ctx.stroke();ctx.fillStyle='#f59e0b';ctx.beginPath();ctx.moveTo(-3,6);ctx.lineTo(3,6);ctx.lineTo(0,13);ctx.fill();ctx.fillStyle='#000';ctx.fillRect(-5,-1,3,3);ctx.fillRect(2,-1,3,3);ctx.strokeStyle='#b91c1c';ctx.beginPath();ctx.moveTo(-7,-5);ctx.lineTo(-2,-2);ctx.moveTo(7,-5);ctx.lineTo(2,-2);ctx.stroke();}
@@ -478,14 +483,15 @@ function drawHUD(tm){ctx.save();const top=96;
  if(msgT>0&&msg){ctx.font='700 '+(15*Math.min(PX,1.2)|0)+'px system-ui';ctx.textAlign='center';const y=H*0.62;const tw=Math.min(W-20,ctx.measureText(msg).width+24);ctx.fillStyle='rgba(3,25,45,.75)';ctx.fillRect((W-tw)/2,y-15,tw,30);ctx.fillStyle='#fff';ctx.fillText(msg,W/2,y,W-30);}
  if(G.paused){ctx.fillStyle='rgba(0,0,0,.5)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.font='800 32px system-ui';ctx.textAlign='center';ctx.fillText(t('pause'),W/2,H/2);}
  ctx.restore();}
-function drawBarrel(tm){const b=P.barrel;ctx.save();
+function drawBarrel(tm){const b=P.barrel;ctx.save();const U3=!!(window.F3D&&F3D.ok);
+ if(!U3){
  const g=ctx.createRadialGradient(W*0.5,H*0.42,10,W*0.5,H*0.42,Math.max(W,H)*0.7);g.addColorStop(0,'rgba(255,255,230,.97)');g.addColorStop(0.18,'rgba(120,230,240,.8)');g.addColorStop(0.55,'rgba(10,110,140,.95)');g.addColorStop(1,'rgba(2,30,50,1)');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
  ctx.strokeStyle='rgba(255,255,255,.35)';ctx.lineWidth=3;for(let i=0;i<14;i++){const a=i/14*Math.PI*2+tm*1.2;ctx.beginPath();ctx.ellipse(W*0.5,H*0.42,W*(0.2+0.25*((i+tm*2)%4)/4),H*(0.15+0.2*((i+tm*2)%4)/4),0,a,a+0.8);ctx.stroke();}
  ctx.fillStyle='rgba(255,255,255,.88)';for(let x=0;x<W;x+=14){ctx.beginPath();ctx.arc(x,18+Math.sin(x*0.05+tm*8)*8,10,0,7);ctx.fill();}
- const growth=Math.min(1,b.t/3.2);ctx.fillStyle='rgba(255,255,220,'+(0.4+growth*0.5)+')';ctx.beginPath();ctx.ellipse(W*0.5,H*0.42,20+growth*W*0.25,14+growth*H*0.18,0,0,7);ctx.fill();
+ const growth=Math.min(1,b.t/3.2);ctx.fillStyle='rgba(255,255,220,'+(0.4+growth*0.5)+')';ctx.beginPath();ctx.ellipse(W*0.5,H*0.42,20+growth*W*0.25,14+growth*H*0.18,0,0,7);ctx.fill();}
  const lane=y=>H*0.8-(y)*H*0.55;ctx.strokeStyle='#ffe066';ctx.lineWidth=3;ctx.setLineDash([8,6]);ctx.strokeRect(W*0.08,lane(b.c+0.13),W*0.84,lane(b.c-0.13)-lane(b.c+0.13));ctx.setLineDash([]);
  const ry=lane(P.p);ctx.fillStyle=b.out>0?'#ff5a5a':'#fff';ctx.beginPath();ctx.moveTo(W*0.5-18,ry+8);ctx.lineTo(W*0.5,ry-12);ctx.lineTo(W*0.5+18,ry+8);ctx.closePath();ctx.fill();
- ctx.font='800 '+(20*PX|0)+'px system-ui';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText('BARREL '+Math.max(0,3.2-b.t).toFixed(1)+'s  ↑/↓',W/2,H*0.14);ctx.restore();}
+ ctx.font='800 '+(20*PX|0)+'px system-ui';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.lineWidth=5;ctx.strokeStyle='#04131f';ctx.strokeText('BARREL '+Math.max(0,3.2-b.t).toFixed(1)+'s  ↑/↓',W/2,H*0.24);ctx.fillText('BARREL '+Math.max(0,3.2-b.t).toFixed(1)+'s  ↑/↓',W/2,H*0.24);ctx.restore();}
 let partyTimer=null;function partyMusic(on){if(on&&!partyTimer){let i=0;const mel=[523,659,784,659,587,698,880,698,523,659,784,1046,988,784,659,587];partyTimer=setInterval(()=>{if(G.mode!=='over'||!G.party){partyMusic(false);return;}tone(mel[i%16],.16,'square',.07);if(i%2===0)tone(mel[i%16]/4,.2,'triangle',.12);i++;},190);}else if(!on&&partyTimer){clearInterval(partyTimer);partyTimer=null;}}
 function drawParty(tm){partyMusic(true);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#3b1d5e');g.addColorStop(0.45,'#f2643a');g.addColorStop(0.62,'#ffd36b');g.addColorStop(0.63,'#1b6f8f');g.addColorStop(0.75,'#e3c48a');g.addColorStop(1,'#c9a46a');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
  ctx.fillStyle='#ffe28a';ctx.beginPath();ctx.arc(W*0.5,H*0.62,50*PX,Math.PI,0);ctx.fill();
@@ -544,5 +550,6 @@ if(DEBUG)window.__fa={G,get P(){return P;},sel,newGame,K,set:(o)=>Object.assign(
  stickX:()=>stickX,setTh:(d)=>{P.th=d*Math.PI/180;},forceRide:(hollow)=>{startFoil();waves=[];nextSwell(0);const w=waves[0];w.hollow=!!hollow;w.dx=10;P.v=w.spd;P.catchable=w;tryCatch();},startGetup:()=>startGetup(),startFoil:()=>startFoil(),audioState:()=>actx?actx.state:'none',waves:()=>waves.map(w=>Math.round(w.dx)),swellAt:(dx)=>{waves=[{kind:"swell",dx:dx*PX,A:110*PX,wf:110*PX,spd:70,broken:true,hollow:false,age:0}];},haz:(ty)=>haz.push({type:ty,x:Math.sin(P.th)*15,z:Math.cos(P.th)*15,vx:-Math.sin(P.th)*4,vz:-Math.cos(P.th)*4,y:ty==='gull'?3:0}),end:(sc)=>{P.score=sc;endGame('test');},mood:(m)=>P.mood=m};
 })();
 </script>
+<script type="module" src="f3d.js?v=2"></script>
 </body>
 </html>
