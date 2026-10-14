@@ -24,6 +24,7 @@ body.playing.touchui #pad{display:flex}
 .stick{position:absolute;left:max(10px,env(safe-area-inset-left));bottom:0;width:150px;height:150px;touch-action:none;pointer-events:auto}
 .stick *{pointer-events:none}
 .stick .base{position:absolute;left:10px;top:10px;width:130px;height:130px;border-radius:50%;background:radial-gradient(circle,rgba(20,70,110,.55),rgba(5,30,55,.75));border:3px solid #bff3ff;box-sizing:border-box}
+.stick .lb{position:absolute;text-align:center;font:800 11px system-ui;color:#e8fbff;text-shadow:0 1px 2px #000}
 .stick .ball{position:absolute;left:47px;top:47px;width:56px;height:56px;border-radius:50%;background:radial-gradient(circle at 36% 30%,#ffe08a,#ff9f1a 55%,#b45309);border:3px solid #fff3c4;box-sizing:border-box}
 #bRemote{position:fixed;pointer-events:auto;touch-action:none;border-radius:14px}
 #ov{position:fixed;inset:0;z-index:8;display:flex;align-items:center;justify-content:center;background:rgba(3,20,38,.72);color:#eafcff;overflow:auto}
@@ -47,7 +48,7 @@ body.playing.touchui #pad{display:flex}
 <button class="top" id="bPause" type="button">II</button>
 <button class="top" id="bLang" type="button">EN</button>
 <button class="top" id="bMute" type="button">🔊</button>
-<div id="pad"><div class="stick" id="stick"><div class="base"></div><div class="ball" id="ball"></div></div><div id="bRemote" aria-label="Foildrive remote"></div></div>
+<div id="pad"><div class="stick" id="stick"><div class="base"></div><span class="lb" style="top:14px;left:0;right:0">FOIL ▲</span><span class="lb" style="bottom:14px;left:0;right:0">▼ DOWN</span><span class="lb" style="left:14px;top:66px">◀</span><span class="lb" style="right:14px;top:66px">▶</span><div class="ball" id="ball"></div></div><div id="bRemote" aria-label="Foildrive remote"></div></div>
 <div id="ov"></div>
 <script>
 'use strict';
@@ -62,7 +63,7 @@ let hi={sessie:+lsGet('fa-hi','0')||0,freeride:+lsGet('fa-hi-free','0')||0};
 /* ---------- teksten ---------- */
 const T={
 nl:{sub:'Peddel uit met je Foildrive, duik onder het schuim, sta op, foil en pak de golf.',start:'SESSIE',free:'FREERIDE',freeTxt:'Freeride: grote golven, oneindige accu, kans op de BARREL.',gear:'Kies je setup',go:'Het water op!',back:'Terug',
-help:'Joystick links: omhoog = pompen, omlaag = duckdive, links/rechts = bocht/sturen. Tik op de Foildrive-remote = motor aan/uit, sleep omhoog/omlaag = vermogen.<br>Toetsen: ↑/W, ↓/S, ←/A en →/D, spatie = bocht, M of Shift = motor, P = pauze.',
+help:'Joystick links: omhoog = FOIL (opstaan en hoger), omlaag = duckdive, links/rechts = bocht/sturen. Tik op de Foildrive-remote = motor aan/uit, sleep omhoog/omlaag = vermogen.<br>Toetsen: ↑/W, ↓/S, ←/A en →/D, spatie = bocht, M of Shift = motor, P = pauze.',
 wing:'Voorvleugel',stab:'Stabilisator',mast:'Mast',board:'Board',bat:'Accu',
 wS:'Klein',wSd:'750 cm² · snel, wendbaar',wM:'Middel',wMd:'1000 cm² · allround',wL:'Groot',wLd:'1400 cm² · veel lift, traag',
 sS:'Klein',sSd:'los, scherpe bochten',sL:'Groot',sLd:'stabiel, vergevend',
@@ -70,14 +71,14 @@ m65d:'kort: snel uit het water',m75d:'allround',m85d:'lang: ruimte, minder wendb
 bS:'Klein',bSd:'4\'2 · duckdive makkelijk, opstaan lastig',bM:'Middel',bMd:'4\'8 · allround',bL:'Groot',bLd:'5\'4 · opstaan makkelijk',
 aS:'Licht',aSd:'korte sessie, lichter',aL:'Groot',aLd:'lange sessie, zwaarder',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Snelheid ${g.vmax|0} · Bocht ${g.turn.toFixed(2)} · Stabiliteit ${g.stab.toFixed(2)} · Accu ${g.cap|0}s`,
-paddle:'Peddel uit! Joystick omlaag bij het schuim',getup:'Joystick omhoog in het groen om op te staan',foil:'Foilen! Pomp, niet te hoog, niet te laag',catchW:'Snelheid goed: tik remote, motor uit = golf pakken!',
+paddle:'Peddel uit! Joystick omlaag bij het schuim',getup:'FOIL (joystick omhoog) in het groen om op te staan',foil:'Foilen! FOIL omhoog, niet te hoog, niet te laag',catchW:'Snelheid goed: tik remote, motor uit = golf pakken!',
 ride:'Opzij onderin = bottom turn, bovenin = cutback',duck:'Duckdive!',washed:'Weggespoeld!',stood:'Opgestaan!',miss:'Te vroeg/laat!',breach:'Breach! Vleugel uit het water',touch:'Touchdown!',
 caught:'Golf gepakt!',swell:'Swell gepakt!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Te snel achter elkaar!',lost:'Golf kwijt, motor aan',close:'Golf sluit: kick-out!',
 barrelC:'Holle golf! BARREL: blijf in de lichte baan',barrel:'BARREL!',swallowed:'Opgeslokt door de buis!',
 over:'Sessie voorbij',batEmpty:'Accu leeg',falls:'Te vaak gevallen',score:'Score',hiS:'Record',again:'Nog een sessie',pause:'Pauze',resume:'Verder',
 bat_:'Accu',falls_:'Val',combo:'Combo'},
 en:{sub:'Paddle out with your Foildrive, duck under the whitewater, get up, foil and catch the wave.',start:'SESSION',free:'FREERIDE',freeTxt:'Freeride: big waves, endless battery, a shot at the BARREL.',gear:'Pick your setup',go:'Hit the water!',back:'Back',
-help:'Joystick left: up = pump, down = duck dive, left/right = turn/steer. Tap the Foildrive remote = motor on/off, drag up/down = power.<br>Keys: ↑/W, ↓/S, ←/A and →/D, space = turn, M or Shift = motor, P = pause.',
+help:'Joystick left: up = FOIL (get up and rise), down = duck dive, left/right = turn/steer. Tap the Foildrive remote = motor on/off, drag up/down = power.<br>Keys: ↑/W, ↓/S, ←/A and →/D, space = turn, M or Shift = motor, P = pause.',
 wing:'Front wing',stab:'Stabiliser',mast:'Mast',board:'Board',bat:'Battery',
 wS:'Small',wSd:'750 cm² · fast, nimble',wM:'Medium',wMd:'1000 cm² · all-round',wL:'Big',wLd:'1400 cm² · lots of lift, slow',
 sS:'Small',sSd:'loose, sharp turns',sL:'Big',sLd:'stable, forgiving',
@@ -85,7 +86,7 @@ m65d:'short: breaches easily',m75d:'all-round',m85d:'long: room, less nimble',
 bS:'Small',bSd:'4\'2 · easy duck dive, hard get-up',bM:'Medium',bMd:'4\'8 · all-round',bL:'Big',bLd:'5\'4 · easy get-up',
 aS:'Light',aSd:'short session, lighter',aL:'Big',aLd:'long session, heavier',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Speed ${g.vmax|0} · Turn ${g.turn.toFixed(2)} · Stability ${g.stab.toFixed(2)} · Battery ${g.cap|0}s`,
-paddle:'Paddle out! Joystick down at the whitewater',getup:'Joystick up in the green to get up',foil:'Foiling! Pump, not too high, not too low',catchW:'Speed matched: tap remote, motor off = catch it!',
+paddle:'Paddle out! Joystick down at the whitewater',getup:'FOIL (joystick up) in the green to get up',foil:'Foiling! FOIL up, not too high, not too low',catchW:'Speed matched: tap remote, motor off = catch it!',
 ride:'Sideways low = bottom turn, high = cutback',duck:'Duck dive!',washed:'Washed back!',stood:'Up and flying!',miss:'Too early/late!',breach:'Breach! Wing out of the water',touch:'Touchdown!',
 caught:'Wave caught!',swell:'Swell caught!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Too fast in a row!',lost:'Lost the wave, motor on',close:'Wave closes: kick-out!',
 barrelC:'Hollow wave! BARREL: stay in the light lane',barrel:'BARREL!',swallowed:'Swallowed by the tube!',
