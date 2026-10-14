@@ -8,7 +8,7 @@ Sheet: https://docs.google.com/spreadsheets/d/1M1zCMLe5vcOAyhp8ONnsB4U9iRu1sd4eI
 1. Open de Sheet hierboven op een computer.
 2. Menu **Extensies → Apps Script** (Extensions → Apps Script). Er opent een editor met een bestand `Code.gs`.
 3. Verwijder de voorbeeldcode en plak de volledige inhoud van `Code.gs` (uit deze map). Klik op het **diskette-icoon (Opslaan)**.
-4. (Optioneel) Kies bovenin de functie **setup** en klik **Uitvoeren** (Run). Geef toestemming (zie stap 7). Dit zet selectievakjes in de kolom `verborgen` en werkt de kopregel bij (incl. merk_board, type_board, merk_foil en mastlengte).
+4. (Optioneel) Kies bovenin de functie **setup** en klik **Uitvoeren** (Run). Geef toestemming (zie stap 7). Dit zet selectievakjes in de kolom `verborgen` en werkt de kopregel bij (incl. merk_board, type_board, merk_foil, model_foil, mastlengte en stab).
 5. Rechtsboven: **Implementeren → Nieuwe implementatie** (Deploy → New deployment).
 6. Klik op het tandwiel bij "Type selecteren" → **Web-app**. Vul in:
    - Beschrijving: `Foilassist ervaringen`

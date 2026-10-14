@@ -9,10 +9,10 @@ const SPOTS_URL = 'https://willemvroom.nl/foilassist/spots.js';
 const MAX_PER_SPOT = 5, PER_SPOT_WINDOW_S = 600;   // max 5 per spot per 10 min
 const MAX_PER_DAY = 100;                           // max 100 per dag in totaal
 const MIN_FILL_MS = 5000;                          // formulier minstens 5 s open
-const HEADERS = ['id','ontvangen','verborgen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','merk_board','type_board','board','merk_foil','voorvleugel','mast','mastlengte','fuselage','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling','taal'];
+const HEADERS = ['id','ontvangen','verborgen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','merk_board','type_board','board','merk_foil','model_foil','voorvleugel','mast','mastlengte','fuselage','stab','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling','taal'];
 const LIMITS = {mastlengte:10, naam:40, hoe_ging_het:1500, omstandigheden_tekst:500, oefenen:300};  // overige tekstvelden: 100
 const PICKS = {golven:['flat','klein','goed','groot','te groot'], wind:['geen','licht','matig','hard','te hard'], stroming:['geen','zwak','matig','sterk'], drukte:['leeg','rustig','druk','erg druk']};
-const PUBLIC = ['id','ontvangen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','merk_board','type_board','board','merk_foil','voorvleugel','mast','mastlengte','fuselage','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling'];
+const PUBLIC = ['id','ontvangen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','merk_board','type_board','board','merk_foil','model_foil','voorvleugel','mast','mastlengte','fuselage','stab','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling'];
 
 function sheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
