@@ -3,7 +3,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-8">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-9">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -46,9 +46,10 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <p><b>Bronnen:</b> golven, stroming, watertemperatuur en zeeniveau: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind en weer: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). Hoog- en laagwater zijn afgeleid uit het voorspelde zeeniveau van het model (inclusief getij); dit is een schatting en kan tot een half uur of meer afwijken van de officiële tijden van <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>. Kaart: Leaflet met OpenStreetMap-tegels. Spots en beschrijvingen: foil.guide, ophetwater.nl, Foil School Nederland.</p>
 <p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
 </footer>
-<script src="leaflet/leaflet.js?v=20261014-8"></script>
+<script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML='<p class="err">Fout bij laden: '+(e.message||"onbekend")+' <button onclick="location.reload()">Opnieuw</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML+='<p class="err">Dit duurt lang… <button onclick="location.reload()">Opnieuw proberen</button></p>'},30000);</script>
+<script src="leaflet/leaflet.js?v=20261014-9"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-8"></script>
+<script src="spots.js?v=20261014-9"></script>
 <script>
 const SL=[9,13,17],R=['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -111,8 +112,22 @@ function drawMap(){if(!map){map=L.map('map',{zoomControl:true});L.tileLayer('htt
  if(lastLand!==land){map.fitBounds(pts,{padding:[30,30],maxZoom:10});lastLand=land;}}
 function openS(k){openK=k;document.getElementById('sc').innerHTML=cardH(k,curDate,true);document.getElementById('sheet').classList.add('open');}
 function closeS(){openK=null;document.getElementById('sheet').classList.remove('open');}
-Promise.all([fetch(mU).then(r=>{if(!r.ok)throw r.status;return r.json()}),fetch(fU).then(r=>{if(!r.ok)throw r.status;return r.json()})])
-.then(([m,w])=>{M=[].concat(m);F=[].concat(w);
- document.getElementById('upd').textContent='Opgehaald: '+new Date().toLocaleString('nl-NL',{weekday:'short',hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'})+' (Open-Meteo).';render();})
-.catch(e=>{document.getElementById('main').innerHTML=`<p class="err">Kon de gegevens niet laden (${e}). Probeer later opnieuw.</p>`});
+
+const KEY='foilassist-cache-v1';
+function tfetch(u,ms=25000){const c=new AbortController();const t=setTimeout(()=>c.abort(),ms);return fetch(u,{signal:c.signal}).then(r=>{clearTimeout(t);if(!r.ok)throw new Error('HTTP '+r.status);return r.json()})}
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+async function retry(fn,n=3){let e;for(let i=0;i<n;i++){try{return await fn()}catch(x){e=x;await sleep(1500*2**i)}}throw e}
+const ck=s=>s.lat.toFixed(4)+','+s.lon.toFixed(4);
+function pick(d){const idx={};d.coords.forEach((c,i)=>idx[(+c[0]).toFixed(4)+','+(+c[1]).toFixed(4)]=i);const ii=spots.map(s=>idx[ck(s)]);if(ii.some(i=>i==null))throw new Error('data.json mist spots');return {m:ii.map(i=>d.marine[i]),f:ii.map(i=>d.forecast[i]),t:d.updated}}
+async function live(){const ch=[];for(let i=0;i<spots.length;i+=25)ch.push(spots.slice(i,i+25));const m=[],f=[];
+ for(const c of ch){const la=c.map(s=>s.lat).join(','),lo=c.map(s=>s.lon).join(',');
+  m.push(...[].concat(await retry(()=>tfetch(mU.replace(/latitude=[^&]*&longitude=[^&]*/,`latitude=${la}&longitude=${lo}`)))));
+  f.push(...[].concat(await retry(()=>tfetch(fU.replace(/latitude=[^&]*&longitude=[^&]*/,`latitude=${la}&longitude=${lo}`)))));}
+ return {m,f,t:new Date().toISOString()}}
+function show(d,note){M=d.m;F=d.f;document.getElementById('upd').textContent='Gegevens van '+new Date(d.t).toLocaleString('nl-NL',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' (Open-Meteo)'+(note||'')+'.';render();}
+function fail(e){document.getElementById('main').innerHTML=`<p class="err">Kon de gegevens niet laden (${e&&e.message||e}). Controleer je verbinding. <button onclick="location.reload()">Opnieuw proberen</button></p>`;}
+(async()=>{let cached=null;try{cached=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+ try{let d;try{d=pick(await retry(()=>tfetch('data.json?h='+Math.floor(Date.now()/9e5))))}catch(e){console.warn('data.json:',e.message);d=await live()}
+  show(d);try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
+ catch(e){if(cached&&cached.m&&cached.m.length==spots.length){show(cached,' – opgeslagen kopie, live laden lukte niet')}else fail(e)}})();
 </script></body></html>
