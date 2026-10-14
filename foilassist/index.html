@@ -3,7 +3,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-12">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-13">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -27,6 +27,7 @@ footer{padding:10px 14px 30px;color:var(--m);font-size:.78rem}footer a{color:var
 .info{font-size:.85rem;color:var(--t);margin:0 0 8px;opacity:.9}
 h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 .rt{margin:-2px 0 6px;font-size:.9rem}.st{color:#ffc83d;letter-spacing:1px}
+.cams{margin:0 0 8px;font-size:.85rem}.cams a{color:var(--a);margin-right:10px;text-decoration:none;white-space:nowrap}
 .err{color:#ffb4a8}
 </style></head><body>
 <header><h1>🏄 Foilassist – spots NL · FR · ES · PT · MA · Canarias · UK · IE · BE</h1>
@@ -47,9 +48,9 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
 </footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML='<p class="err">Fout bij laden: '+(e.message||"onbekend")+' <button onclick="location.reload()">Opnieuw</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML+='<p class="err">Dit duurt lang… <button onclick="location.reload()">Opnieuw proberen</button></p>'},30000);</script>
-<script src="leaflet/leaflet.js?v=20261014-12"></script>
+<script src="leaflet/leaflet.js?v=20261014-13"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-12"></script>
+<script src="spots.js?v=20261014-13"></script>
 <script>
 const SL=[9,13,17],R=['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -91,12 +92,13 @@ function rating(k,date){const m=M[k].hourly;
 const R2=v=>v==null?null:Math.round(v*2)/2;
 const stars=x=>{const v=R2(x);return v==null?'–':'<span class="st">'+'★'.repeat(Math.floor(v))+(v%1?'<span style="opacity:.6">★</span>':'')+'<span style="opacity:.3">'+'★'.repeat(5-Math.ceil(v))+'</span></span> '+v.toFixed(1).replace('.',',')};
 const scol=x=>{const v=R2(x);return v==null?'#888':['#d9534f','#e8743b','#f0ad4e','#d4c84a','#8cc152','#2ecc71'][Math.round(v)]};
+function camsH(s){if(!s.webcams||!s.webcams.length)return '';return '<p class="cams">'+s.webcams.map((c,i)=>`<a href="${c.url}" target="_blank" rel="noopener noreferrer" title="${c.naam.replace(/"/g,'&quot;')}">📷 Spotcam${i?' '+(i+1):''}</a>`).join(' ')+'</p>'}
 function zeeAfst(k){const s=spots[k],m=M[k],km=Math.hypot((m.latitude-s.lat)*111,(m.longitude-s.lon)*111*Math.cos(s.lat*Math.PI/180));return km>5?`<p class="info" style="color:var(--m);font-size:.75rem">Golf-/zeedata uit modelvak ~${Math.round(km)} km van de spot (verder op zee).</p>`:''}
 function cardH(k,date,full){const s=spots[k];const m=M[k].hourly,w=F[k].hourly;
   const idx=SL.map(h=>m.time.indexOf(`${date}T${String(h).padStart(2,'0')}:00`));
   const row=(lab,fn)=>`<tr><td>${lab}</td>${idx.map(i=>`<td>${i<0?'–':fn(i)}</td>`).join('')}</tr>`;
   const td=tides(M[k],date);const hv=M[k].minutely_15.sea_level_height_msl.filter(v=>v!=null),rg=hv.length?Math.max(...hv)-Math.min(...hv):0;
-  return `<section class="card"><h2>${s.naam}<small>${s.land} · lokale tijd ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${s.info}</p>`:''}${zeeAfst(k)}<table>
+  return `<section class="card"><h2>${s.naam}<small>${s.land} · lokale tijd ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${s.info}</p>`:''}${camsH(s)}${zeeAfst(k)}<table>
   <tr><th></th>${SL.map(h=>`<th>${h}:00</th>`).join('')}</tr>
   ${row('Weer',i=>`${wx(w.weather_code[i])} ${f(w.temperature_2m[i])}°${w.precipitation[i]>0?` <small>${f(w.precipitation[i],1)}mm</small>`:''}`)}
   ${row('Wind kn',i=>`${arrow(w.wind_direction_10m[i])} ${f(w.wind_speed_10m[i])}<small>/${f(w.wind_gusts_10m[i])}</small> ${card(w.wind_direction_10m[i])}`)}
