@@ -234,7 +234,7 @@ function update(dt){
   if(P.catchable&&(!P.motor||tp))tryCatch();
  } else if(P.phase==='ride'){
   const w=P.wave;w.age+=dt;P.v=w.spd;
-  if(P.dropT>0){P.dropT-=dt;P.p-=0.55*dt;P.energy=Math.max(P.energy,0.8);}P.p+=((K.up?0.9:0)-(K.down?1.1:0)-0.12)*dt*g.turn;if(P.climb>0){P.climb-=dt;P.p+=1.6*dt;}
+  if(P.dropT>0){P.dropT-=dt;P.p-=0.75*dt;P.energy=Math.max(P.energy,0.8);}P.p+=((K.up?0.9:0)-(K.down?1.1:0)-0.12)*dt*g.turn;if(P.climb>0){P.climb-=dt;P.p+=1.6*dt;}
   P.energy-=dt*(w.broken?0.09:0.14)/g.stab;
   if(P.p>0.98){P.p=0.98;if(!P.barrel){fall(t('breach'));return;}}
   if(P.p<0.05){P.p=0.05;P.energy-=dt*0.5;}
