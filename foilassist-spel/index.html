@@ -63,7 +63,7 @@ let hi={sessie:+lsGet('fa-hi','0')||0,freeride:+lsGet('fa-hi-free','0')||0};
 /* ---------- teksten ---------- */
 const T={
 nl:{sub:'Peddel uit met je Foildrive, duik onder het schuim, sta op, foil en pak de golf.',start:'SESSIE',free:'FREERIDE',freeTxt:'Freeride: grote golven, oneindige accu, kans op de BARREL.',gear:'Kies je setup',go:'Het water op!',back:'Terug',
-help:'Joystick links: omhoog = FOIL (opstaan en hoger), omlaag = duckdive, links/rechts = traploos sturen (hoe verder, hoe scherper). Tik op de Foildrive-remote = motor aan/uit, sleep omhoog/omlaag = vermogen.<br>Toetsen: ↑/W, ↓/S, ←/A en →/D = sturen (vasthouden), M of Shift = motor, P = pauze.',
+help:'Joystick links: omhoog = FOIL (opstaan en hoger), omlaag = duckdive, links/rechts = traploos sturen (hoe verder, hoe scherper). Gas: duim op de Foildrive-remote omhoog schuiven = gas geven (blijft staan), terug naar beneden = gas dicht.<br>Toetsen: ↑/W, ↓/S, ←/A en →/D = sturen (vasthouden), E of Shift = gas, Q = gas terug, M = aan/uit, P = pauze.',
 wing:'Voorvleugel',stab:'Stabilisator',mast:'Mast',board:'Board',bat:'Accu',
 wS:'Klein',wSd:'750 cm² · snel, wendbaar',wM:'Middel',wMd:'1000 cm² · allround',wL:'Groot',wLd:'1400 cm² · veel lift, traag',
 sS:'Klein',sSd:'los, scherpe bochten',sL:'Groot',sLd:'stabiel, vergevend',
@@ -71,14 +71,14 @@ m65d:'kort: snel uit het water',m75d:'allround',m85d:'lang: ruimte, minder wendb
 bS:'Klein',bSd:'4\'2 · duckdive makkelijk, opstaan lastig',bM:'Middel',bMd:'4\'8 · allround',bL:'Groot',bLd:'5\'4 · opstaan makkelijk',
 aS:'Licht',aSd:'korte sessie, lichter',aL:'Groot',aLd:'lange sessie, zwaarder',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Snelheid ${g.vmax|0} · Bocht ${g.turn.toFixed(2)} · Stabiliteit ${g.stab.toFixed(2)} · Accu ${g.cap|0}s`,
-paddle:'Peddel uit! Joystick omlaag bij het schuim',getup:'FOIL (joystick omhoog) in het groen om op te staan',foil:'Foilen! FOIL omhoog, niet te hoog, niet te laag',catchW:'Golf achter je! Stuur opzij (◀/▶) = indroppen',
+paddle:'Peddel uit! Joystick omlaag bij het schuim',getup:'FOIL (joystick omhoog) in het groen om op te staan',foil:'Foilen! FOIL omhoog, niet te hoog, niet te laag',catchW:'Golf achter je! Stuur opzij (◀/▶) of gas dicht = indroppen',
 ride:'Stuur naar de golf = omhoog, ervan af = omlaag. Lang doorsturen onderin = bottom turn, bovenin = cutback',duck:'Duckdive!',washed:'Weggespoeld!',stood:'Opgestaan!',miss:'Te vroeg/laat!',breach:'Breach! Vleugel uit het water',touch:'Touchdown!',
 caught:'Take-off! Golf gepakt!',swell:'Swell gepakt!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Te snel achter elkaar!',lost:'Golf kwijt, motor aan',close:'Golf sluit: kick-out!',
 barrelC:'Holle golf! BARREL: blijf in de lichte baan',barrel:'BARREL!',swallowed:'Opgeslokt door de buis!',
 over:'Sessie voorbij',batEmpty:'Accu leeg',falls:'Te vaak gevallen',score:'Score',hiS:'Record',again:'Nog een sessie',pause:'Pauze',resume:'Verder',
 bat_:'Accu',falls_:'Val',combo:'Combo'},
 en:{sub:'Paddle out with your Foildrive, duck under the whitewater, get up, foil and catch the wave.',start:'SESSION',free:'FREERIDE',freeTxt:'Freeride: big waves, endless battery, a shot at the BARREL.',gear:'Pick your setup',go:'Hit the water!',back:'Back',
-help:'Joystick left: up = FOIL (get up and rise), down = duck dive, left/right = analog steering (further = sharper). Tap the Foildrive remote = motor on/off, drag up/down = power.<br>Keys: ↑/W, ↓/S, ←/A and →/D = steer (hold), M or Shift = motor, P = pause.',
+help:'Joystick left: up = FOIL (get up and rise), down = duck dive, left/right = analog steering (further = sharper). Throttle: slide your thumb up on the Foildrive remote = more power (stays set), back down = off.<br>Keys: ↑/W, ↓/S, ←/A and →/D = steer (hold), E or Shift = throttle up, Q = back, M = on/off, P = pause.',
 wing:'Front wing',stab:'Stabiliser',mast:'Mast',board:'Board',bat:'Battery',
 wS:'Small',wSd:'750 cm² · fast, nimble',wM:'Medium',wMd:'1000 cm² · all-round',wL:'Big',wLd:'1400 cm² · lots of lift, slow',
 sS:'Small',sSd:'loose, sharp turns',sL:'Big',sLd:'stable, forgiving',
@@ -86,7 +86,7 @@ m65d:'short: breaches easily',m75d:'all-round',m85d:'long: room, less nimble',
 bS:'Small',bSd:'4\'2 · easy duck dive, hard get-up',bM:'Medium',bMd:'4\'8 · all-round',bL:'Big',bLd:'5\'4 · easy get-up',
 aS:'Light',aSd:'short session, lighter',aL:'Big',aLd:'long session, heavier',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Speed ${g.vmax|0} · Turn ${g.turn.toFixed(2)} · Stability ${g.stab.toFixed(2)} · Battery ${g.cap|0}s`,
-paddle:'Paddle out! Joystick down at the whitewater',getup:'FOIL (joystick up) in the green to get up',foil:'Foiling! FOIL up, not too high, not too low',catchW:'Wave behind you! Steer sideways (◀/▶) = drop in',
+paddle:'Paddle out! Joystick down at the whitewater',getup:'FOIL (joystick up) in the green to get up',foil:'Foiling! FOIL up, not too high, not too low',catchW:'Wave behind you! Steer sideways (◀/▶) or throttle off = drop in',
 ride:'Steer into the wave = climb, away = drop. Hold the turn low = bottom turn, high = cutback',duck:'Duck dive!',washed:'Washed back!',stood:'Up and flying!',miss:'Too early/late!',breach:'Breach! Wing out of the water',touch:'Touchdown!',
 caught:'Take-off! Wave caught!',swell:'Swell caught!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Too fast in a row!',lost:'Lost the wave, motor on',close:'Wave closes: kick-out!',
 barrelC:'Hollow wave! BARREL: stay in the light lane',barrel:'BARREL!',swallowed:'Swallowed by the tube!',
@@ -113,18 +113,33 @@ function gear(){const w=GEAR.wing[sel.wing],s=GEAR.stab[sel.stab],m=GEAR.mast[se
  return {lift:w.lift/weight,vmax:150*0.55*w.v/Math.sqrt(weight),turn:w.turn*s.turn*m.turn,stab:Math.max(.4,1+w.stab+s.stab),mast:m.len,dive:b.dive,get:b.get*(0.8+0.2*w.lift),cap:1.7*a.cap/(0.85+0.15*w.lift/w.v)};}
 
 /* ---------- audio ---------- */
-let actx=null,master=null,hum=null,humG=null,unlocked=false;
+let actx=null,master=null,hum=null,humG=null,unlocked=false,whine=null,whineG=null,nWater=null,nWind=null,nWindF=null,nRoar=null,silentEl=null,noiseBuf=null;
+const isIOS=/iP(hone|ad|od)/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+function silentWavURI(){const sr=8000,n=4000,b=new Uint8Array(44+n),v=new DataView(b.buffer);const w=(o,s)=>{for(let i=0;i<s.length;i++)b[o+i]=s.charCodeAt(i);};
+ w(0,'RIFF');v.setUint32(4,36+n,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);v.setUint32(24,sr,true);v.setUint32(28,sr,true);v.setUint16(32,1,true);v.setUint16(34,8,true);w(36,'data');v.setUint32(40,n,true);b.fill(128,44);
+ let s='';for(let i=0;i<b.length;i++)s+=String.fromCharCode(b[i]);return 'data:audio/wav;base64,'+btoa(s);}
+function loopNoise(type,freq,q){const src=actx.createBufferSource();src.buffer=noiseBuf;src.loop=true;const f=actx.createBiquadFilter();f.type=type;f.frequency.value=freq;if(q)f.Q.value=q;const g=actx.createGain();g.gain.value=0;src.connect(f);f.connect(g);g.connect(master);src.start();return {g,f};}
 function audio(){try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
  if(!actx){actx=new AC();master=actx.createGain();master.gain.value=muted?0:.8;master.connect(actx.destination);
-  hum=actx.createOscillator();hum.type='sawtooth';hum.frequency.value=90;humG=actx.createGain();humG.gain.value=0;const f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=500;hum.connect(f);f.connect(humG);humG.connect(master);hum.start();}
+  hum=actx.createOscillator();hum.type='sawtooth';hum.frequency.value=90;humG=actx.createGain();humG.gain.value=0;const f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=500;hum.connect(f);f.connect(humG);humG.connect(master);hum.start();
+  whine=actx.createOscillator();whine.type='square';whine.frequency.value=400;whineG=actx.createGain();whineG.gain.value=0;const wf=actx.createBiquadFilter();wf.type='bandpass';wf.frequency.value=1200;wf.Q.value=2;whine.connect(wf);wf.connect(whineG);whineG.connect(master);whine.start();
+  const len=actx.sampleRate*2;noiseBuf=actx.createBuffer(1,len,actx.sampleRate);const d=noiseBuf.getChannelData(0);for(let i=0;i<len;i++)d[i]=Math.random()*2-1;
+  nWater=loopNoise('lowpass',900);const ww=loopNoise('bandpass',1500,0.7);nWind=ww;nRoar=loopNoise('lowpass',260);}
+ if(navigator.audioSession){try{navigator.audioSession.type='playback';}catch(e){}}
+ if(isIOS&&!navigator.audioSession&&!silentEl){try{silentEl=document.createElement('audio');silentEl.src=silentWavURI();silentEl.loop=true;silentEl.setAttribute('playsinline','');}catch(e){silentEl=null;}}
+ if(silentEl&&silentEl.paused){const p=silentEl.play();if(p&&p.catch)p.catch(()=>{});}
  if(actx.state!=='running'){const p=actx.resume();if(p&&p.catch)p.catch(()=>{});}
  if(!unlocked){unlocked=true;const b=actx.createBuffer(1,1,22050),s=actx.createBufferSource();s.buffer=b;s.connect(actx.destination);s.start(0);}
 }catch(e){}}
-['pointerdown','touchstart','touchend','mousedown','keydown'].forEach(ev=>document.addEventListener(ev,audio,{capture:true,passive:true}));
+['pointerdown','pointerup','touchstart','touchend','mousedown','click','keydown'].forEach(ev=>document.addEventListener(ev,audio,{capture:true,passive:true}));
 document.addEventListener('visibilitychange',()=>{if(!actx)return;if(document.hidden){actx.suspend().catch(()=>{});if(G.mode==='play')G.paused=true;}else actx.resume().catch(()=>{});});
 function tone(f,d,type,vol,f2){if(!actx||muted)return;const o=actx.createOscillator(),g=actx.createGain(),n=actx.currentTime;o.type=type||'square';o.frequency.setValueAtTime(f,n);if(f2)o.frequency.exponentialRampToValueAtTime(f2,n+d);g.gain.setValueAtTime(vol||.15,n);g.gain.exponentialRampToValueAtTime(.001,n+d);o.connect(g);g.connect(master);o.start(n);o.stop(n+d+.02);}
 function noise(d,vol){if(!actx||muted)return;const n=actx.currentTime,len=Math.floor(actx.sampleRate*d),b=actx.createBuffer(1,len,actx.sampleRate),c=b.getChannelData(0);for(let i=0;i<len;i++)c[i]=(Math.random()*2-1)*(1-i/len);const s=actx.createBufferSource(),g=actx.createGain(),f=actx.createBiquadFilter();f.type='lowpass';f.frequency.value=1200;s.buffer=b;g.gain.value=vol||.25;s.connect(f);f.connect(g);g.connect(master);s.start(n);}
 const SFX={ok:()=>{tone(520,.1,'square',.12);setTimeout(()=>tone(780,.14,'square',.12),90);},bad:()=>tone(300,.35,'sawtooth',.15,80),splash:()=>noise(.6,.3),
+ gull:()=>{tone(1500,.12,'sawtooth',.07,900);setTimeout(()=>tone(1350,.16,'sawtooth',.07,800),150);},
+ shark:()=>{tone(82,.32,'triangle',.35);setTimeout(()=>tone(87,.32,'triangle',.35),380);setTimeout(()=>tone(82,.2,'triangle',.3),700);setTimeout(()=>tone(87,.2,'triangle',.3),900);},
+ shout:()=>{tone(480,.12,'sawtooth',.14,620);setTimeout(()=>tone(620,.25,'sawtooth',.14,330),120);},
+ whoosh:()=>{if(!actx||muted||!noiseBuf)return;const n=actx.currentTime,src=actx.createBufferSource(),f=actx.createBiquadFilter(),g=actx.createGain();src.buffer=noiseBuf;f.type='bandpass';f.Q.value=1.2;f.frequency.setValueAtTime(300,n);f.frequency.exponentialRampToValueAtTime(2600,n+0.6);g.gain.setValueAtTime(0.001,n);g.gain.exponentialRampToValueAtTime(0.35,n+0.2);g.gain.exponentialRampToValueAtTime(0.001,n+0.8);src.connect(f);f.connect(g);g.connect(master);src.start(n);src.stop(n+0.85);},
  trick:(c)=>tone(440+c*80,.15,'triangle',.18,880+c*120),barrel:()=>{[523,659,784,1046,1318].forEach((f,i)=>setTimeout(()=>tone(f,.25,'square',.12),i*110));}};
 
 /* ---------- canvas ---------- */
@@ -140,7 +155,7 @@ function setBtn(id,down,up){const b=document.getElementById(id);
  b.addEventListener('pointerdown',e=>{e.preventDefault();b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}down();});
  const u=e=>{b.classList.remove('on');if(up)up();};b.addEventListener('pointerup',u);b.addEventListener('pointercancel',u);b.addEventListener('lostpointercapture',u);
  b.addEventListener('contextmenu',e=>e.preventDefault());}
-let turnDir=0,stickX=0;const KX={l:false,r:false};
+let turnDir=0,stickX=0;const KX={l:false,r:false,f:false,b:false};
 (function(){const st=document.getElementById('stick'),ball=document.getElementById('ball');let id=null,cx=0,cy=0,side=0;const R=55;
  function mv(e){let dx=e.clientX-cx,dy=e.clientY-cy;const d=Math.hypot(dx,dy);if(d>R){dx*=R/d;dy*=R/d;}ball.style.transform='translate('+dx+'px,'+dy+'px)';
   K.up=dy<-R*0.35;K.down=dy>R*0.35;const ax=dx/R,dz=0.1;stickX=Math.abs(ax)<dz?0:Math.sign(ax)*Math.min(1,(Math.abs(ax)-dz)/(1-dz)*1.15);}
@@ -148,18 +163,18 @@ let turnDir=0,stickX=0;const KX={l:false,r:false};
  st.addEventListener('pointermove',e=>{if(e.pointerId===id)mv(e);});
  const up=e=>{if(e.pointerId!==id)return;id=null;side=0;stickX=0;K.up=K.down=false;ball.style.transform='';};st.addEventListener('pointerup',up);st.addEventListener('pointercancel',up);
  const rm=document.getElementById('bRemote');let rid=null,ry=0,moved=false,p0=1;
- rm.addEventListener('pointerdown',e=>{e.preventDefault();rid=e.pointerId;ry=e.clientY;moved=false;p0=P?P.pwr:1;try{rm.setPointerCapture(rid);}catch(_){}});
- rm.addEventListener('pointermove',e=>{if(e.pointerId!==rid||!P)return;const d=ry-e.clientY;if(Math.abs(d)>10){moved=true;P.pwr=Math.max(0.4,Math.min(1,p0+d/120));if(!P.motor)P.motor=true;}});
- const ru=e=>{if(e.pointerId!==rid)return;rid=null;if(!moved)motorPress=true;};rm.addEventListener('pointerup',ru);rm.addEventListener('pointercancel',()=>{rid=null;});
+ rm.addEventListener('pointerdown',e=>{e.preventDefault();rid=e.pointerId;ry=e.clientY;moved=false;p0=P?P.thr:0;try{rm.setPointerCapture(rid);}catch(_){}});
+ rm.addEventListener('pointermove',e=>{if(e.pointerId!==rid||!P)return;const d=ry-e.clientY;if(Math.abs(d)>4)moved=true;P.thr=Math.max(0,Math.min(1,p0+d/90));if(P.thr<0.04)P.thr=0;});
+ const ru=e=>{if(e.pointerId!==rid)return;rid=null;};rm.addEventListener('pointerup',ru);rm.addEventListener('pointercancel',()=>{rid=null;});
  window.__stickT={mv:(dx,dy)=>{const r=st.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;mv({clientX:cx+dx,clientY:cy+dy});},rel:()=>{side=0;stickX=0;K.up=K.down=false;ball.style.transform='';}};
 })();
 function placeRemote(){const rm=document.getElementById('bRemote');const g=remoteGeom();rm.style.left=g.x+'px';rm.style.top=g.y+'px';rm.style.width=g.w+'px';rm.style.height=g.h+'px';}
 function remoteGeom(){const touch=document.body.classList.contains('touchui');const rw=Math.min(118,Math.max(92,W*0.27)),rh=rw*1.45;return {w:rw,h:rh,x:W-rw-(touch?40:60),y:H-rh-(touch?44:40)-safeB()};}
 addEventListener('resize',()=>setTimeout(placeRemote,50));setTimeout(placeRemote,0);
 addEventListener('keydown',e=>{const c=e.code;if(e.repeat&&!['ArrowUp','ArrowDown','KeyW','KeyS'].includes(c))return;
- if(c==='ArrowUp'||c==='KeyW')K.up=true;else if(c==='ArrowDown'||c==='KeyS')K.down=true;else if(c==='KeyM'||c==='ShiftLeft'||c==='ShiftRight')motorPress=true;
+ if(c==='ArrowUp'||c==='KeyW')K.up=true;else if(c==='ArrowDown'||c==='KeyS')K.down=true;else if(c==='KeyM')motorPress=true;else if(c==='KeyE'||c==='ShiftLeft'||c==='ShiftRight')KX.f=true;else if(c==='KeyQ')KX.b=true;
  else if(c==='ArrowRight'||c==='KeyD'){KX.r=true;}else if(c==='ArrowLeft'||c==='KeyA'){KX.l=true;}else if(c==='Space'){}else if(c==='KeyP'||c==='Escape'){togglePause();}else if(c==='Enter'&&G.mode!=='play'){const b=document.querySelector('#ov .big');if(b)b.click();}else return;e.preventDefault();});
-addEventListener('keyup',e=>{const c=e.code;if(c==='ArrowRight'||c==='KeyD')KX.r=false;if(c==='ArrowLeft'||c==='KeyA')KX.l=false;if(c==='ArrowUp'||c==='KeyW')K.up=false;if(c==='ArrowDown'||c==='KeyS')K.down=false;});
+addEventListener('keyup',e=>{const c=e.code;if(c==='KeyE'||c==='ShiftLeft'||c==='ShiftRight')KX.f=false;if(c==='KeyQ')KX.b=false;if(c==='ArrowRight'||c==='KeyD')KX.r=false;if(c==='ArrowLeft'||c==='KeyA')KX.l=false;if(c==='ArrowUp'||c==='KeyW')K.up=false;if(c==='ArrowDown'||c==='KeyS')K.down=false;});
 addEventListener('blur',()=>{K.up=K.down=false;KX.l=KX.r=false;});
 
 /* ---------- spelstatus ---------- */
@@ -167,15 +182,15 @@ const G={mode:'menu',paused:false,free:false};
 let P,waves,floaters,msg,msgT,gearNow,celebrate=0,sprays=[];
 function say(s,d){msg=s;msgT=d||1.6;}
 function newGame(free){G.free=free;gearNow=gear();G.mode='play';G.paused=false;document.body.classList.add('playing');
- P={sx:0,bank:0,yaw:0,th:0,rz:0,rx:0,carve:0,armed:true,pwr:1,mood:.6,lane:0,laneX:0,hazT:5,dist:0,lastDir:1,phase:'paddle',score:0,bat:100,falls:0,motor:true,v:0,prog:0,dive:0,diveCd:0,h:0,vy:0,meter:0,getT:0,wave:null,p:.3,energy:1,combo:1,lastMove:-9,time:0,turnAnim:0,dir:1,inv:0,barrel:null,rides:0,barrels:0,maxCombo:1};
+ P={thr:0.8,sx:0,bank:0,yaw:0,th:0,rz:0,rx:0,carve:0,armed:true,pwr:1,mood:.6,lane:0,laneX:0,hazT:5,dist:0,lastDir:1,phase:'paddle',score:0,bat:100,falls:0,motor:true,v:0,prog:0,dive:0,diveCd:0,h:0,vy:0,meter:0,getT:0,wave:null,p:.3,energy:1,combo:1,lastMove:-9,time:0,turnAnim:0,dir:1,inv:0,barrel:null,rides:0,barrels:0,maxCombo:1};
  if(free)gearNow.turn*=FS.steer;haz=[];G.party=0;waves=[];floaters=[];sprays=[];celebrate=0;startPaddle();hideOv();}
-function startPaddle(){P.phase='paddle';P.th=0;haz=[];P.dir=1;P.prog=0;P.h=0;P.v=0;P.wave=null;P.barrel=null;P.motor=true;waves=[];spawnWW(W*0.9);say(t('paddle'),2.5);}
+function startPaddle(){P.phase='paddle';P.th=0;haz=[];P.dir=1;P.prog=0;P.h=0;P.v=0;P.wave=null;P.barrel=null;P.thr=0.8,P.motor=true;waves=[];spawnWW(W*0.9);say(t('paddle'),2.5);}
 function spawnWW(x){waves.push({kind:'ww',dx:x,passed:false});}
 function startGetup(){P.phase='getup';P.dir=-1;P.meter=0;P.getT=0;waves=[];say(t('getup'),2.2);}
-function startFoil(){P.phase='foil';P.th=Math.PI;P.dir=-1;P.h=gearNow.mast*0.45;P.vy=0;P.v=gearNow.vmax*0.75;P.motor=true;waves=[];nextSwell(W*0.6);say(t('foil'),2);}
+function startFoil(){P.liftT=0.8;SFX.whoosh();P.phase='foil';P.th=Math.PI;P.dir=-1;P.h=gearNow.mast*0.45;P.vy=0;P.v=gearNow.vmax*0.75;P.thr=0.8,P.motor=true;waves=[];nextSwell(W*0.6);say(t('foil'),2);}
 function nextSwell(x){const big=G.free?(0.75+Math.random()*0.5):(0.45+Math.random()*0.55);
  const fw=G.free?FS.wave:1,fsp=G.free?FS.speed:1;waves.push({kind:'swell',dx:W*0.5+x,A:(70+70*big)*fw*PX,wf:(90+40*big)*PX,spd:(115+40*big)*0.55*fsp,broken:Math.random()<0.55,hollow:big*fw>(G.free?0.85:0.93),age:0});}
-function fall(why){if(P.inv>0)return;SFX.splash();SFX.bad();say(why,2);P.mood=Math.max(0,P.mood-.25);haz=[];P.falls++;P.combo=1;P.inv=1.5;P.motor=false;
+function fall(why){if(P.inv>0)return;SFX.splash();SFX.bad();say(why,2);P.mood=Math.max(0,P.mood-.25);haz=[];P.falls++;P.combo=1;P.inv=1.5;P.thr=0,P.motor=false;
  if(!G.free&&P.falls>=3){endGame(t('falls'));return;}P.phase='swim';P.swimT=1.4;}
 function endGame(why){G.mode='over';document.body.classList.remove('playing');const key=G.free?'freeride':'sessie';const nh=P.score>hi[key];G.party=nh&&P.score>0;if(nh){hi[key]=P.score;lsSet(G.free?'fa-hi-free':'fa-hi',String(P.score));}
  showOver(why,nh);}
@@ -190,9 +205,10 @@ function placeOnFace(w,p){p=Math.max(.06,Math.min(.97,p));w.dx=w.wf*Math.sqrt(-M
 
 /* ---------- update ---------- */
 function update(dt){
- P.time+=dt;if(P.inv>0)P.inv-=dt;if(msgT>0)msgT-=dt;if(celebrate>0)celebrate-=dt;
+ if(KX.f)P.thr=Math.min(1,P.thr+dt*0.9);if(KX.b)P.thr=Math.max(0,P.thr-dt*1.5);if(P.phase==='getup'||P.phase==='swim'){}else{const was=P.motor;P.motor=P.thr>0.02;if(P.motor)P.pwr=Math.max(0.15,P.thr);}
+ P.time+=dt;if(P.liftT>0)P.liftT-=dt;if(P.judder>0)P.judder-=dt;{const a=(P.v-(P.lastV||0))/Math.max(dt,1e-3);P.acc=(P.acc||0)+(a-(P.acc||0))*Math.min(1,dt*4);P.lastV=P.v;}if(P.inv>0)P.inv-=dt;if(msgT>0)msgT-=dt;if(celebrate>0)celebrate-=dt;
  const g=gearNow;
- if(motorPress){motorPress=false;if(P.phase!=='getup'&&P.phase!=='swim'){P.motor=!P.motor;tone(P.motor?300:200,.08,'square',.08);}
+ if(motorPress){motorPress=false;if(P.phase!=='getup'&&P.phase!=='swim'){P.thr=P.thr>0?0:0.8;P.motor=P.thr>0;tone(P.motor?300:200,.08,'square',.08);}
    if(P.phase==='foil'&&!P.motor)tryCatch();}
  const tp=turnPress;turnPress=false;
  P.dist+=Math.abs(P.v)*dt;P.mood+=(0.55-P.mood)*dt*0.03;P.mood=Math.max(0,Math.min(1,P.mood));
@@ -207,19 +223,19 @@ function update(dt){
  const mvx=Math.sin(P.th)*mps,mvz=Math.cos(P.th)*mps;P.rz+=mvz*dt;P.rx+=mvx*dt;
  if((!G.free||FS.haz)&&P.phase!=='getup'&&P.phase!=='swim'&&!P.barrel){P.hazT-=dt;if(P.hazT<=0){P.hazT=5+Math.random()*5;const ty=P.phase==='ride'?(Math.random()<.6?'surfer':'gull'):(Math.random()<.5?'fin':'gull');
    const D=40,off=Math.random()<.6?0:(Math.random()-.5)*14,hx=Math.sin(P.th)*D+Math.cos(P.th)*off,hz=Math.cos(P.th)*D-Math.sin(P.th)*off,sp=ty==='gull'?7:ty==='fin'?3:4,n=Math.hypot(hx,hz);
-   haz.push({type:ty,x:hx,z:hz,vx:-hx/n*sp,vz:-hz/n*sp,y:ty==='gull'?4:0});if(ty!=='surfer'&&msgT<=0)say(t('dodge'),1.5);}}
+   if(ty==='fin')SFX.shark();else if(ty==='gull')SFX.gull();haz.push({type:ty,x:hx,z:hz,vx:-hx/n*sp,vz:-hz/n*sp,y:ty==='gull'?4:0});if(ty!=='surfer'&&msgT<=0)say(t('dodge'),1.5);}}
  for(const h of haz){h.x+=(h.vx-mvx)*dt;h.z+=(h.vz-mvz)*dt;const dist=Math.hypot(h.x,h.z);if(h.type==='gull')h.y=0.8+3.2*Math.min(1,dist/30);
   const closing=(h.x*(h.vx-mvx)+h.z*(h.vz-mvz))<0;
   if(!h.done&&(dist<2.2||(!closing&&dist<12))){h.done=true;const hit=h.type==='gull'?(dist<2.2&&!K.down):dist<2.2;
    if(h.type==='fin'){if(hit){fall(t('finHit'));haz=[];return;}else{P.score+=30;say(t('finOk'),1);}}
-   else if(h.type==='gull'){if(hit){SFX.bad();say(t('gullHit'),1.3);P.mood-=.12;if(!G.free)P.bat=Math.max(0,P.bat-3);P.score=Math.max(0,P.score-50);}else{P.score+=30;say(t('gullOk'),1);}}
-   else{if(hit){SFX.bad();say(t('surfHit'),1.5);P.mood-=.15;P.combo=1;P.score=Math.max(0,P.score-150);}else{P.score+=40;say(t('surfOk'),1);}}}
+   else if(h.type==='gull'){if(hit){SFX.bad();say(t('gullHit'),1.3);SFX.gull();P.mood-=.12;if(!G.free)P.bat=Math.max(0,P.bat-3);P.score=Math.max(0,P.score-50);}else{P.score+=30;say(t('gullOk'),1);}}
+   else{if(hit){SFX.bad();say(t('surfHit'),1.5);SFX.shout();P.mood-=.15;P.combo=1;P.score=Math.max(0,P.score-150);}else{P.score+=40;say(t('surfOk'),1);}}}
   h.dist=dist;}
  haz=haz.filter(h=>h.dist===undefined||h.dist<60&&!(h.done&&h.dist>14));
  if(P.motor&&P.phase!=='ride'&&P.phase!=='swim'&&!G.free){P.bat-=100/g.cap*dt*(0.5+0.5*P.pwr);if(P.bat<=0){P.bat=0;endGame(t('batEmpty'));return;}}
- if(humG)humG.gain.setTargetAtTime(P.motor&&!muted?0.05:0,actx.currentTime,.05);if(hum)hum.frequency.setTargetAtTime(70+P.v*(P.phase==='paddle'?0.6:1.1),actx.currentTime,.1);
+ if(humG)audioMix();if(humG)humG.gain.setTargetAtTime(P.motor&&!muted?0.05:0,actx.currentTime,.05);if(hum)hum.frequency.setTargetAtTime(70+P.v*(P.phase==='paddle'?0.6:1.1),actx.currentTime,.1);
  if(P.phase==='paddle'){
-  const tv=P.motor?95*(0.5+0.5*P.pwr):25;P.v+=(tv-P.v)*dt*2;P.prog+=P.v*Math.cos(P.th)*dt;if(P.prog<0)P.prog=0;
+  const tv=P.motor?25+70*P.pwr:25;P.v+=(tv-P.v)*dt*2;P.prog+=P.v*Math.cos(P.th)*dt;if(P.prog<0)P.prog=0;
   if(P.diveCd>0)P.diveCd-=dt;
   if(K.down&&P.dive<=0&&P.diveCd<=0){P.dive=g.dive;P.diveCd=g.dive+0.35;say(t('duck'),.6);tone(180,.2,'sine',.15,90);}
   if(P.dive>0)P.dive-=dt;
@@ -233,11 +249,11 @@ function update(dt){
   if(!K.up)P.upLatch=false;
  } else if(P.phase==='swim'){P.swimT-=dt;P.v*=0.95;if(P.swimT<=0)startPaddle();
  } else if(P.phase==='foil'){
-  const tv=P.motor?g.vmax*(0.75+0.25*P.pwr):0;P.v+=(tv-P.v)*dt*(P.motor?1.2:0.35);
+  const tv=P.motor?g.vmax*(0.5+0.5*P.pwr):0;P.v+=(tv-P.v)*dt*(P.motor?1.2:0.35);
   const lift=g.lift*(P.v/66)**2;P.vy+=(-55+(K.up?95*lift:20*lift)+(K.down?-60:0))*dt;P.vy*=1-0.9*dt/g.stab;P.h+=P.vy*dt*PX;
   const mp=g.mast*PX;
   if(P.h>mp){fall(t('breach'));return;}
-  if(P.h<0){if(P.vy<-25||P.v<33){fall(t('touch'));return;}P.h=0;P.vy=10;P.v*=0.8;}
+  if(P.h<0){if(P.vy<-25||P.v<33){fall(t('touch'));return;}P.h=0;P.vy=10;P.v*=0.8;P.judder=0.5;SFX.splash();}
   for(const w of waves){w.age+=dt;w.dx-=Math.max(22,w.spd+P.v*0.6*Math.cos(P.th))*dt;}
   waves=waves.filter(w=>w.dx>-W*1.2&&w.dx<W*1.5);
   if(!waves.length)nextSwell(W*(0.6+Math.random()*0.6)*(G.free?FS.period:1));
@@ -263,13 +279,19 @@ function update(dt){
    P.mood=Math.min(1,P.mood+.08);SFX.trick(P.combo);for(let i=0;i<10;i++)sprays.push({x:W/2,y:H*0.7,vx:(Math.random()-.3)*160,vy:-60-Math.random()*140,t:.8});}
   if(P.turnAnim>0)P.turnAnim-=dt;
   placeOnFace(w,P.p);
-  if(P.energy<=0){say(t('lost'),1.8);P.phase='foil';P.h=g.mast*0.5*PX;P.vy=0;P.motor=false;w.dx=w.wf*0.8;P.combo=1;return;}
+  if(P.energy<=0){say(t('lost'),1.8);P.phase='foil';P.h=g.mast*0.5*PX;P.vy=0;P.thr=0,P.motor=false;w.dx=w.wf*0.8;P.combo=1;return;}
   if(w.age>(w.hollow?16:13)){addScore(200,t('close'));P.rides++;startPaddle();}
  }
  for(const f of floaters){f.t-=dt;f.y-=30*dt;}floaters=floaters.filter(f=>f.t>0);
  for(const s of sprays){s.t-=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=300*dt;}sprays=sprays.filter(s=>s.t>0);
 }
-function tryCatch(){const w=P.catchable;if(!w||P.phase!=='foil')return;P.phase='ride';P.wave=w;waves=[w];P.p=0.85;P.climb=0;P.motor=false;P.lastDir=turnDir||1;P.th=(turnDir||1)>0?-(Math.PI/2+0.3):(Math.PI/2+0.3);P.turnAnim=0.5;P.dropT=0.7;P.energy=1;P.lastMove=P.time-1;P.climb=0;w.age=0;
+function audioMix(){const n=actx.currentTime,kmh=Math.max(0,P.v)*(P.phase==='paddle'||P.phase==='swim'?0.17:0.31),s=Math.min(1,kmh/30),air=(P.phase==='foil'&&P.h>4*PX)||P.phase==='ride';
+ const set=(node,v)=>node.g.gain.setTargetAtTime(muted?0:v,n,.12);
+ whine.frequency.setTargetAtTime(300+kmh*22+P.pwr*120,n,.1);whineG.gain.setTargetAtTime(P.motor&&!muted?0.018+0.02*P.pwr:0,n,.08);
+ set(nWater,air?0.015:(P.phase==='getup'||P.phase==='swim'?0.12:0.08+0.18*s));
+ set(nWind,air?0.02+0.22*s*s:0.01);nWind.f.frequency.setTargetAtTime(900+1600*s,n,.2);
+ let roar=P.phase==='ride'?0.12:0;for(const w of waves){if(w.kind==='ww'||w.broken){const d=Math.abs(w.dx*PXM);if(d<45)roar=Math.max(roar,0.16*(1-d/45));}}set(nRoar,roar);}
+function tryCatch(){const w=P.catchable;if(!w||P.phase!=='foil')return;P.phase='ride';P.wave=w;waves=[w];P.p=0.85;P.climb=0;P.thr=0,P.motor=false;P.lastDir=turnDir||1;P.th=(turnDir||1)>0?-(Math.PI/2+0.3):(Math.PI/2+0.3);P.turnAnim=0.5;P.dropT=0.7;P.energy=1;P.lastMove=P.time-1;P.climb=0;w.age=0;
  SFX.ok();say(w.broken?t('caught'):t('swell'),1.4);if(!G.free)P.bat=Math.min(100,P.bat+0);}
 
 /* ---------- tekenen (eerste persoon) ---------- */
@@ -316,12 +338,14 @@ function draw(){
  let roll=0,pitch=0;CAM.F=Math.max(W*0.62,H*0.42);
  if(play){roll=P.bank*(P.phase==='ride'?0.42:P.phase==='foil'?0.35:0.18);CAM.th=P.th;
   if(P.phase==='ride'){const Am=P.wave.A/PX/40,top=Am*0.5*2.2,zc=1.6+(1-P.p)*4;CAM.h=top*humpProf(-zc,top)+1.2+gearNow.mast/100;pitch=-Math.cos(P.th)*H*0.05;}
-  else if(P.phase==='foil'){CAM.h=1.7+P.h/PX/100;}else if(P.phase==='getup'){CAM.h=0.9;}
+  else if(P.phase==='foil'){const k=P.liftT>0?1-P.liftT/0.8:1;CAM.h=0.45+k*(0.6+(P.h/PX/100)*2.4);pitch+=(P.h/PX)*0.5*k;}else if(P.phase==='getup'){CAM.h=0.9;}
   else{CAM.h=P.dive>0?0.2:0.45;roll+=Math.sin(tm*1.3)*0.03;pitch=Math.sin(tm*2)*5;}
   if(P.phase!=='ride'){let lift=0;for(const w of waves){const top=(w.kind==='ww'?0.7:w.A/PX/40*0.9)*2.2;lift=Math.max(lift,top*humpProf(-w.dx*PXM,top));}CAM.h+=lift;}}
  else{CAM.th=Math.sin(tm*0.25)*0.9;CAM.h=1.6;}
- const hz=H*0.38+pitch;CAM.hz=hz;
- ctx.save();ctx.translate(W/2,H*0.6);ctx.rotate(roll);ctx.translate(-W/2,-H*0.6);
+ const kmhF=play?Math.max(0,P.v)*(P.phase==='paddle'||P.phase==='swim'?0.17:0.31):0,spd=Math.min(1,kmhF/30);
+ if(play){pitch+=Math.max(-30,Math.min(30,(P.acc||0)*0.35));CAM.F*=1-0.14*spd;}
+ const hz=H*0.38+pitch;CAM.hz=hz;const vib=play?(spd*spd*1.6+(P.judder>0?P.judder*12:0)):0;
+ ctx.save();if(vib)ctx.translate((Math.random()-.5)*vib,(Math.random()-.5)*vib);ctx.translate(W/2,H*0.6);ctx.rotate(roll);ctx.translate(-W/2,-H*0.6);
  const E=Math.max(W,H)*0.4;
  const sky=ctx.createLinearGradient(0,hz-H*0.6,0,hz);sky.addColorStop(0,lerpC('3d4652','2f8fe0',mood));sky.addColorStop(1,lerpC('8a939c','d8f3ff',mood));ctx.fillStyle=sky;ctx.fillRect(-E,-E,W+2*E,hz+E+2);
  const az=(a)=>{let r=a-CAM.th;while(r>Math.PI)r-=2*Math.PI;while(r<-Math.PI)r+=2*Math.PI;return Math.abs(r)<1.3?W/2+Math.tan(r)*CAM.F:null;};
@@ -338,6 +362,7 @@ function draw(){
  if(mood>0.7){ctx.fillStyle='rgba(255,255,255,.9)';for(let i=0;i<14;i++){const sx=(Math.sin(i*91.3)*0.5+0.5)*W,sy=hz+(H-hz)*((Math.sin(i*13.7)*0.5+0.5)*0.6),a=Math.sin(tm*5+i*2);if(a>0.6){ctx.fillRect(sx-4,sy,8,1.5);ctx.fillRect(sx,sy-4,1.5,8);}}}
  if(play)drawWorld(tm);else{const z=40-((tm*8)%45);curlWave(z,1.6,tm,{peel:((tm*6)%120)-60});}
  if(play)drawHaz(tm);
+ if(play)drawSpeed(tm,hz,spd);
  ctx.restore();
  if(play){
   if(P.phase==='paddle'&&P.dive>0){ctx.fillStyle='rgba(10,70,110,.78)';ctx.fillRect(0,0,W,H);ctx.fillStyle='rgba(255,255,255,.6)';for(let i=0;i<20;i++){ctx.beginPath();ctx.arc((i*73+tm*40)%W,H-((tm*120+i*57)%H),3+i%4,0,7);ctx.fill();}}
@@ -368,13 +393,25 @@ function drawHaz(tm){for(const h of haz.slice().sort((a,b)=>(b.dist||99)-(a.dist
  else{ctx.fillStyle='#fde68a';ctx.beginPath();ctx.ellipse(0,-2,34,6,0,0,7);ctx.fill();ctx.strokeStyle='#1f2937';ctx.lineWidth=5;ctx.lineCap='round';ctx.beginPath();ctx.moveTo(-10,-6);ctx.lineTo(-4,-30);ctx.lineTo(10,-6);ctx.moveTo(-4,-30);ctx.lineTo(0,-52);ctx.moveTo(-20,-46);ctx.lineTo(0,-46);ctx.lineTo(18,-56);ctx.stroke();ctx.fillStyle='#e0a96d';ctx.beginPath();ctx.arc(1,-62,9,0,7);ctx.fill();ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-4,-66);ctx.lineTo(0,-64);ctx.moveTo(6,-66);ctx.lineTo(2,-64);ctx.stroke();
   ctx.fillStyle='#fff';ctx.strokeStyle='#000';ctx.lineWidth=2;ctx.beginPath();ctx.roundRect(14,-110,lang==='nl'?120:110,30,8);ctx.fill();ctx.stroke();ctx.fillStyle='#000';ctx.font='bold 14px system-ui';ctx.fillText(t('shout'),22,-90);}
  ctx.restore();}}
-function drawNose(tm,roll){const foiling=P.phase==='foil'||P.phase==='ride';const by=H+(foiling?0:10),bw=Math.min(W*0.42,200*PX);
+const STR=[];for(let i=0;i<22;i++)STR.push({a:0.12+Math.random()*0.76,ph:Math.random(),side:i<6});
+function drawSpeed(tm,hz,spd){const air=(P.phase==='foil'&&P.h>4*PX)||P.phase==='ride';if(spd<0.05)return;
+ const vx=W/2;ctx.lineCap='round';
+ for(const s of STR){s.ph=(s.ph+spd*0.025*(air?1.3:1))%1;const r0=s.ph,rr=20+Math.pow(r0,2.2)*H*1.1,len=rr*0.25*spd;
+  const a=s.side?(s.a<0.5?-0.25+s.a*0.4:Math.PI+0.25-(1-s.a)*0.4):Math.PI*s.a;const ca=Math.cos(a),sa=Math.sin(a);
+  if(s.side&&spd<0.45)continue;
+  const x0=vx+ca*rr,y0=hz+sa*rr*(s.side?1:0.8),x1=vx+ca*(rr+len),y1=hz+sa*(rr+len)*(s.side?1:0.8);
+  ctx.strokeStyle=s.side?'rgba(255,255,255,'+(0.18*spd)+')':(air?'rgba(220,250,255,'+(0.1+0.2*spd)+')':'rgba(255,255,255,'+(0.2+0.35*spd)+')');ctx.lineWidth=s.side?1.2:(air?1.2:2+2*spd)*(0.5+r0);
+  ctx.beginPath();ctx.moveTo(x0,y0);ctx.lineTo(x1,y1);ctx.stroke();}
+ if(air){// kielzog/mast-spoor: twee uitwaaierende lijnen vanaf onder het board
+  ctx.strokeStyle='rgba(255,255,255,'+(0.15+0.25*spd)+')';ctx.lineWidth=2;ctx.setLineDash([14,10]);ctx.lineDashOffset=-tm*200*spd;
+  ctx.beginPath();ctx.moveTo(W/2-6,H*0.93);ctx.lineTo(-W*0.1,H*1.05);ctx.moveTo(W/2+6,H*0.93);ctx.lineTo(W*1.1,H*1.05);ctx.stroke();ctx.setLineDash([]);}}
+function drawNose(tm,roll){const foiling=P.phase==='foil'||P.phase==='ride';const lift=foiling?(P.phase==='ride'?0.8:Math.min(1,P.h/(gearNow.mast*PX*0.6)))*(P.liftT>0?1-P.liftT/0.8:1):0;const by=H+(foiling?0:10)-lift*H*0.035,bw=Math.min(W*0.42,200*PX);
  ctx.save();ctx.translate(W/2,by);ctx.rotate(roll*0.5);
  ctx.fillStyle='#fffdf5';ctx.strokeStyle='#0e3a5c';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(-bw/2,0);ctx.quadraticCurveTo(-bw*0.42,-H*0.2,0,-H*0.24);ctx.quadraticCurveTo(bw*0.42,-H*0.2,bw/2,0);ctx.closePath();ctx.fill();ctx.stroke();
  ctx.strokeStyle='#ff7a1a';ctx.lineWidth=3;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(0,-H*0.23);ctx.stroke();
  ctx.fillStyle='#0e3a5c';ctx.font='800 '+(11*PX|0)+'px system-ui';ctx.textAlign='center';ctx.fillText('FOILASSIST!',0,-H*0.08);
  if(!foiling){ctx.fillStyle='rgba(255,255,255,.75)';for(let i=0;i<6;i++){ctx.beginPath();ctx.arc((i-2.5)*bw*0.22,-4+Math.sin(tm*8+i)*3,8,0,7);ctx.fill();}}
- else if(P.motor){ctx.fillStyle='rgba(255,255,255,.5)';for(let i=0;i<5;i++){ctx.beginPath();ctx.arc((Math.random()-.5)*bw,-2,4,0,7);ctx.fill();}}
+ else if(lift<0.25){ctx.fillStyle='rgba(255,255,255,.6)';for(let i=0;i<5;i++){ctx.beginPath();ctx.arc((Math.random()-.5)*bw,-2,4,0,7);ctx.fill();}}
  ctx.restore();}
 function drawRemote(tm){const RG=remoteGeom(),w=RG.w,h=RG.h;
  ctx.save();ctx.translate(RG.x,RG.y);ctx.rotate(-0.1);
@@ -415,8 +452,9 @@ function drawRemote(tm){const RG=remoteGeom(),w=RG.w,h=RG.h;
  ctx.fillStyle='#9aa3ad';ctx.font='800 '+Math.round(w*0.075)+'px system-ui';ctx.fillText('FOILDRIVE',w*0.5,h-w*0.1);ctx.textBaseline='alphabetic';ctx.textAlign='left';
  // vingers om de voorkant (links), duim op de gasknop
  for(let i=0;i<4;i++){const fy=h*0.5+i*h*0.105;ctx.fillStyle=i===0?skinL:skin;ctx.beginPath();ctx.roundRect(-w*0.2,fy,w*0.3,h*0.095,h*0.045);ctx.fill();ctx.strokeStyle=skinD;ctx.lineWidth=1;ctx.stroke();ctx.fillStyle='rgba(255,235,220,.6)';ctx.beginPath();ctx.ellipse(w*0.04,fy+h*0.047,w*0.035,h*0.03,0,0,7);ctx.fill();}
- ctx.fillStyle=skin;ctx.beginPath();ctx.moveTo(w*1.02,h*0.62);ctx.quadraticCurveTo(w*0.95,by+br*0.4,w*0.78,by+br*0.2);ctx.quadraticCurveTo(w*0.68,by+br*0.6,w*0.76,by+br*1.4);ctx.quadraticCurveTo(w*0.95,h*0.82,w*1.08,h*0.8);ctx.closePath();ctx.fill();ctx.strokeStyle=skinD;ctx.stroke();
- ctx.fillStyle='rgba(255,235,220,.7)';ctx.beginPath();ctx.ellipse(w*0.75,by+br*0.75,w*0.04,w*0.05,0.3,0,7);ctx.fill();
+ ctx.save();ctx.translate(0,-(P.thr||0)*h*0.14);ctx.fillStyle=skin;ctx.beginPath();ctx.moveTo(w*1.02,h*0.62);ctx.quadraticCurveTo(w*0.95,by+br*0.4,w*0.78,by+br*0.2);ctx.quadraticCurveTo(w*0.68,by+br*0.6,w*0.76,by+br*1.4);ctx.quadraticCurveTo(w*0.95,h*0.82,w*1.08,h*0.8);ctx.closePath();ctx.fill();ctx.strokeStyle=skinD;ctx.stroke();
+ ctx.fillStyle='rgba(255,235,220,.7)';ctx.beginPath();ctx.ellipse(w*0.75,by+br*0.75,w*0.04,w*0.05,0.3,0,7);ctx.fill();ctx.restore();
+ {const gx=w+6,gy=h*0.12,gh=h*0.5;ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(gx,gy,6,gh);ctx.fillStyle='#3ee08a';ctx.fillRect(gx,gy+gh*(1-(P.thr||0)),6,gh*(P.thr||0));}
  ctx.restore();}
 function safeB(){return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0;}
 function drawHUD(tm){ctx.save();const top=46;
@@ -444,7 +482,8 @@ function drawBarrel(tm){const b=P.barrel;ctx.save();
  const lane=y=>H*0.8-(y)*H*0.55;ctx.strokeStyle='#ffe066';ctx.lineWidth=3;ctx.setLineDash([8,6]);ctx.strokeRect(W*0.08,lane(b.c+0.13),W*0.84,lane(b.c-0.13)-lane(b.c+0.13));ctx.setLineDash([]);
  const ry=lane(P.p);ctx.fillStyle=b.out>0?'#ff5a5a':'#fff';ctx.beginPath();ctx.moveTo(W*0.5-18,ry+8);ctx.lineTo(W*0.5,ry-12);ctx.lineTo(W*0.5+18,ry+8);ctx.closePath();ctx.fill();
  ctx.font='800 '+(20*PX|0)+'px system-ui';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText('BARREL '+Math.max(0,3.2-b.t).toFixed(1)+'s  ↑/↓',W/2,H*0.14);ctx.restore();}
-function drawParty(tm){const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#3b1d5e');g.addColorStop(0.45,'#f2643a');g.addColorStop(0.62,'#ffd36b');g.addColorStop(0.63,'#1b6f8f');g.addColorStop(0.75,'#e3c48a');g.addColorStop(1,'#c9a46a');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+let partyTimer=null;function partyMusic(on){if(on&&!partyTimer){let i=0;const mel=[523,659,784,659,587,698,880,698,523,659,784,1046,988,784,659,587];partyTimer=setInterval(()=>{if(G.mode!=='over'||!G.party){partyMusic(false);return;}tone(mel[i%16],.16,'square',.07);if(i%2===0)tone(mel[i%16]/4,.2,'triangle',.12);i++;},190);}else if(!on&&partyTimer){clearInterval(partyTimer);partyTimer=null;}}
+function drawParty(tm){partyMusic(true);const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#3b1d5e');g.addColorStop(0.45,'#f2643a');g.addColorStop(0.62,'#ffd36b');g.addColorStop(0.63,'#1b6f8f');g.addColorStop(0.75,'#e3c48a');g.addColorStop(1,'#c9a46a');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
  ctx.fillStyle='#ffe28a';ctx.beginPath();ctx.arc(W*0.5,H*0.62,50*PX,Math.PI,0);ctx.fill();
  const fx=W*0.5,fy=H*0.86;ctx.fillStyle='#5b3a1e';ctx.fillRect(fx-34,fy,68,8);for(let i=0;i<6;i++){const f=Math.sin(tm*10+i*2)*8;ctx.fillStyle=i%2?'#ffb703':'#fb5607';ctx.beginPath();ctx.moveTo(fx-26+i*10,fy);ctx.quadraticCurveTo(fx-30+i*10,fy-30-f,fx-20+i*10,fy-46-f-(i%3)*10);ctx.quadraticCurveTo(fx-14+i*10,fy-20,fx-16+i*10,fy);ctx.fill();}
  const cols=['#e63946','#2a9d8f','#e9c46a','#8338ec','#ff006e','#3a86ff'];
@@ -493,11 +532,12 @@ let last=performance.now();
 function loop(now){requestAnimationFrame(loop);try{step(now);}catch(e){if(DEBUG)console.error(e);}}
 function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;
  if(G.mode==='play'&&!G.paused)update(dt);
+ else if(actx&&nWater){const n=actx.currentTime;[nWater,nWind,nRoar].forEach(x=>x.g.gain.setTargetAtTime(0,n,.1));humG.gain.setTargetAtTime(0,n,.1);whineG.gain.setTargetAtTime(0,n,.1);}
  
  draw();}
 requestAnimationFrame(loop);
 if(DEBUG)window.__fa={G,get P(){return P;},sel,newGame,K,set:(o)=>Object.assign(P,o),press:(k)=>{if(k==='motor')motorPress=true;if(k==='turn')turnPress=true;},
- stickX:()=>stickX,setTh:(d)=>{P.th=d*Math.PI/180;},forceRide:(hollow)=>{startFoil();waves=[];nextSwell(0);const w=waves[0];w.hollow=!!hollow;w.dx=10;P.v=w.spd;P.catchable=w;tryCatch();},startGetup:()=>startGetup(),startFoil:()=>startFoil(),waves:()=>waves.map(w=>Math.round(w.dx)),swellAt:(dx)=>{waves=[{kind:"swell",dx:dx*PX,A:110*PX,wf:110*PX,spd:70,broken:true,hollow:false,age:0}];},haz:(ty)=>haz.push({type:ty,x:Math.sin(P.th)*15,z:Math.cos(P.th)*15,vx:-Math.sin(P.th)*4,vz:-Math.cos(P.th)*4,y:ty==='gull'?3:0}),end:(sc)=>{P.score=sc;endGame('test');},mood:(m)=>P.mood=m};
+ stickX:()=>stickX,setTh:(d)=>{P.th=d*Math.PI/180;},forceRide:(hollow)=>{startFoil();waves=[];nextSwell(0);const w=waves[0];w.hollow=!!hollow;w.dx=10;P.v=w.spd;P.catchable=w;tryCatch();},startGetup:()=>startGetup(),startFoil:()=>startFoil(),audioState:()=>actx?actx.state:'none',waves:()=>waves.map(w=>Math.round(w.dx)),swellAt:(dx)=>{waves=[{kind:"swell",dx:dx*PX,A:110*PX,wf:110*PX,spd:70,broken:true,hollow:false,age:0}];},haz:(ty)=>haz.push({type:ty,x:Math.sin(P.th)*15,z:Math.cos(P.th)*15,vx:-Math.sin(P.th)*4,vz:-Math.cos(P.th)*4,y:ty==='gull'?3:0}),end:(sc)=>{P.score=sc;endGame('test');},mood:(m)=>P.mood=m};
 })();
 </script>
 </body>
