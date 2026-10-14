@@ -1,9 +1,14 @@
 <!doctype html><html lang="nl"><head><meta charset="utf-8">
+<script>const LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');let l=/\/en\/?$/.test(location.pathname)?'en':(q=='en'||q=='nl')?q:null;
+try{if(q=='en'||q=='nl')localStorage.setItem('foilassist-lang',q);if(!l)l=localStorage.getItem('foilassist-lang')}catch(e){}
+return l||((navigator.language||'nl').toLowerCase().startsWith('nl')?'nl':'en')})();document.documentElement.lang=LANG;
+function setLang(l){try{localStorage.setItem('foilassist-lang',l)}catch(e){}location.href='/foilassist/'+(l=='en'?'en/':'?lang=nl')}
+const T=(nl,en)=>LANG=='en'?en:nl;</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
-<title>Foilassist – condities per spot</title>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-16">
+<title>Foilassist – condities per spot</title><script>if(LANG=='en')document.title='Foilassist – conditions per spot'</script>
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-17">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -29,14 +34,16 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 .rt{margin:-2px 0 6px;font-size:.9rem}.st{color:#ffc83d;letter-spacing:1px}
 .cams{margin:0 0 8px;font-size:.85rem}.cams a{color:var(--a);margin-right:10px;text-decoration:none;white-space:nowrap}
 .err{color:#ffb4a8}
+html[lang=en] .nl,html[lang=nl] .en{display:none}
+.lt{float:right;font-size:.8rem}.lt button{border:1px solid #2b5675;background:#0f2a3e;color:var(--t);border-radius:12px;padding:3px 8px;font:inherit}.lt button.on{background:var(--a);color:#032}
 </style></head><body>
-<header><h1>🏄 Foilassist – spots NL · BE · FR · ES · PT · MA · Canarias · UK · IE · DE · DK</h1>
-<p>Golven, stroming, wind, weer, watertemperatuur en getij per spot. <span id="upd"></span></p></header>
+<header><span class="lt"><button id="l-nl" onclick="setLang('nl')">NL</button> <button id="l-en" onclick="setLang('en')">EN</button></span><h1>🏄 Foilassist – spots NL · BE · FR · ES · PT · MA · Canarias · UK · IE · DE · DK</h1>
+<p><span class="nl">Golven, stroming, wind, weer, watertemperatuur en getij per spot.</span><span class="en">Waves, current, wind, weather, water temperature and tides per spot.</span> <span id="upd"></span></p></header>
 <nav class="days" id="lands"></nav><nav class="days" id="days" style="top:46px"></nav>
-<div id="map"></div><div id="sheet"><button class="x" onclick="closeS()">▾ sluiten</button><div id="sc"></div></div>
-<h3 class="l">Lijst – beste spot bovenaan</h3>
-<main id="main"><p>Gegevens laden…</p></main>
-<footer>
+<div id="map"></div><div id="sheet"><button class="x" onclick="closeS()">▾ <span class="nl">sluiten</span><span class="en">close</span></button><div id="sc"></div></div>
+<h3 class="l"><span class="nl">Lijst – beste spot bovenaan</span><span class="en">List – best spot on top</span></h3>
+<main id="main"><p class="nl">Gegevens laden…</p><p class="en">Loading data…</p></main>
+<footer><div class="nl">
 <details><summary><b>Hoe de sterren werken</b></summary>
 <p>Een <b>indicatie</b> voor foil assist (golffoilen/downwinden met motorhulp), berekend uit de modelgegevens hierboven. Vandaag: het huidige uur op de spot; andere dagen: het beste van 9, 13 en 17 uur. Start op 5 sterren, daarna aftrek:</p>
 <ul><li>Golven: &lt;0,3 m −3; 0,3–0,6 m −1,5; 0,8–1,5 m ideaal; 0,6–0,8 en 1,5–2 m −0,5; 2–3 m −1; &gt;3 m −2,5. Periode &lt;5 s −1,5; 5–7 s −1; 7–9 s −0,5; ≥9 s geen aftrek. Sorteren gebeurt op de onafgeronde score.</li>
@@ -46,13 +53,23 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <p>Geen vervanging voor eigen beoordeling ter plaatse: lokale ondieptes, pieren, zones en drukte zitten er niet in.</p></details>
 <p><b>Bronnen:</b> golven, stroming, watertemperatuur en zeeniveau: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind en weer: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). Hoog- en laagwater zijn afgeleid uit het voorspelde zeeniveau van het model (inclusief getij); dit is een schatting en kan tot een half uur of meer afwijken van de officiële tijden van <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>. Kaart: Leaflet met OpenStreetMap-tegels. Spots en beschrijvingen: foil.guide, ophetwater.nl, Foil School Nederland.</p>
 <p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
-</footer>
-<script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML='<p class="err">Fout bij laden: '+(e.message||"onbekend")+' <button onclick="location.reload()">Opnieuw</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML+='<p class="err">Dit duurt lang… <button onclick="location.reload()">Opnieuw proberen</button></p>'},30000);</script>
-<script src="leaflet/leaflet.js?v=20261014-16"></script>
+</div><div class="en">
+<details><summary><b>How the stars work</b></summary>
+<p>An <b>indication</b> for foil assist (motor-assisted wave foiling/downwinding), calculated from the model data above. Today: the current hour at the spot; other days: the best of 9, 13 and 17 h. Start at 5 stars, then deductions:</p>
+<ul><li>Waves: &lt;0.3 m −3; 0.3–0.6 m −1.5; 0.8–1.5 m ideal; 0.6–0.8 and 1.5–2 m −0.5; 2–3 m −1; &gt;3 m −2.5. Period &lt;5 s −1.5; 5–7 s −1; 7–9 s −0.5; ≥9 s no deduction. Sorting uses the unrounded score.</li>
+<li>Wind: &gt;25 kn −2; 15–25 kn −1.5 if it comes from the same direction as the waves (onshore, choppy), otherwise −0.5; 8–15 kn onshore −0.5; light wind no deduction. Gusts &gt;30 kn −0.5. (Onshore is estimated from wind vs. wave direction; the coastline orientation per spot is not included.)</li>
+<li>Current: &gt;1.5 kn −1; 0.8–1.5 kn −0.5.</li>
+<li>Rain &gt;0.5 mm/h −0.5, &gt;2 mm/h −1; thunderstorm −2. Dark: 0 stars.</li></ul>
+<p>No substitute for your own judgement on site: local shallows, piers, zones and crowds are not included.</p></details>
+<p><b>Sources:</b> waves, current, water temperature and sea level: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind and weather: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). High and low tide are derived from the model's forecast sea level (including tide); this is an estimate and can differ by half an hour or more from official times (e.g. <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>). Map: Leaflet with OpenStreetMap tiles. Spots and descriptions: foil.guide, ophetwater.nl, Foil School Nederland and the sources listed per spot. English spot descriptions are translations of the Dutch originals.</p>
+<p>Arrows point where waves, wind and current are going <i>to</i>; the letters show where waves and wind come from and where the current goes. Times are the spot's local time. Always judge for yourself on site.</p>
+</div></footer>
+<script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data/.test(m.textContent))m.innerHTML='<p class="err">'+T('Fout bij laden: ','Error while loading: ')+(e.message||T('onbekend','unknown'))+' <button onclick="location.reload()">'+T('Opnieuw','Retry')+'</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data/.test(m.textContent))m.innerHTML+='<p class="err">'+T('Dit duurt lang… ','This is taking long… ')+'<button onclick="location.reload()">'+T('Opnieuw proberen','Try again')+'</button></p>'},30000);</script>
+<script src="leaflet/leaflet.js?v=20261014-17"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-16"></script>
+<script src="spots.js?v=20261014-17"></script>
 <script>
-const SL=[9,13,17],R=['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];
+const SL=[9,13,17],R=LANG=='en'?['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW']:['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];const LOC=T('nl-NL','en-GB');
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
 const arrow=(d,to)=>d==null?'':`<span class="ar" style="transform:rotate(${(to?d:d+180)%360}deg)">↑</span>`;
 const wx=c=>c==null?'–':c==0?'☀️':c<=2?'🌤️':c==3?'☁️':c<=48?'🌫️':c<=57?'🌦️':c<=67?'🌧️':c<=77?'🌨️':c<=82?'🌧️':c<=86?'🌨️':'⛈️';
@@ -69,9 +86,9 @@ function tides(m,date){const t=m.minutely_15.time,h=m.minutely_15.sea_level_heig
   else if(h[i]===Math.min(...w)&&h[i]<h[i-1])o.push(['LW',t[i].slice(11),h[i]]);}
  let r=o.filter((x,k)=>!k||x[0]!=o[k-1][0]);for(let k=1;k<r.length-1;k++){if(Math.abs(r[k][2]-r[k-1][2])<0.25&&Math.abs(r[k+1][2]-r[k][2])<0.25){r.splice(k,1);k--;}}return r.filter((x,k)=>!k||x[0]!=r[k-1][0]);}
 function render(){const dates=[...new Set(M[0].hourly.time.map(t=>t.slice(0,10)))];
- const fmt=d=>new Date(d+'T12:00').toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});
- document.getElementById('days').innerHTML=dates.map((d,i)=>`<button class="${i==day?'on':''}" onclick="day=${i};render()">${i==0?'Vandaag':i==1?'Morgen':fmt(d)}</button>`).join('');
- const date=dates[day];curDate=date;const ORDER=['NL','BE','FR','ES','PT','MA','Canarias','UK','IE','DE','DK'];const present=new Set(spots.map(s=>s.land));const lands=['Alle',...ORDER.filter(l=>present.has(l)),...[...present].filter(l=>!ORDER.includes(l))];document.getElementById('lands').innerHTML=lands.map(l=>`<button class="${l==land?'on':''}" onclick="land='${l}';render()">${l}</button>`).join('');
+ const fmt=d=>new Date(d+'T12:00').toLocaleDateString(LOC,{weekday:'short',day:'numeric',month:'short'});
+ document.getElementById('days').innerHTML=dates.map((d,i)=>`<button class="${i==day?'on':''}" onclick="day=${i};render()">${i==0?T('Vandaag','Today'):i==1?T('Morgen','Tomorrow'):fmt(d)}</button>`).join('');
+ const date=dates[day];curDate=date;const ORDER=['NL','BE','FR','ES','PT','MA','Canarias','UK','IE','DE','DK'];const present=new Set(spots.map(s=>s.land));const lands=['Alle',...ORDER.filter(l=>present.has(l)),...[...present].filter(l=>!ORDER.includes(l))];document.getElementById('lands').innerHTML=lands.map(l=>`<button class="${l==land?'on':''}" onclick="land='${l}';render()">${l=='Alle'?T('Alle','All'):l}</button>`).join('');document.getElementById('l-'+LANG).classList.add('on');
  document.getElementById('main').innerHTML=spots.map((s,k)=>k).filter(k=>land=='Alle'||spots[k].land==land).map(k=>[k,rating(k,date).v??-1]).sort((a,b)=>b[1]-a[1]).map(([k])=>cardH(k,date,false)).join('');drawMap();if(openK!=null)openS(openK);}
 
 // ==== STERREN (indicatie voor foil assist) ====
@@ -87,25 +104,25 @@ function score(k,i){const m=M[k].hourly,w=F[k].hourly;if(i<0)return null;let s=5
  if(wc!=null&&wc>=95)s-=2;else if(r!=null){if(r>2)s-=1;else if(r>0.5)s-=0.5;}
  return Math.max(0,Math.min(5,s));}
 function rating(k,date){const m=M[k].hourly;
- if(day==0){const t=new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00';return {v:score(k,m.time.indexOf(t)),t:'nu ('+t.slice(11)+')'};}
- let best=null,bt='';SL.forEach(hh=>{const v=score(k,m.time.indexOf(`${date}T${String(hh).padStart(2,'0')}:00`));if(v!=null&&(best==null||v>best)){best=v;bt=hh+':00';}});return {v:best,t:'beste ('+bt+')'};}
+ if(day==0){const t=new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00';return {v:score(k,m.time.indexOf(t)),t:T('nu','now')+' ('+t.slice(11)+')'};}
+ let best=null,bt='';SL.forEach(hh=>{const v=score(k,m.time.indexOf(`${date}T${String(hh).padStart(2,'0')}:00`));if(v!=null&&(best==null||v>best)){best=v;bt=hh+':00';}});return {v:best,t:T('beste','best')+' ('+bt+')'};}
 const R2=v=>v==null?null:Math.round(v*2)/2;
-const stars=x=>{const v=R2(x);return v==null?'–':'<span class="st">'+'★'.repeat(Math.floor(v))+(v%1?'<span style="opacity:.6">★</span>':'')+'<span style="opacity:.3">'+'★'.repeat(5-Math.ceil(v))+'</span></span> '+v.toFixed(1).replace('.',',')};
+const stars=x=>{const v=R2(x);return v==null?'–':'<span class="st">'+'★'.repeat(Math.floor(v))+(v%1?'<span style="opacity:.6">★</span>':'')+'<span style="opacity:.3">'+'★'.repeat(5-Math.ceil(v))+'</span></span> '+(LANG=='en'?v.toFixed(1):v.toFixed(1).replace('.',','))};
 const scol=x=>{const v=R2(x);return v==null?'#888':['#d9534f','#e8743b','#f0ad4e','#d4c84a','#8cc152','#2ecc71'][Math.round(v)]};
 function camsH(s){if(!s.webcams||!s.webcams.length)return '';return '<p class="cams">'+s.webcams.map((c,i)=>`<a href="${c.url}" target="_blank" rel="noopener noreferrer" title="${c.naam.replace(/"/g,'&quot;')}">📷 Spotcam${i?' '+(i+1):''}</a>`).join(' ')+'</p>'}
-function zeeAfst(k){const s=spots[k],m=M[k],km=Math.hypot((m.latitude-s.lat)*111,(m.longitude-s.lon)*111*Math.cos(s.lat*Math.PI/180));return km>5?`<p class="info" style="color:var(--m);font-size:.75rem">Golf-/zeedata uit modelvak ~${Math.round(km)} km van de spot (verder op zee).</p>`:''}
+function zeeAfst(k){const s=spots[k],m=M[k],km=Math.hypot((m.latitude-s.lat)*111,(m.longitude-s.lon)*111*Math.cos(s.lat*Math.PI/180));return km>5?`<p class="info" style="color:var(--m);font-size:.75rem">${T(`Golf-/zeedata uit modelvak ~${Math.round(km)} km van de spot (verder op zee).`,`Wave/sea data from a model cell ~${Math.round(km)} km from the spot (further offshore).`)}</p>`:''}
 function cardH(k,date,full){const s=spots[k];const m=M[k].hourly,w=F[k].hourly;
   const idx=SL.map(h=>m.time.indexOf(`${date}T${String(h).padStart(2,'0')}:00`));
   const row=(lab,fn)=>`<tr><td>${lab}</td>${idx.map(i=>`<td>${i<0?'–':fn(i)}</td>`).join('')}</tr>`;
   const td=tides(M[k],date);const hv=M[k].minutely_15.sea_level_height_msl.filter(v=>v!=null),rg=hv.length?Math.max(...hv)-Math.min(...hv):0;
-  return `<section class="card"><h2>${s.naam}<small>${s.land} · lokale tijd ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${s.info}</p>`:''}${camsH(s)}${zeeAfst(k)}<table>
+  return `<section class="card"><h2>${s.naam}<small>${s.land} · ${T('lokale tijd','local time')} ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${LANG=='en'&&s.info_en?s.info_en:s.info}</p>`:''}${camsH(s)}${zeeAfst(k)}<table>
   <tr><th></th>${SL.map(h=>`<th>${h}:00</th>`).join('')}</tr>
-  ${row('Weer',i=>`${wx(w.weather_code[i])} ${f(w.temperature_2m[i])}°${w.precipitation[i]>0?` <small>${f(w.precipitation[i],1)}mm</small>`:''}`)}
+  ${row(T('Weer','Weather'),i=>`${wx(w.weather_code[i])} ${f(w.temperature_2m[i])}°${w.precipitation[i]>0?` <small>${f(w.precipitation[i],1)}mm</small>`:''}`)}
   ${row('Wind kn',i=>`${arrow(w.wind_direction_10m[i])} ${f(w.wind_speed_10m[i])}<small>/${f(w.wind_gusts_10m[i])}</small> ${card(w.wind_direction_10m[i])}`)}
-  ${row('Golf',i=>`${arrow(m.wave_direction[i])} ${f(m.wave_height[i],1)}m <small>${f(m.wave_period[i])}s ${card(m.wave_direction[i])}</small>`)}
-  ${row('Stroming',i=>`${arrow(m.ocean_current_direction[i],1)} ${f(m.ocean_current_velocity[i]==null?null:m.ocean_current_velocity[i]/1.852,1)}kn <small>${card(m.ocean_current_direction[i])}</small>`)}
+  ${row(T('Golf','Waves'),i=>`${arrow(m.wave_direction[i])} ${f(m.wave_height[i],1)}m <small>${f(m.wave_period[i])}s ${card(m.wave_direction[i])}</small>`)}
+  ${row(T('Stroming','Current'),i=>`${arrow(m.ocean_current_direction[i],1)} ${f(m.ocean_current_velocity[i]==null?null:m.ocean_current_velocity[i]/1.852,1)}kn <small>${card(m.ocean_current_direction[i])}</small>`)}
   ${row('Water',i=>`${f(m.sea_surface_temperature[i],1)}°C`)}
-  </table><div class="tide">🌊 ${!hv.length?'getij: geen gegevens':rg<0.3?'getij: verwaarloosbaar klein (&lt;0,3 m)':td.length?td.map(x=>`<b>${x[0]}</b> ${x[1]}`).join(' · '):'getij: geen gegevens'}</div></section>`}
+  </table><div class="tide">🌊 ${!hv.length?T('getij: geen gegevens','tide: no data'):rg<0.3?T('getij: verwaarloosbaar klein (&lt;0,3 m)','tide: negligible (&lt;0.3 m)'):td.length?td.map(x=>`<b>${LANG=='en'?(x[0]=='HW'?'HT':'LT'):x[0]}</b> ${x[1]}`).join(' · '):T('getij: geen gegevens','tide: no data')}</div></section>`}
 let map,layer,openK=null,lastLand=null,curDate;
 function drawMap(){if(!map){map=L.map('map',{zoomControl:true});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);layer=L.layerGroup().addTo(map);}
  layer.clearLayers();const pts=[];spots.forEach((s,k)=>{if(land!='Alle'&&s.land!=land)return;pts.push([s.lat,s.lon]);
@@ -126,11 +143,11 @@ async function live(){const ch=[];for(let i=0;i<spots.length;i+=25)ch.push(spots
   m.push(...[].concat(await retry(()=>tfetch(mU.replace(/latitude=[^&]*&longitude=[^&]*/,`latitude=${la}&longitude=${lo}`)))));
   f.push(...[].concat(await retry(()=>tfetch(fU.replace(/latitude=[^&]*&longitude=[^&]*/,`latitude=${la}&longitude=${lo}`)))));}
  return {m,f,t:new Date().toISOString()}}
-function show(d,note){M=d.m;F=d.f;document.getElementById('upd').textContent='Gegevens van '+new Date(d.t).toLocaleString('nl-NL',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' (Open-Meteo)'+(note||'')+'.';render();}
-function fail(e){document.getElementById('main').innerHTML=`<p class="err">Kon de gegevens niet laden (${e&&e.message||e}). Controleer je verbinding. <button onclick="location.reload()">Opnieuw proberen</button></p>`;}
+function show(d,note){M=d.m;F=d.f;document.getElementById('upd').textContent=T('Gegevens van ','Data from ')+new Date(d.t).toLocaleString(LOC,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' (Open-Meteo)'+(note||'')+'.';render();}
+function fail(e){document.getElementById('main').innerHTML=`<p class="err">${T('Kon de gegevens niet laden','Could not load the data')} (${e&&e.message||e}). ${T('Controleer je verbinding.','Check your connection.')} <button onclick="location.reload()">${T('Opnieuw proberen','Try again')}</button></p>`;}
 (async()=>{let cached=null;try{cached=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
- const okc=cached&&cached.m&&cached.m.length==spots.length;if(okc)try{show(cached,' – opgeslagen kopie, bijwerken…')}catch(e){}
+ const okc=cached&&cached.m&&cached.m.length==spots.length;if(okc)try{show(cached,T(' – opgeslagen kopie, bijwerken…',' – saved copy, updating…'))}catch(e){}
  try{let d;try{d=pick(await retry(()=>tfetch('data.json?h='+Math.floor(Date.now()/9e5))))}catch(e){console.warn('data.json:',e.message);d=await live()}
   show(d);try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
- catch(e){if(okc){show(cached,' – opgeslagen kopie, live laden lukte niet')}else fail(e)}})();
+ catch(e){if(okc){show(cached,T(' – opgeslagen kopie, live laden lukte niet',' – saved copy, live loading failed'))}else fail(e)}})();
 </script></body></html>
