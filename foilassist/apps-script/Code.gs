@@ -9,15 +9,19 @@ const SPOTS_URL = 'https://willemvroom.nl/foilassist/spots.js';
 const MAX_PER_SPOT = 5, PER_SPOT_WINDOW_S = 600;   // max 5 per spot per 10 min
 const MAX_PER_DAY = 100;                           // max 100 per dag in totaal
 const MIN_FILL_MS = 5000;                          // formulier minstens 5 s open
-const HEADERS = ['id','ontvangen','verborgen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','board','voorvleugel','mast','fuselage','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling','taal'];
-const LIMITS = {naam:40, hoe_ging_het:1500, omstandigheden_tekst:500, oefenen:300};  // overige tekstvelden: 100
+const HEADERS = ['id','ontvangen','verborgen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','board','merk_foil','voorvleugel','mast','mastlengte','fuselage','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling','taal'];
+const LIMITS = {mastlengte:10, naam:40, hoe_ging_het:1500, omstandigheden_tekst:500, oefenen:300};  // overige tekstvelden: 100
 const PICKS = {golven:['flat','klein','goed','groot','te groot'], wind:['geen','licht','matig','hard','te hard'], stroming:['geen','zwak','matig','sterk'], drukte:['leeg','rustig','druk','erg druk']};
-const PUBLIC = ['id','ontvangen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','board','voorvleugel','mast','fuselage','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling'];
+const PUBLIC = ['id','ontvangen','spot','naam','sessie','hoe_ging_het','golven','wind','stroming','drukte','omstandigheden_tekst','board','merk_foil','voorvleugel','mast','mastlengte','fuselage','foilassist','batterij_type','batterij_capaciteit','batterij_aantal','gebruiksduur','oefenen','beoordeling'];
 
 function sheet_() {
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   const sh = SHEET_NAME ? ss.getSheetByName(SHEET_NAME) : ss.getSheets()[0];
   if (sh.getLastRow() === 0) sh.appendRow(HEADERS);
+  else if (sh.getLastRow() === 1 && sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0].join() !== HEADERS.join()) {
+    sh.getRange(1, 1, 1, Math.max(sh.getLastColumn(), HEADERS.length)).clearContent();
+    sh.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);    // kopregel bijwerken zolang er nog geen verslagen zijn
+  }
   return sh;
 }
 function json_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
@@ -89,6 +93,7 @@ function doPost(e) {
       sessie: Utilities.formatDate(t, 'UTC', "yyyy-MM-dd'T'HH:mm'Z'"), beoordeling: Math.round(rating * 2) / 2,
       taal: ['nl','en','de'].indexOf(d.taal) >= 0 ? d.taal : ''};
     HEADERS.forEach(h => { if (!(h in r)) r[h] = clean_(d[h], LIMITS[h] || 100); });
+    if (r.mastlengte && !/^\d{2,3}$/.test(r.mastlengte)) r.mastlengte = '';
     Object.keys(PICKS).forEach(k => { if (r[k] && PICKS[k].indexOf(r[k]) < 0) r[k] = ''; });
     const sh = sheet_();
     sh.appendRow(HEADERS.map(h => r[h]));
