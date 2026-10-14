@@ -3,7 +3,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-9">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-10">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -47,9 +47,9 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
 </footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML='<p class="err">Fout bij laden: '+(e.message||"onbekend")+' <button onclick="location.reload()">Opnieuw</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML+='<p class="err">Dit duurt lang… <button onclick="location.reload()">Opnieuw proberen</button></p>'},30000);</script>
-<script src="leaflet/leaflet.js?v=20261014-9"></script>
+<script src="leaflet/leaflet.js?v=20261014-10"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-9"></script>
+<script src="spots.js?v=20261014-10"></script>
 <script>
 const SL=[9,13,17],R=['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -127,7 +127,8 @@ async function live(){const ch=[];for(let i=0;i<spots.length;i+=25)ch.push(spots
 function show(d,note){M=d.m;F=d.f;document.getElementById('upd').textContent='Gegevens van '+new Date(d.t).toLocaleString('nl-NL',{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' (Open-Meteo)'+(note||'')+'.';render();}
 function fail(e){document.getElementById('main').innerHTML=`<p class="err">Kon de gegevens niet laden (${e&&e.message||e}). Controleer je verbinding. <button onclick="location.reload()">Opnieuw proberen</button></p>`;}
 (async()=>{let cached=null;try{cached=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+ const okc=cached&&cached.m&&cached.m.length==spots.length;if(okc)try{show(cached,' – opgeslagen kopie, bijwerken…')}catch(e){}
  try{let d;try{d=pick(await retry(()=>tfetch('data.json?h='+Math.floor(Date.now()/9e5))))}catch(e){console.warn('data.json:',e.message);d=await live()}
   show(d);try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
- catch(e){if(cached&&cached.m&&cached.m.length==spots.length){show(cached,' – opgeslagen kopie, live laden lukte niet')}else fail(e)}})();
+ catch(e){if(okc){show(cached,' – opgeslagen kopie, live laden lukte niet')}else fail(e)}})();
 </script></body></html>
