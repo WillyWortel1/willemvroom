@@ -8,7 +8,7 @@ const T=(nl,en,de)=>LANG=='de'?de:LANG=='en'?en:nl;</script>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title><script>if(LANG=='en')document.title='Foilassist – conditions per spot';if(LANG=='de')document.title='Foilassist – Bedingungen pro Spot'</script>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-32">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-33">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -85,9 +85,9 @@ html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:
 <p>Pfeile zeigen, wohin Wellen, Wind und Strömung <i>gehen</i>; die Buchstaben geben an, woher Wellen und Wind kommen und wohin die Strömung geht. Zeiten sind die Ortszeit des Spots. Immer selbst vor Ort beurteilen.</p>
 </div></footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML='<p class="err">'+T('Fout bij laden: ','Error while loading: ','Fehler beim Laden: ')+(e.message||T('onbekend','unknown','unbekannt'))+' <button onclick="location.reload()">'+T('Opnieuw','Retry','Erneut')+'</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML+='<p class="err">'+T('Dit duurt lang… ','This is taking long… ','Das dauert lange… ')+'<button onclick="location.reload()">'+T('Opnieuw proberen','Try again','Erneut versuchen')+'</button></p>'},30000);</script>
-<script src="leaflet/leaflet.js?v=20261014-32"></script>
+<script src="leaflet/leaflet.js?v=20261014-33"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-32"></script>
+<script src="spots.js?v=20261014-33"></script>
 <script>
 const SL=[9,13,17],R=LANG=='de'?['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW']:LANG=='en'?['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW']:['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];const LOC=T('nl-NL','en-GB','de-DE');
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -135,7 +135,7 @@ function cardH(k,date,full){const s=spots[k];const m=M[k].hourly,w=F[k].hourly;
   const idx=SL.map(h=>m.time.indexOf(`${date}T${String(h).padStart(2,'0')}:00`));
   const row=(lab,fn)=>`<tr><td>${lab}</td>${idx.map(i=>`<td>${i<0?'–':fn(i)}</td>`).join('')}</tr>`;
   const td=tides(M[k],date);const hv=M[k].minutely_15.sea_level_height_msl.filter(v=>v!=null),rg=hv.length?Math.max(...hv)-Math.min(...hv):0;
-  return `<section class="card"><h2><span>${s.naam}${foilIcon(s)}${repBadge(s)}</span><small>${s.land} · ${T('lokale tijd','local time','Ortszeit')} ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${LANG=='de'&&s.info_de?s.info_de:LANG=='en'&&s.info_en?s.info_en:s.info}</p>`:''}${foilH(s,full)}${full?camsH(s):`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0 0 8px">${camsH(s).replace('margin:0 0 8px','') ||'<span></span>'}${cardRepBtn(k)}</div>`}${zeeAfst(k)}<table>
+  return `<section class="card"><h2><span>${s.naam}${foilIcon(s)}${repBadge(s)}</span><small>${s.land} · ${T('lokale tijd','local time','Ortszeit')} ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${LANG=='de'&&s.info_de?s.info_de:LANG=='en'&&s.info_en?s.info_en:s.info}</p>`:''}${foilH(s,full)}${full?camsH(s):`<div class="crow" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0 0 8px">${camsH(s).replace('margin:0 0 8px','') ||'<span></span>'}${cardRepBtn(k)}</div>`}${zeeAfst(k)}<table>
   <tr><th></th>${SL.map(h=>`<th>${h}:00</th>`).join('')}</tr>
   ${row(T('Weer','Weather','Wetter'),i=>`${wx(w.weather_code[i])} ${f(w.temperature_2m[i])}°${w.precipitation[i]>0?` <small>${f(w.precipitation[i],1)}mm</small>`:''}`)}
   ${row('Wind kn',i=>`${arrow(w.wind_direction_10m[i])} ${f(w.wind_speed_10m[i])}<small>/${f(w.wind_gusts_10m[i])}</small> ${card(w.wind_direction_10m[i])}`)}
