@@ -3,7 +3,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-13">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-14">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -30,7 +30,7 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 .cams{margin:0 0 8px;font-size:.85rem}.cams a{color:var(--a);margin-right:10px;text-decoration:none;white-space:nowrap}
 .err{color:#ffb4a8}
 </style></head><body>
-<header><h1>🏄 Foilassist – spots NL · FR · ES · PT · MA · Canarias · UK · IE · BE</h1>
+<header><h1>🏄 Foilassist – spots NL · BE · FR · ES · PT · MA · Canarias · UK · IE</h1>
 <p>Golven, stroming, wind, weer, watertemperatuur en getij per spot. <span id="upd"></span></p></header>
 <nav class="days" id="lands"></nav><nav class="days" id="days" style="top:46px"></nav>
 <div id="map"></div><div id="sheet"><button class="x" onclick="closeS()">▾ sluiten</button><div id="sc"></div></div>
@@ -48,9 +48,9 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
 </footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML='<p class="err">Fout bij laden: '+(e.message||"onbekend")+' <button onclick="location.reload()">Opnieuw</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden/.test(m.textContent))m.innerHTML+='<p class="err">Dit duurt lang… <button onclick="location.reload()">Opnieuw proberen</button></p>'},30000);</script>
-<script src="leaflet/leaflet.js?v=20261014-13"></script>
+<script src="leaflet/leaflet.js?v=20261014-14"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-13"></script>
+<script src="spots.js?v=20261014-14"></script>
 <script>
 const SL=[9,13,17],R=['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -71,7 +71,7 @@ function tides(m,date){const t=m.minutely_15.time,h=m.minutely_15.sea_level_heig
 function render(){const dates=[...new Set(M[0].hourly.time.map(t=>t.slice(0,10)))];
  const fmt=d=>new Date(d+'T12:00').toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});
  document.getElementById('days').innerHTML=dates.map((d,i)=>`<button class="${i==day?'on':''}" onclick="day=${i};render()">${i==0?'Vandaag':i==1?'Morgen':fmt(d)}</button>`).join('');
- const date=dates[day];curDate=date;const lands=['Alle',...new Set(spots.map(s=>s.land))];document.getElementById('lands').innerHTML=lands.map(l=>`<button class="${l==land?'on':''}" onclick="land='${l}';render()">${l}</button>`).join('');
+ const date=dates[day];curDate=date;const ORDER=['NL','BE','FR','ES','PT','MA','Canarias','UK','IE'];const present=new Set(spots.map(s=>s.land));const lands=['Alle',...ORDER.filter(l=>present.has(l)),...[...present].filter(l=>!ORDER.includes(l))];document.getElementById('lands').innerHTML=lands.map(l=>`<button class="${l==land?'on':''}" onclick="land='${l}';render()">${l}</button>`).join('');
  document.getElementById('main').innerHTML=spots.map((s,k)=>k).filter(k=>land=='Alle'||spots[k].land==land).map(k=>[k,rating(k,date).v??-1]).sort((a,b)=>b[1]-a[1]).map(([k])=>cardH(k,date,false)).join('');drawMap();if(openK!=null)openS(openK);}
 
 // ==== STERREN (indicatie voor foil assist) ====
