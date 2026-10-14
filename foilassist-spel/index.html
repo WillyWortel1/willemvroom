@@ -92,8 +92,8 @@ caught:'Take-off! Wave caught!',swell:'Swell caught!',bt:'Bottom turn',cb:'Cutba
 barrelC:'Hollow wave! BARREL: stay in the light lane',barrel:'BARREL!',swallowed:'Swallowed by the tube!',
 over:'Session over',batEmpty:'Battery empty',falls:'Too many falls',score:'Score',hiS:'Best',again:'Another session',pause:'Paused',resume:'Resume',
 bat_:'Battery',falls_:'Falls',combo:'Combo'}};
-Object.assign(T.nl,{sea:'ZEE',beach:'STRAND',heading:'Koers',side:'Golf naast je',waveS:'GOLF',shout:'Hé! Mijn golf!',behind:'Golf achter je',proost:'Proost!',party:'Nieuw record! Strandfeest met je vrienden 🎉',finHit:'Haai! Wegwezen!',finOk:'Haai ontweken',gullHit:'Krijs! Meeuw pikt je!',gullOk:'Meeuw ontweken',surfHit:'Gescholden door een surfer!',surfOk:'Netjes uit de weg',dodge:'Opzij = uitwijken, omlaag = bukken',fsT:'Freeride-instellingen',fsW:'Golfhoogte',fsS:'Golfsnelheid',fsSt:'Sturen',fsP:'Golfperiode',fsH:'Gevaren (meeuwen, haaien, surfers)'});
-Object.assign(T.en,{sea:'SEA',beach:'BEACH',heading:'Heading',side:'Wave beside you',waveS:'WAVE',shout:'Hey! My wave!',behind:'Wave behind you',proost:'Cheers!',party:'New best! Beach party with your friends 🎉',finHit:'Shark! Get out!',finOk:'Dodged the shark',gullHit:'Squawk! Gull attack!',gullOk:'Ducked the gull',surfHit:'Yelled at by a surfer!',surfOk:'Nicely out of the way',dodge:'Sideways = swerve, down = duck',fsT:'Freeride settings',fsW:'Wave height',fsS:'Wave speed',fsSt:'Steering',fsP:'Wave period',fsH:'Hazards (gulls, sharks, surfers)'});
+Object.assign(T.nl,{warm:'Rustige deining – wen even aan',sea:'ZEE',beach:'STRAND',heading:'Koers',side:'Golf naast je',waveS:'GOLF',shout:'Hé! Mijn golf!',behind:'Golf achter je',proost:'Proost!',party:'Nieuw record! Strandfeest met je vrienden 🎉',finHit:'Haai! Wegwezen!',finOk:'Haai ontweken',gullHit:'Krijs! Meeuw pikt je!',gullOk:'Meeuw ontweken',surfHit:'Gescholden door een surfer!',surfOk:'Netjes uit de weg',dodge:'Opzij = uitwijken, omlaag = bukken',fsT:'Freeride-instellingen',fsW:'Golfhoogte',fsS:'Golfsnelheid',fsSt:'Sturen',fsP:'Golfperiode',fsH:'Gevaren (meeuwen, haaien, surfers)'});
+Object.assign(T.en,{warm:'Gentle swell – get used to the controls',sea:'SEA',beach:'BEACH',heading:'Heading',side:'Wave beside you',waveS:'WAVE',shout:'Hey! My wave!',behind:'Wave behind you',proost:'Cheers!',party:'New best! Beach party with your friends 🎉',finHit:'Shark! Get out!',finOk:'Dodged the shark',gullHit:'Squawk! Gull attack!',gullOk:'Ducked the gull',surfHit:'Yelled at by a surfer!',surfOk:'Nicely out of the way',dodge:'Sideways = swerve, down = duck',fsT:'Freeride settings',fsW:'Wave height',fsS:'Wave speed',fsSt:'Steering',fsP:'Wave period',fsH:'Hazards (gulls, sharks, surfers)'});
 T.nl.sub='Je start op de golf. Blijf er zo lang mogelijk op: bottom turns onderin, cutbacks bovenin. Grotere golven gaan sneller. Met je Foildrive foilassist pomp je terug naar de volgende golf.';T.en.sub='You start on the wave. Stay on it as long as you can: bottom turns low, cutbacks high. Bigger waves are faster. Use your Foildrive foilassist to get back onto the next wave.';
 const t=k=>T[lang][k];
 let FS={wave:1,speed:1,period:1,steer:1,haz:true,v:2};try{const o=JSON.parse(lsGet('fa-free','{}'));if(o.v===2)Object.assign(FS,o);else if('haz' in o)FS.haz=o.haz;}catch(e){}
@@ -184,13 +184,14 @@ function say(s,d){msg=s;msgT=d||1.6;}
 function newGame(free){G.free=free;gearNow=gear();G.mode='play';G.paused=false;document.body.classList.add('playing');
  P={thr:0.8,sx:0,bank:0,yaw:0,th:0,rz:0,rx:0,carve:0,armed:true,pwr:1,mood:.6,lane:0,laneX:0,hazT:5,dist:0,lastDir:1,phase:'paddle',score:0,bat:100,falls:0,motor:true,v:0,prog:0,dive:0,diveCd:0,h:0,vy:0,meter:0,getT:0,wave:null,p:.3,energy:1,combo:1,lastMove:-9,time:0,turnAnim:0,dir:1,inv:0,barrel:null,rides:0,barrels:0,maxCombo:1};
  if(free)gearNow.turn*=FS.steer;haz=[];G.party=0;waves=[];floaters=[];sprays=[];celebrate=0;startOnWave();hideOv();}
-function startOnWave(){startFoil();waves=[];nextSwell(0);const w=waves[0];w.dx=10;P.v=w.spd;P.h=gearNow.mast*0.5*PX;P.catchable=w;turnDir=Math.random()<.5?-1:1;tryCatch();say(t('ride'),3);}
+function startOnWave(){startFoil();waves=[];nextSwell(0);const w=waves[0];w.dx=10;P.v=w.spd;P.h=gearNow.mast*0.5*PX;P.catchable=w;turnDir=Math.random()<.5?-1:1;tryCatch();say(warmK()<1&&!P.warmSaid?(P.warmSaid=1,t('warm')):t('ride'),3);}
 function startPaddle(){P.phase='paddle';P.th=0;haz=[];P.dir=1;P.prog=0;P.h=0;P.v=0;P.wave=null;P.barrel=null;P.thr=0.8,P.motor=true;waves=[];spawnWW(W*0.9);say(t('paddle'),2.5);}
 function spawnWW(x){waves.push({kind:'ww',dx:x,passed:false});}
 function startGetup(){P.phase='getup';P.dir=-1;P.meter=0;P.getT=0;waves=[];say(t('getup'),2.2);}
 function startFoil(){P.liftT=0.8;SFX.whoosh();P.phase='foil';P.th=Math.PI;P.dir=-1;P.h=gearNow.mast*0.45;P.vy=0;P.v=gearNow.vmax*0.75;P.thr=0.8,P.motor=true;waves=[];nextSwell(W*0.6);say(t('foil'),2);}
-function nextSwell(x){const big=G.free?(0.75+Math.random()*0.5):(0.45+Math.random()*0.55);
- const fw=G.free?FS.wave:1,fsp=G.free?FS.speed:1;waves.push({kind:'swell',dx:W*0.5+x,A:(70+70*big)*fw*PX,wf:(90+40*big)*PX,spd:(115+40*big)*0.55*fsp,broken:Math.random()<0.55,hollow:big*fw>(G.free?0.85:0.93),age:0});}
+function warmK(){return G.free||!P?1:Math.min(1,Math.max(P.time/90,(P.rides||0)/3));}
+function nextSwell(x){const wk=warmK();const big=G.free?(0.75+Math.random()*0.5):(0.12+(0.33+Math.random()*0.55)*wk);
+ const fw=G.free?FS.wave:1,fsp=G.free?FS.speed:1;waves.push({kind:'swell',dx:W*0.5+x,A:(70+70*big)*fw*PX,wf:(90+40*big)*PX*(1.35-0.35*wk),spd:(115+40*big)*0.55*fsp*(0.72+0.28*wk),broken:Math.random()<0.55*wk*wk,hollow:wk>=1&&big*fw>(G.free?0.85:0.93),age:0});}
 function fall(why){if(P.inv>0)return;SFX.splash();SFX.bad();say(why,2);P.mood=Math.max(0,P.mood-.25);haz=[];P.falls++;P.combo=1;P.inv=1.5;P.thr=0,P.motor=false;
  if(!G.free&&P.falls>=3){endGame(t('falls'));return;}P.phase='swim';P.swimT=1.4;}
 function endGame(why){G.mode='over';document.body.classList.remove('playing');const key=G.free?'freeride':'sessie';const nh=P.score>hi[key];G.party=nh&&P.score>0;if(nh){hi[key]=P.score;lsSet(G.free?'fa-hi-free':'fa-hi',String(P.score));}
@@ -222,7 +223,7 @@ function update(dt){
  let carveEv=false;if(P.armed&&P.carve>0.3){carveEv=true;P.armed=false;P.carve=0;}
  const mps=P.phase==='swim'||P.phase==='getup'?0:Math.max(0,P.v)*(P.phase==='paddle'?0.17:0.31)/3.6;
  const mvx=Math.sin(P.th)*mps,mvz=Math.cos(P.th)*mps;P.rz+=mvz*dt;P.rx+=mvx*dt;
- if((!G.free||FS.haz)&&P.phase!=='getup'&&P.phase!=='swim'&&!P.barrel){P.hazT-=dt;if(P.hazT<=0){P.hazT=5+Math.random()*5;const ty=P.phase==='ride'?(Math.random()<.6?'surfer':'gull'):(Math.random()<.5?'fin':'gull');
+ if((G.free?FS.haz:warmK()>=1)&&P.phase!=='getup'&&P.phase!=='swim'&&!P.barrel){P.hazT-=dt;if(P.hazT<=0){P.hazT=5+Math.random()*5;const ty=P.phase==='ride'?(Math.random()<.6?'surfer':'gull'):(Math.random()<.5?'fin':'gull');
    const D=40,off=Math.random()<.6?0:(Math.random()-.5)*14,hx=Math.sin(P.th)*D+Math.cos(P.th)*off,hz=Math.cos(P.th)*D-Math.sin(P.th)*off,sp=ty==='gull'?7:ty==='fin'?3:4,n=Math.hypot(hx,hz);
    if(ty==='fin')SFX.shark();else if(ty==='gull')SFX.gull();haz.push({type:ty,x:hx,z:hz,vx:-hx/n*sp,vz:-hz/n*sp,y:ty==='gull'?4:0});if(ty!=='surfer'&&msgT<=0)say(t('dodge'),1.5);}}
  for(const h of haz){h.x+=(h.vx-mvx)*dt;h.z+=(h.vz-mvz)*dt;const dist=Math.hypot(h.x,h.z);if(h.type==='gull')h.y=0.8+3.2*Math.min(1,dist/30);
