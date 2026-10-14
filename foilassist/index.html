@@ -3,7 +3,7 @@
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-5">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-6">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -28,7 +28,7 @@ footer{padding:10px 14px 30px;color:var(--m);font-size:.78rem}footer a{color:var
 h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 .err{color:#ffb4a8}
 </style></head><body>
-<header><h1>🏄 Foilassist – spots NL · FR · ES · PT</h1>
+<header><h1>🏄 Foilassist – spots NL · FR · ES · PT · MA · Canarias</h1>
 <p>Golven, stroming, wind, weer, watertemperatuur en getij per spot. <span id="upd"></span></p></header>
 <nav class="days" id="lands"></nav><nav class="days" id="days" style="top:46px"></nav>
 <div id="map"></div><div id="sheet"><button class="x" onclick="closeS()">▾ sluiten</button><div id="sc"></div></div>
@@ -38,9 +38,9 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 <p><b>Bronnen:</b> golven, stroming, watertemperatuur en zeeniveau: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind en weer: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). Hoog- en laagwater zijn afgeleid uit het voorspelde zeeniveau van het model (inclusief getij); dit is een schatting en kan tot een half uur of meer afwijken van de officiële tijden van <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>. Kaart: Leaflet met OpenStreetMap-tegels. Spots en beschrijvingen: foil.guide, ophetwater.nl, Foil School Nederland.</p>
 <p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
 </footer>
-<script src="leaflet/leaflet.js?v=20261014-5"></script>
+<script src="leaflet/leaflet.js?v=20261014-6"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-5"></script>
+<script src="spots.js?v=20261014-6"></script>
 <script>
 const SL=[9,13,17],R=['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
