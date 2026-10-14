@@ -92,7 +92,7 @@ caught:'Take-off! Wave caught!',swell:'Swell caught!',bt:'Bottom turn',cb:'Cutba
 barrelC:'Hollow wave! BARREL: stay in the light lane',barrel:'BARREL!',swallowed:'Swallowed by the tube!',
 over:'Session over',batEmpty:'Battery empty',falls:'Too many falls',score:'Score',hiS:'Best',again:'Another session',pause:'Paused',resume:'Resume',
 bat_:'Battery',falls_:'Falls',combo:'Combo'}};
-Object.assign(T.nl,{warm:'Rustige deining – wen even aan',sea:'ZEE',beach:'STRAND',heading:'Koers',side:'Golf naast je',waveS:'GOLF',shout:'Hé! Mijn golf!',behind:'Golf achter je',proost:'Proost!',party:'Nieuw record! Strandfeest met je vrienden 🎉',finHit:'Haai! Wegwezen!',finOk:'Haai ontweken',gullHit:'Krijs! Meeuw pikt je!',gullOk:'Meeuw ontweken',surfHit:'Gescholden door een surfer!',surfOk:'Netjes uit de weg',dodge:'Opzij = uitwijken, omlaag = bukken',fsT:'Freeride-instellingen',fsW:'Golfhoogte',fsS:'Golfsnelheid',fsSt:'Sturen',fsP:'Golfperiode',fsH:'Gevaren (meeuwen, haaien, surfers)'});
+Object.assign(T.en,{wE:'Wave energy'});Object.assign(T.nl,{wE:'Golfenergie',warm:'Rustige deining – wen even aan',sea:'ZEE',beach:'STRAND',heading:'Koers',side:'Golf naast je',waveS:'GOLF',shout:'Hé! Mijn golf!',behind:'Golf achter je',proost:'Proost!',party:'Nieuw record! Strandfeest met je vrienden 🎉',finHit:'Haai! Wegwezen!',finOk:'Haai ontweken',gullHit:'Krijs! Meeuw pikt je!',gullOk:'Meeuw ontweken',surfHit:'Gescholden door een surfer!',surfOk:'Netjes uit de weg',dodge:'Opzij = uitwijken, omlaag = bukken',fsT:'Freeride-instellingen',fsW:'Golfhoogte',fsS:'Golfsnelheid',fsSt:'Sturen',fsP:'Golfperiode',fsH:'Gevaren (meeuwen, haaien, surfers)'});
 Object.assign(T.en,{warm:'Gentle swell – get used to the controls',sea:'SEA',beach:'BEACH',heading:'Heading',side:'Wave beside you',waveS:'WAVE',shout:'Hey! My wave!',behind:'Wave behind you',proost:'Cheers!',party:'New best! Beach party with your friends 🎉',finHit:'Shark! Get out!',finOk:'Dodged the shark',gullHit:'Squawk! Gull attack!',gullOk:'Ducked the gull',surfHit:'Yelled at by a surfer!',surfOk:'Nicely out of the way',dodge:'Sideways = swerve, down = duck',fsT:'Freeride settings',fsW:'Wave height',fsS:'Wave speed',fsSt:'Steering',fsP:'Wave period',fsH:'Hazards (gulls, sharks, surfers)'});
 T.nl.sub='Je start op de golf. Blijf er zo lang mogelijk op: bottom turns onderin, cutbacks bovenin. Grotere golven gaan sneller. Met je Foildrive foilassist pomp je terug naar de volgende golf.';T.en.sub='You start on the wave. Stay on it as long as you can: bottom turns low, cutbacks high. Bigger waves are faster. Use your Foildrive foilassist to get back onto the next wave.';
 const t=k=>T[lang][k];
@@ -196,7 +196,7 @@ function fall(why){if(P.inv>0)return;SFX.splash();SFX.bad();say(why,2);P.mood=Ma
  if(!G.free&&P.falls>=3){endGame(t('falls'));return;}P.phase='swim';P.swimT=1.4;}
 function endGame(why){G.mode='over';document.body.classList.remove('playing');const key=G.free?'freeride':'sessie';const nh=P.score>hi[key];G.party=nh&&P.score>0;if(nh){hi[key]=P.score;lsSet(G.free?'fa-hi-free':'fa-hi',String(P.score));}
  showOver(why,nh);}
-function addScore(pts,label){const v=Math.round(pts*P.combo);P.score+=v;floaters.push({x:RX,y:H*0.28,txt:label+' +'+v,t:1.4});}
+function addScore(pts,label){const v=Math.round(pts*P.combo);P.score+=v;floaters.push({x:RX,y:H*0.3+Math.min(3,floaters.length)*32,txt:'+'+v+' '+label,t:1.6});}
 
 /* ---------- golfprofiel ---------- */
 function waveH(w,x){ // hoogte boven zeeniveau op scherm-x
@@ -459,9 +459,11 @@ function drawRemote(tm){const RG=remoteGeom(),w=RG.w,h=RG.h;
  {const gx=w+6,gy=h*0.12,gh=h*0.5;ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(gx,gy,6,gh);ctx.fillStyle='#3ee08a';ctx.fillRect(gx,gy+gh*(1-(P.thr||0)),6,gh*(P.thr||0));}
  ctx.restore();}
 function safeB(){return parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab'))||0;}
-function drawHUD(tm){ctx.save();const top=46;
+function drawHUD(tm){ctx.save();const top=96;
+ {const sy=66;ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='900 '+Math.round(42*Math.min(PX,1.3))+'px system-ui';const st=String(P.score);ctx.lineJoin='round';ctx.shadowColor='rgba(0,0,0,.6)';ctx.shadowBlur=8;ctx.lineWidth=8;ctx.strokeStyle='#04131f';ctx.strokeText(st,W/2,sy);ctx.shadowBlur=0;ctx.fillStyle='#fff';ctx.fillText(st,W/2,sy);
+  if(P.combo>1){const sw=ctx.measureText(st).width;ctx.font='900 22px system-ui';ctx.textAlign='left';ctx.lineWidth=6;ctx.strokeText('x'+P.combo,W/2+sw/2+8,sy+4);ctx.fillStyle='#ffb020';ctx.fillText('x'+P.combo,W/2+sw/2+8,sy+4);}}
  ctx.textBaseline='middle';ctx.font='700 13px system-ui';ctx.textAlign='left';ctx.fillStyle='rgba(3,25,45,.55)';ctx.fillRect(6,top,Math.min(W-12,260),22);ctx.fillStyle='#fff';
- ctx.fillText(t('hiS')+' '+hi[G.free?'freeride':'sessie']+(P.combo>1?'  · '+t('combo')+' x'+P.combo:'')+'  · '+t('falls_')+' '+P.falls+(G.free?'':'/3'),12,top+11);
+ ctx.fillText(t('hiS')+' '+hi[G.free?'freeride':'sessie']+'  · '+t('falls_')+' '+P.falls+(G.free?'':'/3'),12,top+11);
  {const iw=Math.min(240,W*0.62),ix=(W-iw)/2,iy=top+50;ctx.save();ctx.beginPath();ctx.rect(ix,iy-12,iw,40);ctx.clip();ctx.fillStyle='rgba(3,25,45,.55)';ctx.fillRect(ix,iy,iw,16);
   const deg=Math.round(((P.th*180/Math.PI)+360)%360);ctx.font='700 10px system-ui';ctx.textAlign='center';ctx.fillStyle='#fff';
   for(let d=-180;d<=540;d+=45){let r=d-deg;if(r>180)r-=360;if(r<-180)r+=360;const x=W/2+r/120*iw/2;ctx.fillRect(x-0.5,iy,1,d%90?5:9);if(d%90===0){const lb={0:t('sea'),90:'→',180:t('beach'),270:'←'}[(d+360)%360];ctx.fillText(lb,x,iy+13);}}
@@ -469,10 +471,10 @@ function drawHUD(tm){ctx.save();const top=46;
   ctx.fillStyle='#4fd1ff';ctx.fillRect(W/2,iy+18,P.sx*iw/2,4);ctx.font='700 10px system-ui';ctx.fillStyle='#fff';ctx.textAlign='center';ctx.fillText(t('heading')+' '+deg+'°',W/2,iy+32);}
  if(P.phase==='getup'){const mw=Math.min(280,W*0.7),mx=(W-mw)/2,my=H*0.5,half=0.09*gearNow.get;ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(mx,my,mw,20);ctx.fillStyle='#3ee08a';ctx.fillRect(mx+mw*(0.5-half),my,mw*half*2,20);ctx.fillStyle='#fff';ctx.fillRect(mx+mw*P.meter-3,my-5,6,30);}
  if(P.phase==='paddle'){const pw=Math.min(240,W*0.6);ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect((W-pw)/2,top+30,pw,6);ctx.fillStyle='#ffe066';ctx.fillRect((W-pw)/2,top+30,pw*Math.min(1,P.prog/(900*PX)),6);}
- if(P.phase==='ride'){const ew=Math.min(160,W*0.4);ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect((W-ew)/2,top+30,ew,6);ctx.fillStyle='#4fd1ff';ctx.fillRect((W-ew)/2,top+30,ew*Math.min(1,P.energy/1.5),6);}
+ if(P.phase==='ride'){const ew=Math.min(160,W*0.4);ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect((W-ew)/2,top+30,ew,6);ctx.fillStyle='#4fd1ff';ctx.fillRect((W-ew)/2,top+30,ew*Math.min(1,P.energy/1.5),6);ctx.font='700 10px system-ui';ctx.textAlign='right';ctx.fillStyle='#bfefff';ctx.fillText(t('wE'),(W-ew)/2-6,top+33);}
  if(P.phase==='foil'){const mp=gearNow.mast*PX,x=18,y1=H*0.3;ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect(x-8,y1,16,mp+40);ctx.fillStyle='#ff5a5a';ctx.fillRect(x-8,y1,16,12);ctx.fillRect(x-8,y1+mp+28,16,12);const hy=y1+mp+28-P.h/mp*(mp+16);ctx.fillStyle='#ffe066';ctx.fillRect(x-11,hy-2,22,4);
   {const wb=waveBearing();if(wb&&Math.abs(wb.rel)>0.9){ctx.textAlign='center';ctx.fillStyle=P.catchable?'#3ee08a':'#fff';ctx.font='800 14px system-ui';ctx.fillText((Math.abs(wb.rel)>2.2?'↓ '+t('behind'):(wb.rel>0?'→ ':'← ')+t('side'))+' '+wb.m+' m',W/2,top+100);}}}
- for(const f of floaters){ctx.globalAlpha=Math.min(1,f.t);ctx.font='800 '+(20*PX|0)+'px system-ui';ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle='#08263f';ctx.strokeText(f.txt,W/2,f.y);ctx.fillStyle='#ffe066';ctx.fillText(f.txt,W/2,f.y);}ctx.globalAlpha=1;
+ for(const f of floaters){ctx.globalAlpha=Math.min(1,f.t);ctx.font='900 '+(26*Math.min(PX,1.3)|0)+'px system-ui';ctx.textAlign='center';ctx.lineWidth=4;ctx.strokeStyle='#08263f';ctx.strokeText(f.txt,W/2,f.y);ctx.fillStyle='#ffe066';ctx.fillText(f.txt,W/2,f.y);}ctx.globalAlpha=1;
  if(msgT>0&&msg){ctx.font='700 '+(15*Math.min(PX,1.2)|0)+'px system-ui';ctx.textAlign='center';const y=H*0.62;const tw=Math.min(W-20,ctx.measureText(msg).width+24);ctx.fillStyle='rgba(3,25,45,.75)';ctx.fillRect((W-tw)/2,y-15,tw,30);ctx.fillStyle='#fff';ctx.fillText(msg,W/2,y,W-30);}
  if(G.paused){ctx.fillStyle='rgba(0,0,0,.5)';ctx.fillRect(0,0,W,H);ctx.fillStyle='#fff';ctx.font='800 32px system-ui';ctx.textAlign='center';ctx.fillText(t('pause'),W/2,H/2);}
  ctx.restore();}
