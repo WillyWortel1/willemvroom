@@ -63,7 +63,7 @@ let hi={sessie:+lsGet('fa-hi','0')||0,freeride:+lsGet('fa-hi-free','0')||0};
 /* ---------- teksten ---------- */
 const T={
 nl:{sub:'Peddel uit met je Foildrive, duik onder het schuim, sta op, foil en pak de golf.',start:'SESSIE',free:'FREERIDE',freeTxt:'Freeride: grote golven, oneindige accu, kans op de BARREL.',gear:'Kies je setup',go:'Het water op!',back:'Terug',
-help:'Joystick links: omhoog = FOIL (opstaan en hoger), omlaag = duckdive, links/rechts = bocht/sturen. Tik op de Foildrive-remote = motor aan/uit, sleep omhoog/omlaag = vermogen.<br>Toetsen: ↑/W, ↓/S, ←/A en →/D, spatie = bocht, M of Shift = motor, P = pauze.',
+help:'Joystick links: omhoog = FOIL (opstaan en hoger), omlaag = duckdive, links/rechts = traploos sturen (hoe verder, hoe scherper). Tik op de Foildrive-remote = motor aan/uit, sleep omhoog/omlaag = vermogen.<br>Toetsen: ↑/W, ↓/S, ←/A en →/D = sturen (vasthouden), M of Shift = motor, P = pauze.',
 wing:'Voorvleugel',stab:'Stabilisator',mast:'Mast',board:'Board',bat:'Accu',
 wS:'Klein',wSd:'750 cm² · snel, wendbaar',wM:'Middel',wMd:'1000 cm² · allround',wL:'Groot',wLd:'1400 cm² · veel lift, traag',
 sS:'Klein',sSd:'los, scherpe bochten',sL:'Groot',sLd:'stabiel, vergevend',
@@ -72,13 +72,13 @@ bS:'Klein',bSd:'4\'2 · duckdive makkelijk, opstaan lastig',bM:'Middel',bMd:'4\'
 aS:'Licht',aSd:'korte sessie, lichter',aL:'Groot',aLd:'lange sessie, zwaarder',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Snelheid ${g.vmax|0} · Bocht ${g.turn.toFixed(2)} · Stabiliteit ${g.stab.toFixed(2)} · Accu ${g.cap|0}s`,
 paddle:'Peddel uit! Joystick omlaag bij het schuim',getup:'FOIL (joystick omhoog) in het groen om op te staan',foil:'Foilen! FOIL omhoog, niet te hoog, niet te laag',catchW:'Golf achter je! Stuur opzij (◀/▶) = indroppen',
-ride:'Opzij onderin = bottom turn, bovenin = cutback',duck:'Duckdive!',washed:'Weggespoeld!',stood:'Opgestaan!',miss:'Te vroeg/laat!',breach:'Breach! Vleugel uit het water',touch:'Touchdown!',
+ride:'Stuur naar de golf = omhoog, ervan af = omlaag. Lang doorsturen onderin = bottom turn, bovenin = cutback',duck:'Duckdive!',washed:'Weggespoeld!',stood:'Opgestaan!',miss:'Te vroeg/laat!',breach:'Breach! Vleugel uit het water',touch:'Touchdown!',
 caught:'Take-off! Golf gepakt!',swell:'Swell gepakt!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Te snel achter elkaar!',lost:'Golf kwijt, motor aan',close:'Golf sluit: kick-out!',
 barrelC:'Holle golf! BARREL: blijf in de lichte baan',barrel:'BARREL!',swallowed:'Opgeslokt door de buis!',
 over:'Sessie voorbij',batEmpty:'Accu leeg',falls:'Te vaak gevallen',score:'Score',hiS:'Record',again:'Nog een sessie',pause:'Pauze',resume:'Verder',
 bat_:'Accu',falls_:'Val',combo:'Combo'},
 en:{sub:'Paddle out with your Foildrive, duck under the whitewater, get up, foil and catch the wave.',start:'SESSION',free:'FREERIDE',freeTxt:'Freeride: big waves, endless battery, a shot at the BARREL.',gear:'Pick your setup',go:'Hit the water!',back:'Back',
-help:'Joystick left: up = FOIL (get up and rise), down = duck dive, left/right = turn/steer. Tap the Foildrive remote = motor on/off, drag up/down = power.<br>Keys: ↑/W, ↓/S, ←/A and →/D, space = turn, M or Shift = motor, P = pause.',
+help:'Joystick left: up = FOIL (get up and rise), down = duck dive, left/right = analog steering (further = sharper). Tap the Foildrive remote = motor on/off, drag up/down = power.<br>Keys: ↑/W, ↓/S, ←/A and →/D = steer (hold), M or Shift = motor, P = pause.',
 wing:'Front wing',stab:'Stabiliser',mast:'Mast',board:'Board',bat:'Battery',
 wS:'Small',wSd:'750 cm² · fast, nimble',wM:'Medium',wMd:'1000 cm² · all-round',wL:'Big',wLd:'1400 cm² · lots of lift, slow',
 sS:'Small',sSd:'loose, sharp turns',sL:'Big',sLd:'stable, forgiving',
@@ -87,7 +87,7 @@ bS:'Small',bSd:'4\'2 · easy duck dive, hard get-up',bM:'Medium',bMd:'4\'8 · al
 aS:'Light',aSd:'short session, lighter',aL:'Big',aLd:'long session, heavier',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Speed ${g.vmax|0} · Turn ${g.turn.toFixed(2)} · Stability ${g.stab.toFixed(2)} · Battery ${g.cap|0}s`,
 paddle:'Paddle out! Joystick down at the whitewater',getup:'FOIL (joystick up) in the green to get up',foil:'Foiling! FOIL up, not too high, not too low',catchW:'Wave behind you! Steer sideways (◀/▶) = drop in',
-ride:'Sideways low = bottom turn, high = cutback',duck:'Duck dive!',washed:'Washed back!',stood:'Up and flying!',miss:'Too early/late!',breach:'Breach! Wing out of the water',touch:'Touchdown!',
+ride:'Steer into the wave = climb, away = drop. Hold the turn low = bottom turn, high = cutback',duck:'Duck dive!',washed:'Washed back!',stood:'Up and flying!',miss:'Too early/late!',breach:'Breach! Wing out of the water',touch:'Touchdown!',
 caught:'Take-off! Wave caught!',swell:'Swell caught!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Too fast in a row!',lost:'Lost the wave, motor on',close:'Wave closes: kick-out!',
 barrelC:'Hollow wave! BARREL: stay in the light lane',barrel:'BARREL!',swallowed:'Swallowed by the tube!',
 over:'Session over',batEmpty:'Battery empty',falls:'Too many falls',score:'Score',hiS:'Best',again:'Another session',pause:'Paused',resume:'Resume',
@@ -140,34 +140,34 @@ function setBtn(id,down,up){const b=document.getElementById(id);
  b.addEventListener('pointerdown',e=>{e.preventDefault();b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}down();});
  const u=e=>{b.classList.remove('on');if(up)up();};b.addEventListener('pointerup',u);b.addEventListener('pointercancel',u);b.addEventListener('lostpointercapture',u);
  b.addEventListener('contextmenu',e=>e.preventDefault());}
-let turnDir=0;
+let turnDir=0,stickX=0;const KX={l:false,r:false};
 (function(){const st=document.getElementById('stick'),ball=document.getElementById('ball');let id=null,cx=0,cy=0,side=0;const R=55;
  function mv(e){let dx=e.clientX-cx,dy=e.clientY-cy;const d=Math.hypot(dx,dy);if(d>R){dx*=R/d;dy*=R/d;}ball.style.transform='translate('+dx+'px,'+dy+'px)';
-  K.up=dy<-R*0.35;K.down=dy>R*0.35;const sd=dx>R*0.5?1:dx<-R*0.5?-1:0;if(sd&&sd!==side){turnDir=sd;turnPress=true;}if(Math.abs(dx)<R*0.3)side=0;else if(sd)side=sd;}
+  K.up=dy<-R*0.35;K.down=dy>R*0.35;const ax=dx/R,dz=0.1;stickX=Math.abs(ax)<dz?0:Math.sign(ax)*Math.min(1,(Math.abs(ax)-dz)/(1-dz)*1.15);}
  st.addEventListener('pointerdown',e=>{e.preventDefault();if(id!==null)return;id=e.pointerId;const r=st.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;try{st.setPointerCapture(id);}catch(_){}mv(e);});
  st.addEventListener('pointermove',e=>{if(e.pointerId===id)mv(e);});
- const up=e=>{if(e.pointerId!==id)return;id=null;side=0;K.up=K.down=false;ball.style.transform='';};st.addEventListener('pointerup',up);st.addEventListener('pointercancel',up);
+ const up=e=>{if(e.pointerId!==id)return;id=null;side=0;stickX=0;K.up=K.down=false;ball.style.transform='';};st.addEventListener('pointerup',up);st.addEventListener('pointercancel',up);
  const rm=document.getElementById('bRemote');let rid=null,ry=0,moved=false,p0=1;
  rm.addEventListener('pointerdown',e=>{e.preventDefault();rid=e.pointerId;ry=e.clientY;moved=false;p0=P?P.pwr:1;try{rm.setPointerCapture(rid);}catch(_){}});
  rm.addEventListener('pointermove',e=>{if(e.pointerId!==rid||!P)return;const d=ry-e.clientY;if(Math.abs(d)>10){moved=true;P.pwr=Math.max(0.4,Math.min(1,p0+d/120));if(!P.motor)P.motor=true;}});
  const ru=e=>{if(e.pointerId!==rid)return;rid=null;if(!moved)motorPress=true;};rm.addEventListener('pointerup',ru);rm.addEventListener('pointercancel',()=>{rid=null;});
- window.__stickT={mv:(dx,dy)=>{const r=st.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;mv({clientX:cx+dx,clientY:cy+dy});},rel:()=>{side=0;K.up=K.down=false;ball.style.transform='';}};
+ window.__stickT={mv:(dx,dy)=>{const r=st.getBoundingClientRect();cx=r.left+r.width/2;cy=r.top+r.height/2;mv({clientX:cx+dx,clientY:cy+dy});},rel:()=>{side=0;stickX=0;K.up=K.down=false;ball.style.transform='';}};
 })();
 function placeRemote(){const rm=document.getElementById('bRemote');const g=remoteGeom();rm.style.left=g.x+'px';rm.style.top=g.y+'px';rm.style.width=g.w+'px';rm.style.height=g.h+'px';}
 function remoteGeom(){const touch=document.body.classList.contains('touchui');const rw=Math.min(150,W*0.38),rh=rw*0.62;return {w:rw,h:rh,x:W-rw-12-(touch?0:10),y:H-rh-(touch?36:24)-safeB()};}
 addEventListener('resize',()=>setTimeout(placeRemote,50));setTimeout(placeRemote,0);
 addEventListener('keydown',e=>{const c=e.code;if(e.repeat&&!['ArrowUp','ArrowDown','KeyW','KeyS'].includes(c))return;
  if(c==='ArrowUp'||c==='KeyW')K.up=true;else if(c==='ArrowDown'||c==='KeyS')K.down=true;else if(c==='KeyM'||c==='ShiftLeft'||c==='ShiftRight')motorPress=true;
- else if(c==='Space'){turnDir=0;turnPress=true;}else if(c==='ArrowRight'||c==='KeyD'){turnDir=1;turnPress=true;}else if(c==='ArrowLeft'||c==='KeyA'){turnDir=-1;turnPress=true;}else if(c==='KeyP'||c==='Escape'){togglePause();}else if(c==='Enter'&&G.mode!=='play'){const b=document.querySelector('#ov .big');if(b)b.click();}else return;e.preventDefault();});
-addEventListener('keyup',e=>{const c=e.code;if(c==='ArrowUp'||c==='KeyW')K.up=false;if(c==='ArrowDown'||c==='KeyS')K.down=false;});
-addEventListener('blur',()=>{K.up=K.down=false;});
+ else if(c==='ArrowRight'||c==='KeyD'){KX.r=true;}else if(c==='ArrowLeft'||c==='KeyA'){KX.l=true;}else if(c==='Space'){}else if(c==='KeyP'||c==='Escape'){togglePause();}else if(c==='Enter'&&G.mode!=='play'){const b=document.querySelector('#ov .big');if(b)b.click();}else return;e.preventDefault();});
+addEventListener('keyup',e=>{const c=e.code;if(c==='ArrowRight'||c==='KeyD')KX.r=false;if(c==='ArrowLeft'||c==='KeyA')KX.l=false;if(c==='ArrowUp'||c==='KeyW')K.up=false;if(c==='ArrowDown'||c==='KeyS')K.down=false;});
+addEventListener('blur',()=>{K.up=K.down=false;KX.l=KX.r=false;});
 
 /* ---------- spelstatus ---------- */
 const G={mode:'menu',paused:false,free:false};
 let P,waves,floaters,msg,msgT,gearNow,celebrate=0,sprays=[];
 function say(s,d){msg=s;msgT=d||1.6;}
 function newGame(free){G.free=free;gearNow=gear();G.mode='play';G.paused=false;document.body.classList.add('playing');
- P={pwr:1,mood:.6,lane:0,laneX:0,hazT:5,dist:0,lastDir:1,phase:'paddle',score:0,bat:100,falls:0,motor:true,v:0,prog:0,dive:0,diveCd:0,h:0,vy:0,meter:0,getT:0,wave:null,p:.3,energy:1,combo:1,lastMove:-9,time:0,turnAnim:0,dir:1,inv:0,barrel:null,rides:0,barrels:0,maxCombo:1};
+ P={sx:0,bank:0,yaw:0,carve:0,armed:true,pwr:1,mood:.6,lane:0,laneX:0,hazT:5,dist:0,lastDir:1,phase:'paddle',score:0,bat:100,falls:0,motor:true,v:0,prog:0,dive:0,diveCd:0,h:0,vy:0,meter:0,getT:0,wave:null,p:.3,energy:1,combo:1,lastMove:-9,time:0,turnAnim:0,dir:1,inv:0,barrel:null,rides:0,barrels:0,maxCombo:1};
  if(free)gearNow.turn*=FS.steer;haz=[];G.party=0;waves=[];floaters=[];sprays=[];celebrate=0;startPaddle();hideOv();}
 function startPaddle(){P.phase='paddle';P.dir=1;P.prog=0;P.h=0;P.v=0;P.wave=null;P.barrel=null;P.motor=true;waves=[];spawnWW(W*0.9);say(t('paddle'),2.5);}
 function spawnWW(x){waves.push({kind:'ww',dx:x,passed:false});}
@@ -196,8 +196,14 @@ function update(dt){
    if(P.phase==='foil'&&!P.motor)tryCatch();}
  const tp=turnPress;turnPress=false;
  P.dist+=Math.abs(P.v)*dt;P.mood+=(0.55-P.mood)*dt*0.03;P.mood=Math.max(0,Math.min(1,P.mood));
- if(tp&&P.phase!=='ride'){P.lane=turnDir?turnDir*0.7:(P.lane>0?-0.7:0.7);tone(500,.05,'triangle',.08);}
- P.laneX+=(P.lane-P.laneX)*Math.min(1,dt*4*(G.free?FS.steer:1)*gearNow.turn);
+ const rawX=Math.max(-1,Math.min(1,stickX+(KX.r?1:0)-(KX.l?1:0)));const sens=(G.free?FS.steer:1)*gearNow.turn;
+ P.sx=rawX;P.bank+=(rawX*Math.min(1.3,sens)-P.bank)*Math.min(1,dt*8);
+ const latV=(P.phase==='ride'?1.0:P.phase==='foil'?1.6:P.phase==='paddle'?0.9:0)*sens;
+ P.laneX=Math.max(-1.8,Math.min(1.8,P.laneX+rawX*latV*dt));if(Math.abs(rawX)<0.1)P.laneX*=1-dt*0.25;P.lane=P.laneX;
+ P.yaw+=(rawX*0.9*Math.min(1.4,sens)-P.yaw)*Math.min(1,dt*3);
+ if(Math.abs(rawX)>0.45){P.carve+=Math.abs(rawX)*dt*sens;turnDir=Math.sign(rawX);}else{P.carve=Math.max(0,P.carve-dt*2);}
+ if(Math.abs(rawX)<0.25)P.armed=true;
+ let carveEv=false;if(P.armed&&P.carve>0.3){carveEv=true;P.armed=false;P.carve=0;}
  if((!G.free||FS.haz)&&P.phase!=='getup'&&P.phase!=='swim'&&!P.barrel){P.hazT-=dt;if(P.hazT<=0){P.hazT=5+Math.random()*5;const ty=P.phase==='ride'?(Math.random()<.6?'surfer':'gull'):(Math.random()<.5?'fin':'gull');haz.push({type:ty,d:7,lane:ty==='gull'?P.laneX:(Math.random()<.65?P.lane:-P.lane)});if(ty!=='surfer'&&msgT<=0)say(t('dodge'),1.5);}}
  for(const h of haz){h.d-=dt*2;if(!h.done&&h.d<0.7){h.done=true;const hit=h.type==='gull'?!K.down:Math.abs(h.lane-P.laneX)<0.6;
    if(h.type==='fin'){if(hit){fall(t('finHit'));haz=[];return;}else{P.score+=30;say(t('finOk'),1);}}
@@ -231,24 +237,24 @@ function update(dt){
   if(!waves.length)nextSwell(W*(0.6+Math.random()*0.6)*(G.free?FS.period:1));
   P.catchable=null;for(const w of waves){if(w.dx>-20*PX&&w.dx<w.wf*1.6&&P.v>35)P.catchable=w;}
   if(P.catchable&&msgT<=0)say(t('catchW'),.3);
-  if(P.catchable&&(!P.motor||tp))tryCatch();
+  if(P.catchable&&(!P.motor||Math.abs(P.sx)>0.45))tryCatch();
  } else if(P.phase==='ride'){
   const w=P.wave;w.age+=dt;P.v=w.spd;
-  if(P.dropT>0){P.dropT-=dt;P.p-=0.75*dt;P.energy=Math.max(P.energy,0.8);}P.p+=((K.up?0.9:0)-(K.down?1.1:0)-0.12)*dt*g.turn;if(P.climb>0){P.climb-=dt;P.p+=1.6*dt;}
+  if(P.dropT>0){P.dropT-=dt;P.p-=0.75*dt;P.energy=Math.max(P.energy,0.8);}P.p+=((K.up?0.9:0)-(K.down?1.1:0)-0.12+P.sx*(P.lastDir||1)*0.9)*dt*g.turn;if(P.climb>0){P.climb-=dt;P.p+=1.6*dt;}
   P.energy-=dt*(w.broken?0.09:0.14)/g.stab;
   if(P.p>0.98){P.p=0.98;if(!P.barrel){fall(t('breach'));return;}}
   if(P.p<0.05){P.p=0.05;P.energy-=dt*0.5;}
   if(P.barrel){const b=P.barrel;b.t+=dt;b.c=0.5+Math.sin(b.t*1.8)*0.18;if(Math.abs(P.p-b.c)>0.13){b.out+=dt;if(b.out>0.45){P.barrel=null;fall(t('swallowed'));return;}}else b.out=Math.max(0,b.out-dt);
    if(b.t>3.2){P.barrel=null;P.barrels++;addScore(2000,t('barrel'));P.mood=1;SFX.barrel();celebrate=2.5;w.hollow=false;P.energy=Math.min(1.5,P.energy+0.6);}}
   else if(w.hollow&&w.age>2.5&&!w.barrelDone){w.barrelDone=true;P.barrel={t:0,c:.5,out:0};say(t('barrelC'),2.5);tone(200,.5,'sine',.2,600);}
-  if(tp&&!P.barrel){const since=P.time-P.lastMove;
-   if(since<0.35*g.stab){fall(t('wobble'));return;}
-   P.combo=since<2.6?Math.min(8,P.combo+1):1;P.maxCombo=Math.max(P.maxCombo,P.combo);P.lastMove=P.time;P.turnAnim=0.5;P.lane=turnDir?turnDir*0.7:(P.lane>0?-0.7:0.7);
+  if(carveEv&&!P.barrel){const since=P.time-P.lastMove;
+   if(since<0.3*g.stab){fall(t('wobble'));return;}
+   P.combo=since<2.6?Math.min(8,P.combo+1):1;P.maxCombo=Math.max(P.maxCombo,P.combo);P.lastMove=P.time;P.turnAnim=0.5;
    const base=(w.broken?1:0.7)*(w.A/(110*PX));
    if(P.p<0.3){addScore(100*base,t('bt'));P.climb=0.45;P.energy=Math.min(1.5,P.energy+0.35*g.turn);}
    else if(P.p>0.7){addScore(150*base*g.turn,t('cb'));P.p-=0.25;P.energy=Math.min(1.5,P.energy+0.25);}
-   else{if(Math.random()>0.55*g.stab){fall(t('wobble'));return;}addScore(50*base,t('carve'));P.energy=Math.min(1.5,P.energy+0.1);}
-   P.mood=Math.min(1,P.mood+.08);P.lastDir=turnDir||-(P.lastDir||1);SFX.trick(P.combo);for(let i=0;i<10;i++)sprays.push({x:W/2,y:H*0.7,vx:(Math.random()-.3)*160,vy:-60-Math.random()*140,t:.8});}
+   else{addScore(50*base,t('carve'));P.energy=Math.min(1.5,P.energy+0.1);}
+   P.mood=Math.min(1,P.mood+.08);SFX.trick(P.combo);for(let i=0;i<10;i++)sprays.push({x:W/2,y:H*0.7,vx:(Math.random()-.3)*160,vy:-60-Math.random()*140,t:.8});}
   if(P.turnAnim>0)P.turnAnim-=dt;
   placeOnFace(w,P.p);
   if(P.energy<=0){say(t('lost'),1.8);P.phase='foil';P.h=g.mast*0.5*PX;P.vy=0;P.motor=false;w.dx=w.wf*0.8;P.combo=1;return;}
@@ -262,34 +268,34 @@ function tryCatch(){const w=P.catchable;if(!w||P.phase!=='foil')return;P.phase='
 
 /* ---------- tekenen (eerste persoon) ---------- */
 function lerpC(a,b,k){const pa=a.match(/\w\w/g).map(h=>parseInt(h,16)),pb=b.match(/\w\w/g).map(h=>parseInt(h,16));return 'rgb('+pa.map((v,i)=>Math.round(v+(pb[i]-v)*k)).join(',')+')';}
-let rain=[];for(let i=0;i<90;i++)rain.push({x:Math.random(),y:Math.random(),s:.6+Math.random()*.6});
+let yawX=0,rain=[];for(let i=0;i<90;i++)rain.push({x:Math.random(),y:Math.random(),s:.6+Math.random()*.6});
 function draw(){
  const tm=performance.now()/1000;
  if(G.mode==='over'&&G.party){drawParty(tm);return;}
  const mood=P&&G.mode==='play'?P.mood:0.75;
  let roll=0,hzOff=0;
  if(P&&G.mode==='play'){
-  if(P.phase==='ride'){roll=(P.turnAnim>0?Math.sin(P.turnAnim/0.5*Math.PI)*0.35*(P.lastDir||1):0);hzOff=(P.p-0.5)*-H*0.12;}
-  else if(P.phase==='foil'){hzOff=Math.min(30,P.h*0.4);roll=(P.laneX-P.lane)*0.25;}
-  else{hzOff=Math.sin(tm*2)*6+(P.phase==='paddle'?0:0);roll=Math.sin(tm*1.3)*0.03+(P.laneX-P.lane)*0.2;}
+  roll=P.bank*(P.phase==='ride'?0.42:P.phase==='foil'?0.35:0.18);
+  if(P.phase==='ride'){hzOff=(P.p-0.5)*-H*0.12;}else if(P.phase==='foil'){hzOff=Math.min(30,P.h*0.4);}else{hzOff=Math.sin(tm*2)*6;roll+=Math.sin(tm*1.3)*0.03;}
   let lift=0;for(const w of waves)if(w.kind==='swell'&&w.dx>-w.wf&&w.dx<w.wf*1.5)lift+=waveH(w,RX);hzOff+=lift*0.25;}
- const hz=H*0.36+hzOff;
+ const hz=H*0.36+hzOff;yawX=P&&G.mode==='play'?-P.yaw*W*0.45:0;
  ctx.save();ctx.translate(W/2,H*0.6);ctx.rotate(roll);ctx.translate(-W/2,-H*0.6);
  const E=Math.max(W,H)*0.3;
  // lucht
  const sky=ctx.createLinearGradient(0,hz-H*0.6,0,hz);sky.addColorStop(0,lerpC('3d4652','2f8fe0',mood));sky.addColorStop(1,lerpC('8a939c','d8f3ff',mood));ctx.fillStyle=sky;ctx.fillRect(-E,-E,W+2*E,hz+E+2);
- if(mood>0.3){ctx.globalAlpha=Math.min(1,(mood-0.3)*2);ctx.fillStyle='#fff3b0';ctx.beginPath();ctx.arc(W*0.75,hz-H*0.2,(20+mood*14)*PX,0,7);ctx.fill();ctx.globalAlpha=1;}
+ ctx.save();ctx.translate(yawX,0);if(mood>0.3){ctx.globalAlpha=Math.min(1,(mood-0.3)*2);ctx.fillStyle='#fff3b0';ctx.beginPath();ctx.arc(W*0.75,hz-H*0.2,(20+mood*14)*PX,0,7);ctx.fill();ctx.globalAlpha=1;}
  const nc=Math.round(2+(1-mood)*7);for(let i=0;i<nc;i++){const x=((i*W*0.37+tm*(6+i))%(W+300))-150,y=hz-H*(0.08+(i%4)*0.06);ctx.fillStyle=mood<0.4?'rgba(70,78,90,.9)':'rgba(255,255,255,.85)';ctx.beginPath();ctx.ellipse(x,y,50*PX,14*PX,0,0,7);ctx.ellipse(x+30*PX,y-8*PX,30*PX,14*PX,0,0,7);ctx.fill();}
  // land (achter je bij uitpeddelen, voor je richting kust)
  const toShore=P&&G.mode==='play'&&P.phase!=='paddle'&&P.phase!=='swim';
  if(toShore||G.mode!=='play'){ctx.fillStyle=lerpC('5c6a4a','e9d39a',mood);ctx.fillRect(-E,hz-8,W+2*E,8);ctx.fillStyle=lerpC('3f4a36','4f8a3a',mood);for(let i=-2;i<12;i++){ctx.beginPath();ctx.ellipse(i*W*0.12,hz-8,W*0.08,14,0,Math.PI,0);ctx.fill();}}
+ ctx.restore();
  // zee
  const sea=ctx.createLinearGradient(0,hz,0,H);sea.addColorStop(0,lerpC('3b5566','2aa3c8',mood));sea.addColorStop(1,lerpC('15242f','05406a',mood));ctx.fillStyle=sea;ctx.fillRect(-E,hz,W+2*E,H-hz+E);
  const scroll=(P&&G.mode==='play'?P.dist||0:tm*60)/60;
  ctx.strokeStyle='rgba(255,255,255,.18)';ctx.lineWidth=2;
  for(let k=0;k<14;k++){const d=0.6+k*0.9-(scroll%0.9);const y=hz+(H-hz)*0.35/d;ctx.beginPath();for(let x=-E;x<=W+E;x+=24)ctx.lineTo(x,y+Math.sin(x*0.03/ (1/d) *0.3+tm*2+k)*3/d);ctx.stroke();}
  if(mood>0.7){ctx.fillStyle='rgba(255,255,255,.9)';for(let i=0;i<14;i++){const sx=(Math.sin(i*91.3)*0.5+0.5)*W,sy=hz+(H-hz)*((Math.sin(i*13.7)*0.5+0.5)*0.6),a=Math.sin(tm*5+i*2);if(a>0.6){ctx.fillRect(sx-4,sy,8,1.5);ctx.fillRect(sx,sy-4,1.5,8);}}}
- if(P&&G.mode==='play'){drawWorld(hz,tm);drawHaz(hz,tm);}
+ if(P&&G.mode==='play'){drawWorld(hz,tm);ctx.save();ctx.translate(yawX*0.6,0);drawHaz(hz,tm);ctx.restore();}
  else{const d=1.5+((tm*0.6)%5);drawBand(hz,d,true,tm);}
  ctx.restore();
  if(P&&G.mode==='play'){
@@ -312,7 +318,7 @@ function drawWorld(hz,tm){
  if(P.phase==='paddle'||P.phase==='swim'){for(const w of waves.slice().sort((a,b)=>b.dx-a.dx)){const d=Math.max(0.35,w.dx/(70*PX));if(w.dx>-10)drawBand(hz,d,true,tm);}}
  else if(P.phase==='foil'||P.phase==='getup'){for(const w of waves)if(w.kind==='swell'&&w.dx<0){const d=0.5-w.dx/(80*PX);drawBand(hz,d,false,tm,w.A/PX*0.8);}}
  else if(P.phase==='ride'&&!P.barrel){const w=P.wave,side=P.lastDir===-1?-1:1;const wallTop=hz-(1-P.p)*H*0.32-30*PX*(w.A/(110*PX));
-  ctx.save();if(side<0){ctx.translate(W,0);ctx.scale(-1,1);}
+  ctx.save();ctx.translate(yawX*0.5,0);if(side<0){ctx.translate(W,0);ctx.scale(-1,1);}
   const g=ctx.createLinearGradient(W*0.5,0,W,0);g.addColorStop(0,'rgba(20,140,170,.6)');g.addColorStop(1,'#0a5c86');ctx.fillStyle=g;
   ctx.beginPath();ctx.moveTo(W*0.45,hz+4);ctx.quadraticCurveTo(W*0.75,hz,W*0.85,wallTop);ctx.lineTo(W*1.6,wallTop-20);ctx.lineTo(W*1.6,H*1.2);ctx.lineTo(W*0.3,H*1.2);ctx.closePath();ctx.fill();
   ctx.strokeStyle='rgba(255,255,255,.9)';ctx.lineWidth=7*PX;ctx.beginPath();ctx.moveTo(W*0.62,hz-6);ctx.quadraticCurveTo(W*0.8,wallTop-(w.broken?5:25),W*1.4,wallTop-10);ctx.stroke();
@@ -355,6 +361,7 @@ function safeB(){return parseFloat(getComputedStyle(document.documentElement).ge
 function drawHUD(tm){ctx.save();const top=46;
  ctx.textBaseline='middle';ctx.font='700 13px system-ui';ctx.textAlign='left';ctx.fillStyle='rgba(3,25,45,.55)';ctx.fillRect(6,top,Math.min(W-12,260),22);ctx.fillStyle='#fff';
  ctx.fillText(t('hiS')+' '+hi[G.free?'freeride':'sessie']+(P.combo>1?'  · '+t('combo')+' x'+P.combo:'')+'  · '+t('falls_')+' '+P.falls+(G.free?'':'/3'),12,top+11);
+ {const iw=Math.min(220,W*0.56),ix=(W-iw)/2,iy=top+50;ctx.fillStyle='rgba(3,25,45,.55)';ctx.fillRect(ix,iy,iw,14);ctx.fillStyle='rgba(255,255,255,.35)';ctx.fillRect(W/2-1,iy,2,14);ctx.fillStyle='#4fd1ff';ctx.fillRect(W/2,iy+3,P.sx*iw/2,8);ctx.fillStyle='#ffe066';ctx.beginPath();const lx=W/2+P.laneX/1.8*iw/2;ctx.moveTo(lx,iy-4);ctx.lineTo(lx-5,iy-10);ctx.lineTo(lx+5,iy-10);ctx.fill();ctx.font='700 10px system-ui';ctx.textAlign='center';ctx.fillStyle='#fff';ctx.fillText('◀ '+Math.round(P.sx*100)+'% ▶',W/2,iy+24);}
  if(P.phase==='getup'){const mw=Math.min(280,W*0.7),mx=(W-mw)/2,my=H*0.5,half=0.09*gearNow.get;ctx.fillStyle='rgba(0,0,0,.45)';ctx.fillRect(mx,my,mw,20);ctx.fillStyle='#3ee08a';ctx.fillRect(mx+mw*(0.5-half),my,mw*half*2,20);ctx.fillStyle='#fff';ctx.fillRect(mx+mw*P.meter-3,my-5,6,30);}
  if(P.phase==='paddle'){const pw=Math.min(240,W*0.6);ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect((W-pw)/2,top+30,pw,6);ctx.fillStyle='#ffe066';ctx.fillRect((W-pw)/2,top+30,pw*Math.min(1,P.prog/(900*PX)),6);}
  if(P.phase==='ride'){const ew=Math.min(160,W*0.4);ctx.fillStyle='rgba(0,0,0,.35)';ctx.fillRect((W-ew)/2,top+30,ew,6);ctx.fillStyle='#4fd1ff';ctx.fillRect((W-ew)/2,top+30,ew*Math.min(1,P.energy/1.5),6);}
@@ -425,7 +432,7 @@ function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;
  draw();}
 requestAnimationFrame(loop);
 if(DEBUG)window.__fa={G,get P(){return P;},sel,newGame,K,set:(o)=>Object.assign(P,o),press:(k)=>{if(k==='motor')motorPress=true;if(k==='turn')turnPress=true;},
- forceRide:(hollow)=>{startFoil();waves=[];nextSwell(0);const w=waves[0];w.hollow=!!hollow;w.dx=10;P.v=w.spd;P.catchable=w;tryCatch();},startGetup:()=>startGetup(),startFoil:()=>startFoil(),waves:()=>waves.map(w=>Math.round(w.dx)),swellAt:(dx)=>{waves=[{kind:"swell",dx:dx*PX,A:110*PX,wf:110*PX,spd:70,broken:true,hollow:false,age:0}];},haz:(ty)=>haz.push({type:ty,d:3,lane:P.laneX}),end:(sc)=>{P.score=sc;endGame('test');},mood:(m)=>P.mood=m};
+ stickX:()=>stickX,forceRide:(hollow)=>{startFoil();waves=[];nextSwell(0);const w=waves[0];w.hollow=!!hollow;w.dx=10;P.v=w.spd;P.catchable=w;tryCatch();},startGetup:()=>startGetup(),startFoil:()=>startFoil(),waves:()=>waves.map(w=>Math.round(w.dx)),swellAt:(dx)=>{waves=[{kind:"swell",dx:dx*PX,A:110*PX,wf:110*PX,spd:70,broken:true,hollow:false,age:0}];},haz:(ty)=>haz.push({type:ty,d:3,lane:P.laneX}),end:(sc)=>{P.score=sc;endGame('test');},mood:(m)=>P.mood=m};
 })();
 </script>
 </body>
