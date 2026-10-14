@@ -278,32 +278,32 @@ let yawX=0,rain=[];for(let i=0;i<90;i++)rain.push({x:Math.random(),y:Math.random
 const CAM={th:0,h:1,hz:0,F:400};
 function proj(x,z,y){const c=Math.cos(CAM.th),s=Math.sin(CAM.th),f=x*s+z*c,sd=x*c-z*s;if(f<0.35)return null;return [W/2+sd/f*CAM.F,CAM.hz+(CAM.h-y)/f*CAM.F,f];}
 const XS=(()=>{const a=[];for(let i=-60;i<=60;i++){const u=i/60;a.push(Math.sign(u)*u*u*400);}return a;})();
-function curlWave(z,top,tm,o){ // rustige krullende golf: doorschijnend blauwgroen, lip krult, schuim alleen bij breekpunt
- o=o||{};top*=2.2;const peel=o.peel===undefined?-1e9:o.peel,sg=o.dir||1,ww=!!o.ww,a=o.alpha||0.93;
- const pts=[];for(const x of XS){const q=(x-peel)*sg,broken=q<0;const k=Math.max(0,Math.min(1,(q+18)/18)),sm=k*k*(3-2*k);const t=(0.55+0.45*sm)*top*(1+0.05*Math.sin(x*0.07+tm*1.2));
-  const d=Math.abs(q),bump=d<30?(1+0.12*Math.cos(d/30*Math.PI/2)):1;const tp=proj(x,z,t*bump),bs=proj(x,Math.max(z*0.5,z-top*0.9),0),lp=proj(x,Math.max(z*0.75,z-top*0.35),t*bump*0.85);pts.push(tp&&bs&&lp?{x,tp,bs,lp,broken}:null);}
- // aaneengesloten stukken
- let run=[];const runs=[];for(const p of pts){if(p)run.push(p);else if(run.length){runs.push(run);run=[];}}if(run.length)runs.push(run);
- for(const r of runs){if(r.length<2)continue;const mid=r[r.length>>1],yT=mid.tp[1],yB=mid.bs[1];
-  const g=ctx.createLinearGradient(0,yB,0,yT);
-  if(ww){g.addColorStop(0,'rgba(12,80,105,'+a+')');g.addColorStop(1,'rgba(70,170,180,'+a+')');}
-  else{g.addColorStop(0,'rgba(6,58,82,'+a+')');g.addColorStop(0.55,'rgba(14,128,140,'+a+')');g.addColorStop(0.88,'rgba(70,205,190,'+(a*0.9)+')');g.addColorStop(1,'rgba(150,240,220,'+(a*0.85)+')');}
-  ctx.beginPath();ctx.moveTo(r[0].tp[0],r[0].tp[1]);for(const p of r)ctx.lineTo(p.tp[0],p.tp[1]);for(let i=r.length-1;i>=0;i--)ctx.lineTo(r[i].bs[0],r[i].bs[1]+2);ctx.closePath();ctx.fillStyle=g;ctx.fill();
-  // licht dat door de lip schijnt
-  if(!ww){ctx.beginPath();for(let i=0;i<r.length;i++){const p=r[i],y=p.tp[1]+(p.bs[1]-p.tp[1])*0.18;i?ctx.lineTo(p.tp[0],y):ctx.moveTo(p.tp[0],y);}for(let i=r.length-1;i>=0;i--)ctx.lineTo(r[i].tp[0],r[i].tp[1]);ctx.closePath();ctx.fillStyle='rgba(180,255,235,.22)';ctx.fill();}
-  // textuurlijnen op de wand
-  ctx.strokeStyle='rgba(255,255,255,.10)';ctx.lineWidth=1;for(const k of [0.35,0.6,0.8]){ctx.beginPath();for(let i=0;i<r.length;i+=2){const p=r[i],y=p.bs[1]+(p.tp[1]-p.bs[1])*k+Math.sin(p.x*0.2+tm*2+k*9)*1.5;i?ctx.lineTo(p.tp[0],y):ctx.moveTo(p.tp[0],y);}ctx.stroke();}
-  // krullende lip (overhang) voorbij het breekpunt, niet over de hele lengte
-  if(!ww){ctx.beginPath();let on=false;const seg=[];for(const p of r){const d=(p.x-peel)*sg;if(d>-2&&d<60){seg.push(p);}}
-   if(seg.length>1){ctx.moveTo(seg[0].tp[0],seg[0].tp[1]);for(const p of seg){const d=Math.max(0,1-((p.x-peel)*sg)/60);ctx.lineTo(p.tp[0]+(p.lp[0]-p.tp[0])*d,p.tp[1]+(p.lp[1]-p.tp[1])*d*0.3);}
-    for(let i=seg.length-1;i>=0;i--)ctx.lineTo(seg[i].tp[0],seg[i].tp[1]);ctx.closePath();ctx.fillStyle='rgba(120,230,215,.55)';ctx.fill();}}
-  // dunne schuimlijn alleen op de kam bij het breekpunt; wit water alleen waar hij gebroken is
-  ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=1.6;ctx.beginPath();let st=false;
-  for(const p of r){const d=(p.x-peel)*sg;if(d>-4&&d<14){st?ctx.lineTo(p.tp[0],p.tp[1]):(ctx.moveTo(p.tp[0],p.tp[1]),st=true);}else st=false;}ctx.stroke();
-  ctx.fillStyle='rgba(245,252,255,.88)';for(let i=0;i<r.length;i+=2){const p=r[i];if(!p.broken&&!ww)continue;const rr=Math.max(1.5,Math.min(14,CAM.F/p.tp[2]*0.16));ctx.beginPath();ctx.arc(p.tp[0],p.tp[1]+rr*0.4+Math.sin(tm*5+i)*rr*0.25,rr,0,7);ctx.fill();}
-  // beetje spray bij de piek
-  ctx.fillStyle='rgba(255,255,255,.7)';for(const p of r){const d=Math.abs(p.x-peel);if(d<6){for(let k=0;k<3;k++){const ph=(tm*1.7+k*0.33+p.x)%1;ctx.fillRect(p.tp[0]+Math.sin(k*7+tm*3)*8,p.tp[1]-ph*CAM.F/p.tp[2]*0.6,2,2);}}}
- }}
+function humpProf(u,top){const L=u<0?top*2.4:top*7;return 0.5*(1+Math.cos(Math.PI*Math.min(1,Math.abs(u)/L)));}
+function projC(x,z,y){const c=Math.cos(CAM.th),s=Math.sin(CAM.th);let f=x*s+z*c;const sd=x*c-z*s;if(f<-1.5)return null;f=Math.max(f,0.6);return [W/2+sd/f*CAM.F,CAM.hz+(CAM.h-y)/f*CAM.F,f];}
+function curlWave(z,top,tm,o){ // golf als glooiend profiel in wereldruimte: steile voorkant, lange zachte rug
+ o=o||{};top*=2.2;const peel=o.peel===undefined?-1e9:o.peel,sg=o.dir||1,ww=!!o.ww,a=o.alpha||0.95;
+ const Lf=top*2.4,Lb=top*7,US=[-1,-0.85,-0.7,-0.56,-0.43,-0.31,-0.2,-0.1,0,0.05,0.11,0.18,0.26,0.35,0.45,0.56,0.68,0.8,0.9,1];
+ const prof=u=>{const L=u<0?Lf:Lb;return 0.5*(1+Math.cos(Math.PI*Math.min(1,Math.abs(u)/L)));};
+ const us=US.map(k=>k<0?k*Lf:k*Lb);const faceView=z>0; // camera aan landzijde: je ziet de voorkant
+ const H_=(x,i)=>{const q=(x-peel)*sg,k=Math.max(0,Math.min(1,(q+18)/18)),sm=k*k*(3-2*k);return top*(0.55+0.45*sm)*(1+0.1*Math.sin(x*0.045+tm*0.7)+0.05*Math.sin(x*0.13+1.3))*prof(us[i]);};
+ // strips van ver naar dichtbij
+ const idx=us.map((u,i)=>i).slice(0,-1).sort((i,j)=>Math.abs(z+(us[j]+us[j+1])/2)-Math.abs(z+(us[i]+us[i+1])/2));
+ for(const i of idx){const u0=us[i],u1=us[i+1],front=u1<=0;
+  let run=[];const runs=[];for(let n=0;n<XS.length;n+=2){const x=XS[n];const p0=projC(x,z+u0,H_(x,i)),p1=projC(x,z+u1,H_(x,i+1));if(p0&&p1)run.push([p0,p1]);else if(run.length){runs.push(run);run=[];}}if(run.length)runs.push(run);
+  const hm=(prof(u0)+prof(u1))/2,a0=a;let col;{const a=a0*Math.min(1,hm*3.5);
+  if(front&&faceView){const c=hm;col=ww?`rgba(${40+60*c|0},${120+70*c|0},${140+50*c|0},${a})`:`rgba(${8+90*c*c|0},${70+150*c|0},${95+110*c|0},${a})`;}
+  else{const c=hm;col=`rgba(${34-14*c|0},${150-42*c|0},${190-40*c|0},${a})`;}}
+  for(const r of runs){if(r.length<2)continue;ctx.beginPath();ctx.moveTo(r[0][0][0],r[0][0][1]);for(const p of r)ctx.lineTo(p[0][0],p[0][1]);for(let k=r.length-1;k>=0;k--)ctx.lineTo(r[k][1][0],r[k][1][1]);ctx.closePath();ctx.fillStyle=col;ctx.fill();
+   if(front&&faceView&&!ww&&i%2===0){ctx.strokeStyle='rgba(255,255,255,.08)';ctx.lineWidth=1;ctx.beginPath();for(let k=0;k<r.length;k++){const p=r[k][0];k?ctx.lineTo(p[0],p[1]+Math.sin(k+tm*2)*1.2):ctx.moveTo(p[0],p[1]);}ctx.stroke();}}}
+ // kamlijn: dun schuim bij breekpunt en wit water alleen waar gebroken (alleen zichtbaar van voren of van boven)
+ const ci=us.indexOf(0);if(!faceView){ctx.strokeStyle='rgba(255,255,255,.18)';ctx.lineWidth=1.2;ctx.beginPath();let f0=true;for(let n=0;n<XS.length;n+=2){const x=XS[n],p=proj(x,z,H_(x,ci));if(!p){f0=true;continue;}f0?ctx.moveTo(p[0],p[1]):ctx.lineTo(p[0],p[1]);f0=false;}ctx.stroke();}let st=false;ctx.strokeStyle='rgba(255,255,255,.85)';ctx.lineWidth=1.6;ctx.beginPath();
+ const crestPts=[];for(let n=0;n<XS.length;n+=2){const x=XS[n];const p=proj(x,z,H_(x,ci));crestPts.push(p?{x,p}:null);}
+ for(const c of crestPts){if(!c){st=false;continue;}const d=(c.x-peel)*sg;if(d>-4&&d<14){st?ctx.lineTo(c.p[0],c.p[1]):(ctx.moveTo(c.p[0],c.p[1]),st=true);}else st=false;}ctx.stroke();
+ if(faceView){ctx.fillStyle='rgba(245,252,255,.85)';for(const c of crestPts){if(!c)continue;if(!ww&&(c.x-peel)*sg>=0)continue;const rr=Math.max(1.5,Math.min(12,CAM.F/c.p[2]*0.14));ctx.beginPath();ctx.arc(c.p[0],c.p[1]+rr*0.5,rr,0,7);ctx.fill();}
+  // zachte krul + licht door de lip net voorbij het breekpunt
+  if(!ww){ctx.fillStyle='rgba(150,240,220,.35)';ctx.beginPath();let on=false;for(const c of crestPts){if(!c){on=false;continue;}const d=(c.x-peel)*sg;if(d>-2&&d<50){const r=Math.min(10,CAM.F/c.p[2]*0.25)*(1-d/50);if(!on){ctx.moveTo(c.p[0],c.p[1]);on=true;}ctx.lineTo(c.p[0]-sg*r*0.3,c.p[1]+r);}}ctx.closePath();ctx.fill();
+   ctx.fillStyle='rgba(255,255,255,.7)';for(const c of crestPts){if(!c)continue;if(Math.abs(c.x-peel)<5){for(let k=0;k<3;k++){const ph=(tm*1.7+k*0.33)%1;ctx.fillRect(c.p[0]+Math.sin(k*7+tm*3)*6,c.p[1]-ph*CAM.F/c.p[2]*0.5,2,2);}}}}}
+}
 function crest(z,top,fill,lipCol,foam,tm,bump){ // lange golfkam op afstand z (camera-relatief), evenwijdig aan de kust
  top*=2.2;let seg=[];const segs=[];for(const x of XS){const y=top*(1+(bump||0)*Math.sin(x*0.08+tm*1.5));const a=proj(x,z,y),b=proj(x,z,0);if(a&&b)seg.push([a,b]);else if(seg.length){segs.push(seg);seg=[];}}if(seg.length)segs.push(seg);
  for(const sg of segs){if(sg.length<2)continue;ctx.beginPath();ctx.moveTo(sg[0][0][0],sg[0][0][1]);for(const p of sg)ctx.lineTo(p[0][0],p[0][1]);for(let i=sg.length-1;i>=0;i--)ctx.lineTo(sg[i][1][0],sg[i][1][1]+2);ctx.closePath();ctx.fillStyle=fill;ctx.fill();
@@ -315,10 +315,10 @@ function draw(){
  const play=P&&G.mode==='play',mood=play?P.mood:0.75;
  let roll=0,pitch=0;CAM.F=Math.max(W*0.62,H*0.42);
  if(play){roll=P.bank*(P.phase==='ride'?0.42:P.phase==='foil'?0.35:0.18);CAM.th=P.th;
-  if(P.phase==='ride'){const Am=P.wave.A/PX/40;CAM.h=0.6+P.p*Am*0.95+gearNow.mast/100;pitch=-Math.cos(P.th)*H*0.05;}
+  if(P.phase==='ride'){const Am=P.wave.A/PX/40,top=Am*0.5*2.2,zc=1.6+(1-P.p)*4;CAM.h=top*humpProf(-zc,top)+1.2+gearNow.mast/100;pitch=-Math.cos(P.th)*H*0.05;}
   else if(P.phase==='foil'){CAM.h=1.7+P.h/PX/100;}else if(P.phase==='getup'){CAM.h=0.9;}
   else{CAM.h=P.dive>0?0.2:0.45;roll+=Math.sin(tm*1.3)*0.03;pitch=Math.sin(tm*2)*5;}
-  let lift=0;for(const w of waves)if(w.kind==='swell'&&P.phase!=='ride'&&w.dx>-w.wf&&w.dx<w.wf*1.5)lift+=waveH(w,RX)/PX/40;CAM.h+=lift*0.8;}
+  if(P.phase!=='ride'){let lift=0;for(const w of waves){const top=(w.kind==='ww'?0.7:w.A/PX/40*0.9)*2.2;lift=Math.max(lift,top*humpProf(-w.dx*PXM,top));}CAM.h+=lift;}}
  else{CAM.th=Math.sin(tm*0.25)*0.9;CAM.h=1.6;}
  const hz=H*0.38+pitch;CAM.hz=hz;
  ctx.save();ctx.translate(W/2,H*0.6);ctx.rotate(roll);ctx.translate(-W/2,-H*0.6);
