@@ -5,7 +5,7 @@ import json, re, time, urllib.request, pathlib, datetime
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 src = (ROOT / "spots.js").read_text(encoding="utf-8")
 spots = []
-for m in re.finditer(r"\{[^{}]*?lat:\s*(-?[\d.]+),\s*lon:\s*(-?[\d.]+),\s*actief:\s*(true|false)", src):
+for m in re.finditer(r"\blat:\s*(-?[\d.]+),\s*lon:\s*(-?[\d.]+),\s*actief:\s*(true|false)", src):
     if m.group(3) == "true":
         spots.append((float(m.group(1)), float(m.group(2))))
 MARINE = "https://marine-api.open-meteo.com/v1/marine?hourly=wave_height,wave_period,wave_direction,ocean_current_velocity,ocean_current_direction,sea_surface_temperature&minutely_15=sea_level_height_msl&forecast_days=5&timezone=auto"
