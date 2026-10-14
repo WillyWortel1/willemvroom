@@ -8,7 +8,7 @@ const T=(nl,en,de)=>LANG=='de'?de:LANG=='en'?en:nl;</script>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title><script>if(LANG=='en')document.title='Foilassist – conditions per spot';if(LANG=='de')document.title='Foilassist – Bedingungen pro Spot'</script>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-18">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-19">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -34,6 +34,14 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 .rt{margin:-2px 0 6px;font-size:.9rem}.st{color:#ffc83d;letter-spacing:1px}
 .cams{margin:0 0 8px;font-size:.85rem}.cams a{color:var(--a);margin-right:10px;text-decoration:none;white-space:nowrap}
 .err{color:#ffb4a8}
+.rep{margin-top:12px;border-top:1px solid #2b5675;padding-top:8px}.rep h4{margin:4px 0 6px;font-size:.95rem}
+.btn{border:1px solid var(--a);background:var(--a);color:#032;border-radius:18px;padding:8px 14px;font:inherit;font-weight:600}
+.btn2{background:none;color:var(--a)}
+.ri{background:var(--card);border-radius:10px;padding:8px 10px;margin:6px 0;font-size:.85rem;white-space:pre-wrap;word-break:break-word}.ri small{color:var(--m)}
+.badge{font-size:.75rem;color:var(--a);margin-left:6px}
+#rf label{display:block;font-size:.8rem;color:var(--m);margin:8px 0 2px}#rf input,#rf textarea,#rf select{width:100%;background:#0f2a3e;color:var(--t);border:1px solid #2b5675;border-radius:8px;padding:7px;font:inherit}
+#rf fieldset{border:1px solid #2b5675;border-radius:10px;margin:10px 0;padding:4px 10px 10px}#rf legend{color:var(--a);font-size:.85rem}
+#rf .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 8px}.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
 html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:none}
 .lt{float:right;font-size:.8rem}.lt button{border:1px solid #2b5675;background:#0f2a3e;color:var(--t);border-radius:12px;padding:3px 8px;font:inherit}.lt button.on{background:var(--a);color:#032}
 </style></head><body>
@@ -75,9 +83,9 @@ html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:
 <p>Pfeile zeigen, wohin Wellen, Wind und Strömung <i>gehen</i>; die Buchstaben geben an, woher Wellen und Wind kommen und wohin die Strömung geht. Zeiten sind die Ortszeit des Spots. Immer selbst vor Ort beurteilen.</p>
 </div></footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML='<p class="err">'+T('Fout bij laden: ','Error while loading: ','Fehler beim Laden: ')+(e.message||T('onbekend','unknown','unbekannt'))+' <button onclick="location.reload()">'+T('Opnieuw','Retry','Erneut')+'</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML+='<p class="err">'+T('Dit duurt lang… ','This is taking long… ','Das dauert lange… ')+'<button onclick="location.reload()">'+T('Opnieuw proberen','Try again','Erneut versuchen')+'</button></p>'},30000);</script>
-<script src="leaflet/leaflet.js?v=20261014-18"></script>
+<script src="leaflet/leaflet.js?v=20261014-19"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-18"></script>
+<script src="spots.js?v=20261014-19"></script>
 <script>
 const SL=[9,13,17],R=LANG=='de'?['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW']:LANG=='en'?['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW']:['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];const LOC=T('nl-NL','en-GB','de-DE');
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -125,14 +133,67 @@ function cardH(k,date,full){const s=spots[k];const m=M[k].hourly,w=F[k].hourly;
   const idx=SL.map(h=>m.time.indexOf(`${date}T${String(h).padStart(2,'0')}:00`));
   const row=(lab,fn)=>`<tr><td>${lab}</td>${idx.map(i=>`<td>${i<0?'–':fn(i)}</td>`).join('')}</tr>`;
   const td=tides(M[k],date);const hv=M[k].minutely_15.sea_level_height_msl.filter(v=>v!=null),rg=hv.length?Math.max(...hv)-Math.min(...hv):0;
-  return `<section class="card"><h2>${s.naam}<small>${s.land} · ${T('lokale tijd','local time','Ortszeit')} ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${LANG=='de'&&s.info_de?s.info_de:LANG=='en'&&s.info_en?s.info_en:s.info}</p>`:''}${camsH(s)}${zeeAfst(k)}<table>
+  return `<section class="card"><h2><span>${s.naam}${repBadge(s)}</span><small>${s.land} · ${T('lokale tijd','local time','Ortszeit')} ${off(k)}</small></h2><div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>${full&&s.info?`<p class="info">${LANG=='de'&&s.info_de?s.info_de:LANG=='en'&&s.info_en?s.info_en:s.info}</p>`:''}${camsH(s)}${zeeAfst(k)}<table>
   <tr><th></th>${SL.map(h=>`<th>${h}:00</th>`).join('')}</tr>
   ${row(T('Weer','Weather','Wetter'),i=>`${wx(w.weather_code[i])} ${f(w.temperature_2m[i])}°${w.precipitation[i]>0?` <small>${f(w.precipitation[i],1)}mm</small>`:''}`)}
   ${row('Wind kn',i=>`${arrow(w.wind_direction_10m[i])} ${f(w.wind_speed_10m[i])}<small>/${f(w.wind_gusts_10m[i])}</small> ${card(w.wind_direction_10m[i])}`)}
   ${row(T('Golf','Waves','Wellen'),i=>`${arrow(m.wave_direction[i])} ${f(m.wave_height[i],1)}m <small>${f(m.wave_period[i])}s ${card(m.wave_direction[i])}</small>`)}
   ${row(T('Stroming','Current','Strömung'),i=>`${arrow(m.ocean_current_direction[i],1)} ${f(m.ocean_current_velocity[i]==null?null:m.ocean_current_velocity[i]/1.852,1)}kn <small>${card(m.ocean_current_direction[i])}</small>`)}
   ${row('Water',i=>`${f(m.sea_surface_temperature[i],1)}°C`)}
-  </table><div class="tide">🌊 ${!hv.length?T('getij: geen gegevens','tide: no data','Gezeiten: keine Daten'):rg<0.3?T('getij: verwaarloosbaar klein (&lt;0,3 m)','tide: negligible (&lt;0.3 m)','Gezeiten: vernachlässigbar (&lt;0,3 m)'):td.length?td.map(x=>`<b>${LANG=='en'?(x[0]=='HW'?'HT':'LT'):LANG=='de'?(x[0]=='HW'?'HW':'NW'):x[0]}</b> ${x[1]}`).join(' · '):T('getij: geen gegevens','tide: no data','Gezeiten: keine Daten')}</div></section>`}
+  </table><div class="tide">🌊 ${!hv.length?T('getij: geen gegevens','tide: no data','Gezeiten: keine Daten'):rg<0.3?T('getij: verwaarloosbaar klein (&lt;0,3 m)','tide: negligible (&lt;0.3 m)','Gezeiten: vernachlässigbar (&lt;0,3 m)'):td.length?td.map(x=>`<b>${LANG=='en'?(x[0]=='HW'?'HT':'LT'):LANG=='de'?(x[0]=='HW'?'HW':'NW'):x[0]}</b> ${x[1]}`).join(' · '):T('getij: geen gegevens','tide: no data','Gezeiten: keine Daten')}</div>${full?repH(k):''}</section>`}
+
+// ==== ERVARINGEN (sessieverslagen) ====
+const REPORTS_URL=''; // Apps Script web-app URL (eindigt op /exec); leeg = 'binnenkort beschikbaar'
+let REP=null,formT=0;
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const PK={golven:[['flat','flat','flat','flach'],['klein','klein','small','klein'],['goed','goed','good','gut'],['groot','groot','big','groß'],['te groot','te groot','too big','zu groß']],
+ wind:[['geen','geen','none','kein'],['licht','licht','light','leicht'],['matig','matig','moderate','mäßig'],['hard','hard','strong','stark'],['te hard','te hard','too strong','zu stark']],
+ stroming:[['geen','geen','none','keine'],['zwak','zwak','weak','schwach'],['matig','matig','moderate','mäßig'],['sterk','sterk','strong','stark']],
+ drukte:[['leeg','leeg','empty','leer'],['rustig','rustig','quiet','ruhig'],['druk','druk','busy','voll'],['erg druk','erg druk','very busy','sehr voll']]};
+const pkL=(k,v)=>{const x=(PK[k]||[]).find(p=>p[0]==v);return x?T(x[1],x[2],x[3]):v};
+const PKN={golven:()=>T('Golven','Waves','Wellen'),wind:()=>'Wind',stroming:()=>T('Stroming','Current','Strömung'),drukte:()=>T('Drukte','Crowd','Andrang')};
+async function loadReports(){if(!REPORTS_URL)return;try{const d=await tfetch(REPORTS_URL+'?limit=200',20000);if(d&&d.ok){REP=d.reports;if(M)render();}}catch(e){console.warn('ervaringen:',e.message)}}
+const repOf=s=>(REP||[]).filter(r=>r.spot==s.naam);
+function repBadge(s){const n=repOf(s).length;return n?`<span class="badge">💬 ${n}</span>`:''}
+function repItem(r){const f=(l,v)=>v?`\n${l}: ${esc(v)}`:'';const cond=Object.keys(PK).filter(k=>r[k]).map(k=>PKN[k]()+' '+esc(pkL(k,r[k]))).join(' · ');
+ const bat=[r.batterij_type,r.batterij_capaciteit,r.batterij_aantal&&('×'+r.batterij_aantal),r.gebruiksduur].filter(Boolean).map(esc).join(' · ');
+ const foil=[r.voorvleugel,r.mast,r.fuselage].filter(Boolean).map(esc).join(' / ');
+ const dt=r.sessie?new Date(r.sessie).toLocaleString(LOC,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'';
+ return `<div class="ri"><b>${esc(r.naam||T('anoniem','anonymous','anonym'))}</b> <small>${esc(dt)}</small> ${stars(+r.beoordeling)}\n${esc(r.hoe_ging_het)}${cond?'\n'+cond:''}${f(T('Omstandigheden','Conditions','Bedingungen'),r.omstandigheden_tekst)}${f('Board',r.board)}${foil?'\nFoil: '+foil:''}${f('Foil assist',r.foilassist)}${bat?'\n'+T('Batterij','Battery','Akku')+': '+bat:''}${f(T('Oefent','Practising','Übt'),r.oefenen)}</div>`}
+function repH(k){const s=spots[k];const list=repOf(s);
+ return `<div class="rep" id="rep"><h4>💬 ${T('Ervaringen','Session reports','Erfahrungen')}${list.length?' ('+list.length+')':''}</h4>
+ ${REPORTS_URL?`<button class="btn" onclick="openForm(${k})">✍️ ${T('Ervaring delen','Share your session','Erfahrung teilen')}</button>`:`<p class="info" style="color:var(--m)">✍️ ${T('Ervaring delen – binnenkort beschikbaar.','Share your session – coming soon.','Erfahrung teilen – bald verfügbar.')}</p>`}
+ ${REPORTS_URL&&REP==null?`<p class="info" style="color:var(--m)">${T('Ervaringen laden…','Loading reports…','Erfahrungen werden geladen…')}</p>`:''}
+ ${list.slice(0,10).map(repItem).join('')}</div>`}
+function openForm(k){const s=spots[k];formT=Date.now();const now=new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,16);
+ const i=(id,l,ph='',max=100,type='text')=>`<label for="f_${id}">${l}</label><input id="f_${id}" name="${id}" type="${type}" maxlength="${max}" placeholder="${esc(ph)}">`;
+ const sel=k=>`<label for="f_${k}">${PKN[k]()}</label><select id="f_${k}" name="${k}"><option value="">–</option>${PK[k].map(p=>`<option value="${p[0]}">${esc(T(p[1],p[2],p[3]))}</option>`).join('')}</select>`;
+ document.getElementById('rep').innerHTML=`<form id="rf" onsubmit="sendForm(event,${k})"><h4>✍️ ${T('Ervaring delen','Share your session','Erfahrung teilen')} – ${esc(s.naam)}</h4>
+ <p class="info" style="color:var(--m)">${T('Je verslag is direct openbaar zichtbaar op deze site. Vul geen e-mail, telefoonnummer of andere persoonsgegevens in.','Your report is publicly visible on this site right away. Do not enter an email, phone number or other personal data.','Dein Bericht ist sofort öffentlich auf dieser Seite sichtbar. Gib keine E-Mail, Telefonnummer oder andere persönliche Daten ein.')}</p>
+ ${i('naam',T('Naam of bijnaam (optioneel)','Name or nickname (optional)','Name oder Spitzname (optional)'),'',40)}
+ <label for="f_sessie">${T('Datum en tijd sessie','Date and time of session','Datum und Uhrzeit der Session')}</label><input id="f_sessie" name="sessie" type="datetime-local" required value="${now}" max="${now}">
+ <label for="f_hoe">${T('Hoe ging het?','How did it go?','Wie lief es?')} *</label><textarea id="f_hoe" name="hoe_ging_het" rows="4" maxlength="1500" required></textarea>
+ <fieldset><legend>${T('Omstandigheden','Conditions','Bedingungen')}</legend><div class="g2">${sel('golven')}${sel('wind')}${sel('stroming')}${sel('drukte')}</div>
+ <label for="f_omt">${T('Toelichting','Details','Details')}</label><textarea id="f_omt" name="omstandigheden_tekst" rows="2" maxlength="500"></textarea></fieldset>
+ <fieldset><legend>${T('Materiaal','Gear','Material')}</legend>${i('board','Board',T('bv. 4\'6 foilboard 40 l','e.g. 4\'6 foilboard 40 l','z. B. 4\'6 Foilboard 40 l'))}
+ <div class="g2">${i('voorvleugel',T('Voorvleugel','Front wing','Frontflügel'),'1250 cm²')}${i('mast','Mast','75 cm')}</div>${i('fuselage','Fuselage')}
+ ${i('foilassist',T('Foil assist (merk/model/stuwkracht)','Foil assist (brand/model/thrust)','Foil Assist (Marke/Modell/Schub)'))}</fieldset>
+ <fieldset><legend>${T('Batterij(en)','Battery/batteries','Akku(s)')}</legend><div class="g2">${i('batterij_type','Type')}${i('batterij_capaciteit',T('Capaciteit','Capacity','Kapazität'),'Wh / Ah')}
+ ${i('batterij_aantal',T('Aantal gebruikt','Number used','Anzahl genutzt'),'',3,'number')}${i('gebruiksduur',T('Gebruiksduur','Runtime','Laufzeit'),T('bv. 25 min','e.g. 25 min','z. B. 25 min'))}</div></fieldset>
+ <label for="f_oef">${T('Wat oefen je?','What are you practising?','Was übst du?')}</label><input id="f_oef" name="oefenen" maxlength="300">
+ <label for="f_rt">${T('Beoordeling sessie (0–5)','Session rating (0–5)','Bewertung der Session (0–5)')}</label><select id="f_rt" name="beoordeling">${[5,4.5,4,3.5,3,2.5,2,1.5,1,0.5,0].map(v=>`<option value="${v}"${v==3?' selected':''}>${'★'.repeat(Math.floor(v))}${v%1?'½':''} ${v}</option>`).join('')}</select>
+ <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
+ <p id="rmsg"></p><button class="btn" type="submit">${T('Versturen','Send','Senden')}</button> <button class="btn btn2" type="button" onclick="openS(${k})">${T('Annuleren','Cancel','Abbrechen')}</button></form>`;
+ document.getElementById('f_naam').focus({preventScroll:true});}
+async function sendForm(ev,k){ev.preventDefault();const fm=ev.target,b=fm.querySelector('button[type=submit]'),msg=document.getElementById('rmsg');
+ const d=Object.fromEntries(new FormData(fm).entries());d.spot=spots[k].naam;d.sessie=new Date(d.sessie).toISOString();d.elapsed=Date.now()-formT;d.taal=LANG;
+ const E={too_fast:T('Iets te snel verstuurd, probeer het over een paar seconden opnieuw.','Sent a bit too fast, try again in a few seconds.','Etwas zu schnell gesendet, versuche es in ein paar Sekunden erneut.'),rate_spot:T('Er zijn net veel verslagen voor deze spot geplaatst; probeer het later.','Many reports were just posted for this spot; try later.','Gerade viele Berichte für diesen Spot; versuche es später.'),rate_day:T('Daglimiet bereikt; probeer het morgen.','Daily limit reached; try tomorrow.','Tageslimit erreicht; versuche es morgen.'),bad_date:T('Controleer datum en tijd.','Check date and time.','Prüfe Datum und Uhrzeit.')};
+ b.disabled=true;msg.className='';msg.textContent=T('Versturen…','Sending…','Wird gesendet…');
+ try{const r=await fetch(REPORTS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)});const j=await r.json();
+  if(!j.ok)throw new Error(E[j.error]||j.error);msg.textContent='✅ '+T('Bedankt! Je ervaring staat online.','Thanks! Your report is online.','Danke! Dein Bericht ist online.');
+  await loadReports();setTimeout(()=>{if(openK==k)openS(k)},1200);}
+ catch(e){b.disabled=false;msg.className='err';msg.textContent=T('Versturen mislukt: ','Sending failed: ','Senden fehlgeschlagen: ')+e.message;}}
+
 let map,layer,openK=null,lastLand=null,curDate;
 function drawMap(){if(!map){map=L.map('map',{zoomControl:true});L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);layer=L.layerGroup().addTo(map);}
  layer.clearLayers();const pts=[];spots.forEach((s,k)=>{if(land!='Alle'&&s.land!=land)return;pts.push([s.lat,s.lon]);
@@ -155,7 +216,7 @@ async function live(){const ch=[];for(let i=0;i<spots.length;i+=25)ch.push(spots
  return {m,f,t:new Date().toISOString()}}
 function show(d,note){M=d.m;F=d.f;document.getElementById('upd').textContent=T('Gegevens van ','Data from ','Daten von ')+new Date(d.t).toLocaleString(LOC,{weekday:'short',day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})+' (Open-Meteo)'+(note||'')+'.';render();}
 function fail(e){document.getElementById('main').innerHTML=`<p class="err">${T('Kon de gegevens niet laden','Could not load the data','Die Daten konnten nicht geladen werden')} (${e&&e.message||e}). ${T('Controleer je verbinding.','Check your connection.','Prüfe deine Verbindung.')} <button onclick="location.reload()">${T('Opnieuw proberen','Try again','Erneut versuchen')}</button></p>`;}
-(async()=>{let cached=null;try{cached=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
+loadReports();(async()=>{let cached=null;try{cached=JSON.parse(localStorage.getItem(KEY)||'null')}catch(e){}
  const okc=cached&&cached.m&&cached.m.length==spots.length;if(okc)try{show(cached,T(' – opgeslagen kopie, bijwerken…',' – saved copy, updating…',' – gespeicherte Kopie, wird aktualisiert…'))}catch(e){}
  try{let d;try{d=pick(await retry(()=>tfetch('data.json?h='+Math.floor(Date.now()/9e5))))}catch(e){console.warn('data.json:',e.message);d=await live()}
   show(d);try{localStorage.setItem(KEY,JSON.stringify(d))}catch(e){}}
