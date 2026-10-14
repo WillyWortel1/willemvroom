@@ -1,6 +1,7 @@
 <!doctype html><html lang="nl"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities Nederlandse kust</title>
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
@@ -45,7 +46,7 @@ function tides(m,date){const t=m.minutely_15.time,h=m.minutely_15.sea_level_heig
   const w=h.slice(i-2,i+3);if(w.includes(null))continue;
   if(h[i]===Math.max(...w)&&h[i]>h[i-1])o.push(['HW',t[i].slice(11),h[i]]);
   else if(h[i]===Math.min(...w)&&h[i]<h[i-1])o.push(['LW',t[i].slice(11),h[i]]);}
- return o.filter((x,k)=>!k||x[0]!=o[k-1][0]);}
+ let r=o.filter((x,k)=>!k||x[0]!=o[k-1][0]);for(let k=1;k<r.length-1;k++){if(Math.abs(r[k][2]-r[k-1][2])<0.25&&Math.abs(r[k+1][2]-r[k][2])<0.25){r.splice(k,1);k--;}}return r.filter((x,k)=>!k||x[0]!=r[k-1][0]);}
 function render(){const dates=[...new Set(M[0].hourly.time.map(t=>t.slice(0,10)))];
  const fmt=d=>new Date(d+'T12:00').toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});
  document.getElementById('days').innerHTML=dates.map((d,i)=>`<button class="${i==day?'on':''}" onclick="day=${i};render()">${i==0?'Vandaag':i==1?'Morgen':fmt(d)}</button>`).join('');
