@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<meta name="theme-color" content="#0b2a4a">
+<meta http-equiv="Cache-Control" content="no-cache"><meta name="theme-color" content="#0b2a4a">
 <link rel="icon" href="data:,">
 <title>FOILASSIST!</title>
 <style>
@@ -71,9 +71,9 @@ m65d:'kort: snel uit het water',m75d:'allround',m85d:'lang: ruimte, minder wendb
 bS:'Klein',bSd:'4\'2 · duckdive makkelijk, opstaan lastig',bM:'Middel',bMd:'4\'8 · allround',bL:'Groot',bLd:'5\'4 · opstaan makkelijk',
 aS:'Licht',aSd:'korte sessie, lichter',aL:'Groot',aLd:'lange sessie, zwaarder',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Snelheid ${g.vmax|0} · Bocht ${g.turn.toFixed(2)} · Stabiliteit ${g.stab.toFixed(2)} · Accu ${g.cap|0}s`,
-paddle:'Peddel uit! Joystick omlaag bij het schuim',getup:'FOIL (joystick omhoog) in het groen om op te staan',foil:'Foilen! FOIL omhoog, niet te hoog, niet te laag',catchW:'Snelheid goed: tik remote, motor uit = golf pakken!',
+paddle:'Peddel uit! Joystick omlaag bij het schuim',getup:'FOIL (joystick omhoog) in het groen om op te staan',foil:'Foilen! FOIL omhoog, niet te hoog, niet te laag',catchW:'Golf achter je! Stuur opzij (◀/▶) = indroppen',
 ride:'Opzij onderin = bottom turn, bovenin = cutback',duck:'Duckdive!',washed:'Weggespoeld!',stood:'Opgestaan!',miss:'Te vroeg/laat!',breach:'Breach! Vleugel uit het water',touch:'Touchdown!',
-caught:'Golf gepakt!',swell:'Swell gepakt!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Te snel achter elkaar!',lost:'Golf kwijt, motor aan',close:'Golf sluit: kick-out!',
+caught:'Take-off! Golf gepakt!',swell:'Swell gepakt!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Te snel achter elkaar!',lost:'Golf kwijt, motor aan',close:'Golf sluit: kick-out!',
 barrelC:'Holle golf! BARREL: blijf in de lichte baan',barrel:'BARREL!',swallowed:'Opgeslokt door de buis!',
 over:'Sessie voorbij',batEmpty:'Accu leeg',falls:'Te vaak gevallen',score:'Score',hiS:'Record',again:'Nog een sessie',pause:'Pauze',resume:'Verder',
 bat_:'Accu',falls_:'Val',combo:'Combo'},
@@ -86,9 +86,9 @@ m65d:'short: breaches easily',m75d:'all-round',m85d:'long: room, less nimble',
 bS:'Small',bSd:'4\'2 · easy duck dive, hard get-up',bM:'Medium',bMd:'4\'8 · all-round',bL:'Big',bLd:'5\'4 · easy get-up',
 aS:'Light',aSd:'short session, lighter',aL:'Big',aLd:'long session, heavier',
 statsT:(g)=>`Lift ${g.lift.toFixed(2)} · Speed ${g.vmax|0} · Turn ${g.turn.toFixed(2)} · Stability ${g.stab.toFixed(2)} · Battery ${g.cap|0}s`,
-paddle:'Paddle out! Joystick down at the whitewater',getup:'FOIL (joystick up) in the green to get up',foil:'Foiling! FOIL up, not too high, not too low',catchW:'Speed matched: tap remote, motor off = catch it!',
+paddle:'Paddle out! Joystick down at the whitewater',getup:'FOIL (joystick up) in the green to get up',foil:'Foiling! FOIL up, not too high, not too low',catchW:'Wave behind you! Steer sideways (◀/▶) = drop in',
 ride:'Sideways low = bottom turn, high = cutback',duck:'Duck dive!',washed:'Washed back!',stood:'Up and flying!',miss:'Too early/late!',breach:'Breach! Wing out of the water',touch:'Touchdown!',
-caught:'Wave caught!',swell:'Swell caught!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Too fast in a row!',lost:'Lost the wave, motor on',close:'Wave closes: kick-out!',
+caught:'Take-off! Wave caught!',swell:'Swell caught!',bt:'Bottom turn',cb:'Cutback',carve:'Carve',wobble:'Too fast in a row!',lost:'Lost the wave, motor on',close:'Wave closes: kick-out!',
 barrelC:'Hollow wave! BARREL: stay in the light lane',barrel:'BARREL!',swallowed:'Swallowed by the tube!',
 over:'Session over',batEmpty:'Battery empty',falls:'Too many falls',score:'Score',hiS:'Best',again:'Another session',pause:'Paused',resume:'Resume',
 bat_:'Battery',falls_:'Falls',combo:'Combo'}};
@@ -128,6 +128,7 @@ const SFX={ok:()=>{tone(520,.1,'square',.12);setTimeout(()=>tone(780,.14,'square
  trick:(c)=>tone(440+c*80,.15,'triangle',.18,880+c*120),barrel:()=>{[523,659,784,1046,1318].forEach((f,i)=>setTimeout(()=>tone(f,.25,'square',.12),i*110));}};
 
 /* ---------- canvas ---------- */
+if(!CanvasRenderingContext2D.prototype.roundRect)CanvasRenderingContext2D.prototype.roundRect=function(x,y,w,h,r){r=Math.min(r,w/2,h/2);this.moveTo(x+r,y);this.arcTo(x+w,y,x+w,y+h,r);this.arcTo(x+w,y+h,x,y+h,r);this.arcTo(x,y+h,x,y,r);this.arcTo(x,y,x+w,y,r);this.closePath();};
 const cv=document.getElementById('c'),ctx=cv.getContext('2d');let W=0,H=0,DPR=1,SY=0,RX=0,PX=1;
 function resize(){DPR=Math.min(2,window.devicePixelRatio||1);W=innerWidth;H=innerHeight;cv.width=Math.round(W*DPR);cv.height=Math.round(H*DPR);cv.style.width=W+'px';cv.style.height=H+'px';ctx.setTransform(DPR,0,0,DPR,0,0);
  SY=Math.round(H*(W<600?0.5:0.56));RX=W*0.4;PX=Math.max(.8,Math.min(1.6,Math.min(W,H*1.2)/520));}
@@ -225,15 +226,15 @@ function update(dt){
   const mp=g.mast*PX;
   if(P.h>mp){fall(t('breach'));return;}
   if(P.h<0){if(P.vy<-25||P.v<33){fall(t('touch'));return;}P.h=0;P.vy=10;P.v*=0.8;}
-  for(const w of waves){w.age+=dt;w.dx-=(w.spd-P.v)*dt;}
+  for(const w of waves){w.age+=dt;w.dx-=Math.max(22,w.spd-P.v*0.6)*dt;}
   waves=waves.filter(w=>w.dx>-W*1.2&&w.dx<W*1.5);
   if(!waves.length)nextSwell(W*(0.6+Math.random()*0.6)*(G.free?FS.period:1));
-  P.catchable=null;for(const w of waves){if(w.dx>-5*PX&&w.dx<w.wf*1.1&&Math.abs(P.v-w.spd)<17*Math.sqrt(g.stab))P.catchable=w;}
+  P.catchable=null;for(const w of waves){if(w.dx>-20*PX&&w.dx<w.wf*1.6&&P.v>35)P.catchable=w;}
   if(P.catchable&&msgT<=0)say(t('catchW'),.3);
-  if(P.catchable&&!P.motor)tryCatch();
+  if(P.catchable&&(!P.motor||tp))tryCatch();
  } else if(P.phase==='ride'){
   const w=P.wave;w.age+=dt;P.v=w.spd;
-  P.p+=((K.up?0.9:0)-(K.down?1.1:0)-0.12)*dt*g.turn;if(P.climb>0){P.climb-=dt;P.p+=1.6*dt;}
+  if(P.dropT>0){P.dropT-=dt;P.p-=0.55*dt;P.energy=Math.max(P.energy,0.8);}P.p+=((K.up?0.9:0)-(K.down?1.1:0)-0.12)*dt*g.turn;if(P.climb>0){P.climb-=dt;P.p+=1.6*dt;}
   P.energy-=dt*(w.broken?0.09:0.14)/g.stab;
   if(P.p>0.98){P.p=0.98;if(!P.barrel){fall(t('breach'));return;}}
   if(P.p<0.05){P.p=0.05;P.energy-=dt*0.5;}
@@ -256,7 +257,7 @@ function update(dt){
  for(const f of floaters){f.t-=dt;f.y-=30*dt;}floaters=floaters.filter(f=>f.t>0);
  for(const s of sprays){s.t-=dt;s.x+=s.vx*dt;s.y+=s.vy*dt;s.vy+=300*dt;}sprays=sprays.filter(s=>s.t>0);
 }
-function tryCatch(){const w=P.catchable;if(!w||P.phase!=='foil')return;P.phase='ride';P.wave=w;waves=[w];P.p=0.45;P.energy=1;P.lastMove=P.time-1;P.climb=0;w.age=0;
+function tryCatch(){const w=P.catchable;if(!w||P.phase!=='foil')return;P.phase='ride';P.wave=w;waves=[w];P.p=0.85;P.climb=0;P.motor=false;P.lastDir=turnDir||1;P.turnAnim=0.5;P.dropT=0.7;P.energy=1;P.lastMove=P.time-1;P.climb=0;w.age=0;
  SFX.ok();say(w.broken?t('caught'):t('swell'),1.4);if(!G.free)P.bat=Math.min(100,P.bat+0);}
 
 /* ---------- tekenen (eerste persoon) ---------- */
@@ -417,13 +418,14 @@ syncTop();showMenu();
 
 /* ---------- lus ---------- */
 let last=performance.now();
-function loop(now){const dt=Math.min(0.05,(now-last)/1000);last=now;
+function loop(now){requestAnimationFrame(loop);try{step(now);}catch(e){if(DEBUG)console.error(e);}}
+function step(now){const dt=Math.min(0.05,(now-last)/1000);last=now;
  if(G.mode==='play'&&!G.paused)update(dt);
  
- draw();requestAnimationFrame(loop);}
+ draw();}
 requestAnimationFrame(loop);
 if(DEBUG)window.__fa={G,get P(){return P;},sel,newGame,K,set:(o)=>Object.assign(P,o),press:(k)=>{if(k==='motor')motorPress=true;if(k==='turn')turnPress=true;},
- forceRide:(hollow)=>{startFoil();waves=[];nextSwell(0);const w=waves[0];w.hollow=!!hollow;w.dx=10;P.v=w.spd;P.catchable=w;tryCatch();},startGetup:()=>startGetup(),startFoil:()=>startFoil(),haz:(ty)=>haz.push({type:ty,d:3,lane:P.laneX}),end:(sc)=>{P.score=sc;endGame('test');},mood:(m)=>P.mood=m};
+ forceRide:(hollow)=>{startFoil();waves=[];nextSwell(0);const w=waves[0];w.hollow=!!hollow;w.dx=10;P.v=w.spd;P.catchable=w;tryCatch();},startGetup:()=>startGetup(),startFoil:()=>startFoil(),waves:()=>waves.map(w=>Math.round(w.dx)),swellAt:(dx)=>{waves=[{kind:"swell",dx:dx*PX,A:110*PX,wf:110*PX,spd:70,broken:true,hollow:false,age:0}];},haz:(ty)=>haz.push({type:ty,d:3,lane:P.laneX}),end:(sc)=>{P.score=sc;endGame('test');},mood:(m)=>P.mood=m};
 })();
 </script>
 </body>
