@@ -184,14 +184,14 @@ function say(s,d){msg=s;msgT=d||1.6;}
 function newGame(free){G.free=free;gearNow=gear();G.mode='play';G.paused=false;document.body.classList.add('playing');
  P={thr:0.8,sx:0,bank:0,yaw:0,th:0,rz:0,rx:0,carve:0,armed:true,pwr:1,mood:.6,lane:0,laneX:0,hazT:5,dist:0,lastDir:1,phase:'paddle',score:0,bat:100,falls:0,motor:true,v:0,prog:0,dive:0,diveCd:0,h:0,vy:0,meter:0,getT:0,wave:null,p:.3,energy:1,combo:1,lastMove:-9,time:0,turnAnim:0,dir:1,inv:0,barrel:null,rides:0,barrels:0,maxCombo:1};
  if(free)gearNow.turn*=FS.steer;haz=[];G.party=0;waves=[];floaters=[];sprays=[];celebrate=0;startOnWave();hideOv();}
-function startOnWave(){startFoil();waves=[];nextSwell(0);const w=waves[0];w.dx=10;P.v=w.spd;P.h=gearNow.mast*0.5*PX;P.catchable=w;turnDir=Math.random()<.5?-1:1;tryCatch();say(warmK()<1&&!P.warmSaid?(P.warmSaid=1,t('warm')):t('ride'),3);}
+function startOnWave(){startFoil();waves=[];nextSwell(0);const w=waves[0];w.dx=10;P.v=w.spd;P.h=gearNow.mast*0.5*PX;P.catchable=w;turnDir=Math.random()<.5?-1:1;tryCatch();say(warmK()<1?t('warm'):t('ride'),2.8);}
 function startPaddle(){P.phase='paddle';P.th=0;haz=[];P.dir=1;P.prog=0;P.h=0;P.v=0;P.wave=null;P.barrel=null;P.thr=0.8,P.motor=true;waves=[];spawnWW(W*0.9);say(t('paddle'),2.5);}
 function spawnWW(x){waves.push({kind:'ww',dx:x,passed:false});}
 function startGetup(){P.phase='getup';P.dir=-1;P.meter=0;P.getT=0;waves=[];say(t('getup'),2.2);}
 function startFoil(){P.liftT=0.8;SFX.whoosh();P.phase='foil';P.th=Math.PI;P.dir=-1;P.h=gearNow.mast*0.45;P.vy=0;P.v=gearNow.vmax*0.75;P.thr=0.8,P.motor=true;waves=[];nextSwell(W*0.6);say(t('foil'),2);}
 function warmK(){return G.free||!P?1:Math.min(1,Math.max(P.time/90,(P.rides||0)/3));}
 function nextSwell(x){const wk=warmK();const big=G.free?(0.75+Math.random()*0.5):(0.12+(0.33+Math.random()*0.55)*wk);
- const fw=G.free?FS.wave:1,fsp=G.free?FS.speed:1;waves.push({kind:'swell',dx:W*0.5+x,A:(70+70*big)*fw*PX,wf:(90+40*big)*PX*(1.35-0.35*wk),spd:(115+40*big)*0.55*fsp*(0.72+0.28*wk),broken:Math.random()<0.55*wk*wk,hollow:wk>=1&&big*fw>(G.free?0.85:0.93),age:0});}
+ const fw=G.free?FS.wave:1,fsp=G.free?FS.speed:1;waves.push({kind:'swell',dx:W*0.5+x,A:(70+70*big)*fw*PX,wf:(90+40*big)*PX*(1.35-0.35*wk),spd:(115+40*big)*0.55*fsp*(0.72+0.28*wk),broken:wk>=0.4&&Math.random()<0.55*wk*wk,hollow:wk>=1&&big*fw>(G.free?0.85:0.93),age:0});}
 function fall(why){if(P.inv>0)return;SFX.splash();SFX.bad();say(why,2);P.mood=Math.max(0,P.mood-.25);haz=[];P.falls++;P.combo=1;P.inv=1.5;P.thr=0,P.motor=false;
  if(!G.free&&P.falls>=3){endGame(t('falls'));return;}P.phase='swim';P.swimT=1.4;}
 function endGame(why){G.mode='over';document.body.classList.remove('playing');const key=G.free?'freeride':'sessie';const nh=P.score>hi[key];G.party=nh&&P.score>0;if(nh){hi[key]=P.score;lsSet(G.free?'fa-hi-free':'fa-hi',String(P.score));}
