@@ -17,11 +17,11 @@ window.SPOTS = [
   { naam: "Vrouwenpolder",      land: "NL", lat: 51.595, lon: 3.611, actief: true, bron: "foil.guide" },
   { naam: "Cadzand",            land: "NL", lat: 51.378, lon: 3.383, actief: true, bron: "foil.guide" },
   // Later: zet op actief: true
-  { naam: "Wissant",            land: "FR", lat: 50.886, lon: 1.660, actief: false, bron: "foil.guide" },
-  { naam: "La Torche",          land: "FR", lat: 47.838, lon: -4.350, actief: false, bron: "foil.guide" },
-  { naam: "Somo (Santander)",   land: "ES", lat: 43.455, lon: -3.735, actief: false, bron: "foil.guide" },
-  { naam: "Tarifa",             land: "ES", lat: 36.030, lon: -5.620, actief: false, bron: "foil.guide" },
-  { naam: "Peniche – Baleal",   land: "PT", lat: 39.370, lon: -9.340, actief: false, bron: "foil.guide" },
-  { naam: "Guincho",            land: "PT", lat: 38.730, lon: -9.474, actief: false, bron: "foil.guide" },
-  { naam: "Costa da Caparica",  land: "PT", lat: 38.640, lon: -9.240, actief: false, bron: "foil.guide" },
+  { naam: "Wissant",            land: "FR", lat: 50.886, lon: 1.660, actief: true, bron: "foil.guide" },
+  { naam: "La Torche",          land: "FR", lat: 47.838, lon: -4.350, actief: true, bron: "foil.guide" },
+  { naam: "Somo (Santander)",   land: "ES", lat: 43.455, lon: -3.735, actief: true, bron: "foil.guide" },
+  { naam: "Tarifa",             land: "ES", lat: 36.030, lon: -5.620, actief: true, bron: "foil.guide" },
+  { naam: "Peniche – Baleal",   land: "PT", lat: 39.370, lon: -9.340, actief: true, bron: "foil.guide" },
+  { naam: "Guincho",            land: "PT", lat: 38.730, lon: -9.474, actief: true, bron: "foil.guide" },
+  { naam: "Costa da Caparica",  land: "PT", lat: 38.640, lon: -9.240, actief: true, bron: "foil.guide" },
 ];

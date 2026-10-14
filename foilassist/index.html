@@ -2,7 +2,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
-<title>Foilassist – condities Nederlandse kust</title>
+<title>Foilassist – condities per spot</title>
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -21,13 +21,13 @@ th{color:var(--m);font-weight:500;font-size:.75rem}td:first-child{color:var(--m)
 footer{padding:10px 14px 30px;color:var(--m);font-size:.78rem}footer a{color:var(--a)}
 .err{color:#ffb4a8}
 </style></head><body>
-<header><h1>🏄 Foilassist – Nederlandse kust</h1>
+<header><h1>🏄 Foilassist – spots NL · FR · ES · PT</h1>
 <p>Golven, stroming, wind, weer, watertemperatuur en getij per spot. <span id="upd"></span></p></header>
-<nav class="days" id="days"></nav>
+<nav class="days" id="lands"></nav><nav class="days" id="days" style="top:46px"></nav>
 <main id="main"><p>Gegevens laden…</p></main>
 <footer>
 <p><b>Bronnen:</b> golven, stroming, watertemperatuur en zeeniveau: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind en weer: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). Hoog- en laagwater zijn afgeleid uit het voorspelde zeeniveau van het model (inclusief getij); dit is een schatting en kan tot een half uur of meer afwijken van de officiële tijden van <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>. Spots: foil.guide, ophetwater.nl, Foil School Nederland.</p>
-<p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Altijd zelf ter plaatse beoordelen.</p>
+<p>Pijlen wijzen de richting waar golven, wind en stroming <i>heen</i> gaan; de letters geven aan waar golven en wind vandaan komen en waar de stroming heen gaat. Tijden zijn de lokale tijd van de spot. Altijd zelf ter plaatse beoordelen.</p>
 </footer>
 <script src="spots.js"></script>
 <script>
@@ -38,9 +38,9 @@ const wx=c=>c==null?'–':c==0?'☀️':c<=2?'🌤️':c==3?'☁️':c<=48?'🌫
 const f=(v,n=0)=>v==null?'–':v.toFixed(n);
 const spots=SPOTS.filter(s=>s.actief),lat=spots.map(s=>s.lat).join(','),lon=spots.map(s=>s.lon).join(',');
 const D=5,tz='Europe/Amsterdam';
-const mU=`https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height,wave_period,wave_direction,ocean_current_velocity,ocean_current_direction,sea_surface_temperature&minutely_15=sea_level_height_msl&forecast_days=${D}&timezone=${tz}`;
-const fU=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation,cloud_cover,weather_code,wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kn&forecast_days=${D}&timezone=${tz}`;
-let M,F,day=0;
+const mU=`https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lon}&hourly=wave_height,wave_period,wave_direction,ocean_current_velocity,ocean_current_direction,sea_surface_temperature&minutely_15=sea_level_height_msl&forecast_days=${D}&timezone=auto`;
+const fU=`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation,cloud_cover,weather_code,wind_speed_10m,wind_gusts_10m,wind_direction_10m&wind_speed_unit=kn&forecast_days=${D}&timezone=auto`;
+let M,F,day=0,land='Alle';const off=k=>{const o=M[k].utc_offset_seconds/3600;return 'UTC'+(o>=0?'+':'')+o};
 function tides(m,date){const t=m.minutely_15.time,h=m.minutely_15.sea_level_height_msl,o=[];
  for(let i=2;i<h.length-2;i++){if(h[i]==null||!t[i].startsWith(date))continue;
   const w=h.slice(i-2,i+3);if(w.includes(null))continue;
@@ -50,19 +50,19 @@ function tides(m,date){const t=m.minutely_15.time,h=m.minutely_15.sea_level_heig
 function render(){const dates=[...new Set(M[0].hourly.time.map(t=>t.slice(0,10)))];
  const fmt=d=>new Date(d+'T12:00').toLocaleDateString('nl-NL',{weekday:'short',day:'numeric',month:'short'});
  document.getElementById('days').innerHTML=dates.map((d,i)=>`<button class="${i==day?'on':''}" onclick="day=${i};render()">${i==0?'Vandaag':i==1?'Morgen':fmt(d)}</button>`).join('');
- const date=dates[day];
- document.getElementById('main').innerHTML=spots.map((s,k)=>{const m=M[k].hourly,w=F[k].hourly;
+ const date=dates[day];const lands=['Alle',...new Set(spots.map(s=>s.land))];document.getElementById('lands').innerHTML=lands.map(l=>`<button class="${l==land?'on':''}" onclick="land='${l}';render()">${l}</button>`).join('');
+ document.getElementById('main').innerHTML=spots.map((s,k)=>{if(land!='Alle'&&s.land!=land)return '';const m=M[k].hourly,w=F[k].hourly;
   const idx=SL.map(h=>m.time.indexOf(`${date}T${String(h).padStart(2,'0')}:00`));
   const row=(lab,fn)=>`<tr><td>${lab}</td>${idx.map(i=>`<td>${i<0?'–':fn(i)}</td>`).join('')}</tr>`;
-  const td=tides(M[k],date);
-  return `<section class="card"><h2>${s.naam}<small>${s.land}</small></h2><table>
+  const td=tides(M[k],date);const hv=M[k].minutely_15.sea_level_height_msl.filter(v=>v!=null),rg=hv.length?Math.max(...hv)-Math.min(...hv):0;
+  return `<section class="card"><h2>${s.naam}<small>${s.land} · lokale tijd ${off(k)}</small></h2><table>
   <tr><th></th>${SL.map(h=>`<th>${h}:00</th>`).join('')}</tr>
   ${row('Weer',i=>`${wx(w.weather_code[i])} ${f(w.temperature_2m[i])}°${w.precipitation[i]>0?` <small>${f(w.precipitation[i],1)}mm</small>`:''}`)}
   ${row('Wind kn',i=>`${arrow(w.wind_direction_10m[i])} ${f(w.wind_speed_10m[i])}<small>/${f(w.wind_gusts_10m[i])}</small> ${card(w.wind_direction_10m[i])}`)}
   ${row('Golf',i=>`${arrow(m.wave_direction[i])} ${f(m.wave_height[i],1)}m <small>${f(m.wave_period[i])}s ${card(m.wave_direction[i])}</small>`)}
   ${row('Stroming',i=>`${arrow(m.ocean_current_direction[i],1)} ${f(m.ocean_current_velocity[i]==null?null:m.ocean_current_velocity[i]/1.852,1)}kn <small>${card(m.ocean_current_direction[i])}</small>`)}
   ${row('Water',i=>`${f(m.sea_surface_temperature[i],1)}°C`)}
-  </table><div class="tide">🌊 ${td.length?td.map(x=>`<b>${x[0]}</b> ${x[1]}`).join(' · '):'getij: geen gegevens'}</div></section>`}).join('');}
+  </table><div class="tide">🌊 ${!hv.length?'getij: geen gegevens':rg<0.3?'getij: verwaarloosbaar klein (&lt;0,3 m)':td.length?td.map(x=>`<b>${x[0]}</b> ${x[1]}`).join(' · '):'getij: geen gegevens'}</div></section>`}).join('');}
 Promise.all([fetch(mU).then(r=>{if(!r.ok)throw r.status;return r.json()}),fetch(fU).then(r=>{if(!r.ok)throw r.status;return r.json()})])
 .then(([m,w])=>{M=[].concat(m);F=[].concat(w);
  document.getElementById('upd').textContent='Opgehaald: '+new Date().toLocaleString('nl-NL',{weekday:'short',hour:'2-digit',minute:'2-digit',day:'numeric',month:'short'})+' (Open-Meteo).';render();})
