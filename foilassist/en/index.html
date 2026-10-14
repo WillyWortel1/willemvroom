@@ -9,7 +9,7 @@ const T=(nl,en,de)=>LANG=='de'?de:LANG=='en'?en:nl;</script>
 <meta name="robots" content="noindex">
 <link rel="icon" href="/favicon.svg">
 <title>Foilassist – condities per spot</title><script>if(LANG=='en')document.title='Foilassist – conditions per spot';if(LANG=='de')document.title='Foilassist – Bedingungen pro Spot'</script>
-<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-25">
+<link rel="stylesheet" href="leaflet/leaflet.css?v=20261014-26">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -84,9 +84,9 @@ html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:
 <p>Pfeile zeigen, wohin Wellen, Wind und Strömung <i>gehen</i>; die Buchstaben geben an, woher Wellen und Wind kommen und wohin die Strömung geht. Zeiten sind die Ortszeit des Spots. Immer selbst vor Ort beurteilen.</p>
 </div></footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML='<p class="err">'+T('Fout bij laden: ','Error while loading: ','Fehler beim Laden: ')+(e.message||T('onbekend','unknown','unbekannt'))+' <button onclick="location.reload()">'+T('Opnieuw','Retry','Erneut')+'</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML+='<p class="err">'+T('Dit duurt lang… ','This is taking long… ','Das dauert lange… ')+'<button onclick="location.reload()">'+T('Opnieuw proberen','Try again','Erneut versuchen')+'</button></p>'},30000);</script>
-<script src="leaflet/leaflet.js?v=20261014-25"></script>
+<script src="leaflet/leaflet.js?v=20261014-26"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="spots.js?v=20261014-25"></script>
+<script src="spots.js?v=20261014-26"></script>
 <script>
 const SL=[9,13,17],R=LANG=='de'?['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW']:LANG=='en'?['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW']:['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];const LOC=T('nl-NL','en-GB','de-DE');
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -173,9 +173,10 @@ function openForm(k){const s=spots[k];formT=Date.now();const now=new Date(Date.n
  const sel=k=>`<label for="f_${k}">${PKN[k]()}</label><select id="f_${k}" name="${k}"><option value="">–</option>${PK[k].map(p=>`<option value="${p[0]}">${esc(T(p[1],p[2],p[3]))}</option>`).join('')}</select>`;
  document.getElementById('rep').innerHTML=`<form id="rf" onsubmit="sendForm(event,${k})"><h4>✍️ ${T('Ervaring delen','Share your session','Erfahrung teilen')} – ${esc(s.naam)}</h4>
  <p class="info" style="color:var(--m)">${T('Alles is optioneel; vul in wat je wilt (minstens één veld).','Everything is optional; fill in what you like (at least one field).','Alles ist optional; fülle aus, was du möchtest (mindestens ein Feld).')} ${T('Je verslag is direct openbaar zichtbaar op deze site. Vul geen e-mail, telefoonnummer of andere persoonsgegevens in.','Your report is publicly visible on this site right away. Do not enter an email, phone number or other personal data.','Dein Bericht ist sofort öffentlich auf dieser Seite sichtbar. Gib keine E-Mail, Telefonnummer oder andere persönliche Daten ein.')}</p>
- ${i('naam',T('Naam of bijnaam (optioneel)','Name or nickname (optional)','Name oder Spitzname (optional)'),'',40)}
- <label for="f_sessie">${T('Datum en tijd sessie','Date and time of session','Datum und Uhrzeit der Session')}</label><input id="f_sessie" name="sessie" type="datetime-local" required value="${now}" max="${now}">
  <label for="f_hoe">${T('Hoe ging het?','How did it go?','Wie lief es?')}</label><textarea id="f_hoe" name="hoe_ging_het" rows="4" maxlength="1500"></textarea>
+ <label for="f_rt">${T('Beoordeling sessie (0–5)','Session rating (0–5)','Bewertung der Session (0–5)')}</label><select id="f_rt" name="beoordeling">${[5,4.5,4,3.5,3,2.5,2,1.5,1,0.5,0].map(v=>`<option value="${v}"${v==3?' selected':''}>${'★'.repeat(Math.floor(v))}${v%1?'½':''} ${v}</option>`).join('')}</select>
+ ${i('naam',T('Naam of bijnaam (optioneel)','Name or nickname (optional)','Name oder Spitzname (optional)'),'',40)}
+ <details><summary style="color:var(--a);margin:10px 0;cursor:pointer">${T('+ Meer details (optioneel)','+ More details (optional)','+ Mehr Details (optional)')}</summary> <label for="f_sessie">${T('Datum en tijd sessie','Date and time of session','Datum und Uhrzeit der Session')}</label><input id="f_sessie" name="sessie" type="datetime-local" value="${now}" max="${now}">
  <fieldset><legend>${T('Omstandigheden','Conditions','Bedingungen')}</legend><div class="g2">${sel('golven')}${sel('wind')}${sel('stroming')}${sel('drukte')}</div>
  <label for="f_omt">${T('Toelichting','Details','Details')}</label><textarea id="f_omt" name="omstandigheden_tekst" rows="2" maxlength="500"></textarea></fieldset>
  <fieldset><legend>${T('Materiaal','Gear','Material')}</legend><div class="g2">${i('merk_board',T('Merk board','Board brand','Board-Marke'))}${i('type_board',T('Type/model board','Board type/model','Board-Typ/-Modell'))}</div>${i('board',T('Board maat/volume','Board size/volume','Board-Größe/Volumen'),T('bv. 4\'6 foilboard 40 l','e.g. 4\'6 foilboard 40 l','z. B. 4\'6 Foilboard 40 l'))}
@@ -184,12 +185,12 @@ function openForm(k){const s=spots[k];formT=Date.now();const now=new Date(Date.n
  <fieldset><legend>${T('Batterij(en)','Battery/batteries','Akku(s)')}</legend><div class="g2">${i('batterij_type','Type')}${i('batterij_capaciteit',T('Capaciteit','Capacity','Kapazität'),'Wh / Ah')}
  ${i('batterij_aantal',T('Aantal gebruikt','Number used','Anzahl genutzt'),'',3,'number')}${i('gebruiksduur',T('Gebruiksduur','Runtime','Laufzeit'),T('bv. 25 min','e.g. 25 min','z. B. 25 min'))}</div></fieldset>
  <label for="f_oef">${T('Wat oefen je?','What are you practising?','Was übst du?')}</label><input id="f_oef" name="oefenen" maxlength="300">
- <label for="f_rt">${T('Beoordeling sessie (0–5)','Session rating (0–5)','Bewertung der Session (0–5)')}</label><select id="f_rt" name="beoordeling">${[5,4.5,4,3.5,3,2.5,2,1.5,1,0.5,0].map(v=>`<option value="${v}"${v==3?' selected':''}>${'★'.repeat(Math.floor(v))}${v%1?'½':''} ${v}</option>`).join('')}</select>
+</details>
  <div class="hp" aria-hidden="true"><label>Website<input name="website" tabindex="-1" autocomplete="off"></label></div>
  <p id="rmsg"></p><button class="btn" type="submit">${T('Versturen','Send','Senden')}</button> <button class="btn btn2" type="button" onclick="openS(${k})">${T('Annuleren','Cancel','Abbrechen')}</button></form>`;
- document.getElementById('f_naam').focus({preventScroll:true});}
+ document.getElementById('f_hoe').focus({preventScroll:true});}
 async function sendForm(ev,k){ev.preventDefault();const fm=ev.target,b=fm.querySelector('button[type=submit]'),msg=document.getElementById('rmsg');
- const d=Object.fromEntries(new FormData(fm).entries());const filled=Object.keys(d).some(x=>!['sessie','beoordeling','website'].includes(x)&&String(d[x]).trim());if(!filled){msg.className='err';msg.textContent=T('Vul minstens één veld in.','Fill in at least one field.','Fülle mindestens ein Feld aus.');return}if(!String(d.hoe_ging_het||'').trim())d.hoe_ging_het='–';d.spot=spots[k].naam;d.sessie=new Date(d.sessie).toISOString();d.elapsed=Date.now()-formT;d.taal=LANG;
+ const d=Object.fromEntries(new FormData(fm).entries());const filled=Object.keys(d).some(x=>!['sessie','beoordeling','website'].includes(x)&&String(d[x]).trim());if(!filled){msg.className='err';msg.textContent=T('Vul minstens één veld in.','Fill in at least one field.','Fülle mindestens ein Feld aus.');return}if(!String(d.hoe_ging_het||'').trim())d.hoe_ging_het='–';d.spot=spots[k].naam;d.sessie=(d.sessie?new Date(d.sessie):new Date()).toISOString();d.elapsed=Date.now()-formT;d.taal=LANG;
  const E={too_fast:T('Iets te snel verstuurd, probeer het over een paar seconden opnieuw.','Sent a bit too fast, try again in a few seconds.','Etwas zu schnell gesendet, versuche es in ein paar Sekunden erneut.'),rate_spot:T('Er zijn net veel verslagen voor deze spot geplaatst; probeer het later.','Many reports were just posted for this spot; try later.','Gerade viele Berichte für diesen Spot; versuche es später.'),rate_day:T('Daglimiet bereikt; probeer het morgen.','Daily limit reached; try tomorrow.','Tageslimit erreicht; versuche es morgen.'),bad_date:T('Controleer datum en tijd.','Check date and time.','Prüfe Datum und Uhrzeit.')};
  b.disabled=true;msg.className='';msg.textContent=T('Versturen…','Sending…','Wird gesendet…');
  try{const r=await fetch(REPORTS_URL,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)});const j=await r.json();
