@@ -11,11 +11,12 @@ concurrency: foilassist-data
 jobs:
   fetch:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
-      - run: python3 foilassist/tools/fetch_data.py
+      - run: python3 -u foilassist/tools/fetch_data.py
       - run: |
           git config user.name WillyWortel1
           git config user.email WillyWortel1@users.noreply.github.com
           git add foilassist/data.json
-          git diff --cached --quiet || (git commit -m "Foilassist data update" && git pull --rebase && git push)
+          git diff --cached --quiet || (git commit -m "Foilassist data update" && git pull --rebase -X theirs && git push)
