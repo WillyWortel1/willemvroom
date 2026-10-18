@@ -22,4 +22,16 @@
     <loc>https://willemvroom.nl/flipper2/</loc>
     <lastmod>2026-10-18</lastmod>
   </url>
+  <url>
+    <loc>https://willemvroom.nl/hypersail/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/hypersail/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/hypersail/en/"/>
+  </url>
+  <url>
+    <loc>https://willemvroom.nl/hypersail/en/</loc>
+    <lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/hypersail/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/hypersail/en/"/>
+  </url>
 </urlset>
