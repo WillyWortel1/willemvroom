@@ -5,3 +5,5 @@
 :root{--color-subtle-text:#71717a}
 html.dark{--color-subtle-text:#a1a1aa}
 .text-subtle{color:var(--color-subtle-text)}
+
+.werk-nr{color:#d62828}
