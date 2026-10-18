@@ -104,6 +104,17 @@ const sfx={
  mission(){[523,659,784,659,784,1047,1319].forEach((f,i)=>tone(f,.1,'square',.06,0,i*.08));},
  jackpot(){[1047,1319,1568,2093,1568,2093].forEach((f,i)=>tone(f,.11,'square',.06,0,i*.09));noise(.4,.12);},
  skill(){[1568,1760,2093,2637].forEach((f,i)=>tone(f,.08,'square',.05,0,i*.06));},
+ latch(){tone(90,.14,'square',.09,-35);noise(.07,.2);tone(420,.06,'square',.05,-250,.05);},
+ release(){tone(1400,.05,'square',.04);noise(.05,.16);tone(320,.2,'triangle',.09,-200,.03);noise(.08,.12,.12);},
+ ride(d){d=d||1.7;if(!canPlay())return;try{const t=actx.currentTime+.01; // lier/kraan-gezoem + rail-gerommel
+   const o=actx.createOscillator(),g1=actx.createGain(),g=actx.createGain(),lfo=actx.createOscillator(),lg=actx.createGain();nodeCount+=5;
+   o.type='sawtooth';o.frequency.setValueAtTime(55,t);o.frequency.linearRampToValueAtTime(100,t+d*.4);o.frequency.linearRampToValueAtTime(80,t+d);
+   lfo.type='square';lfo.frequency.setValueAtTime(11,t);lfo.frequency.linearRampToValueAtTime(19,t+d*.4);g1.gain.value=.65;lg.gain.value=.35;lfo.connect(lg);lg.connect(g1.gain);
+   g.gain.setValueAtTime(.0001,t);g.gain.linearRampToValueAtTime(.06,t+.08);g.gain.setValueAtTime(.06,t+d-.12);g.gain.linearRampToValueAtTime(.0001,t+d);
+   o.connect(g1);g1.connect(g);g.connect(master);o.start(t);lfo.start(t);o.stop(t+d+.05);lfo.stop(t+d+.05);
+   const sr=actx.sampleRate,n=Math.floor(sr*d),buf=actx.createBuffer(1,n,sr),a=buf.getChannelData(0),tick=Math.floor(sr/16);let v=0;
+   for(let i=0;i<n;i++){v=v*.96+(Math.random()*2-1)*.04;const env=Math.min(1,i/(sr*.06),(n-i)/(sr*.1));a[i]=v*5*env*((i%tick)<sr*.008?2.6:1);}
+   const s=actx.createBufferSource(),g2=actx.createGain();s.buffer=buf;g2.gain.value=.28;s.connect(g2);g2.connect(master);s.start(t);nodeCount+=2;}catch(e){}},
  level(){[262,330,392,523,392,523,659,784,1047].forEach((f,i)=>tone(f,.11,'square',.06,0,i*.09));}
 };
 const bMute=document.getElementById('bMute');
@@ -125,8 +136,11 @@ seg(10,140,10,610);seg(290,140,290,560);seg(268,150,268,610,{r:1});
 const gate=seg(268,140,290,118,{oneway:true,r:1,kind:'gate'});{const ex=gate.bx-gate.ax,ey=gate.by-gate.ay,l=Math.hypot(ex,ey);gate.nx=ey/l;gate.ny=-ex/l;}
 seg(40,150,40,240,{r:2,kind:'guide'});seg(220,150,220,294,{r:2,kind:'guide'});
 [92,124,156,188].forEach(x=>seg(x,38,x,62,{r:2,mat:M.post,kind:'post'}));
-// KRAAN-ingang (ramp): opening in de linkerwand onder de orbit; de mini-flipper en de rechterflipper mikken erop
-const RAMP={y0:252,y1:312,x1:34,vx:-250,k:1.3,lx:20,ly:282,ax:40,ay:282};
+// KRAAN-ingang (v2): zichtbare mond in het speelveld links, open naar de flippers; de bal moet er omhoog in
+const RAMP={o:[40,244],d:[100,240],w:50,len:18,a0:-16,a1:10,v:220};
+{const r=RAMP,l=Math.hypot(r.d[0],r.d[1]);r.d=[r.d[0]/l,r.d[1]/l];r.n=[r.d[1],-r.d[0]];const O=r.o,D=r.d,N=r.n,P=(a,b)=>[O[0]+D[0]*a+N[0]*b,O[1]+D[1]*a+N[1]*b];
+ r.P=P;r.c=P(-4,r.w/2); // middelpunt achterin de mond: hier begint de kraanbaan
+ const a=P(0,0),b=P(r.len,0),c=P(0,r.w),e=P(r.len,r.w);seg(a[0],a[1],b[0],b[1],{r:2,kind:'guide'});seg(c[0],c[1],e[0],e[1],{r:2,kind:'guide'});}
 // NIEUW in II: geleider onder de KRAAN-ingang stuurt de linker orbit naar de linker inlaan (in I viel een volle lancering via de orbit in de uitloop)
 {const d=seg(11,322,34,346,{r:2,kind:'guide',oneway:true});const ex=d.bx-d.ax,ey=d.by-d.ay,l=Math.hypot(ex,ey);d.nx=ey/l;d.ny=-ex/l;} // eenrichting: van onderen (kickback) kan de bal erdoor
 // inlaan: geleider loopt RAAKLIJNIG over de scharnierkap (zelfde als FLIPPER! I)
@@ -267,18 +281,24 @@ function atPl(b){return b.on&&!b.ride&&b.x>PLX0&&b.y>PLY-R-6;}
 function plBall(){for(const b of balls)if(atPl(b))return b;return null;}
 function atPlunger(){return atPl(ball);}
 // KRAAN-rit: bal verlaat het speelveld en rolt over de kraan naar de linker inlaan
-const RPATH=[[22,282],[24,150],[30,112],[50,96],[70,104],[78,128],[72,200],[60,280],[46,336],[42,358]];
+// v2: kraanbaan loopt van de ingang links omhoog, langs de rand over de boog en rechts omlaag; de bal hangt aan een kraan-kat
+const RPATH=(()=>{const P=[],q=(a,b,c,n)=>{for(let i=1;i<=n;i++){const t=i/n,u=1-t;P.push([u*u*a[0]+2*u*t*b[0]+t*t*c[0],u*u*a[1]+2*u*t*b[1]+t*t*c[1]]);}};
+  const m=RAMP.c,m2=[m[0]-RAMP.d[0]*24,m[1]-RAMP.d[1]*24];P.push(m);P.push(m2);q(m2,[24,m2[1]-20],[24,140],12);
+  const a1=2*Math.PI-0.6;for(let i=0;i<=48;i++){const a=Math.PI+(a1-Math.PI)*i/48;P.push([AC.x+126*Math.cos(a),AC.y+126*Math.sin(a)]);}
+  const e=P[P.length-1];q(e,[258,e[1]+(258-e[0])*0.825/0.565],[258,128],8);for(let y=140;y<=262;y+=12)P.push([258,y]);q([258,262],[258,292],[240,296],8);return P;})();
+const RIDE=1.7;
 const RLEN=(()=>{let l=0;for(let i=1;i<RPATH.length;i++)l+=Math.hypot(RPATH[i][0]-RPATH[i-1][0],RPATH[i][1]-RPATH[i-1][1]);return l;})();
 function rampPos(u){let d=u*RLEN;for(let i=1;i<RPATH.length;i++){const a=RPATH[i-1],b=RPATH[i],l=Math.hypot(b[0]-a[0],b[1]-a[1]);if(d<=l||i===RPATH.length-1){const k=Math.min(1,d/l);return [a[0]+(b[0]-a[0])*k,a[1]+(b[1]-a[1])*k];}d-=l;}return RPATH[RPATH.length-1];}
-function inRampMouth(x,y,vx,vy){const r=RAMP;return y>r.y0&&y<r.y1&&x<r.x1&&vx<r.vx&&-vy<-vx*r.k;}
-const rampLog=[];function enterRamp(b){if(DEBUG&&rampLog.length<200)rampLog.push([+b.x.toFixed(0),+b.y.toFixed(0),+b.vx.toFixed(0),+b.vy.toFixed(0),+(simT-lastFlipT).toFixed(2),lastFlip]);b.ride={u:0};ramps++;add(2000,1000);sfx.ramp();burst(b.x,b.y,'#ffd23f',16);
+function rideEase(u){return u*u*(3-2*u)*0.4+u*0.6;}
+function inRampMouth(x,y,vx,vy){const r=RAMP,dx=x-r.o[0],dy=y-r.o[1],a=dx*r.d[0]+dy*r.d[1],b=dx*r.n[0]+dy*r.n[1];return a>r.a0&&a<r.a1&&b>R-2&&b<r.w-R+2&&vx*r.d[0]+vy*r.d[1]<-r.v;}
+const rampLog=[];function enterRamp(b){if(DEBUG&&rampLog.length<200)rampLog.push([+b.x.toFixed(0),+b.y.toFixed(0),+b.vx.toFixed(0),+b.vy.toFixed(0),+(simT-lastFlipT).toFixed(2),lastFlip]);b.ride={u:0};ramps++;add(2000,1000);sfx.latch();sfx.ramp();sfx.ride(RIDE);burst(b.x,b.y,'#ffd23f',16);
   if(mb){jackpots++;add(10000*level,2000);sfx.jackpot();message('JACKPOT!',2);}else message('KRAAN!',1.2);
   if(simT-comboT<4){comboT=-99;add(5000,1000);if(!mb)message('COMBO!',1.5);advance('combo');}
   advance('ramp');}
 function sensorsBall(b,dt){
   ball=b;
-  if(b.ride){b.ride.u+=dt/0.95;const p=rampPos(Math.min(1,b.ride.u));b.x=p[0];b.y=p[1];
-    if(b.ride.u>=1){b.ride=null;const e=RPATH[RPATH.length-1];b.x=e[0];b.y=e[1];b.vx=0;b.vy=320;b.stuckT=0;b.p0=null;}b.py=undefined;return;}
+  if(b.ride){b.ride.u+=dt/RIDE;const p=rampPos(rideEase(Math.min(1,b.ride.u)));b.x=p[0];b.y=p[1];
+    if(b.ride.u>=1){b.ride=null;const e=RPATH[RPATH.length-1];b.x=e[0];b.y=e[1];b.vx=-50;b.vy=60;sfx.release();burst(e[0],e[1],'#ffd23f',10);b.stuckT=0;b.p0=null;}b.py=undefined;return;}
   // rollover-banen (+ skill shot)
   lanes.forEach((l,i)=>{const ins=Math.abs(b.x-l.x)<10&&b.y>40&&b.y<62;if(ins&&!b.lane[i]&&!tilted){
       if(!l.lit){l.lit=true;add(250,200);sfx.lane();burst(l.x,50,'#7aff7a',6);}
@@ -408,22 +428,25 @@ function buildStatic(){
   c.globalAlpha=.18;for(let i=0;i<12;i++){c.fillStyle=i%2?'#ffd23f':'#000';c.beginPath();c.moveTo(70+i*12,342);c.lineTo(82+i*12,342);c.lineTo(76+i*12,354);c.lineTo(64+i*12,354);c.fill();}c.globalAlpha=1;
   c.font='bold 14px monospace';c.textAlign='center';c.fillStyle='rgba(255,63,164,.22)';c.fillText('BOUWPLAATS II',139,372);
   c.font='bold 9px monospace';c.fillStyle='rgba(122,255,255,.35)';c.fillText('BONK!',130,286);
-  c.fillStyle='rgba(255,210,63,.3)';c.fillText('SPINNER',244,190);c.fillText('ORBIT',25,180);
-  c.restore();
-  // KRAAN (ramp) als vakwerk-giek, ligt boven het speelveld
-  c.save();c.globalAlpha=.55;c.strokeStyle='#ffd23f';c.lineWidth=1;c.shadowColor='#ffd23f';c.shadowBlur=4;
-  for(const off of [-6,6]){c.beginPath();for(let i=0;i<=40;i++){const p=rampPos(i/40),q=rampPos(Math.min(1,i/40+.01)),dx=q[0]-p[0],dy=q[1]-p[1],l=Math.hypot(dx,dy)||1;const X=p[0]-dy/l*off,Y=p[1]+dx/l*off;i?c.lineTo(X,Y):c.moveTo(X,Y);}c.stroke();}
-  c.globalAlpha=.3;for(let i=0;i<=40;i++){const p=rampPos(i/40),q=rampPos(Math.min(1,i/40+.01)),dx=q[0]-p[0],dy=q[1]-p[1],l=Math.hypot(dx,dy)||1;const s=i%2?1:-1;
-    c.beginPath();c.moveTo(p[0]+dy/l*6,p[1]-dx/l*6);c.lineTo(p[0]-dy/l*6+dx/l*4*s,p[1]+dx/l*6+dy/l*4*s);c.stroke();}
+  c.fillStyle='rgba(255,210,63,.35)';c.fillText('ORBIT',25,268);c.font='bold 7px monospace';c.fillText('SPINNER',236,224);
   c.restore();
   for(const s of SEGS){if(s.kind==='target'||s.hidden)continue;const col=s.kind==='sling'?'#7affff':s.kind==='guide'||s.kind==='post'?'#ff3fa4':s.kind==='gate'?'#ffd23f':'#7a5cff';glowLine(c,s.ax,s.ay,s.bx,s.by,col,s.r?Math.max(2,s.r*1.6):2);}
   c.shadowBlur=0;
+  // KRAANBAAN (v2): vakwerk-rail langs de rand, ligt boven het speelveld
+  {const N=160,pt=i=>{const p=rampPos(i/N),q=rampPos(Math.min(1,i/N+.004)),r=rampPos(Math.max(0,i/N-.004)),dx=q[0]-r[0],dy=q[1]-r[1],l=Math.hypot(dx,dy)||1;return [p[0],p[1],-dy/l,dx/l];};
+   c.save();c.lineCap='round';
+   c.globalAlpha=.85;c.strokeStyle='rgba(20,14,4,.9)';c.lineWidth=12;c.beginPath();for(let i=0;i<=N;i++){const p=pt(i);i?c.lineTo(p[0],p[1]):c.moveTo(p[0],p[1]);}c.stroke();
+   c.globalAlpha=.45;c.strokeStyle='#ffd23f';c.lineWidth=1;for(let i=0;i<=N;i++){const p=pt(i),s=i%2?1:-1,[tx,ty]=[p[3],-p[2]];c.beginPath();c.moveTo(p[0]+p[2]*4.5,p[1]+p[3]*4.5);c.lineTo(p[0]-p[2]*4.5+tx*3*s,p[1]-p[3]*4.5+ty*3*s);c.stroke();}
+   c.globalAlpha=.95;c.lineWidth=1.6;c.shadowColor='#ffd23f';c.shadowBlur=5;for(const off of [-5,5]){c.beginPath();for(let i=0;i<=N;i++){const p=pt(i);const X=p[0]+p[2]*off,Y=p[1]+p[3]*off;i?c.lineTo(X,Y):c.moveTo(X,Y);}c.stroke();}
+   c.shadowBlur=0;c.fillStyle='#ffd23f';for(let i=12;i<N;i+=22){const p=pt(i);c.globalAlpha=.6;c.fillRect(p[0]-2,p[1]-2,4,4);}
+   const e=RPATH[RPATH.length-1];c.globalAlpha=.9;c.fillStyle='#ffd23f';c.beginPath();c.arc(e[0],e[1]-2,3,0,7);c.fill();c.restore();}
   c.fillStyle='rgba(255,210,63,.08)';c.fillRect(269,150,20,410);
   c.font='bold 7px monospace';c.fillStyle='rgba(255,210,63,.6)';c.save();c.translate(282,400);c.rotate(-Math.PI/2);c.fillText('LANCEER',0,0);c.restore();
   c.fillStyle='rgba(255,120,200,.5)';c.font='bold 7px monospace';c.textAlign='center';c.fillText('KICK',20,560);
-  c.fillStyle='rgba(255,210,63,.14)';c.fillRect(11,RAMP.y0,RAMP.x1-14,RAMP.y1-RAMP.y0);
-  c.strokeStyle='#ffd23f';c.lineWidth=2;c.shadowColor='#ffd23f';c.shadowBlur=6;c.beginPath();c.moveTo(11,RAMP.y0);c.lineTo(RAMP.x1-2,RAMP.y0);c.moveTo(11,RAMP.y1);c.lineTo(RAMP.x1-2,RAMP.y1);c.stroke();c.shadowBlur=0;
-  c.fillStyle='rgba(255,210,63,.8)';c.font='bold 7px monospace';c.save();c.translate(RAMP.lx,RAMP.ly);c.rotate(-Math.PI/2);c.fillText('KRAAN',0,0);c.restore();
+  {const r=RAMP,P=r.P,a=P(-6,0),b=P(r.len,0),e=P(r.len,r.w),f=P(-6,r.w);c.fillStyle='rgba(255,210,63,.16)';c.beginPath();c.moveTo(a[0],a[1]);c.lineTo(b[0],b[1]);c.lineTo(e[0],e[1]);c.lineTo(f[0],f[1]);c.fill();
+   c.strokeStyle='#ffd23f';c.lineWidth=2;c.shadowColor='#ffd23f';c.shadowBlur=8;c.beginPath();c.moveTo(b[0],b[1]);c.lineTo(e[0],e[1]);c.stroke();c.shadowBlur=0;
+   const t=P(-3,r.w/2),u=P(r.len-2,r.w/2-6),v=P(r.len-2,r.w/2+6);c.fillStyle='#ffd23f';c.beginPath();c.moveTo(t[0],t[1]);c.lineTo(u[0],u[1]);c.lineTo(v[0],v[1]);c.fill();
+   const L=P(r.len+9,r.w/2);c.save();c.translate(L[0],L[1]);c.rotate(Math.atan2(r.n[1],r.n[0]));c.fillStyle='rgba(255,210,63,.9)';c.font='bold 8px monospace';c.textAlign='center';c.fillText('KRAAN',0,3);c.restore();}
 }
 function drawFlipper(f){const [tx,ty]=flipTip(f),ang=f.a,nx=-Math.sin(ang),ny=Math.cos(ang),col=f===FU?'#3fd8ff':'#ff3fa4';
   ctx.fillStyle=f.held&&!tilted?(f===FU?'#b0f2ff':'#ff9ad4'):col;ctx.shadowColor=col;ctx.shadowBlur=10;ctx.beginPath();
@@ -441,7 +464,7 @@ function render(){
   // missielampen
   MISSIONS.forEach((m,i)=>{const x=89+i*20,on=i<mi||(i===mi&&blink);lamp(x,312,5,on,i<mi?'#7affff':'#ff3fa4');ctx.fillStyle=i===mi?'#ffd0f0':'rgba(122,255,255,.55)';ctx.fillText(m.lamp,x,327);});
   // KRAAN-pijl
-  const hot=mode==='play'&&(mb||curM().id==='ramp'||curM().id==='combo'&&simT-comboT<4);lamp(RAMP.ax,RAMP.ay,4,hot&&blink||mode==='play'&&simT-comboT<4,mb?'#ffffff':'#ffd23f');
+  const hot=mode==='play'&&(mb||curM().id==='ramp'||curM().id==='combo'&&simT-comboT<4);{const q=RAMP.P(RAMP.len+18,RAMP.w/2);RAMP.ax=q[0];RAMP.ay=q[1];}lamp(RAMP.ax,RAMP.ay,4,hot&&blink||mode==='play'&&simT-comboT<4,mb?'#ffffff':'#ffd23f');
   lamp(20,500,4,kickback,'#ffd23f');
   lamp(139,388,5,mode==='play'&&launched&&simT<saveUntil&&!tilted&&blink||mode==='play'&&!launched,'#7affff');
   ctx.fillStyle='rgba(122,255,255,.55)';ctx.fillText('BAL GERED',139,402);
@@ -460,7 +483,15 @@ function render(){
   for(const f of FLIPS)drawFlipper(f);
   for(const p of parts){ctx.globalAlpha=Math.min(1,p.t*2.5);ctx.fillStyle=p.c;ctx.fillRect(p.x-1,p.y-1,2,2);}ctx.globalAlpha=1;
   if(mode==='title')drawBall({x:279,y:PLY-R});else for(const b of balls)if(b.on&&!b.ride)drawBall(b);
-  for(const b of balls)if(b.on&&b.ride)drawBall(b);
+  for(const b of balls)if(b.on&&b.ride){const u=rideEase(Math.min(1,b.ride.u)),p=rampPos(u),q=rampPos(Math.min(1,u+.01)),r=rampPos(Math.max(0,u-.01)),dx=q[0]-r[0],dy=q[1]-r[1],l=Math.hypot(dx,dy)||1,tx=dx/l,ty=dy/l;
+    // binnenwaarts (naar het midden van de tafel) hangt de bal aan een kabel
+    let nx=-ty,ny=tx;if((150-p[0])*nx+(300-p[1])*ny<0){nx=-nx;ny=-ny;}
+    const hang=11*Math.min(1,b.ride.u/0.08,(1-b.ride.u)/0.1),sw=Math.sin(simT*9)*2*Math.min(1,hang/11),bx=p[0]+nx*hang+tx*sw,by=p[1]+ny*hang+ty*sw;
+    ctx.strokeStyle='#cfd3dc';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(p[0],p[1]);ctx.lineTo(bx,by);ctx.stroke();
+    drawBall({x:bx,y:by,ride:true});
+    ctx.save();ctx.translate(p[0],p[1]);ctx.rotate(Math.atan2(ty,tx));ctx.fillStyle='#ffd23f';ctx.shadowColor='#ffd23f';ctx.shadowBlur=8;ctx.fillRect(-8,-4,16,8);ctx.shadowBlur=0;
+    ctx.fillStyle='#2a1a00';ctx.fillRect(-6,-2,12,4);ctx.fillStyle='#ffd23f';ctx.font='bold 4px monospace';ctx.fillText('KAT',0,1.5);
+    ctx.fillStyle='#444';for(const wx of [-6,6]){ctx.beginPath();ctx.arc(wx,-4,1.8,0,7);ctx.arc(wx,4,1.8,0,7);ctx.fill();}ctx.restore();}
   ctx.setTransform(1,0,0,1,0,0);
   drawDMD();
   T();
@@ -510,7 +541,7 @@ if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held
     balls:balls.filter(b=>b.on).map(b=>({x:+b.x.toFixed(1),y:+b.y.toFixed(1),ride:!!b.ride,auto:b.auto})),alive:alive(),feedQ:feedQ,mb:mb,level:level,mi:mi,mission:curM().id,prog:prog,need:curM().need(level),done:missionsDone,ramps:ramps,jackpots:jackpots,skillLane:skillLane,skillArmed:skillArmed,skills:skills,charge:plCharge,
     fps:fpsLog.length?fpsLog.length/fpsLog.reduce((a,b)=>a+b,0):0,muted:muted}),
   place:(x,y,vx,vy)=>{balls=[ball];ball.x=x;ball.y=y;ball.vx=vx||0;ball.vy=vy||0;ball.on=true;ball.ride=null;ball.auto=false;ball.py=undefined;feedQ=0;mb=false;},setLaunched:(v,save)=>{launched=v;lastLaunch=simT;saveUntil=simT+(save||0);},
-  setMission:(m,p,l)=>{mi=m;prog=p||0;if(l)level=l;dmdKey='';},advance:(id,n)=>advance(id,n),toRamp:()=>{const b=balls.find(b=>b.on&&!b.ride&&!atPl(b));if(b){b.x=60;b.y=282;b.vx=-700;b.vy=-60;}return !!b;},multiball:n=>startMultiball(n),
+  setMission:(m,p,l)=>{mi=m;prog=p||0;if(l)level=l;dmdKey='';},advance:(id,n)=>advance(id,n),toRamp:()=>{const b=balls.find(b=>b.on&&!b.ride&&!atPl(b));if(b){const p=RAMP.P(14,RAMP.w/2);b.x=p[0];b.y=p[1];b.vx=-RAMP.d[0]*700;b.vy=-RAMP.d[1]*700;}return !!b;},rampShot:()=>{const p=RAMP.P(14,RAMP.w/2);return [p[0],p[1],-RAMP.d[0]*700,-RAMP.d[1]*700];},multiball:n=>startMultiball(n),
   // rauwe natuurkunde: bal op (x,y) met snelheid, optioneel rechts vasthouden vanaf tijd tHold; geeft baan en of de KRAAN geraakt werd
   shot:(x,y,vx,vy,tHold,secs,fl)=>{noNudge=true;const sv=balls;balls=[mkBall(x,y)];ball=balls[0];ball.vx=vx;ball.vy=vy;const F=fl==='L'?FL:fl==='U'?FU:FR;for(const f of FLIPS){f.held=false;f.a=f.rest;f.w=0;}
     const path=[];let hit=null,lane0=-1;for(let i=0;i<secs*480;i++){if(i===Math.round(tHold*480)){F.held=true;if(F===FR)FU.held=true;}substep();if(i%24===0)path.push([+ball.x.toFixed(0),+ball.y.toFixed(0)]);
@@ -548,7 +579,7 @@ if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held
         if(cav||belowLine())res.trapped.push([+ball.x.toFixed(1),+ball.y.toFixed(1),+x.toFixed(1),+y.toFixed(1)]);
         if(Math.hypot(ball.vx,ball.vy)<5&&!on&&!atPl(ball))res.still.push([+ball.x.toFixed(1),+ball.y.toFixed(1)]);}}
     noNudge=false;for(const f of FLIPS)f.held=false;[mode,score,launched,saveUntil]=sv;placeOnPlunger();return res;},speed:n=>{simSpeed=n;},ballNo:n=>{ballNo=n;},
-  audio:()=>({state:actx?actx.state:'none',gain:master?master.gain.value:null,nodes:nodeCount}),sfxAll:()=>{const n0=nodeCount;for(const k in sfx)sfx[k]();return nodeCount-n0;}};
+  audio:()=>({state:actx?actx.state:'none',gain:master?master.gain.value:null,nodes:nodeCount}),sfx:k=>{const n0=nodeCount;sfx[k]();return nodeCount-n0;},toggleMute:()=>toggleMute(),sfxAll:()=>{const n0=nodeCount;for(const k in sfx)sfx[k]();return nodeCount-n0;}};
 
 resize();requestAnimationFrame(loop);
 })();
