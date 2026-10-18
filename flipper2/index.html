@@ -162,7 +162,7 @@ const bumpers=[[95,150],[183,150],[139,200]].map(p=>{const c={x:p[0],y:p[1],r:15
 function mkFlip(px,py,rest,up,side,L,r1,r2){return {px:px,py:py,a:rest,rest:rest,up:up,w:0,L:L||50,r1:r1||9,r2:r2||5,side:side,held:false};}
 const FL=mkFlip(81,490,0.5,-0.45,-1),FR=mkFlip(197,490,Math.PI-0.5,Math.PI+0.45,1);
 // derde flipper: mini-flipper rechtsboven onder de spinnerbaan, vuurt mee met rechts en mikt op de KRAAN
-const FU=mkFlip(261,330,Math.PI-0.45,Math.PI+0.5,1,34,7,4);FU.open=true;
+const FU=mkFlip(261,330,Math.PI-0.45,Math.PI+0.5,1,34,7,4);FU.open=true;FU.pressT=-9; // mini-flipper: slaat alleen kort uit (kan de bal niet vasthouden)
 const FLIPS=[FL,FR,FU];
 // dichte holte achter/onder elke hoofdflipper
 for(const f of [FL,FR]){CIRC.push({x:f.px,y:f.py,r:f.r1,mat:M.post,kind:'pivot'});
@@ -234,7 +234,7 @@ function hitFlip(f){
   ball.x=qx+nx*rr;ball.y=qy+ny*rr;
   const cx=qx+nx*rad,cy=qy+ny*rad;resolve(nx,ny,-f.w*(cy-f.py),f.w*(cx-f.px),M.flip);
 }
-function flipUpdate(f,h){const up=f.held&&!tilted,target=up?f.up:f.rest,sp=up?30:20,dir=Math.sign(target-f.a);
+function flipUpdate(f,h){const up=f.held&&!tilted&&(f!==FU||simT-FU.pressT<0.3),target=up?f.up:f.rest,sp=up?30:20,dir=Math.sign(target-f.a);
   if(Math.abs(target-f.a)<1e-4){f.w=0;return;}f.w=dir*sp;f.a+=f.w*h;if((dir>0&&f.a>target)||(dir<0&&f.a<target)){f.a=target;}}
 function collideAll(){
   for(const s of SEGS){if(s.kind==='target'&&!s.up)continue;const imp=hitSeg(s);if(imp<0)continue;
@@ -316,10 +316,10 @@ function sensorsBall(b,dt){
     if(skillArmed&&!tilted){skills++;add(5000*level,1000);sfx.skill();message('SKILL SHOT!',2);burst(b.x,b.y,'#ffffff',24);}skillArmed=false;}
   if(b.auto&&!inLane(b))b.auto=false;
   // vastzitten
-  const sp=Math.hypot(b.vx,b.vy),cradle=(FL.held&&Math.abs(b.x-110)<35&&b.y>440)||(FR.held&&Math.abs(b.x-168)<35&&b.y>440)||(FU.held&&Math.hypot(b.x-FU.px,b.y-FU.py)<FU.L+12);
+  const sp=Math.hypot(b.vx,b.vy),cradle=(FL.held&&Math.abs(b.x-110)<35&&b.y>440)||(FR.held&&Math.abs(b.x-168)<35&&b.y>440);if(cradle){b.cradleT=(b.cradleT||0)+dt;}else b.cradleT=0;const cradleOk=cradle&&b.cradleT<6;
   if(!b.p0)b.p0=[b.x,b.y];
   const moved=Math.hypot(b.x-b.p0[0],b.y-b.p0[1]);
-  if(b.on&&!atPl(b)&&!cradle&&!noNudge&&(sp<30||moved<4)){b.stuckT+=dt;if(b.stuckT>1.0){b.stuckT=0;stuckNudges++;b.stuckLvl=Math.min(4,b.stuckLvl+1);
+  if(b.on&&!atPl(b)&&!cradleOk&&!noNudge&&(sp<30||moved<4)){b.stuckT+=dt;if(b.stuckT>1.0){if(cradle)b.cradleT=0;b.stuckT=0;stuckNudges++;b.stuckLvl=Math.min(4,b.stuckLvl+1);
       const dx=139-b.x,k=220*b.stuckLvl;b.vx=Math.sign(dx||1)*k;b.vy=b.y>380?k*0.4:-k*0.8;b.p0=[b.x,b.y];}}
   else{b.stuckT=0;b.p0=[b.x,b.y];if(sp>200)b.stuckLvl=0;}
   b.px=b.x;b.py=b.y;
@@ -349,7 +349,7 @@ function nudge(){if(mode!=='play'||alive()===0||tilted)return;const dvx=(Math.ra
 /* ---------- invoer ---------- */
 const keysL=new Set(['ArrowLeft','KeyZ','ShiftLeft']),keysR=new Set(['ArrowRight','KeyM','ShiftRight']),keysP=new Set(['Space','ArrowDown']),keysN=new Set(['KeyN','ArrowUp']);
 const held={L:new Set(),R:new Set(),P:new Set()};
-let lastFlipT=-9,lastFlip='';function setFlip(){const l=held.L.size>0,r=held.R.size>0;if(l&&!FL.held){lastFlipT=simT;lastFlip='L';}if(r&&!FR.held){lastFlipT=simT;lastFlip='R';}if(mode==='play'&&!tilted){if(l&&!FL.held)sfx.flip();if(r&&!FR.held)sfx.flip();}FL.held=l;FR.held=r;FU.held=r;
+let lastFlipT=-9,lastFlip='';function setFlip(){const l=held.L.size>0,r=held.R.size>0;if(l&&!FL.held){lastFlipT=simT;lastFlip='L';}if(r&&!FR.held){lastFlipT=simT;lastFlip='R';}if(mode==='play'&&!tilted){if(l&&!FL.held)sfx.flip();if(r&&!FR.held)sfx.flip();}if(r&&!FU.held)FU.pressT=simT;FL.held=l;FR.held=r;FU.held=r;
   const p=held.P.size>0;if(p&&!plHeld&&mode==='play')plHeld=true;if(!p&&plHeld){plHeld=false;release();}}
 function release(){if(mode!=='play')return;const b=plBall();if(b&&!b.auto){const c=plCharge;b.vy=-(1000+1250*c);sfx.launch();if(!launched){const z=SKZ[skillLane];skillArmed=c>=z[0]&&c<=z[1];}}plCharge=0;}
 let startReq=false,pauseReq=false;
@@ -360,17 +360,29 @@ addEventListener('keydown',e=>{const c=e.code;
   if(keysL.has(c))held.L.add(c);if(keysR.has(c))held.R.add(c);if(keysP.has(c))held.P.add(c);if(keysN.has(c))nudge();
   if(c==='KeyP'||c==='Escape')pauseReq=true;if(c==='KeyG')toggleMute();setFlip();});
 addEventListener('keyup',e=>{const c=e.code;held.L.delete(c);held.R.delete(c);held.P.delete(c);setFlip();});
-addEventListener('blur',()=>{held.L.clear();held.R.clear();held.P.clear();setFlip();if(mode==='play')paused=true;});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode!=='title')paused=true;});
-// aanraken: linkerhelft = linkerflipper, rechterhelft = rechterflipper + mini-flipper (multi-touch)
-const tp=new Map();
+addEventListener('blur',()=>{releaseAll();if(mode==='play')paused=true;});
+document.addEventListener('visibilitychange',()=>{if(document.hidden){releaseAll();if(mode!=='title')paused=true;}});
+// aanraken: linkerhelft = linkerflipper, rechterhelft = rechterflipper + mini-flipper (multi-touch).
+// Touch via touch-events per identifier (iOS mist soms pointerup); bij elk touch-event wordt opgeschoond tegen e.touches.
+const tp=new Map(),tt=new Map();
 function inRect(el,e){const r=el.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;}
 function isUI(e){const el=e.target&&e.target.closest&&e.target.closest('.ui');return !!el&&inRect(el,e);}
-document.addEventListener('pointerdown',e=>{if(isUI(e))return;e.preventDefault();audio();
+function releaseAll(){tp.clear();tt.clear();held.L.clear();held.R.clear();held.P.clear();setFlip();}
+function reconcile(e){const ids=new Set();for(const t of e.touches)ids.add(t.identifier);let ch=false;for(const [id,s] of tt)if(!ids.has(id)){tt.delete(id);held[s].delete('t'+id);ch=true;}if(e.touches.length===0&&held.P.has('btn')){held.P.delete('btn');ch=true;}if(ch)setFlip();}
+document.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'||isUI(e))return;e.preventDefault();audio();
   if(paused){pauseReq=true;return;}if(mode==='title'||mode==='over'){startReq=true;return;}
   const side=e.clientX<innerWidth/2?'L':'R';tp.set(e.pointerId,side);held[side].add('p'+e.pointerId);setFlip();},{passive:false});
 const pend=e=>{const s=tp.get(e.pointerId);if(!s)return;tp.delete(e.pointerId);held[s].delete('p'+e.pointerId);setFlip();};
 document.addEventListener('pointerup',pend);document.addEventListener('pointercancel',pend);
+document.addEventListener('touchstart',e=>{reconcile(e);let fl=false;
+  for(const t of e.changedTouches){const el=document.elementFromPoint(t.clientX,t.clientY),ui=el&&el.closest&&el.closest('.ui');if(ui&&inRect(ui,t))continue;fl=true;
+    if(paused){pauseReq=true;continue;}if(mode==='title'||mode==='over'){startReq=true;continue;}
+    const side=t.clientX<innerWidth/2?'L':'R';tt.set(t.identifier,side);held[side].add('t'+t.identifier);}
+  if(fl){e.preventDefault();audio();setFlip();}},{passive:false});
+const tend=e=>{for(const t of e.changedTouches){const s=tt.get(t.identifier);if(s){tt.delete(t.identifier);held[s].delete('t'+t.identifier);}}reconcile(e);setFlip();};
+document.addEventListener('touchend',tend,{passive:false});document.addEventListener('touchcancel',tend,{passive:false});
+document.addEventListener('touchmove',e=>{reconcile(e);},{passive:true});
+addEventListener('pagehide',releaseAll);
 function uiBtn(id,down,up){const b=document.getElementById(id);b.addEventListener('pointerdown',e=>{if(!inRect(b,e))return;e.preventDefault();e.stopPropagation();audio();b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}down();});
   const u=e=>{b.classList.remove('on');if(up)up();};b.addEventListener('pointerup',u);b.addEventListener('pointercancel',u);b.addEventListener('lostpointercapture',u);
   b.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();down();if(up)up();}});}
@@ -536,7 +548,7 @@ let readyCls=null;const bL=document.getElementById('bLaunch');
 function updLaunchBtn(){const pb=balls.find(b=>b.on&&!b.auto&&!b.ride&&b.x>268&&b.y>150);const r=!!pb&&mode==='play'&&(!launched&&alive()===1||bL.classList.contains('on'));if(r!==readyCls){readyCls=r;document.body.classList.toggle('ready',r);}}
 function loop(now){const dt=Math.min(0.05,(now-last)/1000);last=now;fpsLog.push(dt);if(fpsLog.length>240)fpsLog.shift();
   for(let i=0;i<simSpeed;i++)frameUpdate(dt);updLaunchBtn();render();requestAnimationFrame(loop);}
-if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held,flipL:FL.held,flipU:FU.held,mode:mode,paused:paused,score:score,ball:ballNo,extra:extraBalls,on:ball.on,x:ball.x,y:ball.y,vx:ball.vx,vy:ball.vy,atPl:atPl(ball),launched:launched,
+if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held,flipL:FL.held,flipU:FU.held,miniUp:FU.a>FU.rest+0.45,mode:mode,paused:paused,score:score,ball:ballNo,extra:extraBalls,on:ball.on,x:ball.x,y:ball.y,vx:ball.vx,vy:ball.vy,atPl:atPl(ball),launched:launched,
     save:mode==='play'&&launched&&simT<saveUntil,mult:mult,bonus:bonus,tilt:tilt,tilted:tilted,kickback:kickback,glitches:glitches,glog:glitchLog,rlog:rampLog,stuck:stuckNudges,targets:targets.map(t=>t.up),lanes:lanes.map(l=>l.lit),hi:hiScore,msg:msg,
     balls:balls.filter(b=>b.on).map(b=>({x:+b.x.toFixed(1),y:+b.y.toFixed(1),ride:!!b.ride,auto:b.auto})),alive:alive(),feedQ:feedQ,mb:mb,level:level,mi:mi,mission:curM().id,prog:prog,need:curM().need(level),done:missionsDone,ramps:ramps,jackpots:jackpots,skillLane:skillLane,skillArmed:skillArmed,skills:skills,charge:plCharge,
     fps:fpsLog.length?fpsLog.length/fpsLog.reduce((a,b)=>a+b,0):0,muted:muted}),
@@ -544,7 +556,7 @@ if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held
   setMission:(m,p,l)=>{mi=m;prog=p||0;if(l)level=l;dmdKey='';},advance:(id,n)=>advance(id,n),toRamp:()=>{const b=balls.find(b=>b.on&&!b.ride&&!atPl(b));if(b){const p=RAMP.P(14,RAMP.w/2);b.x=p[0];b.y=p[1];b.vx=-RAMP.d[0]*700;b.vy=-RAMP.d[1]*700;}return !!b;},rampShot:()=>{const p=RAMP.P(14,RAMP.w/2);return [p[0],p[1],-RAMP.d[0]*700,-RAMP.d[1]*700];},multiball:n=>startMultiball(n),
   // rauwe natuurkunde: bal op (x,y) met snelheid, optioneel rechts vasthouden vanaf tijd tHold; geeft baan en of de KRAAN geraakt werd
   shot:(x,y,vx,vy,tHold,secs,fl)=>{noNudge=true;const sv=balls;balls=[mkBall(x,y)];ball=balls[0];ball.vx=vx;ball.vy=vy;const F=fl==='L'?FL:fl==='U'?FU:FR;for(const f of FLIPS){f.held=false;f.a=f.rest;f.w=0;}
-    const path=[];let hit=null,lane0=-1;for(let i=0;i<secs*480;i++){if(i===Math.round(tHold*480)){F.held=true;if(F===FR)FU.held=true;}substep();if(i%24===0)path.push([+ball.x.toFixed(0),+ball.y.toFixed(0)]);
+    const path=[];let hit=null,lane0=-1;for(let i=0;i<secs*480;i++){if(i===Math.round(tHold*480)){F.held=true;FU.pressT=simT;if(F===FR)FU.held=true;}substep();if(i%24===0)path.push([+ball.x.toFixed(0),+ball.y.toFixed(0)]);
       if(lane0<0)lanes.forEach((l,j)=>{if(lane0<0&&Math.abs(ball.x-l.x)<10&&ball.y>40&&ball.y<62)lane0=j;});if(inRampMouth(ball.x,ball.y,ball.vx,ball.vy)){hit=[+ball.x.toFixed(1),+ball.y.toFixed(1),i/480];break;}if(ball.y>600)break;}
     for(const f of FLIPS){f.held=false;f.a=f.rest;f.w=0;}noNudge=false;balls=sv;ball=balls[0];return {hit:hit,lane:lane0,path:path,end:[ball.x,ball.y]};},
   pockets:(step,secs,ylo)=>{noNudge=true;const out=[];let n=0;const sv=[mode,launched];balls=[ball];
@@ -552,13 +564,21 @@ if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held
       if(y<140&&Math.hypot(x-AC.x,y-AC.y)>AC.r-R-1)continue;if(x<10+R+1||x>290-R-1)continue;
       let bad=false;for(const s of SEGS){if(s.oneway||(s.kind==='target'&&!s.up))continue;const ex=s.bx-s.ax,ey=s.by-s.ay,l2=ex*ex+ey*ey;let t=((x-s.ax)*ex+(y-s.ay)*ey)/l2;t=t<0?0:t>1?1:t;if(Math.hypot(x-(s.ax+ex*t),y-(s.ay+ey*t))<R+s.r+.5){bad=true;break;}}
       if(bad)continue;for(const c of CIRC)if(Math.hypot(x-c.x,y-c.y)<R+c.r+.5)bad=true;if(bad||inCavity(x,y,0))continue;
-      for(const f of FLIPS){f.held=up;f.a=up?f.up:f.rest;f.w=0;}
+      for(const f of FLIPS){f.held=up;f.a=up?f.up:f.rest;f.w=0;}FU.pressT=simT;
       for(const f of FLIPS){const [tx,ty]=flipTip(f),ex=tx-f.px,ey=ty-f.py;let t=((x-f.px)*ex+(y-f.py)*ey)/(f.L*f.L);t=t<0?0:t>1?1:t;if(Math.hypot(x-(f.px+ex*t),y-(f.py+ey*t))<R+f.r1+.5)bad=true;}
       if(bad)continue;n++;ball.x=x;ball.y=y;ball.vx=ball.vy=0;ball.on=true;ball.ride=null;let dr=false;
       let q=null;for(let i=0;i<secs*480;i++){substep();if(i===(secs-0.5)*480)q=[ball.x,ball.y];if(ball.y>600){dr=true;break;}}
-      if(dr||atPl(ball))continue;const sp=Math.hypot(ball.vx,ball.vy);if(sp>=20||(q&&Math.hypot(ball.x-q[0],ball.y-q[1])>2))continue;if(up&&onFace()==='cradle')continue;
+      if(dr||atPl(ball))continue;const sp=Math.hypot(ball.vx,ball.vy);if(sp>=20||(q&&Math.hypot(ball.x-q[0],ball.y-q[1])>2))continue;if(up&&onFace()==='cradle'&&Math.hypot(ball.x-FU.px,ball.y-FU.py)>FU.L+14)continue; // alleen hoofdflippers mogen de bal vasthouden
       out.push({up:up,x:+x.toFixed(1),y:+y.toFixed(1),ex:+ball.x.toFixed(1),ey:+ball.y.toFixed(1)});}
     noNudge=false;for(const f of FLIPS){f.held=false;f.a=f.rest;}targets.forEach(t=>t.up=true);[mode,launched]=sv;placeOnPlunger();return {tested:n,pockets:out};},
+  fuHold:(secs)=>{noNudge=true;const out=[];let n=0;const sv=balls;balls=[mkBall(0,0)];ball=balls[0];
+    for(let y=270;y<=345;y+=3)for(let x=222;x<=266;x+=3){let bad=false;for(const s of SEGS){const ex=s.bx-s.ax,ey=s.by-s.ay,l2=ex*ex+ey*ey;let t=((x-s.ax)*ex+(y-s.ay)*ey)/l2;t=t<0?0:t>1?1:t;if(Math.hypot(x-(s.ax+ex*t),y-(s.ay+ey*t))<R+s.r+.5)bad=true;}
+      for(const c of CIRC)if(Math.hypot(x-c.x,y-c.y)<R+c.r+.5)bad=true;for(const f of FLIPS){f.held=false;f.a=f.rest;f.w=0;}
+      {const f=FU,[tx,ty]=flipTip(f),ex=tx-f.px,ey=ty-f.py;let t=((x-f.px)*ex+(y-f.py)*ey)/(f.L*f.L);t=t<0?0:t>1?1:t;if(Math.hypot(x-(f.px+ex*t),y-(f.py+ey*t))<R+f.r1+.5)bad=true;}
+      if(bad)continue;n++;ball.x=x;ball.y=y;ball.vx=ball.vy=0;ball.on=true;ball.ride=null;
+      for(let i=0;i<secs*480;i++){if(i===24){FR.held=true;FU.held=true;FU.pressT=simT;}substep();if(ball.y>600)break;}
+      if(ball.y<600&&Math.hypot(ball.vx,ball.vy)<20&&Math.hypot(ball.x-FU.px,ball.y-FU.py)<FU.L+14)out.push([x,y,+ball.x.toFixed(1),+ball.y.toFixed(1)]);}
+    for(const f of FLIPS){f.held=false;f.a=f.rest;f.w=0;}noNudge=false;balls=sv;ball=balls[0];return {tested:n,resting:out};},
   auto:v=>{auto=v;},kick:v=>{kickback=v;},
   fuzz:(n,secs,seed,zone)=>{let rs=seed||1;const rnd=()=>{rs=(rs*16807)%2147483647;return rs/2147483647;};noNudge=true;const res={drained:0,onFace:0,cradled:0,trapped:[],cavityHits:0,live:0,still:[]};
     const sv=[mode,score,launched,saveUntil];balls=[ball];
