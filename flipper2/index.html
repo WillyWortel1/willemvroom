@@ -52,7 +52,7 @@ lsSet('flip2-top10',JSON.stringify(top10));if(top10.length&&top10[0].s>hiScore)h
 function qualifies(s){return s>0&&(top10.length<10||s>top10[top10.length-1].s);}
 let lastRank=-1;
 /* ---------- gedeelde top 10 (Google Apps Script + Sheet, zie apps-script/STAPPEN.md); leeg = uit, lokale top 10 werkt altijd ---------- */
-const LEADERBOARD_URL='';
+const LEADERBOARD_URL='https://script.google.com/macros/s/AKfycbwK09Cy5VaZYGDhY9QTQajtXh0JgZKGRTa0AiINBLmGa1MSUIVfEiwFT2fjcGTtQ5WuRA/exec';
 let shared=null,sharedState=LEADERBOARD_URL?'laden':'uit',sharedRank=-1;
 function tfetch(url,opt,ms){const c=typeof AbortController!=='undefined'?new AbortController():null;const t=setTimeout(()=>{if(c)c.abort();},ms||8000);
   return fetch(url,Object.assign({},opt||{},c?{signal:c.signal}:{})).finally(()=>clearTimeout(t));}

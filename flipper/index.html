@@ -270,29 +270,44 @@ addEventListener('keydown',e=>{const c=e.code;
   if(keysL.has(c))held.L.add(c);if(keysR.has(c))held.R.add(c);if(keysP.has(c))held.P.add(c);if(keysN.has(c))nudge();
   if(c==='KeyP'||c==='Escape')pauseReq=true;if(c==='KeyG')toggleMute();setFlip();});
 addEventListener('keyup',e=>{const c=e.code;held.L.delete(c);held.R.delete(c);held.P.delete(c);setFlip();});
-addEventListener('blur',()=>{held.L.clear();held.R.clear();held.P.clear();setFlip();if(mode==='play')paused=true;});
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&mode!=='title')paused=true;});
+// pauze alleen tijdens het spel; alleen echt verbergen (app-wissel/scherm uit) pauzeert, blur laat alleen de flippers los
+function canPause(){return mode==='play'||mode==='bonus';}
+let pauseCount=0,flipTouchT=-1e9;function doPause(){if(canPause()&&!paused){paused=true;pauseCount++;}}
+function releaseAll(){if(typeof tp!=='undefined')tp.clear();held.L.clear();held.R.clear();held.P.clear();setFlip();}
+function resumeFix(){last=performance.now();acc=0;if(mode==='play'&&!ball.on)placeOnPlunger();}
+addEventListener('blur',releaseAll);
+document.addEventListener('visibilitychange',()=>{if(document.hidden){releaseAll();doPause();}else{last=performance.now();acc=0;}});
+addEventListener('pagehide',()=>{releaseAll();doPause();});
+addEventListener('pageshow',()=>{releaseAll();last=performance.now();acc=0;if(!canPause())paused=false;});
 // aanraken: linkerhelft = linkerflipper, rechterhelft = rechterflipper (multi-touch)
 const tp=new Map();
 function inRect(el,e){const r=el.getBoundingClientRect();return e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom;}
 function isUI(e){const el=e.target&&e.target.closest&&e.target.closest('.ui');return !!el&&inRect(el,e);} // aanraking net naast een knop (vinger-correctie) telt als flipper
 document.addEventListener('pointerdown',e=>{if(isUI(e))return;e.preventDefault();audio();
   if(paused){pauseReq=true;return;}if(mode==='title'||mode==='over'){startReq=true;return;}
-  const side=e.clientX<innerWidth/2?'L':'R';tp.set(e.pointerId,side);held[side].add('p'+e.pointerId);setFlip();},{passive:false});
+  const side=e.clientX<innerWidth/2?'L':'R';tp.set(e.pointerId,side);held[side].add('p'+e.pointerId);flipTouchT=performance.now();setFlip();},{passive:false});
 const pend=e=>{const s=tp.get(e.pointerId);if(!s)return;tp.delete(e.pointerId);held[s].delete('p'+e.pointerId);setFlip();};
 document.addEventListener('pointerup',pend);document.addEventListener('pointercancel',pend);
+document.addEventListener('touchcancel',releaseAll);document.addEventListener('touchend',e=>{if(e.touches.length===0&&tp.size){tp.clear();held.L.clear();held.R.clear();setFlip();}});
 function uiBtn(id,down,up){const b=document.getElementById(id);b.addEventListener('pointerdown',e=>{if(!inRect(b,e))return;e.preventDefault();e.stopPropagation();audio();b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}down();});
   const u=e=>{b.classList.remove('on');if(up)up();};b.addEventListener('pointerup',u);b.addEventListener('pointercancel',u);b.addEventListener('lostpointercapture',u);
   b.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();down();if(up)up();}});}
-uiBtn('bPause',()=>{pauseReq=true;});uiBtn('bMute',()=>toggleMute());
+uiBtn('bMute',()=>toggleMute());
+// pauzeknop: alleen een bewuste tik (kort, begint en eindigt op de knop), niet tijdens of vlak na flipperen
+(()=>{const b=document.getElementById('bPause');let pt=null;const busy=()=>tp.size>0||held.L.size>0||held.R.size>0||performance.now()-flipTouchT<400;
+  b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();audio();pt=inRect(b,e)?{id:e.pointerId,t:performance.now(),busy:busy()}:null;if(pt){b.classList.add('on');try{b.setPointerCapture(e.pointerId);}catch(_){}}});
+  const u=e=>{b.classList.remove('on');const q=pt;pt=null;if(!q||e.type!=='pointerup'||e.pointerId!==q.id||!inRect(b,e)||performance.now()-q.t>800)return;if(paused||(!q.busy&&!busy()))pauseReq=true;};
+  b.addEventListener('pointerup',u);b.addEventListener('pointercancel',u);
+  b.addEventListener('keydown',e=>{if(e.code==='Enter'){e.preventDefault();pauseReq=true;}});})();
 uiBtn('bLaunch',()=>{if(mode==='title'||mode==='over'){startReq=true;return;}held.P.add('btn');setFlip();},()=>{held.P.delete('btn');setFlip();});
-['contextmenu','selectstart','gesturestart','dblclick'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
+['contextmenu','selectstart','gesturestart','gesturechange','gestureend','dblclick'].forEach(t=>document.addEventListener(t,e=>e.preventDefault(),{passive:false}));
 document.addEventListener('touchmove',e=>e.preventDefault(),{passive:false});
 
 /* ---------- update ---------- */
 let acc=0,last=performance.now(),fpsLog=[];
 function frameUpdate(dt){
-  if(pauseReq){pauseReq=false;if(mode!=='title'&&mode!=='over')paused=!paused;}
+  if(pauseReq){pauseReq=false;if(paused){paused=false;resumeFix();}else doPause();}
+  if(paused&&!canPause()){paused=false;resumeFix();} // nooit PAUZE in titel/spel voorbij
   if(paused)return;
   if(startReq){startReq=false;if(mode==='title'||(mode==='over'&&overT>1))startGame();}
   if(auto)autoplay(dt);
@@ -423,7 +438,7 @@ function loop(now){const dt=Math.min(0.05,(now-last)/1000);last=now;fpsLog.push(
   for(let i=0;i<simSpeed;i++)frameUpdate(dt);updLaunchBtn();render();requestAnimationFrame(loop);}
 if(DEBUG)window.__fl={state:()=>({btn:getComputedStyle(bL).display,flipR:FR.held,flipL:FL.held,mode:mode,paused:paused,score:score,ball:ballNo,extra:extraBalls,on:ball.on,x:ball.x,y:ball.y,vx:ball.vx,vy:ball.vy,atPl:atPlunger(),launched:launched,
     save:mode==='play'&&launched&&simT<saveUntil,mult:mult,bonus:bonus,tilt:tilt,tilted:tilted,kickback:kickback,glitches:glitches,stuck:stuckNudges,targets:targets.map(t=>t.up),lanes:lanes.map(l=>l.lit),hi:hiScore,msg:msg,
-    fps:fpsLog.length?fpsLog.length/fpsLog.reduce((a,b)=>a+b,0):0,muted:muted}),
+    fps:fpsLog.length?fpsLog.length/fpsLog.reduce((a,b)=>a+b,0):0,muted:muted,pauses:pauseCount}),
   place:(x,y,vx,vy)=>{ball.x=x;ball.y=y;ball.vx=vx||0;ball.vy=vy||0;ball.on=true;},setLaunched:(v,save)=>{launched=v;lastLaunch=simT;saveUntil=simT+(save||0);},
   pockets:(step,secs,ylo)=>{noNudge=true;const out=[];let n=0;const sv=[mode,launched];
     for(const up of [false,true])for(let y=(ylo||0)+1.37;y<560;y+=step)for(let x=11.71;x<289;x+=step){
