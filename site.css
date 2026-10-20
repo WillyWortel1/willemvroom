@@ -48,3 +48,6 @@ html.dark .wv-head .home,html.dark .wv-head nav b,html.dark .wv-head nav{color:#
 
 /* Maantje altijd wit */
 html.dark #thm,html.dark #thm:hover,html.dark #thm:active,html.dark #thm:focus,html.dark #thm:focus-visible{color:#fff!important}
+
+/* Rode nummers */
+#werk .werk-nr,html.dark #werk .werk-nr{background:#d62828;color:#fff}
