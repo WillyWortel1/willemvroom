@@ -20,3 +20,4 @@ table{border-collapse:collapse;width:100%;font-size:.85rem;margin-top:8px;font-v
 td{padding:6px 6px 6px 0;border-top:1px solid #f0f0f0}tr.race td{font-weight:700;color:#d62828}
 .lk{font-size:.82rem;margin:10px 0 0}footer{color:#999;font-size:.75rem;margin-top:28px;text-align:center}
 @media(max-width:420px){h1{font-size:1.8rem}td,th{font-size:.8rem}}
+.leaflet-container a{color:#444}
