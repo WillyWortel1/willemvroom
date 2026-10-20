@@ -13,7 +13,8 @@ function cond(k,date){const i=gIdx(k,date);if(i<0)return null;const w=F[k].hourl
  if((ws!=null&&ws>=20)||(g!=null&&g>=30)||(H!=null&&H>=2))l=2;
  if(o=='off'&&ws!=null&&ws>=5)l=3;
  return {l,i,ws,g,H,P:m.wave_period[i],wd:w.wind_direction_10m[i],o,t:day==0?T('nu','now','jetzt')+' ('+m.time[i].slice(11)+')':'13:00'};}
-const condCol=c=>'#111';
+// kleurverloop kaartstip: x = max(wind/25 kn, vlagen/35 kn, golf/2,5 m), begrensd 0–1; aflandig ≥5 kn = 1 (rood). Tint 120° (groen) → 0° (rood).
+const condCol=c=>{if(!c)return '#888';let x=c.l==3?1:Math.max((c.ws||0)/25,(c.g||0)/35,(c.H||0)/2.5);x=Math.max(0,Math.min(1,x));return `hsl(${Math.round(120*(1-x))},80%,45%)`};
 function condH(k,date){const c=cond(k,date);if(!c)return '<div class="rt">–</div>';
  let h=`<div class="rt"><small>${c.t}</small><br>💨 ${f(c.ws)}/${f(c.g)} kn ${card(c.wd)} · ${relL(c.o)} · 🌊 ${f(c.H,1)} m ${f(c.P)} s</div>`;
  if(c.l==3)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind','Ablandiger Wind')} (${card(c.wd)}, ${Math.round(c.ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af.','you drift away from the shore.','du treibst von der Küste weg.')}</p>`;
