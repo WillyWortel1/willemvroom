@@ -1,6 +1,6 @@
 const SPORTS=[
  {id:'foil',nl:'Foilassist',en:'Foil assist'},{id:'prone',nl:'Foilen (prone)',en:'Prone foiling'},{id:'supfoil',nl:'Supfoil',en:'SUP foiling'},{id:'dw',nl:'Downwinder',en:'Downwinder'},{id:'surf',nl:'Golfsurfen',en:'Surfing'},{id:'wind',nl:'Windsurfen',en:'Windsurfing'},
- {id:'kite',nl:'Kitesurfen',en:'Kitesurfing'},{id:'kitefoil',nl:'Kitefoilen',en:'Kite foiling'},{id:'wing',nl:'Wingen',en:'Wing foiling'},{id:'parawing',nl:'Parawing',en:'Parawing'},{id:'sup',nl:'SUP',en:'SUP'}].map(x=>({...x,n:()=>T(x.nl,x.en,x.en)}));
+ {id:'kite',nl:'Kitesurfen',en:'Kitesurfing'},{id:'kitefoil',nl:'Kitefoilen',en:'Kite foiling'},{id:'wing',nl:'Wingen',en:'Wing foiling'},{id:'parawing',nl:'Parawing',en:'Parawing'},{id:'sup',nl:'SUPsurf',en:'SUPsurf'}].map(x=>({...x,n:()=>T(x.nl,x.en,x.en)}));
 let SPORT=(()=>{try{const v=localStorage.getItem('spots-sport');if(SPORTS.some(x=>x.id==v))return v}catch(e){}return 'foil'})();
 const SP=()=>SPORTS.find(x=>x.id==SPORT);
 function setSport(id){SPORT=id;try{localStorage.setItem('spots-sport',id)}catch(e){}closeFR();render();}
