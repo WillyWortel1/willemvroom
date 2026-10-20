@@ -1,0 +1,13 @@
+*{box-sizing:border-box}body{margin:0 auto;max-width:720px;padding:0 14px 30px;font:15px/1.45 "IBM Plex Sans",system-ui,-apple-system,sans-serif;color:#111;background:#fff}
+a{color:#d62828}header{display:flex;justify-content:space-between;padding:14px 0 6px;font-size:.9rem}.home{color:#111;text-decoration:none;font-weight:600}
+.prev{background:#fff3b0;padding:4px 8px;border-radius:6px;font-size:.8rem;margin:4px 0}
+h1{font-size:1.5rem;margin:12px 0 2px}.sub{color:#666;font-size:.85rem;margin:2px 0}
+#map{height:240px;border:1px solid #ddd;border-radius:10px;margin:10px 0;z-index:0}
+article{border-top:1px solid #e5e5e5;padding:10px 0}article.past{opacity:.45}
+article.next{border:2px solid #d62828;border-radius:10px;padding:10px;margin:6px -4px}
+.h{display:flex;gap:10px;align-items:flex-start}.rd{min-width:28px;height:28px;border-radius:50%;background:#111;color:#fff;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:600}
+.next .rd{background:#d62828}h2{font-size:1.05rem;margin:0}.h p{margin:0;color:#666;font-size:.82rem}
+.cd{color:#d62828;font-weight:700;margin:6px 0 0 38px}.win{margin:4px 0 0 38px;font-size:.85rem}
+details{margin:6px 0 0 38px}summary{cursor:pointer;font-size:.85rem;color:#444}
+table{border-collapse:collapse;width:100%;font-size:.84rem;margin-top:4px}th{text-align:left;color:#888;font-weight:500;font-size:.75rem}td{padding:3px 4px 3px 0}tr.race td{font-weight:700;color:#d62828}
+.lk{font-size:.8rem;margin:6px 0 0}footer{color:#888;font-size:.75rem;margin-top:20px}
