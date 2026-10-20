@@ -15,7 +15,7 @@ rep("<title>Foilassist – condities per spot</title><script>if(LANG=='en')docum
 # paden naar foilassist-data (alleen lezen)
 rep('href="leaflet/leaflet.css','href="/foilassist/leaflet/leaflet.css')
 rep('src="leaflet/leaflet.js','src="/foilassist/leaflet/leaflet.js')
-rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=11"></script>')
+rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=11"></script><script src="/spots/beachpos.js?v=1"></script>')
 rep("tfetch('data.json?h=","tfetch('/foilassist/data.json?h=")
 rep("const KEY='foilassist-cache-v1';","const KEY='spots-cache-v1';")
 # kop
@@ -53,10 +53,12 @@ rep("L.circleMarker([s.lat,s.lon],{radius:(land=='Alle'?7:10),color:'#fff',weigh
 rep(".wdot{",".wdot{") if ".wdot{" in s else rep("</style>",".wdot{background:none;border:0}.leaflet-marker-icon.wdot{pointer-events:none!important}.wdot .hit{pointer-events:auto;cursor:pointer}</style>")
 rep('margin-right:6px;background:${condCol(cond(k,date),k)}"></span>','margin-right:4px;background:${condCol(cond(k,date),k)}"></span>${miniArrow(cond(k,date))}')
 rep("layer=L.layerGroup().addTo(map);}","layer=L.layerGroup().addTo(map);map.on('zoomend',()=>drawMap());}")
+rep("pts.push([s.lat,s.lon]);","pts.push(dp(s));")
+rep("L.marker([s.lat,s.lon]","L.marker(dp(s)")
 # formulier: "meer details" weg
 _a=s.index("<details><summary style=\"color:var(--a);margin:10px 0;cursor:pointer\">");_b=s.index("</details>",_a)+len("</details>");s=s[:_a]+s[_b:]
 out=R/"spots";(out/"en").mkdir(parents=True,exist_ok=True)
-s=s.replace('?v=20261014-42','?v=20261020-spots12')
+s=s.replace('?v=20261014-42','?v=20261020-spots13')
 (out/"index.html").write_text(s,encoding="utf-8")
 for l in ("en","de"):
     (out/l).mkdir(exist_ok=True);(out/l/"index.html").write_text(s.replace('<html lang="nl">',f'<html lang="{l}">',1),encoding="utf-8")

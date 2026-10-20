@@ -57,3 +57,5 @@ function dotIcon(k,c){const z=map&&map._loaded?map.getZoom():5;const sz=z<5?12:z
  const ar=wd==null?'':`<svg class="hit" viewBox="-10 -10 20 20" width="${as}" height="${as}" style="position:absolute;left:${ax}px;top:${ay}px;transform:rotate(${(wd+180)%360}deg)"><path d="M0,-9 L6,1 L2,1 L2,9 L-2,9 L-2,1 L-6,1 Z" fill="#000" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
  return L.divIcon({className:'wdot',iconSize:[W,W],iconAnchor:[W/2,W/2],tooltipAnchor:[0,-sz/2],html:`<div class="hit" style="position:absolute;left:${W/2-sz/2}px;top:${W/2-sz/2}px;width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2px solid #fff;box-sizing:border-box;box-shadow:0 0 2px rgba(0,0,0,.5)"></div>${ar}`});}
 const miniArrow=c=>c&&c.wd!=null?`<span aria-hidden="true" style="display:inline-block;transform:rotate(${(c.wd+180)%360}deg);font-size:.9em;margin-right:4px">↑</span>`:'';
+// weergavepositie van de stip: op het strand (spots/beachpos.js); voorspelling blijft op de oorspronkelijke coördinaten
+const dp=s=>{const b=(window.BEACHPOS||{})[s.naam];return b?[b[0],b[1]]:[s.lat,s.lon]};
