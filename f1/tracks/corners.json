@@ -1,0 +1,71 @@
+{
+"source": "Labels on the Wikimedia Commons map (see credits) cross-checked with the English Wikipedia circuit article",
+"circuits": {
+"zandvoort": {
+"1": "Tarzanbocht",
+"4": "Hugenholtzbocht",
+"8": "Scheivlak",
+"15": "Arie Luyendijkbocht"
+},
+"spa": {
+"1": "La Source",
+"3": "Eau Rouge / Raidillon",
+"4": "Eau Rouge / Raidillon",
+"5": "Eau Rouge / Raidillon",
+"9": "Les Combes",
+"11": "Bruxelles",
+"12": "Pouhon",
+"15": "Campus",
+"17": "Blanchimont",
+"19": "Chicane (Bus Stop)",
+"20": "Chicane (Bus Stop)"
+},
+"monza": {
+"1": "Variante del Rettifilo",
+"2": "Variante del Rettifilo",
+"3": "Curva Biassono (Curva Grande)",
+"4": "Variante della Roggia",
+"5": "Variante della Roggia",
+"6": "Curve di Lesmo",
+"7": "Curve di Lesmo",
+"8": "Variante Ascari",
+"9": "Variante Ascari",
+"10": "Variante Ascari",
+"11": "Curva Parabolica (Curva Alboreto)"
+},
+"monaco": {
+"1": "Sainte Dévote",
+"4": "Casino",
+"8": "Portier",
+"9": "Tunnel",
+"17": "La Rascasse",
+"19": "Anthony Noghès"
+},
+"suzuka": {
+"1": "First Curve",
+"7": "Dunlop Curve",
+"8": "Degner Curve",
+"11": "Hairpin",
+"14": "Spoon Curve",
+"17": "Casio Triangle"
+},
+"interlagos": {
+"1": "S do Senna",
+"2": "S do Senna",
+"4": "Descida do Lago",
+"6": "Ferradura",
+"7": "Laranjinha",
+"10": "Bico de Pato",
+"11": "Mergulho",
+"12": "Junção"
+},
+"red_bull_ring": {
+"1": "Niki Lauda Kurve",
+"9": "Jochen Rindt Kurve"
+},
+"villeneuve": {
+"2": "Virage Senna",
+"10": "L'Épingle"
+}
+}
+}
