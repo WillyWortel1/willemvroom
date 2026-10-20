@@ -9,9 +9,9 @@ async function get(u){const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw 0
 async function load(){let races,src='live';
  try{races=(await get('https://api.jolpi.ca/ergast/f1/current.json')).RaceTable.Races;
   const last=races[races.length-1];if(new Date()>new Date(T(last).getTime()+864e5)){try{const n=(await get('https://api.jolpi.ca/ergast/f1/'+(+last.season+1)+'.json')).RaceTable.Races;if(n.length)races=n}catch(e){}}}
- catch(e){races=(await (await fetch('/f1/fallback.json?v=20261020-f1a')).json()).MRData.RaceTable.Races;src='fb'}
+ catch(e){races=(await (await fetch('/f1/fallback.json?v=20261020-f1b')).json()).MRData.RaceTable.Races;src='fb'}
  let win={};try{(await get('https://api.jolpi.ca/ergast/f1/'+races[0].season+'/results/1.json?limit=100')).RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}
- catch(e){try{(await (await fetch('/f1/winners.json?v=20261020-f1a')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
+ catch(e){try{(await (await fetch('/f1/winners.json?v=20261020-f1b')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
  render(races,win,src)}
 function render(races,win,src){const now=Date.now();const el=document.getElementById('list');
  document.getElementById('season').textContent=races[0].season;
@@ -21,7 +21,7 @@ function render(races,win,src){const now=Date.now();const el=document.getElement
    return `<tr${k?'':' class=race'}><td>${L(nl,en)}</td><td>${fmt(d,tz,{weekday:'short',day:'numeric',month:'short'})} ${fmt(d,tz,{hour:'2-digit',minute:'2-digit'})}</td><td><b>${fmt(d,'Europe/Amsterdam',{weekday:'short',hour:'2-digit',minute:'2-digit'})}</b></td></tr>`}).join('');
   const w=win[r.round];
   return `<article class="${past?'past':''}${isN?' next':''}" id="r${r.round}"><div class=h><span class=rd>${r.round}</span><div><h2>${r.raceName.replace('Grand Prix','GP')}</h2><p>${c.circuitName} · ${c.Location.locality}, ${c.Location.country}</p></div></div>
-  ${isN?`<p class=cd data-t="${T(r).toISOString()}"></p>`:''}${past&&w?`<p class=win>🏆 ${w.givenName} ${w.familyName}</p>`:''}
+  ${isN?`<p class=cd data-t="${T(r).toISOString()}"></p>`:''}${past&&w?`<p class=win>${L('Winnaar','Winner')}: ${w.givenName} ${w.familyName}</p>`:''}
   <details${isN?' open':''}><summary>${L('Tijden','Times')}</summary><table><tr><th></th><th>${L('Lokaal','Local')} (${off(T(r),tz)})</th><th>NL</th></tr>${rows}</table>
   <p class=lk><a href="#map" data-r="${r.round}">${L('Op kaart','On map')}</a> · <a href="https://www.openstreetmap.org/?mlat=${c.Location.lat}&mlon=${c.Location.long}#map=14/${c.Location.lat}/${c.Location.long}" target=_blank rel=noopener>OpenStreetMap</a></p></details></article>`}).join('');
  if(src=='fb')document.getElementById('note').textContent=L('Live data niet bereikbaar – opgeslagen kalender getoond.','Live data unavailable – showing saved calendar.');
