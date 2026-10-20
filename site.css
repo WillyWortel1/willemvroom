@@ -51,3 +51,5 @@ html.dark #thm,html.dark #thm:hover,html.dark #thm:active,html.dark #thm:focus,h
 
 /* Rode nummers */
 #werk .werk-nr,html.dark #werk .werk-nr{background:#d62828;color:#fff}
+
+h1 .dot{color:#d62828}
