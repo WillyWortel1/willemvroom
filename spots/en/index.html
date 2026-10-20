@@ -1,14 +1,14 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
-<script>const LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');let l=(location.pathname.match(/\/(en)\/?$/)||[])[1]||(['en','nl'].includes(q)?q:null);
-try{if(['en','nl'].includes(q))localStorage.setItem('spots-lang',q);if(!l)l=localStorage.getItem('spots-lang')}catch(e){}if(l=='de')l=null;
-const nv=(navigator.language||'nl').toLowerCase();return l||(nv.startsWith('nl')?'nl':'en')})();document.documentElement.lang=LANG;
+<script>const LANG=(()=>{const q=new URLSearchParams(location.search).get('lang');let l=(location.pathname.match(/\/(en|de)\/?$/)||[])[1]||(['en','nl','de'].includes(q)?q:null);
+try{if(['en','nl','de'].includes(q))localStorage.setItem('spots-lang',q);if(!l)l=localStorage.getItem('spots-lang')}catch(e){}
+const nv=(navigator.language||'nl').toLowerCase();return l||(nv.startsWith('nl')?'nl':nv.startsWith('de')?'de':'en')})();document.documentElement.lang=LANG;
 function setLang(l){try{localStorage.setItem('spots-lang',l)}catch(e){}location.href='/spots/'+(l=='nl'?'?lang=nl':l+'/')}
 const T=(nl,en,de)=>LANG=='de'?de:LANG=='en'?en:nl;</script>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="/favicon.svg">
-<title>Spots🤙 – condities per spot</title><script>if(LANG=='en')document.title='Spots🤙 – conditions per spot'</script>
-<link rel="stylesheet" href="/foilassist/leaflet/leaflet.css?v=20261014-42">
+<title>Spots🤙 – condities per spot</title><script>if(LANG=='en')document.title='Spots🤙 – conditions per spot';if(LANG=='de')document.title='Spots🤙 – Bedingungen pro Spot'</script>
+<link rel="stylesheet" href="/foilassist/leaflet/leaflet.css?v=20261020-spots3">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -50,8 +50,8 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:none}
 .lt{float:right;font-size:.8rem}.lt button{border:1px solid #2b5675;background:#0f2a3e;color:var(--t);border-radius:12px;padding:3px 8px;font:inherit}.lt button.on{background:var(--a);color:#032}
 </style></head><body>
-<header><span class="lt"><button id="l-nl" onclick="setLang('nl')">NL</button> <button id="l-en" onclick="setLang('en')">EN</button></span><h1>Spots🤙</h1>
-<p class="pv" style="color:#ffc83d">⚙️ <span class="nl">Voorbeeldversie – nog niet openbaar.</span><span class="en">Preview – not public yet.</span></p><p><span class="nl">Golven, stroming, wind, weer, watertemperatuur en getij per spot.</span><span class="en">Waves, current, wind, weather, water temperature and tides per spot.</span><span class="de">Wellen, Strömung, Wind, Wetter, Wassertemperatur und Gezeiten pro Spot.</span> <span id="upd"></span></p></header>
+<header><span class="lt"><button id="l-nl" onclick="setLang('nl')">NL</button> <button id="l-en" onclick="setLang('en')">EN</button> <button id="l-de" onclick="setLang('de')">DE</button></span><h1>Spots🤙</h1>
+<p class="pv" style="color:#ffc83d">⚙️ <span class="nl">Voorbeeldversie – nog niet openbaar.</span><span class="en">Preview – not public yet.</span><span class="de">Vorschauversion – noch nicht öffentlich.</span></p><p><span class="nl">Golven, stroming, wind, weer, watertemperatuur en getij per spot.</span><span class="en">Waves, current, wind, weather, water temperature and tides per spot.</span><span class="de">Wellen, Strömung, Wind, Wetter, Wassertemperatur und Gezeiten pro Spot.</span> <span id="upd"></span></p></header>
 <nav class="days" id="sports"></nav><nav class="days" id="lands" style="top:46px"></nav><nav class="days" id="days" style="top:92px"></nav>
 <div id="map"></div><div id="frm" onclick="if(event.target==this)closeFR()"><div role="dialog" aria-modal="true" id="frc"></div></div><div id="sheet"><button class="x" onclick="closeS()">▾ <span class="nl">sluiten</span><span class="en">close</span><span class="de">schließen</span></button><div id="sc"></div></div>
 <h3 class="l"><span class="nl">Lijst – beste spot bovenaan</span><span class="en">List – best spot on top</span><span class="de">Liste – bester Spot oben</span></h3>
@@ -64,11 +64,15 @@ html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:
 <div id="rules-en"></div>
 <p><b>Sources:</b> waves, current, water temperature and sea level: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind and weather: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). High and low tide are derived from the model's forecast sea level (including tide); this is an estimate and can differ by half an hour or more from official times (e.g. <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>). Map: Leaflet with OpenStreetMap tiles. Spots and descriptions (originally collected for foil assist): foil.guide, ophetwater.nl, Foil School Nederland and the sources listed per spot. English spot descriptions are translations of the Dutch originals.</p>
 <p>Arrows point where waves, wind and current are going <i>to</i>; the letters show where waves and wind come from and where the current goes. Times are the spot's local time. Always judge for yourself on site.</p>
+</div><div class="de">
+<div id="rules-de"></div>
+<p><b>Quellen:</b> Wellen, Strömung, Wassertemperatur und Meeresspiegel: <a href="https://open-meteo.com/en/docs/marine-weather-api">Open-Meteo Marine</a>. Wind und Wetter: <a href="https://open-meteo.com/">Open-Meteo Forecast</a> (CC BY 4.0). Hoch- und Niedrigwasser werden aus dem vorhergesagten Meeresspiegel des Modells (inklusive Gezeiten) abgeleitet; das ist eine Schätzung und kann eine halbe Stunde oder mehr von offiziellen Zeiten abweichen (z. B. <a href="https://waterinfo.rws.nl/">Rijkswaterstaat</a>). Karte: Leaflet mit OpenStreetMap-Kacheln. Spots und Beschreibungen (ursprünglich für Foil Assist gesammelt): foil.guide, ophetwater.nl, Foil School Nederland und die pro Spot genannten Quellen. Die deutschen Spotbeschreibungen sind Übersetzungen der niederländischen Originale.</p>
+<p>Pfeile zeigen, wohin Wellen, Wind und Strömung <i>gehen</i>; die Buchstaben geben an, woher Wellen und Wind kommen und wohin die Strömung geht. Zeiten sind die Ortszeit des Spots. Immer selbst vor Ort beurteilen.</p>
 </div></footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML='<p class="err">'+T('Fout bij laden: ','Error while loading: ','Fehler beim Laden: ')+(e.message||T('onbekend','unknown','unbekannt'))+' <button onclick="location.reload()">'+T('Opnieuw','Retry','Erneut')+'</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML+='<p class="err">'+T('Dit duurt lang… ','This is taking long… ','Das dauert lange… ')+'<button onclick="location.reload()">'+T('Opnieuw proberen','Try again','Erneut versuchen')+'</button></p>'},30000);</script>
-<script src="/foilassist/leaflet/leaflet.js?v=20261014-42"></script>
+<script src="/foilassist/leaflet/leaflet.js?v=20261020-spots3"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=1"></script>
+<script src="/foilassist/spots.js?v=20261020-spots3"></script><script src="/spots/coast.js?v=2"></script>
 <script>
 const SL=[9,13,17],R=LANG=='de'?['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW']:LANG=='en'?['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW']:['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];const LOC=T('nl-NL','en-GB','de-DE');
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -105,13 +109,13 @@ function scoreFoil(k,i){const m=M[k].hourly,w=F[k].hourly;if(i<0)return null;let
  if(wc!=null&&wc>=95)s-=2;else if(r!=null){if(r>2)s-=1;else if(r>0.5)s-=0.5;}
  return Math.max(0,Math.min(5,s));}
 const SPORTS=[
- {id:'foil',nl:'Foilassist',en:'Foil assist'},{id:'prone',nl:'Foilen (prone)',en:'Prone foiling'},{id:'supfoil',nl:'Supfoil',en:'SUP foiling'},{id:'dw',nl:'Downwinder',en:'Downwinder'},{id:'surf',nl:'Golfsurfen',en:'Surfing'},{id:'wind',nl:'Windsurfen',en:'Windsurfing'},
- {id:'kite',nl:'Kitesurfen',en:'Kitesurfing'},{id:'kitefoil',nl:'Kitefoilen',en:'Kite foiling'},{id:'wing',nl:'Wingen',en:'Wing foiling'},{id:'parawing',nl:'Parawing',en:'Parawing'},{id:'sup',nl:'SUPsurf',en:'SUPsurf'}].map(x=>({...x,n:()=>T(x.nl,x.en,x.en)}));
+ {id:'foil',de:'Foil-Assist',nl:'Foilassist',en:'Foil assist'},{id:'prone',de:'Prone-Foilen',nl:'Foilen (prone)',en:'Prone foiling'},{id:'supfoil',de:'SUP-Foilen',nl:'Supfoil',en:'SUP foiling'},{id:'dw',de:'Downwinder',nl:'Downwinder',en:'Downwinder'},{id:'surf',de:'Wellenreiten',nl:'Golfsurfen',en:'Surfing'},{id:'wind',de:'Windsurfen',nl:'Windsurfen',en:'Windsurfing'},
+ {id:'kite',de:'Kitesurfen',nl:'Kitesurfen',en:'Kitesurfing'},{id:'kitefoil',de:'Kitefoilen',nl:'Kitefoilen',en:'Kite foiling'},{id:'wing',de:'Wingfoilen',nl:'Wingen',en:'Wing foiling'},{id:'parawing',de:'Parawing',nl:'Parawing',en:'Parawing'},{id:'sup',de:'SUPsurf',nl:'SUPsurf',en:'SUPsurf'}].map(x=>({...x,n:()=>T(x.nl,x.en,x.de)}));
 let SPORT=(()=>{try{const v=localStorage.getItem('spots-sport');if(SPORTS.some(x=>x.id==v))return v}catch(e){}return 'foil'})();
 const SP=()=>SPORTS.find(x=>x.id==SPORT);
 function setSport(id){SPORT=id;try{localStorage.setItem('spots-sport',id)}catch(e){}closeFR();render();}
 function sportNav(){document.getElementById('sports').innerHTML=SPORTS.map(x=>`<button class="${x.id==SPORT?'on':''}" onclick="setSport('${x.id}')">${x.n()}</button>`).join('');
- ['nl','en'].forEach(l=>{const e=document.getElementById('rules-'+l);if(e)e.innerHTML=rulesH(l)});}
+ ['nl','en','de'].forEach(l=>{const e=document.getElementById('rules-'+l);if(e)e.innerHTML=rulesH(l)});}
 // windrichting t.o.v. golfrichting als schatting voor aanlandig/aflandig (kustoriëntatie per spot zit er niet in)
 function rel(k,i){const wd=F[k].hourly.wind_direction_10m[i],gd=M[k].hourly.wave_direction[i];const cb=(window.COAST||{})[spots[k].naam];
  if(cb&&cb[1]&&wd!=null){let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;return d<=67.5?'on':d>=112.5?'off':'side';}
@@ -119,7 +123,7 @@ if(wd==null||gd==null||M[k].hourly.wave_height[i]==null||M[k].hourly.wave_height
 function cAng(k,i){const cb=(window.COAST||{})[spots[k].naam],wd=F[k].hourly.wind_direction_10m[i];if(!cb||!cb[1]||wd==null)return null;let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;return d;}
 function alongH(k,i){const cb=(window.COAST||{})[spots[k].naam],wd=F[k].hourly.wind_direction_10m[i];if(!cb||!cb[1]||wd==null)return '';
  const to=(wd+180)%360,t1=(cb[0]+90)%360,t2=(cb[0]+270)%360;const df=(a,b)=>{let d=Math.abs(a-b)%360;return d>180?360-d:d};const tt=df(to,t1)<df(to,t2)?t1:t2,ff=(tt+180)%360;
- return T(`Wind langs de kust: loopt van ${card(ff)} naar ${card(tt)}.`,`Wind along the coast: runs from ${card(ff)} to ${card(tt)}.`)}
+ return T(`Wind langs de kust: loopt van ${card(ff)} naar ${card(tt)}.`,`Wind along the coast: runs from ${card(ff)} to ${card(tt)}.`,`Wind entlang der Küste: weht von ${card(ff)} nach ${card(tt)}.`)}
 function common(k,i){const w=F[k].hourly,r=w.precipitation[i],wc=w.weather_code[i];let s=0;if(wc!=null&&wc>=95)s-=2;else if(r!=null){if(r>2)s-=1;else if(r>0.5)s-=0.5;}return s;}
 function score(k,i){if(i<0)return null;if(SPORT=='foil')return scoreFoil(k,i);
  const m=M[k].hourly,w=F[k].hourly;if(w.is_day&&w.is_day[i]===0)return 0;
@@ -168,15 +172,16 @@ function score(k,i){if(i<0)return null;if(SPORT=='foil')return scoreFoil(k,i);
   if(ws!=null){if(ws>18)s-=4;else if(ws>12)s-=2.5;else if(ws>8)s-=1;if(o=='off'&&ws>8)s-=2;if(o=='unk'&&ws>8)s-=0.5;}
   if(c!=null&&c>1)s-=1;
  }
+ if(['wind','kite','kitefoil','wing','parawing'].includes(SPORT)&&o=='off'&&ws!=null&&ws>=5)s=Math.min(s,1.5);
  return Math.max(0,Math.min(5,s));}
-const qual=v=>v==null?'':v>=3.5?T('goed','good'):v>=2?T('matig','fair'):T('slecht','poor');
+const qual=v=>v==null?'':v>=3.5?T('goed','good','gut'):v>=2?T('matig','fair','mäßig'):T('slecht','poor','schlecht');
 const qualH=v=>v==null?'':`<span style="font-size:.75rem;font-weight:600;padding:1px 7px;border-radius:9px;background:${v>=3.5?'#2ecc71':v>=2?'#f0ad4e':'#d9534f'};color:#032">${qual(v)}</span>`;
 function openGen(k){const s=spots[k];
- document.getElementById('frc').innerHTML=`<h4>⚠️ ${T('Lokale regels','Local rules')} – ${esc(spotName(s))}</h4>
- <p>${T('Voor '+SP().nl.toLowerCase()+' hebben we voor deze spot geen gecontroleerde lokale regels. Check ter plaatse de borden, zones (zwem-, surf- en watersportzones, seizoensregels) en vraag bij twijfel de lifeguards of de lokale club.','For '+SP().en.toLowerCase()+' we have no verified local rules for this spot. Check the signs and zones on site (swimming, surf and water-sports zones, seasonal rules) and ask the lifeguards or the local club if in doubt.')}</p>
- <p>${T('Houd rekening met andere watergebruikers: geef ruimte, ken de voorrangsregels en blijf uit de buurt van zwemmers.','Be considerate of other water users: give space, know the right-of-way rules and keep clear of swimmers.')}</p>
- <p><b>${T('De beoordeling is een indicatie, geen veiligheidsadvies. Beoordeel altijd zelf ter plaatse.','The rating is an indication, not safety advice. Always judge for yourself on site.')}</b></p>
- <p style="text-align:right"><button class="btn" onclick="closeFR()">${T('Sluiten','Close')}</button></p>`;
+ document.getElementById('frc').innerHTML=`<h4>⚠️ ${T('Lokale regels','Local rules','Lokale Regeln')} – ${esc(spotName(s))}</h4>
+ <p>${T('Voor '+SP().nl.toLowerCase()+' hebben we voor deze spot geen gecontroleerde lokale regels. Check ter plaatse de borden, zones (zwem-, surf- en watersportzones, seizoensregels) en vraag bij twijfel de lifeguards of de lokale club.','For '+SP().en.toLowerCase()+' we have no verified local rules for this spot. Check the signs and zones on site (swimming, surf and water-sports zones, seasonal rules) and ask the lifeguards or the local club if in doubt.','Für '+SP().de+' haben wir für diesen Spot keine geprüften lokalen Regeln. Prüfe vor Ort Schilder und Zonen (Bade-, Surf- und Wassersportzonen, saisonale Regeln) und frag im Zweifel die Rettungsschwimmer oder den lokalen Club.')}</p>
+ <p>${T('Houd rekening met andere watergebruikers: geef ruimte, ken de voorrangsregels en blijf uit de buurt van zwemmers.','Be considerate of other water users: give space, know the right-of-way rules and keep clear of swimmers.','Nimm Rücksicht auf andere Wassernutzer: halte Abstand, kenne die Vorfahrtsregeln und halte dich von Schwimmern fern.')}</p>
+ <p><b>${T('De beoordeling is een indicatie, geen veiligheidsadvies. Beoordeel altijd zelf ter plaatse.','The rating is an indication, not safety advice. Always judge for yourself on site.','Die Bewertung ist eine Orientierung, kein Sicherheitsrat. Beurteile immer selbst vor Ort.')}</b></p>
+ <p style="text-align:right"><button class="btn" onclick="closeFR()">${T('Sluiten','Close','Schließen')}</button></p>`;
  document.getElementById('frm').classList.add('open');}
 const RULES={
  foil:['Golven 0,8–1,5 m ideaal, periode ≥9 s; lichte of aflandige wind; aftrek bij aanlandige wind &gt;8 kn, wind &gt;25 kn, stroming &gt;0,8 kn.','Waves 0.8–1.5 m ideal, period ≥9 s; light or offshore wind; deductions for onshore wind &gt;8 kn, wind &gt;25 kn, current &gt;0.8 kn.'],
@@ -190,17 +195,32 @@ const RULES={
  wing:['Wind ca. 11–30 kn ideaal (&lt;7 kn −4; 7–11 kn −1,5; 30–35 kn −1,5; &gt;35 kn −3). Vlagen meer dan 15 kn boven de wind −1, vlagen &gt;40 kn −1. Geschat aflandig −2 (aflandig afdrijven is gevaarlijk); bij golven &lt;0,5 m onbekend: −1. Golven &gt;3 m −1, stroming &gt;1,5 kn −1.','Wind about 11–30 kn ideal (&lt;7 kn −4; 7–11 kn −1.5; 30–35 kn −1.5; &gt;35 kn −3). Gusts more than 15 kn above the wind −1, gusts &gt;40 kn −1. Estimated offshore −2 (drifting offshore is dangerous); with waves &lt;0.5 m unknown: −1. Waves &gt;3 m −1, current &gt;1.5 kn −1.'],
  parawing:['Wind 12–25 kn ideaal (&lt;8 kn −4; 8–12 kn −1,5; 25–30 kn −1,5; &gt;30 kn −3). Vlagen meer dan 15 kn boven de wind −1. Aflandig −2 (met waarschuwing); onbekende richting −1. Deining tot 3 m geen aftrek, &gt;3 m −1. Stroming &gt;1,5 kn −1.','Wind 12–25 kn ideal (&lt;8 kn −4; 8–12 kn −1.5; 25–30 kn −1.5; &gt;30 kn −3). Gusts more than 15 kn above the wind −1. Offshore −2 (with warning); unknown direction −1. Swell up to 3 m no deduction, &gt;3 m −1. Current &gt;1.5 kn −1.'],
  sup:['Vlak water en weinig wind ideaal: golven 0,3–0,6 m −1, 0,6–1 m −2, &gt;1 m −3,5; wind 8–12 kn −1, 12–18 kn −2,5, &gt;18 kn −4; geschat aflandig &gt;8 kn −2 extra (onbekend bij golven &lt;0,5 m: −0,5). Stroming &gt;1 kn −1.','Flat water and little wind ideal: waves 0.3–0.6 m −1, 0.6–1 m −2, &gt;1 m −3.5; wind 8–12 kn −1, 12–18 kn −2.5, &gt;18 kn −4; estimated offshore &gt;8 kn −2 extra (unknown with waves &lt;0.5 m: −0.5). Current &gt;1 kn −1.']};
-function rulesH(l){const x=SP(),r=RULES[SPORT][l=='en'?1:0];return l=='en'
- ?`<details><summary><b>How the rating works – ${x.en}</b></summary><p>An <b>indication</b> for ${x.en.toLowerCase()}, not safety advice. Today: the current hour; other days: best of 9, 13 and 17 h. Start at 5 stars, then deductions. Good ≥3.5, fair 2–3.5, poor &lt;2.</p><p>${r}</p><p>All sports: rain &gt;0.5 mm/h −0.5, &gt;2 mm/h −1; thunderstorm −2; dark 0. Onshore/side/offshore: wind direction vs. the seaward direction of the coast per spot (derived from the OpenStreetMap coastline; onshore ≤67.5°, offshore ≥112.5°). Where the coastline is unclear, it is estimated from wind vs. wave direction. Shallows, rips, zones and crowds are not included.</p></details>`
- :`<details><summary><b>Hoe de beoordeling werkt – ${x.nl}</b></summary><p>Een <b>indicatie</b> voor ${x.nl.toLowerCase()}, geen veiligheidsadvies. Vandaag: het huidige uur; andere dagen: het beste van 9, 13 en 17 uur. Start op 5 sterren, daarna aftrek. Goed ≥3,5, matig 2–3,5, slecht &lt;2.</p><p>${r}</p><p>Alle sporten: regen &gt;0,5 mm/u −0,5, &gt;2 mm/u −1; onweer −2; donker 0. Aanlandig/zijwaarts/aflandig: windrichting t.o.v. de zeewaartse richting van de kust per spot (afgeleid uit de OpenStreetMap-kustlijn; aanlandig ≤67,5°, aflandig ≥112,5°). Waar de kustlijn onduidelijk is, wordt het geschat uit wind- t.o.v. golfrichting. Ondieptes, muistromen, zones en drukte zitten er niet in.</p></details>`}
+const RDE={
+ foil:'Wellen 0,8–1,5 m ideal, Periode ≥9 s; leichter oder ablandiger Wind; Abzüge bei auflandigem Wind &gt;8 kn, Wind &gt;25 kn, Strömung &gt;0,8 kn.',
+ prone:'Wellen 0,4–2 m ideal (&lt;0,25 m −3; 0,25–0,4 m −1; 2–3 m −1; &gt;3 m −2,5); Periode &lt;5 s −1,5, 5–7 s −1. Wind &gt;20 kn −2; 12–20 kn −1,5 auflandig (sonst −0,5); 8–12 kn auflandig −0,5. Strömung &gt;0,8 kn −0,5, &gt;1,5 kn −1.',
+ supfoil:'Wellen/Buckel 0,3–1,8 m ideal (&lt;0,2 m −2,5; 0,2–0,3 m −1; 1,8–3 m −1; &gt;3 m −2,5); Periode &lt;6 s −0,5. Wind &gt;15 kn −1,5, &gt;22 kn −3; auflandig 12–15 kn −1; ablandig &gt;8 kn zusätzlich −2. Strömung &gt;1 kn −1.',
+ dw:'Wind 15–25 kn ideal (&lt;12 kn −3; 12–15 kn −1; 25–30 kn −1; &gt;30 kn −3). Richtung zur Küste: sideshore oder side-onshore (30–100° von direkt auflandig) ideal; direkt auflandig (&lt;30°) −1; ablandige Komponente (&gt;100°) −3 mit Warnung; Küstenausrichtung unbekannt −1,5. Buckel 0,5–2 m gut, &lt;0,3 m −1, &gt;2,5 m −1. Strömung &gt;1,5 kn −1. Organisiere immer deine Abholung und fahr nicht allein.',
+ surf:'Wellen 0,8–2,5 m ideal (&lt;0,5 m −3; 0,5–0,8 m −1; 2,5–3,5 m −1; &gt;3,5 m −2,5); Periode &lt;6 s −1,5, 6–8 s −1, 8–10 s −0,5. Wind &gt;20 kn −2; 12–20 kn −1,5 auflandig (sonst −0,5); 8–12 kn auflandig −0,5. Strömung &gt;0,8 kn −0,5, &gt;1,5 kn −1.',
+ wind:'Wind 12–30 kn ideal (&lt;8 kn −4; 8–12 kn −2; 30–35 kn −1,5; &gt;35 kn −3). Böen mehr als 15 kn über dem Mittelwind −1, Böen &gt;40 kn −1. Unbekannte Richtung bei Wellen &lt;0,5 m −0,5. Wellen &gt;3 m −1, Strömung &gt;1,5 kn −1.',
+ kite:'Wind 12–30 kn ideal (&lt;8 kn −4; 8–12 kn −2; 30–35 kn −1,5; &gt;35 kn −3). Böen mehr als 15 kn über dem Mittelwind −1, Böen &gt;40 kn −1. Unbekannte Richtung bei Wellen &lt;0,5 m −1. Wellen &gt;3 m −1, Strömung &gt;1,5 kn −1.',
+ kitefoil:'Wind 10–25 kn ideal (&lt;6 kn −4; 6–10 kn −1; 25–30 kn −1,5; &gt;30 kn −3). Böen mehr als 15 kn über dem Mittelwind −1. Unbekannte Richtung −1. Wellen &gt;2 m −1, Strömung &gt;1,5 kn −1.',
+ wing:'Wind ca. 11–30 kn ideal (&lt;7 kn −4; 7–11 kn −1,5; 30–35 kn −1,5; &gt;35 kn −3). Böen mehr als 15 kn über dem Mittelwind −1, Böen &gt;40 kn −1. Unbekannte Richtung bei Wellen &lt;0,5 m −1. Wellen &gt;3 m −1, Strömung &gt;1,5 kn −1.',
+ parawing:'Wind 12–25 kn ideal (&lt;8 kn −4; 8–12 kn −1,5; 25–30 kn −1,5; &gt;30 kn −3). Böen mehr als 15 kn über dem Mittelwind −1. Unbekannte Richtung −1. Dünung bis 3 m kein Abzug, &gt;3 m −1. Strömung &gt;1,5 kn −1.',
+ sup:'Flaches Wasser und wenig Wind ideal: Wellen 0,3–0,6 m −1, 0,6–1 m −2, &gt;1 m −3,5; Wind 8–12 kn −1, 12–18 kn −2,5, &gt;18 kn −4; ablandig &gt;8 kn zusätzlich −2. Strömung &gt;1 kn −1.'};
+const CAP=['wind','kite','kitefoil','wing','parawing'];
+function rulesH(l){const x=SP(),cap=CAP.includes(SPORT);
+ if(l=='de')return `<details><summary><b>So funktioniert die Bewertung – ${x.de}</b></summary><p>Eine <b>Orientierung</b> für ${x.de}, kein Sicherheitsrat. Heute: die aktuelle Stunde; andere Tage: der beste Wert von 9, 13 und 17 Uhr. Start bei 5 Sternen, dann Abzüge. Gut ≥3,5, mäßig 2–3,5, schlecht &lt;2.</p><p>${RDE[SPORT]}</p>${cap?'<p><b>Ablandiger Wind (≥5 kn): immer „schlecht“ (max. 1,5 Sterne) mit Warnung.</b></p>':''}<p>Alle Sportarten: Regen &gt;0,5 mm/h −0,5, &gt;2 mm/h −1; Gewitter −2; dunkel 0. Auflandig/sideshore/ablandig: Windrichtung gegenüber der seewärtigen Ausrichtung der Küste pro Spot (abgeleitet aus einer Land-/Meer-Karte; auflandig ≤67,5°, ablandig ≥112,5°). Wo die Küste unklar ist, wird es aus Wind- gegenüber Wellenrichtung geschätzt. Untiefen, Rippströmungen, Zonen und Andrang sind nicht enthalten.</p></details>`;
+ const r=RULES[SPORT][l=='en'?1:0];return l=='en'
+ ?`<details><summary><b>How the rating works – ${x.en}</b></summary><p>An <b>indication</b> for ${x.en.toLowerCase()}, not safety advice. Today: the current hour; other days: best of 9, 13 and 17 h. Start at 5 stars, then deductions. Good ≥3.5, fair 2–3.5, poor &lt;2.</p><p>${r}</p>${cap?'<p><b>Offshore wind (≥5 kn): always “poor” (max. 1.5 stars) with a warning.</b></p>':''}<p>All sports: rain &gt;0.5 mm/h −0.5, &gt;2 mm/h −1; thunderstorm −2; dark 0. Onshore/side/offshore: wind direction vs. the seaward direction of the coast per spot (derived from a land/sea map; onshore ≤67.5°, offshore ≥112.5°). Where the coastline is unclear, it is estimated from wind vs. wave direction. Shallows, rips, zones and crowds are not included.</p></details>`
+ :`<details><summary><b>Hoe de beoordeling werkt – ${x.nl}</b></summary><p>Een <b>indicatie</b> voor ${x.nl.toLowerCase()}, geen veiligheidsadvies. Vandaag: het huidige uur; andere dagen: het beste van 9, 13 en 17 uur. Start op 5 sterren, daarna aftrek. Goed ≥3,5, matig 2–3,5, slecht &lt;2.</p><p>${r}</p>${cap?'<p><b>Aflandige wind (≥5 kn): altijd „slecht” (max. 1,5 ster) met waarschuwing.</b></p>':''}<p>Alle sporten: regen &gt;0,5 mm/u −0,5, &gt;2 mm/u −1; onweer −2; donker 0. Aanlandig/zijwaarts/aflandig: windrichting t.o.v. de zeewaartse richting van de kust per spot (afgeleid uit een land/zee-kaart; aanlandig ≤67,5°, aflandig ≥112,5°). Waar de kust onduidelijk is, wordt het geschat uit wind- t.o.v. golfrichting. Ondieptes, muistromen, zones en drukte zitten er niet in.</p></details>`}
 function offW(k,date){if(SPORT=='dw')return dwW(k,date);if(!['wind','kite','kitefoil','wing','parawing','sup','supfoil'].includes(SPORT))return '';const m=M[k].hourly;let i;
  if(day==0)i=m.time.indexOf(new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00');else i=m.time.indexOf(date+'T13:00');
  if(i<0)return '';const ws=F[k].hourly.wind_speed_10m[i];if(rel(k,i)!='off'||ws==null||ws<5)return '';
- return `<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind')} (${card(F[k].hourly.wind_direction_10m[i])}, ${Math.round(ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af. Niet zonder begeleiding of rescue.','you drift away from the shore. Not without supervision or rescue.')}</p>`}
+ return `<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind','Ablandiger Wind')} (${card(F[k].hourly.wind_direction_10m[i])}, ${Math.round(ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af. Niet zonder begeleiding of rescue.','you drift away from the shore. Not without supervision or rescue.','du treibst von der Küste weg. Nicht ohne Begleitung oder Rescue.')}</p>`}
 function dwW(k,date){const m=M[k].hourly;const i=day==0?m.time.indexOf(new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00'):m.time.indexOf(date+'T13:00');if(i<0)return '';
  const d=cAng(k,i),ws=F[k].hourly.wind_speed_10m[i];let h='';
- if(d!=null&&d>100&&ws!=null&&ws>=5)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind')} (${card(F[k].hourly.wind_direction_10m[i])}, ${Math.round(ws)} kn${day?' · 13:00':''}) – ${T('geen downwinder: je drijft van de kust af.','no downwinder: you drift away from the shore.')}</p>`;
- const a=alongH(k,i);if(a)h+=`<p class="info" style="margin:0 0 8px">↔️ ${a}${day?' (13:00)':''}</p>`;else h+=`<p class="info" style="color:var(--m);margin:0 0 8px">${T('Kustrichting voor deze spot onzeker; controleer de windrichting t.o.v. de kust zelf.','Coast bearing for this spot is uncertain; check the wind direction vs. the coast yourself.')}</p>`;
+ if(d!=null&&d>100&&ws!=null&&ws>=5)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind','Ablandiger Wind')} (${card(F[k].hourly.wind_direction_10m[i])}, ${Math.round(ws)} kn${day?' · 13:00':''}) – ${T('geen downwinder: je drijft van de kust af.','no downwinder: you drift away from the shore.','kein Downwinder: du treibst von der Küste weg.')}</p>`;
+ const a=alongH(k,i);if(a)h+=`<p class="info" style="margin:0 0 8px">↔️ ${a}${day?' (13:00)':''}</p>`;else h+=`<p class="info" style="color:var(--m);margin:0 0 8px">${T('Kustrichting voor deze spot onzeker; controleer de windrichting t.o.v. de kust zelf.','Coast bearing for this spot is uncertain; check the wind direction vs. the coast yourself.','Küstenausrichtung für diesen Spot unsicher; prüfe die Windrichtung zur Küste selbst.')}</p>`;
  return h}
 
 function rating(k,date){const m=M[k].hourly;
@@ -221,7 +241,7 @@ function cardH(k,date,full){const s=spots[k];const m=M[k].hourly,w=F[k].hourly;
   ${row('Wind kn',i=>`${arrow(w.wind_direction_10m[i])} ${f(w.wind_speed_10m[i])}<small>/${f(w.wind_gusts_10m[i])}</small> ${card(w.wind_direction_10m[i])}`)}
   ${row(T('Golf','Waves','Wellen'),i=>`${arrow(m.wave_direction[i])} ${f(m.wave_height[i],1)}m <small>${f(m.wave_period[i])}s ${card(m.wave_direction[i])}</small>`)}
   ${row(T('Stroming','Current','Strömung'),i=>`${arrow(m.ocean_current_direction[i],1)} ${f(m.ocean_current_velocity[i]==null?null:m.ocean_current_velocity[i]/1.852,1)}kn <small>${card(m.ocean_current_direction[i])}</small>`)}
-  ${row('Water',i=>`${f(m.sea_surface_temperature[i],1)}°C`)}
+  ${row(T('Water','Water','Wasser'),i=>`${f(m.sea_surface_temperature[i],1)}°C`)}
   </table><div class="tide">🌊 ${!hv.length?T('getij: geen gegevens','tide: no data','Gezeiten: keine Daten'):rg<0.3?T('getij: verwaarloosbaar klein (&lt;0,3 m)','tide: negligible (&lt;0.3 m)','Gezeiten: vernachlässigbar (&lt;0,3 m)'):td.length?td.map(x=>`<b>${LANG=='en'?(x[0]=='HW'?'HT':'LT'):LANG=='de'?(x[0]=='HW'?'HW':'NW'):x[0]}</b> ${x[1]}`).join(' · '):T('getij: geen gegevens','tide: no data','Gezeiten: keine Daten')}</div>${full?repH(k):`<p style="text-align:center;margin:10px 0 0">${cardRepBtn(k)}</p>`}</section>`}
 
 // ==== ERVARINGEN (sessieverslagen) ====
