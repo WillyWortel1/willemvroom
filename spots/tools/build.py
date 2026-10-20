@@ -17,7 +17,7 @@ rep("<title>Foilassist – condities per spot</title><script>if(LANG=='en')docum
 # paden naar foilassist-data (alleen lezen)
 rep('href="leaflet/leaflet.css','href="/foilassist/leaflet/leaflet.css')
 rep('src="leaflet/leaflet.js','src="/foilassist/leaflet/leaflet.js')
-rep('src="spots.js?','src="/foilassist/spots.js?')
+rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=1"></script>')
 rep("tfetch('data.json?h=","tfetch('/foilassist/data.json?h=")
 rep("const KEY='foilassist-cache-v1';","const KEY='spots-cache-v1';")
 # kop
@@ -35,7 +35,8 @@ rep("// ==== STERREN (indicatie voor foil assist) ====\nfunction score(k,i){","/
 rep("function rating(k,date){",open(R/"spots/tools/sport.js",encoding="utf-8").read()+"\nfunction rating(k,date){")
 rep("""document.getElementById('lands').innerHTML=""","""sportNav();document.getElementById('lands').innerHTML=""")
 rep(""".bindTooltip(`${spotName(s)} · ${R2(rating(k,curDate).v)??'–'}★`""",""".bindTooltip(`${spotName(s)} · ${R2(rating(k,curDate).v)??'–'}★ ${qual(rating(k,curDate).v)}`""")
-rep("""<div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>""","""<div class="rt">${stars(rating(k,date).v)} ${qualH(rating(k,date).v)} <small>${SP().n()} · ${rating(k,date).t}</small></div>""")
+rep("""<div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>""","""<div class="rt">${stars(rating(k,date).v)} ${qualH(rating(k,date).v)} <small>${SP().n()} · ${rating(k,date).t}</small></div>${offW(k,date)}""")
+rep("let on=false;if(wd!=null&&m.wave_direction[i]!=null){let d=Math.abs(wd-m.wave_direction[i])%360;if(d>180)d=360-d;on=d<60;}","let on=false;if(wd!=null&&m.wave_direction[i]!=null){let d=Math.abs(wd-m.wave_direction[i])%360;if(d>180)d=360-d;on=d<60;}{const _o=rel(k,i);if(_o!='unk')on=_o=='on';}")
 # lokale regels
 rep("function frLabel(s){const f=s.foilregel;return","function frLabel(s){const f=s.foilregel;if(SPORT!='foil')return T('⚠️ Lokale regels','⚠️ Local rules','⚠️ Lokale Regeln');return")
 rep("function openFR(k){const s=spots[k],f=s.foilregel,land=FRL[s.land];","function openFR(k){if(SPORT!='foil')return openGen(k);const s=spots[k],f=s.foilregel,land=FRL[s.land];")
