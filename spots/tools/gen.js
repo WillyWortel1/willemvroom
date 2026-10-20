@@ -1,11 +1,11 @@
 // ==== ALGEMEEN CONDITIEOVERZICHT (geen sportkeuze) ====
 // Zeewaartse kustrichting uit /spots/coast.js; anders schatting uit wind- t.o.v. golfrichting.
 function rel(k,i){const wd=F[k].hourly.wind_direction_10m[i],gd=M[k].hourly.wave_direction[i];const cb=(window.COAST||{})[spots[k].naam];
- if(cb&&cb[1]&&wd!=null){let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;return d<=67.5?'on':d>=112.5?'off':'side';}
+ if(cb&&cb[1]&&wd!=null){let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;return d<=67.5?'on':d>=112.5?'off':d>90?'sideoff':'side';} // zijwaarts 67,5–90°, zijaflandig 90–112,5°, aflandig ≥112,5°
  if(cb&&!cb[1]&&wd!=null){let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;if(d>=120)return 'off';if(d<=45)return 'on';} // onzekere kust: alleen duidelijke gevallen
  if(wd==null||gd==null||M[k].hourly.wave_height[i]==null||M[k].hourly.wave_height[i]<0.5)return 'unk';
  let d=Math.abs(wd-gd)%360;if(d>180)d=360-d;return d<60?'on':d>120?'off':'side';}
-const relL=o=>({on:T('aanlandig','onshore','auflandig'),side:T('zijwaarts','side-shore','sideshore'),off:T('aflandig','offshore','ablandig'),unk:T('richting t.o.v. kust onbekend','direction vs. coast unknown','Richtung zur Küste unbekannt')})[o];
+const relL=o=>({on:T('aanlandig','onshore','auflandig'),side:T('zijwaarts','side-shore','sideshore'),off:T('aflandig','offshore','ablandig'),sideoff:T('zijaflandig','side-offshore','schräg ablandig'),unk:T('richting t.o.v. kust onbekend','direction vs. coast unknown','Richtung zur Küste unbekannt')})[o];
 function gIdx(k,date){const m=M[k].hourly;return day==0?m.time.indexOf(new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00'):m.time.indexOf(date+'T13:00');}
 // niveau 3 = aflandig (waarschuwing); overige niveaus worden niet getoond
 function cond(k,date){const i=gIdx(k,date);if(i<0)return null;const w=F[k].hourly,m=M[k].hourly;
@@ -22,6 +22,7 @@ function condQ(k,c){if(!c)return null;const i=c.i,w=F[k].hourly,m=M[k].hourly,ws
  let wq=0;if(ws!=null){wq=ws<6?0:ws<12?(ws-6)/6:ws<=25?1:1-(ws-25)/7*0.7;}
  let vq=0;if(H!=null){vq=H<0.3?0:H<0.6?(H-0.3)/0.3:H<=2?1:1-(H-2)/1.5*0.7;vq*=P==null?0.8:P<5?0.5:P<7?0.75:P<9?0.9:1;}
  let q=Math.max(wq,vq);
+ if(c.o=='sideoff'&&ws!=null&&ws>=5)q=Math.min(q,0.45);           // zijaflandig: nooit groen
  if(c.o=='unk'&&ws!=null&&ws>=10)q=Math.min(q,0.6);               // richting t.o.v. kust onbekend: voorzichtig
  if(g!=null&&ws!=null&&g-ws>15)q-=0.15;                         // zeer vlagerig
  if(c.o=='on'&&ws!=null&&ws>15&&H!=null&&H>1&&P!=null&&P<6)q-=0.2; // korte aanlandige chop
@@ -33,6 +34,7 @@ const condCol=(c,k)=>{const q=condQ(k,c);return q==null?'#888':`hsl(${Math.round
 function condH(k,date){const c=cond(k,date);if(!c)return '<div class="rt">–</div>';
  let h=`<div class="rt"><small>${c.t}</small><br>💨 ${f(c.ws)}/${f(c.g)} kn ${card(c.wd)} · ${relL(c.o)} · 🌊 ${f(c.H,1)} m ${f(c.P)} s</div>`;
  if(c.l==3)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind','Ablandiger Wind')} (${card(c.wd)}, ${Math.round(c.ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af.','you drift away from the shore.','du treibst von der Küste weg.')}</p>`;
+ if(c.l!=3&&c.o=='sideoff'&&c.ws!=null&&c.ws>=5)h+=`<p class="info" style="color:#ffc89a;font-weight:600;margin:0 0 8px">⚠️ ${T('Zijaflandige wind','Side-offshore wind','Schräg ablandiger Wind')} (${card(c.wd)}, ${Math.round(c.ws)} kn${day?' · 13:00':''}) – ${T('je kunt van de kust af drijven.','you can drift away from the shore.','du kannst von der Küste abtreiben.')}</p>`;
  return h}
 function frLabel(){return T('⚠️ Lokale regels','⚠️ Local rules','⚠️ Lokale Regeln')}
 function openFR(k){const s=spots[k];
