@@ -55,3 +55,4 @@ html.dark #thm,html.dark #thm:hover,html.dark #thm:active,html.dark #thm:focus,h
 h1 .dot{color:#d62828}
 dl.rise dt{color:#d62828!important}
 html{scroll-behavior:smooth}#werk{scroll-margin-top:8px}.to-werk{grid-column:1/-1;justify-self:center;display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;margin-top:8px;color:#d62828;-webkit-tap-highlight-color:transparent;animation:tw 2s ease-in-out infinite}@keyframes tw{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.to-werk{animation:none}}
+.to-werk{margin-top:-16px;height:30px;width:44px}.to-werk svg{width:24px;height:24px}@keyframes tw{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
