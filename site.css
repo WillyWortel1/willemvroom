@@ -33,7 +33,7 @@ dt{font-size:.75rem!important;text-transform:uppercase;letter-spacing:.06em;font
 footer{border-top:1px solid var(--color-line)}
 footer>div{max-width:760px}
 #thm{border:0;background:none;padding:0;width:36px;height:36px;margin-left:4px;color:var(--color-fg);display:inline-flex;align-items:center;justify-content:center;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent}
-#thm:hover,#thm:active{color:var(--accent)}
+@media (hover:hover){html:not(.dark) #thm:hover{color:#d62828}}html:not(.dark) #thm:active{color:#d62828}
 #thm svg{position:absolute;transition:opacity .3s,transform .4s}
 #thm .moon{opacity:0;transform:rotate(-90deg) scale(.6)}
 html.dark #thm .sun{opacity:0;transform:rotate(90deg) scale(.6)}html.dark #thm .moon{opacity:1;transform:none}
@@ -45,3 +45,6 @@ html.dark #thm .sun{opacity:0;transform:rotate(90deg) scale(.6)}html.dark #thm .
 .wv-head nav a{color:#d62828;text-decoration:none;transition:opacity .2s}.wv-head nav a:hover{opacity:.7}
 .wv-head nav b{color:#111;font-weight:700}
 html.dark .wv-head .home,html.dark .wv-head nav b,html.dark .wv-head nav{color:#fff}
+
+/* Maantje altijd wit */
+html.dark #thm,html.dark #thm:hover,html.dark #thm:active,html.dark #thm:focus,html.dark #thm:focus-visible{color:#fff!important}
