@@ -15,7 +15,7 @@ rep("<title>Foilassist – condities per spot</title><script>if(LANG=='en')docum
 # paden naar foilassist-data (alleen lezen)
 rep('href="leaflet/leaflet.css','href="/foilassist/leaflet/leaflet.css')
 rep('src="leaflet/leaflet.js','src="/foilassist/leaflet/leaflet.js')
-rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=3"></script>')
+rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=4"></script>')
 rep("tfetch('data.json?h=","tfetch('/foilassist/data.json?h=")
 rep("const KEY='foilassist-cache-v1';","const KEY='spots-cache-v1';")
 # kop
@@ -34,7 +34,7 @@ rep("""document.getElementById('lands').innerHTML=""","""genRules();document.get
 rep(""".map(k=>[k,rating(k,date).v??-1]).sort((a,b)=>b[1]-a[1]).map(([k])=>cardH(k,date,false))""",""".map(k=>cardH(k,date,false))""")
 rep("""<span class="nl">Lijst – beste spot bovenaan</span><span class="en">List – best spot on top</span><span class="de">Liste – bester Spot oben</span>""","""<span class="nl">Lijst</span><span class="en">List</span><span class="de">Liste</span>""")
 rep("""fillColor:scol(rating(k,curDate).v)""","""fillColor:condCol(cond(k,curDate))""")
-rep(""".bindTooltip(`${spotName(s)} · ${R2(rating(k,curDate).v)??'–'}★`""",""".bindTooltip(`${spotName(s)} · ${(c=>c?LV()[c.l][0]:'–')(cond(k,curDate))}`""")
+rep(""".bindTooltip(`${spotName(s)} · ${R2(rating(k,curDate).v)??'–'}★`""",""".bindTooltip(`${spotName(s)}`""")
 rep("""<div class="rt">${stars(rating(k,date).v)} <small>${rating(k,date).t}</small></div>""","""${condH(k,date)}""")
 rep("${row('Water',i=>","${row(T('Water','Water','Wasser'),i=>")
 # lokale regels: altijd generiek (functies in gen.js gaan voor; oude definities hernoemen)
@@ -49,7 +49,7 @@ rep("""<fieldset><legend>${T('Batterij(en)','Battery/batteries','Akku(s)')}</leg
 rep("""<input id="f_oef" name="oefenen" maxlength="300">""","""<input id="f_oef" name="oefenen" maxlength="300" hidden disabled>""")
 rep("""<label for="f_oef">${T('Wat oefen je?','What are you practising?','Was übst du?')}</label>""","")
 out=R/"spots";(out/"en").mkdir(parents=True,exist_ok=True)
-s=s.replace('?v=20261014-42','?v=20261020-spots4')
+s=s.replace('?v=20261014-42','?v=20261020-spots5')
 (out/"index.html").write_text(s,encoding="utf-8")
 for l in ("en","de"):
     (out/l).mkdir(exist_ok=True);(out/l/"index.html").write_text(s.replace('<html lang="nl">',f'<html lang="{l}">',1),encoding="utf-8")
