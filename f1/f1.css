@@ -15,10 +15,12 @@ article.past{opacity:.5}article.next{border:2px solid #d62828;box-shadow:0 8px 2
 .next .rd{background:#d62828}h2{font-size:1.15rem;font-weight:750;letter-spacing:-.015em;margin:0}.h p{margin:2px 0 0;color:#777;font-size:.82rem}
 .cd{display:inline-block;background:#111;color:#fff;font-weight:700;border-radius:999px;padding:6px 14px;margin:12px 0 0;font-variant-numeric:tabular-nums}
 .win{margin:10px 0 0;font-size:.85rem;color:#444}
-details{margin:12px 0 0}summary{cursor:pointer;font-size:.85rem;font-weight:600;color:#333;list-style:none}summary::before{content:'▸ ';color:#999;transition:.2s}details[open] summary::before{content:'▾ '}
+details{margin:12px 0 0}summary{cursor:pointer;font-size:.85rem;font-weight:600;color:#333;list-style:none}summary::-webkit-details-marker{display:none}summary{display:flex;align-items:center;gap:8px;min-height:32px}summary::before{content:'';width:7px;height:7px;border-right:2px solid #888;border-bottom:2px solid #888;transform:rotate(-45deg);transition:transform .25s}details[open]>summary::before{transform:rotate(45deg)}details[open]>summary~*{animation:op .3s ease}@keyframes op{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
 table{border-collapse:collapse;width:100%;font-size:.85rem;margin-top:8px;font-variant-numeric:tabular-nums}th{text-align:left;color:#999;font-weight:500;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;padding-bottom:4px}
 td{padding:6px 6px 6px 0;border-top:1px solid #f0f0f0}tr.race td{font-weight:700;color:#d62828}
 .lk{font-size:.82rem;margin:10px 0 0}footer{color:#999;font-size:.75rem;margin-top:28px;text-align:center}
 @media(max-width:420px){h1{font-size:1.8rem}td,th{font-size:.8rem}}
 .leaflet-container a{color:#444}
 .sw{margin:10px 0 4px;font-size:.95rem;font-weight:700;display:flex;gap:6px}.sw b,.sw a{padding:6px 14px;border-radius:999px;border:1px solid #ddd;color:#555;background:#fff;transition:.2s}.sw b{background:#d62828;border-color:#d62828;color:#fff}.prov{margin:10px 0 0;font-size:.85rem;color:#555}
+.tb img{display:block;width:100%;max-width:420px;height:auto;margin:8px auto 0;aspect-ratio:1/1;object-fit:contain}.tb small{display:block;color:#999;font-size:.7rem;text-align:center;margin-top:4px}
+.tb img{filter:grayscale(1)}.tb small a{color:#999;text-decoration:underline}
