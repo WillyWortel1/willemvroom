@@ -30,7 +30,10 @@ function condQ(k,c){if(!c)return null;const i=c.i,w=F[k].hourly,m=M[k].hourly,ws
  const wc=w.weather_code[i],r=w.precipitation[i];if(wc!=null&&wc>=95)q-=0.5;else if(r!=null){if(r>2)q-=0.2;else if(r>0.5)q-=0.1;}
  if(w.is_day&&w.is_day[i]===0)q-=0.4;                            // donker
  return Math.max(0,Math.min(1,q));}
-const condCol=(c,k)=>{const q=condQ(k,c);return q==null?'#888':`hsl(${Math.round(120*q)},80%,45%)`};
+let DOTS=(()=>{try{return localStorage.getItem('spots-dots')=='neutral'?'neutral':'color'}catch(e){return 'color'}})();
+function setDots(m){DOTS=m;try{localStorage.setItem('spots-dots',m)}catch(e){}render();}
+function dotsNav(){const e=document.getElementById('dm');if(!e)return;e.innerHTML=[['color',T('Kleur','Colour','Farbe')],['neutral',T('Neutraal','Neutral','Neutral')]].map(([m,t])=>`<button type="button" aria-pressed="${DOTS==m}" class="${DOTS==m?'on':''}" onclick="setDots('${m}')">${t}</button>`).join('');}
+const condCol=(c,k)=>{if(DOTS=='neutral')return '#111';const q=condQ(k,c);return q==null?'#888':`hsl(${Math.round(120*q)},80%,45%)`};
 function condH(k,date){const c=cond(k,date);if(!c)return '<div class="rt">–</div>';
  let h=`<div class="rt"><small>${c.t}</small><br>💨 ${f(c.ws)}/${f(c.g)} kn ${card(c.wd)} · ${relL(c.o)} · 🌊 ${f(c.H,1)} m ${f(c.P)} s</div>`;
  if(c.l==3)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind','Ablandiger Wind')} (${card(c.wd)}, ${Math.round(c.ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af.','you drift away from the shore.','du treibst von der Küste weg.')}</p>`;

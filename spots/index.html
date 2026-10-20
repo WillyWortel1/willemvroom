@@ -8,7 +8,7 @@ const T=(nl,en,de)=>LANG=='de'?de:LANG=='en'?en:nl;</script>
 <link rel="canonical" href="https://willemvroom.nl/spots/"><link rel="alternate" hreflang="nl" href="https://willemvroom.nl/spots/"><link rel="alternate" hreflang="en" href="https://willemvroom.nl/spots/en/"><link rel="alternate" hreflang="de" href="https://willemvroom.nl/spots/de/"><link rel="alternate" hreflang="x-default" href="https://willemvroom.nl/spots/">
 <link rel="icon" href="/favicon.svg">
 <title>Spots🤙 – condities per spot</title><script>if(LANG=='en')document.title='Spots🤙 – conditions per spot';if(LANG=='de')document.title='Spots🤙 – Bedingungen pro Spot'</script>
-<link rel="stylesheet" href="/foilassist/leaflet/leaflet.css?v=20261020-spots14">
+<link rel="stylesheet" href="/foilassist/leaflet/leaflet.css?v=20261020-spots15">
 <style>
 :root{--bg:#0b1d2a;--card:#12324a;--t:#e8f3fb;--m:#8fb3cc;--a:#3ec1d3}
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
@@ -49,11 +49,11 @@ h3.l{margin:14px 14px 0;font-size:1rem;color:var(--m)}
 #rf .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 8px}.hp{position:absolute;left:-9999px;height:0;overflow:hidden}
 html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:none}
 .lt{float:right;font-size:.8rem}.lt button{border:1px solid #2b5675;background:#0f2a3e;color:var(--t);border-radius:12px;padding:3px 8px;font:inherit}.lt button.on{background:var(--a);color:#032}
-.wdot{background:none;border:0}.leaflet-marker-icon.wdot{pointer-events:none!important}.wdot .hit{pointer-events:auto;cursor:pointer}</style></head><body>
+.wdot{background:none;border:0}.leaflet-marker-icon.wdot{pointer-events:none!important}.wdot .hit{pointer-events:auto;cursor:pointer}#dm{display:flex;justify-content:flex-end;gap:0;margin:0 10px 4px}#dm button{border:1px solid #fff;background:#000;color:#fff;font:inherit;font-size:.78rem;padding:3px 10px;cursor:pointer}#dm button:first-child{border-radius:12px 0 0 12px}#dm button:last-child{border-radius:0 12px 12px 0;border-left:0}#dm button.on{background:#fff;color:#000;font-weight:600}</style></head><body>
 <header><span class="lt"><button id="l-nl" onclick="setLang('nl')">NL</button> <button id="l-en" onclick="setLang('en')">EN</button> <button id="l-de" onclick="setLang('de')">DE</button></span><h1>Spots🤙</h1>
 <p><span class="nl">Golven, stroming, wind, weer, watertemperatuur en getij per spot.</span><span class="en">Waves, current, wind, weather, water temperature and tides per spot.</span><span class="de">Wellen, Strömung, Wind, Wetter, Wassertemperatur und Gezeiten pro Spot.</span> <span id="upd"></span></p></header>
 <nav class="days" id="lands"></nav><nav class="days" id="days" style="top:46px"></nav>
-<div id="map"></div><div id="frm" onclick="if(event.target==this)closeFR()"><div role="dialog" aria-modal="true" id="frc"></div></div><div id="sheet"><button class="x" onclick="closeS()">▾ <span class="nl">sluiten</span><span class="en">close</span><span class="de">schließen</span></button><div id="sc"></div></div>
+<div id="map"></div><div id="dm" role="group" aria-label="Stippen"></div><div id="frm" onclick="if(event.target==this)closeFR()"><div role="dialog" aria-modal="true" id="frc"></div></div><div id="sheet"><button class="x" onclick="closeS()">▾ <span class="nl">sluiten</span><span class="en">close</span><span class="de">schließen</span></button><div id="sc"></div></div>
 <h3 class="l"><span class="nl">Lijst</span><span class="en">List</span><span class="de">Liste</span></h3>
 <main id="main"><p class="nl">Gegevens laden…</p><p class="en">Loading data…</p><p class="de">Daten werden geladen…</p></main>
 <footer><div class="nl">
@@ -70,9 +70,9 @@ html:not([lang=nl]) .nl,html:not([lang=en]) .en,html:not([lang=de]) .de{display:
 <p>Pfeile zeigen, wohin Wellen, Wind und Strömung <i>gehen</i>; die Buchstaben geben an, woher Wellen und Wind kommen und wohin die Strömung geht. Zeiten sind die Ortszeit des Spots. Immer selbst vor Ort beurteilen.</p>
 </div></footer>
 <script>window.addEventListener("error",e=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML='<p class="err">'+T('Fout bij laden: ','Error while loading: ','Fehler beim Laden: ')+(e.message||T('onbekend','unknown','unbekannt'))+' <button onclick="location.reload()">'+T('Opnieuw','Retry','Erneut')+'</button></p>'});setTimeout(()=>{const m=document.getElementById("main");if(m&&/Gegevens laden|Loading data|Daten werden geladen/.test(m.textContent))m.innerHTML+='<p class="err">'+T('Dit duurt lang… ','This is taking long… ','Das dauert lange… ')+'<button onclick="location.reload()">'+T('Opnieuw proberen','Try again','Erneut versuchen')+'</button></p>'},30000);</script>
-<script src="/foilassist/leaflet/leaflet.js?v=20261020-spots14"></script>
+<script src="/foilassist/leaflet/leaflet.js?v=20261020-spots15"></script>
 <!-- Versie bij elke deploy ophogen (cache-busting) -->
-<script src="/foilassist/spots.js?v=20261020-spots14"></script><script src="/spots/coast.js?v=11"></script><script src="/spots/beachpos.js?v=2"></script>
+<script src="/foilassist/spots.js?v=20261020-spots15"></script><script src="/spots/coast.js?v=11"></script><script src="/spots/beachpos.js?v=3"></script>
 <script>
 const SL=[9,13,17],R=LANG=='de'?['N','NNO','NO','ONO','O','OSO','SO','SSO','S','SSW','SW','WSW','W','WNW','NW','NNW']:LANG=='en'?['N','NNE','NE','ENE','E','ESE','SE','SSE','S','SSW','SW','WSW','W','WNW','NW','NNW']:['N','NNO','NO','ONO','O','OZO','ZO','ZZO','Z','ZZW','ZW','WZW','W','WNW','NW','NNW'];const LOC=T('nl-NL','en-GB','de-DE');
 const card=d=>d==null?'–':R[Math.round(d/22.5)%16];
@@ -93,7 +93,7 @@ function tides(m,date){const t=m.minutely_15.time,h=m.minutely_15.sea_level_heig
 function render(){const dates=[...new Set(M[0].hourly.time.map(t=>t.slice(0,10)))];
  const fmt=d=>new Date(d+'T12:00').toLocaleDateString(LOC,{weekday:'short',day:'numeric',month:'short'});
  document.getElementById('days').innerHTML=dates.map((d,i)=>`<button class="${i==day?'on':''}" onclick="day=${i};render()">${i==0?T('Vandaag','Today','Heute'):i==1?T('Morgen','Tomorrow','Morgen'):fmt(d)}</button>`).join('');
- const date=dates[day];curDate=date;const ORDER=['NL','BE','FR','ES','PT','MA','Canarias','UK','Cornwall','IE','DE','DK'];const present=new Set(spots.flatMap(s=>s.regio?[s.land,s.regio]:[s.land]));const lands=['Alle',...ORDER.filter(l=>present.has(l)),...[...present].filter(l=>!ORDER.includes(l))];genRules();document.getElementById('lands').innerHTML=lands.map(l=>`<button class="${l==land?'on':''}" onclick="land='${l}';render()">${l=='Alle'?T('Alle','All','Alle'):l}</button>`).join('');document.getElementById('l-'+LANG).classList.add('on');
+ const date=dates[day];curDate=date;const ORDER=['NL','BE','FR','ES','PT','MA','Canarias','UK','Cornwall','IE','DE','DK'];const present=new Set(spots.flatMap(s=>s.regio?[s.land,s.regio]:[s.land]));const lands=['Alle',...ORDER.filter(l=>present.has(l)),...[...present].filter(l=>!ORDER.includes(l))];genRules();dotsNav();document.getElementById('lands').innerHTML=lands.map(l=>`<button class="${l==land?'on':''}" onclick="land='${l}';render()">${l=='Alle'?T('Alle','All','Alle'):l}</button>`).join('');document.getElementById('l-'+LANG).classList.add('on');
  document.getElementById('main').innerHTML=spots.map((s,k)=>k).filter(k=>land=='Alle'||(spots[k].land==land||spots[k].regio==land)).map(k=>cardH(k,date,false)).join('');drawMap();if(openK!=null)openS(openK);}
 
 // ==== STERREN (indicatie voor foil assist) ====
@@ -140,7 +140,10 @@ function condQ(k,c){if(!c)return null;const i=c.i,w=F[k].hourly,m=M[k].hourly,ws
  const wc=w.weather_code[i],r=w.precipitation[i];if(wc!=null&&wc>=95)q-=0.5;else if(r!=null){if(r>2)q-=0.2;else if(r>0.5)q-=0.1;}
  if(w.is_day&&w.is_day[i]===0)q-=0.4;                            // donker
  return Math.max(0,Math.min(1,q));}
-const condCol=(c,k)=>{const q=condQ(k,c);return q==null?'#888':`hsl(${Math.round(120*q)},80%,45%)`};
+let DOTS=(()=>{try{return localStorage.getItem('spots-dots')=='neutral'?'neutral':'color'}catch(e){return 'color'}})();
+function setDots(m){DOTS=m;try{localStorage.setItem('spots-dots',m)}catch(e){}render();}
+function dotsNav(){const e=document.getElementById('dm');if(!e)return;e.innerHTML=[['color',T('Kleur','Colour','Farbe')],['neutral',T('Neutraal','Neutral','Neutral')]].map(([m,t])=>`<button type="button" aria-pressed="${DOTS==m}" class="${DOTS==m?'on':''}" onclick="setDots('${m}')">${t}</button>`).join('');}
+const condCol=(c,k)=>{if(DOTS=='neutral')return '#111';const q=condQ(k,c);return q==null?'#888':`hsl(${Math.round(120*q)},80%,45%)`};
 function condH(k,date){const c=cond(k,date);if(!c)return '<div class="rt">–</div>';
  let h=`<div class="rt"><small>${c.t}</small><br>💨 ${f(c.ws)}/${f(c.g)} kn ${card(c.wd)} · ${relL(c.o)} · 🌊 ${f(c.H,1)} m ${f(c.P)} s</div>`;
  if(c.l==3)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind','Ablandiger Wind')} (${card(c.wd)}, ${Math.round(c.ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af.','you drift away from the shore.','du treibst von der Küste weg.')}</p>`;
