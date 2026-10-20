@@ -11,17 +11,17 @@ async function get(u){const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw 0
 let TR=[],CR={},CN=null;
 const SEA=new URLSearchParams(location.search).get('s');
 async function load(){let races,src='live';
- try{CR=await (await fetch('/f1/tracks/credits.json?v=20261020-f1n')).json();TR=Object.keys(CR)}catch(e){}
+ try{CR=await (await fetch('/f1/tracks/credits.json?v=20261020-f1o')).json();TR=Object.keys(CR)}catch(e){}
  document.getElementById('sw').innerHTML=['2026','2027'].map(y=>(SEA||'2026')==y?`<b>${y}</b>`:`<a href="?s=${y}">${y}</a>`).join(' ');
  if(SEA=='2027'){try{races=(await get('https://api.jolpi.ca/ergast/f1/2027.json')).RaceTable.Races}catch(e){}
-  if(!races||!races.length){try{races=(await (await fetch('/f1/2027.json?v=20261020-f1n')).json()).MRData.RaceTable.Races;src='prov'}catch(e){}}
+  if(!races||!races.length){try{races=(await (await fetch('/f1/2027.json?v=20261020-f1o')).json()).MRData.RaceTable.Races;src='prov'}catch(e){}}
   if(!races||!races.length){document.getElementById('list').innerHTML='<p class=sub>'+L('Kalender 2027 nog niet bekend.','2027 calendar not yet published.')+'</p>';return}
   return render(races,{},src)}
  try{races=(await get('https://api.jolpi.ca/ergast/f1/current.json')).RaceTable.Races;
   const last=races[races.length-1];if(new Date()>new Date(T(last).getTime()+864e5)){try{const n=(await get('https://api.jolpi.ca/ergast/f1/'+(+last.season+1)+'.json')).RaceTable.Races;if(n.length)races=n}catch(e){}}}
- catch(e){races=(await (await fetch('/f1/fallback.json?v=20261020-f1n')).json()).MRData.RaceTable.Races;src='fb'}
+ catch(e){races=(await (await fetch('/f1/fallback.json?v=20261020-f1o')).json()).MRData.RaceTable.Races;src='fb'}
  let win={};try{(await get('https://api.jolpi.ca/ergast/f1/'+races[0].season+'/results/1.json?limit=100')).RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}
- catch(e){try{(await (await fetch('/f1/winners.json?v=20261020-f1n')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
+ catch(e){try{(await (await fetch('/f1/winners.json?v=20261020-f1o')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
  render(races,win,src)}
 function provTimes(r,tz){const d0=new Date(r.start+'T12:00:00Z'),day=i=>new Date(d0.getTime()+i*864e5);
  const S=r.sprint?[['VT1','FP1',0],['Sprintkwalificatie','Sprint Qualifying',0],['Sprint','Sprint',1],['Kwalificatie','Qualifying',1],['Race','Race',2]]:[['VT1','FP1',0],['VT2','FP2',0],['VT3','FP3',1],['Kwalificatie','Qualifying',1],['Race','Race',2]];
@@ -45,11 +45,11 @@ function render(races,win,src){const now=Date.now();const el=document.getElement
  if(src=='prov')document.getElementById('note').textContent=L('Bron: officiële kalender 2027 (formula1.com / FIA, 16-09-2026). Voorlopig; tijden volgen later.','Source: official 2027 calendar (formula1.com / FIA, 16 Sep 2026). Provisional; times to follow.');
  if(src=='fb')document.getElementById('note').textContent=L('Live data niet bereikbaar – opgeslagen kalender getoond.','Live data unavailable – showing saved calendar.');
  const map=L_.map('map',{scrollWheelZoom:false,attributionControl:false}).setView([25,10],1);L_.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:''}).addTo(map);L_.control.attribution({prefix:false}).addAttribution('© OpenStreetMap').addTo(map);
- const mk={};races.forEach(r=>{const c=r.Circuit,n=r===next;mk[r.round]=L_.circleMarker([+c.Location.lat,+c.Location.long],{radius:n?8:5,color:n?'#d62828':'#111',fillColor:n?'#d62828':(T(r)<now?'#999':'#111'),fillOpacity:1,weight:n?3:1}).addTo(map).bindPopup(`<b>${r.round}. ${r.raceName}</b><br>${c.circuitName}`)});
+ const mk={};races.forEach(r=>{const c=r.Circuit,n=r===next;mk[r.round]=L_.circleMarker([+c.Location.lat,+c.Location.long],{radius:n?8:5,color:n?'#d62828':'#111',fillColor:n?'#d62828':(T(r)<now?'#999':'#111'),fillOpacity:1,weight:n?3:1,className:n?'mk nx':(T(r)<now?'mk ps':'mk up')}).addTo(map).bindPopup(`<b>${r.round}. ${r.raceName}</b><br>${c.circuitName}`)});
  el.addEventListener('toggle',async e=>{const d=e.target;if(!(d.classList&&d.classList.contains('trk')&&d.open&&!d.dataset.l))return;d.dataset.l=1;const tb=d.querySelector('.tb'),id=d.dataset.c,cr=CR[id];
   const cap=`<small><a href="${cr.u}" target=_blank rel=noopener>${cr.a}</a>, ${cr.l}, Wikimedia Commons</small>`;
-  try{if(!CN)CN=(await (await fetch('/f1/tracks/corners.json?v=20261020-f1n')).json()).circuits;}catch(x){CN={}}
-  try{const tx=await (await fetch(`/f1/tracks/${id}.svg?v=20261020-f1n`)).text();tb.innerHTML='<div class=sv></div><div class=tip hidden></div>'+cap;const sv=tb.querySelector('.sv');sv.innerHTML=tx.replace(/<\?xml[^>]*>|<!DOCTYPE[^>]*>/g,'');
+  try{if(!CN)CN=(await (await fetch('/f1/tracks/corners.json?v=20261020-f1o')).json()).circuits;}catch(x){CN={}}
+  try{const tx=await (await fetch(`/f1/tracks/${id}.svg?v=20261020-f1o`)).text();tb.innerHTML='<div class=sv></div><div class=tip hidden></div>'+cap;const sv=tb.querySelector('.sv');sv.innerHTML=tx.replace(/<\?xml[^>]*>|<!DOCTYPE[^>]*>/g,'');
    const g=sv.querySelector('svg');if(!g.getAttribute('viewBox')){const w=parseFloat(g.getAttribute('width')),h=parseFloat(g.getAttribute('height'));if(w&&h)g.setAttribute('viewBox',`0 0 ${w} ${h}`)}g.removeAttribute('width');g.removeAttribute('height');
    const nm=CN[id]||{},tip=tb.querySelector('.tip'),seen=new Set();
    const M=g.getScreenCTM().inverse(),sc=1/g.getScreenCTM().a,P=(x,y)=>{const p=g.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(M)};
@@ -58,7 +58,7 @@ function render(races,win,src){const now=Date.now();const el=document.getElement
     r.addEventListener('click',ev=>{ev.stopPropagation();const q=r.getBoundingClientRect(),o=tb.getBoundingClientRect();tip.innerHTML=`<b>${L('Bocht','Turn')} ${n}</b>${nm[n]?' · '+nm[n]:''}`;tip.hidden=false;tip.style.left=Math.min(Math.max(q.left-o.left+q.width/2,80),o.width-80)+'px';tip.style.top=(q.top-o.top)+'px'})});
    sv.addEventListener('click',()=>tip.hidden=true);
    const ks=Object.keys(nm).filter(k=>seen.has(+k)).sort((a,b)=>a-b);if(ks.length)tb.insertAdjacentHTML('beforeend',`<div class=bl><b>${L('Bochten','Corners')}</b><ol>${ks.map(k=>`<li><span>${k}</span>${nm[k]}</li>`).join('')}</ol></div>`);
-  }catch(x){tb.innerHTML=`<img src="/f1/tracks/${id}.svg?v=20261020-f1n" alt="">`+cap}},true);
+  }catch(x){tb.innerHTML=`<img src="/f1/tracks/${id}.svg?v=20261020-f1o" alt="">`+cap}},true);
  el.addEventListener('click',e=>{const a=e.target.closest('[data-r]');if(a){const m=mk[a.dataset.r];map.setView(m.getLatLng(),11);m.openPopup()}});
  const cd=document.querySelector('.cd');const tick=()=>{if(!cd)return;let s=Math.max(0,(new Date(cd.dataset.t)-Date.now())/1e3|0);const d=s/86400|0,h=s%86400/3600|0,m=s%3600/60|0;cd.textContent=L('Race over ','Race in ')+`${d}d ${h}u ${m}m`.replace('u',L('u','h'))};tick();setInterval(tick,3e4);
  if(next)setTimeout(()=>document.getElementById('r'+next.round).scrollIntoView({block:'start'}),50)}
