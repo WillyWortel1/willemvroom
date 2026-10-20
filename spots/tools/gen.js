@@ -1,0 +1,35 @@
+// ==== ALGEMEEN CONDITIEOVERZICHT (geen sportkeuze) ====
+// Zeewaartse kustrichting uit /spots/coast.js; anders schatting uit wind- t.o.v. golfrichting.
+function rel(k,i){const wd=F[k].hourly.wind_direction_10m[i],gd=M[k].hourly.wave_direction[i];const cb=(window.COAST||{})[spots[k].naam];
+ if(cb&&cb[1]&&wd!=null){let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;return d<=67.5?'on':d>=112.5?'off':'side';}
+ if(wd==null||gd==null||M[k].hourly.wave_height[i]==null||M[k].hourly.wave_height[i]<0.5)return 'unk';
+ let d=Math.abs(wd-gd)%360;if(d>180)d=360-d;return d<60?'on':d>120?'off':'side';}
+const relL=o=>({on:T('aanlandig','onshore','auflandig'),side:T('zijwaarts','side-shore','sideshore'),off:T('aflandig','offshore','ablandig'),unk:T('richting t.o.v. kust onbekend','direction vs. coast unknown','Richtung zur Küste unbekannt')})[o];
+function gIdx(k,date){const m=M[k].hourly;return day==0?m.time.indexOf(new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00'):m.time.indexOf(date+'T13:00');}
+// niveaus: 0 rustig, 1 actief, 2 stevig, 3 aflandig (waarschuwing)
+function cond(k,date){const i=gIdx(k,date);if(i<0)return null;const w=F[k].hourly,m=M[k].hourly;
+ const ws=w.wind_speed_10m[i],g=w.wind_gusts_10m[i],H=m.wave_height[i],o=rel(k,i);let l=0;
+ if((ws!=null&&ws>=10)||(H!=null&&H>=0.8))l=1;
+ if((ws!=null&&ws>=20)||(g!=null&&g>=30)||(H!=null&&H>=2))l=2;
+ if(o=='off'&&ws!=null&&ws>=5)l=3;
+ return {l,i,ws,g,H,P:m.wave_period[i],wd:w.wind_direction_10m[i],o,t:day==0?T('nu','now','jetzt')+' ('+m.time[i].slice(11)+')':'13:00'};}
+const LV=()=>[[T('rustig','calm','ruhig'),'#8cc152'],[T('actief','active','aktiv'),'#f0ad4e'],[T('stevig','strong','kräftig'),'#d9534f'],['⚠️ '+T('aflandig','offshore','ablandig'),'#b06cff']];
+const condCol=c=>c?LV()[c.l][1]:'#888';
+function condH(k,date){const c=cond(k,date);if(!c)return '<div class="rt">–</div>';const lv=LV()[c.l];
+ let h=`<div class="rt"><span style="font-size:.8rem;font-weight:600;padding:2px 8px;border-radius:9px;background:${lv[1]};color:#032">${lv[0]}</span> <small>${c.t}</small><br><small>💨 ${f(c.ws)}/${f(c.g)} kn ${card(c.wd)} · ${relL(c.o)} · 🌊 ${f(c.H,1)} m ${f(c.P)} s</small></div>`;
+ if(c.l==3)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind','Ablandiger Wind')} (${card(c.wd)}, ${Math.round(c.ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af.','you drift away from the shore.','du treibst von der Küste weg.')}</p>`;
+ return h}
+function frLabel(){return T('⚠️ Lokale regels','⚠️ Local rules','⚠️ Lokale Regeln')}
+function openFR(k){const s=spots[k];
+ document.getElementById('frc').innerHTML=`<h4>⚠️ ${T('Lokale regels','Local rules','Lokale Regeln')} – ${esc(spotName(s))}</h4>
+ <p>${T('Check ter plaatse de borden en zones (zwem-, surf- en watersportzones, seizoensregels) en vraag bij twijfel de lifeguards of de lokale club.','Check the signs and zones on site (swimming, surf and water-sports zones, seasonal rules) and ask the lifeguards or the local club if in doubt.','Prüfe vor Ort Schilder und Zonen (Bade-, Surf- und Wassersportzonen, saisonale Regeln) und frag im Zweifel die Rettungsschwimmer oder den lokalen Club.')}</p>
+ <p>${T('Houd rekening met andere watergebruikers: geef ruimte, ken de voorrangsregels en blijf uit de buurt van zwemmers.','Be considerate of other water users: give space, know the right-of-way rules and keep clear of swimmers.','Nimm Rücksicht auf andere Wassernutzer: halte Abstand, kenne die Vorfahrtsregeln und halte dich von Schwimmern fern.')}</p>
+ <p><b>${T('Het overzicht is een indicatie, geen veiligheidsadvies. Beoordeel altijd zelf ter plaatse.','The overview is an indication, not safety advice. Always judge for yourself on site.','Die Übersicht ist eine Orientierung, kein Sicherheitsrat. Beurteile immer selbst vor Ort.')}</b></p>
+ <p style="text-align:right"><button class="btn" onclick="closeFR()">${T('Sluiten','Close','Schließen')}</button></p>`;
+ document.getElementById('frm').classList.add('open');}
+function genRules(){const t={
+ nl:`<details><summary><b>Wat de kleuren betekenen</b></summary><p>Een algemene <b>indicatie</b> van wind en golven, geen veiligheidsadvies en geen beoordeling per sport. Vandaag: het huidige uur; andere dagen: 13:00.</p><ul><li><b style="color:#8cc152">rustig</b>: wind &lt;10 kn en golven &lt;0,8 m.</li><li><b style="color:#f0ad4e">actief</b>: wind 10–20 kn of golven 0,8–2 m.</li><li><b style="color:#d9534f">stevig</b>: wind ≥20 kn, vlagen ≥30 kn of golven ≥2 m.</li><li><b style="color:#b06cff">⚠️ aflandig</b>: aflandige wind ≥5 kn – je drijft van de kust af (gaat voor de andere niveaus).</li></ul><p>Aanlandig/zijwaarts/aflandig: windrichting t.o.v. de zeewaartse richting van de kust per spot (afgeleid uit een land/zee-kaart; aanlandig ≤67,5°, aflandig ≥112,5°). Waar de kust onduidelijk is, wordt het geschat uit wind- t.o.v. golfrichting. Ondieptes, muistromen, zones en drukte zitten er niet in.</p></details>`,
+ en:`<details><summary><b>What the colours mean</b></summary><p>A general <b>indication</b> of wind and waves, not safety advice and not a rating per sport. Today: the current hour; other days: 13:00.</p><ul><li><b style="color:#8cc152">calm</b>: wind &lt;10 kn and waves &lt;0.8 m.</li><li><b style="color:#f0ad4e">active</b>: wind 10–20 kn or waves 0.8–2 m.</li><li><b style="color:#d9534f">strong</b>: wind ≥20 kn, gusts ≥30 kn or waves ≥2 m.</li><li><b style="color:#b06cff">⚠️ offshore</b>: offshore wind ≥5 kn – you drift away from the shore (overrides the other levels).</li></ul><p>Onshore/side/offshore: wind direction vs. the seaward direction of the coast per spot (derived from a land/sea map; onshore ≤67.5°, offshore ≥112.5°). Where the coastline is unclear, it is estimated from wind vs. wave direction. Shallows, rips, zones and crowds are not included.</p></details>`,
+ de:`<details><summary><b>Was die Farben bedeuten</b></summary><p>Eine allgemeine <b>Orientierung</b> zu Wind und Wellen, kein Sicherheitsrat und keine Bewertung pro Sportart. Heute: die aktuelle Stunde; andere Tage: 13:00.</p><ul><li><b style="color:#8cc152">ruhig</b>: Wind &lt;10 kn und Wellen &lt;0,8 m.</li><li><b style="color:#f0ad4e">aktiv</b>: Wind 10–20 kn oder Wellen 0,8–2 m.</li><li><b style="color:#d9534f">kräftig</b>: Wind ≥20 kn, Böen ≥30 kn oder Wellen ≥2 m.</li><li><b style="color:#b06cff">⚠️ ablandig</b>: ablandiger Wind ≥5 kn – du treibst von der Küste weg (hat Vorrang vor den anderen Stufen).</li></ul><p>Auflandig/sideshore/ablandig: Windrichtung gegenüber der seewärtigen Ausrichtung der Küste pro Spot (abgeleitet aus einer Land-/Meer-Karte; auflandig ≤67,5°, ablandig ≥112,5°). Wo die Küste unklar ist, wird es aus Wind- gegenüber Wellenrichtung geschätzt. Untiefen, Rippströmungen, Zonen und Andrang sind nicht enthalten.</p></details>`};
+ ['nl','en','de'].forEach(l=>{const e=document.getElementById('rules-'+l);if(e)e.innerHTML=t[l]});}
+try{localStorage.removeItem('spots-sport')}catch(e){}
