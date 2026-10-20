@@ -39,6 +39,13 @@ body.touch.ready #bLaunch{display:block}
 'use strict';
 (function(){
 const DEBUG=new URLSearchParams(location.search).get('debug')==='1';
+const EN=/\/en(\/|\/index\.html)?$/.test(location.pathname)||new URLSearchParams(location.search).get('lang')==='en';
+const TRL=EN?[["II - KRAAN-EDITIE", "II - CRANE EDITION"], ["KRAAN-EDITIE", "CRANE EDITION"], ["LINKS/RECHTS TIKKEN: FLIPPERS  LANCEER: HOUDEN", "TAP LEFT/RIGHT: FLIPPERS  LAUNCH: HOLD"], ["SPATIE: LANCEER", "SPACE: LAUNCH"], ["6 MISSIES - MULTIBAL - SKILL SHOT - JACKPOT", "6 MISSIONS - MULTIBALL - SKILL SHOT - JACKPOT"], ["BLAUWE MINI-FLIPPER GAAT MEE MET RECHTS", "BLUE MINI FLIPPER FIRES WITH RIGHT"], ["DRUK OP SPATIE OM TE STARTEN", "PRESS SPACE TO START"], ["DRUK OP P OM DOOR TE GAAN", "PRESS P TO CONTINUE"], ["TIK OM TE STARTEN", "TAP TO START"], ["TIK OM DOOR TE GAAN", "TAP TO CONTINUE"], ["TIK VOOR GELUID", "TAP FOR SOUND"], ["NIET OPGESLAGEN IN GEDEELDE LIJST", "NOT SAVED TO SHARED LIST"], ["NAAM NIET TOEGESTAAN (GEDEELD)", "NAME NOT ALLOWED (SHARED)"], ["GEDEELDE LIJST NIET BEREIKBAAR", "SHARED LIST UNAVAILABLE"], ["NOG GEEN SCORES", "NO SCORES YET"], ["TOP 10 - DIT TOESTEL", "TOP 10 - THIS DEVICE"], ["TOP 10 - IEDEREEN", "TOP 10 - EVERYONE"], ["TOP 10 IEDEREEN", "TOP 10 EVERYONE"], ["RAAK ALLE 3 DOELEN", "HIT ALL 3 TARGETS"], ["SCHIET IN DE KRAAN", "SHOOT THE CRANE"], ["LAAT SPINNER DRAAIEN", "SPIN THE SPINNER"], ["RAAK DE BUMPERS", "HIT THE BUMPERS"], ["SPINNER DAN KRAAN", "SPINNER THEN CRANE"], ["ALLE 3 BANEN AAN", "LIGHT ALL 3 LANES"], ["MULTIBAL VOORBIJ", "MULTIBALL OVER"], ["MULTIBAL BALLEN ", "MULTIBALL BALLS "], ["MULTIBAL", "MULTIBALL"], ["NOG EEN BAL!", "SHOOT AGAIN!"], ["EXTRA BAL!", "EXTRA BALL!"], ["BAL GERED", "BALL SAVED"], ["MISSIE KLAAR!", "MISSION DONE!"], [" MISSIES ", " MISSIONS "], [" MISSIE ", " MISSION "], ["NIVEAU ", "LEVEL "], ["SPEL VOORBIJ", "GAME OVER"], ["NIEUW RECORD! ", "NEW RECORD! "], ["SHOT: ZACHT", "SHOT: SOFT"], ["SHOT: MIDDEN", "SHOT: MEDIUM"], ["SHOT: VOL", "SHOT: FULL"], ["LET OP!", "CAREFUL!"], ["PAUZE", "PAUSED"], ["BOUWPLAATS II", "BUILDING SITE II"], ["GELUID AAN", "SOUND ON"], ["GELUID UIT", "SOUND OFF"], ["LANCEER", "LAUNCH"], ["KRAAN", "CRANE"], ["BANEN", "LANES"], ["HOOG", "HIGH"], ["PLEK ", "RANK "], ["BAL ", "BALL "]]:[];
+const TRM=new Map(TRL),TRX=EN?new RegExp(TRL.map(p=>p[0]).sort((a,b)=>b.length-a.length).map(k=>k.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|'),'g'):null;
+function TL(s){if(!EN||typeof s!=='string')return s;return s.replace(TRX,m=>TRM.get(m));}
+{const P=CanvasRenderingContext2D.prototype,f=P.fillText;P.fillTextRaw=f;if(EN)P.fillText=function(t,x,y,m){return m===undefined?f.call(this,TL(t),x,y):f.call(this,TL(t),x,y,m);};}
+if(EN){document.documentElement.lang='en';document.title='FLIPPER! II Crane Edition';const q=id=>document.getElementById(id);q('bLaunch').textContent='LAUNCH';q('nameSkip').textContent='SKIP';q('nameOk').textContent='SAVE';q('nameIn').placeholder='YOUR NAME';q('nameIn').setAttribute('aria-label','Name for the top 10');const h2=document.querySelector('#nameBox h2');if(h2)h2.textContent='NEW HIGH SCORE!';}
+
 const isTouch=('ontouchstart' in window)||navigator.maxTouchPoints>0||(window.matchMedia&&matchMedia('(pointer:coarse)').matches);
 if(isTouch)document.body.classList.add('touch');
 function lsGet(k,d){try{const v=localStorage.getItem(k);return v===null?d:v;}catch(e){return d;}}
@@ -160,7 +167,7 @@ const sfx={
  level(){[262,330,392,523,392,523,659,784,1047].forEach((f,i)=>tone(f,.11,'square',.06,0,i*.09));}
 };
 const bMute=document.getElementById('bMute');
-function updMute(){bMute.textContent=muted?'GELUID UIT':'GELUID AAN';}
+function updMute(){bMute.textContent=TL(muted?'GELUID UIT':'GELUID AAN');}
 /* trillen bij extra bal: navigator.vibrate (Android); iOS 18+: verborgen switch-checkbox geeft een haptische tik (niet gegarandeerd). Geluid uit = ook niet trillen. */
 let hapPending=false,haps=0;
 function haptic(){if(muted)return false;haps++;
@@ -252,7 +259,7 @@ function newBall(){mult=1;bonus=0;tilt=0;tilted=false;targets.forEach(t=>t.up=tr
 /* naam invoeren bij een topscore: HTML-formulier (iPhone-toetsenbord), flippers/start doen niets zolang het open is */
 let nameOpen=false,gameT0=0;const nB=document.getElementById('nameBox'),nI=document.getElementById('nameIn');
 function rankOf(s){let r=0;while(r<top10.length&&top10[r].s>=s)r++;return r;}
-function openNameBox(){nameOpen=true;releaseAll();document.getElementById('nameInfo').textContent=(qualifies(score)?'PLEK '+(rankOf(score)+1):'TOP 10 IEDEREEN')+' - SCORE '+fmt(score);nI.value=lsGet('flip2-name','');nB.classList.add('on');
+function openNameBox(){nameOpen=true;releaseAll();document.getElementById('nameInfo').textContent=TL((qualifies(score)?'PLEK '+(rankOf(score)+1):'TOP 10 IEDEREEN')+' - SCORE '+fmt(score));nI.value=lsGet('flip2-name','');nB.classList.add('on');
   setTimeout(()=>{try{nI.focus();}catch(e){}},50);}
 function closeNameBox(save){if(!nameOpen)return;const n=cleanName(nI.value);
   if(save&&n){lsSet('flip2-name',n);postShared(n,score,level,(simT-gameT0)*1000);}
@@ -612,11 +619,11 @@ function drawTop10(){const sh=sharedState==='ok'&&shared&&Math.floor(performance
   if(note){ctx.fillStyle='#bba';ctx.font='bold 8px monospace';ctx.fillText(note,150,y0+H+6);ctx.font='bold 9px monospace';}
   if(!n){ctx.fillStyle='#bba';ctx.fillText('NOG GEEN SCORES',150,y0+31);return;}
   L.forEach((e,i)=>{const y=y0+28+i*11.5,me=i===hl&&mode==='over';ctx.fillStyle=me?(Math.floor(performance.now()/300)%2?'#fff':'#ffd23f'):i===0?'#ffd23f':'#ffd0f0';
-    ctx.textAlign='left';ctx.fillText(String(i+1).padStart(2,' ')+'. '+e.n.toUpperCase(),50,y);ctx.textAlign='right';ctx.fillText(fmt(e.s),250,y);});ctx.textAlign='center';}
-function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+    ctx.textAlign='left';ctx.fillTextRaw(String(i+1).padStart(2,' ')+'. '+e.n.toUpperCase(),50,y);ctx.textAlign='right';ctx.fillText(fmt(e.s),250,y);});ctx.textAlign='center';}
+function fmt(n){return String(n).replace(/\B(?=(\d{3})+(?!\d))/g,EN?',':'.');}
 /* ---------- dot-matrix display (eigen lettertype), 3 regels met missie ---------- */
 const DW=128,DH=36,PITCH=2.05;let dmd=new Uint8Array(DW*DH),dmdKey='',dmdCan=document.createElement('canvas');
-function dText(s,x,y,sc,align){s=String(s).toUpperCase();sc=sc||1;const w=s.length*6*sc-sc;if(align==='c')x=Math.round(x-w/2);else if(align==='r')x=x-w;
+function dText(s,x,y,sc,align){s=String(TL(s)).toUpperCase();sc=sc||1;const w=s.length*6*sc-sc;if(align==='c')x=Math.round(x-w/2);else if(align==='r')x=x-w;
   for(let i=0;i<s.length;i++){const g=FONT[s[i]];if(!g)continue;for(let r=0;r<7;r++)for(let c=0;c<5;c++)if(g[r]&(16>>c))for(let a=0;a<sc;a++)for(let b=0;b<sc;b++){const X=x+(i*6+c)*sc+a,Y=y+r*sc+b;if(X>=0&&X<DW&&Y>=0&&Y<DH)dmd[Y*DW+X]=1;}}}
 function missionLine(){const m=curM(),t=performance.now()/1000;
   if(mode==='play'&&!launched&&alive()===1)return 'SKILL SHOT: '+SKZ[skillLane][2];
