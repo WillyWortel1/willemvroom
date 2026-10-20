@@ -28,3 +28,4 @@ td{padding:6px 6px 6px 0;border-top:1px solid #f0f0f0}tr.race td{font-weight:700
 .tip{position:absolute;transform:translate(-50%,calc(-100% - 6px));background:#111;color:#fff;font-size:.8rem;padding:6px 10px;border-radius:8px;border-left:3px solid #d62828;white-space:nowrap;box-shadow:0 4px 14px rgba(0,0,0,.2);z-index:5;pointer-events:none}.tip b{color:#fff}
 .bl{margin-top:10px;font-size:.8rem}.bl ol{list-style:none;padding:0;margin:6px 0 0;columns:2;column-gap:14px}.bl li{break-inside:avoid;padding:2px 0;color:#444}.bl li span{display:inline-block;min-width:22px;color:#d62828;font-weight:700}
 article.past:has(details[open]){opacity:1}
+.test .rd{background:#666}
