@@ -67,4 +67,18 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/spots/en/"/>
     <xhtml:link rel="alternate" hreflang="de" href="https://willemvroom.nl/spots/de/"/>
   </url>
+  <url>
+    <loc>https://willemvroom.nl/f1/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/f1/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/f1/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://willemvroom.nl/f1/"/>
+  </url>
+  <url>
+    <loc>https://willemvroom.nl/f1/en/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/f1/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/f1/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://willemvroom.nl/f1/"/>
+  </url>
 </urlset>
