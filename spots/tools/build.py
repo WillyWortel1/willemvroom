@@ -15,7 +15,7 @@ rep("<title>Foilassist – condities per spot</title><script>if(LANG=='en')docum
 # paden naar foilassist-data (alleen lezen)
 rep('href="leaflet/leaflet.css','href="/foilassist/leaflet/leaflet.css')
 rep('src="leaflet/leaflet.js','src="/foilassist/leaflet/leaflet.js')
-rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=7"></script>')
+rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=8"></script>')
 rep("tfetch('data.json?h=","tfetch('/foilassist/data.json?h=")
 rep("const KEY='foilassist-cache-v1';","const KEY='spots-cache-v1';")
 # kop
@@ -49,8 +49,10 @@ rep("""<fieldset><legend>${T('Materiaal','Gear','Material')}</legend>""","""<fie
 rep("""<fieldset><legend>${T('Batterij(en)','Battery/batteries','Akku(s)')}</legend>""","""<fieldset hidden disabled><legend>${T('Batterij(en)','Battery/batteries','Akku(s)')}</legend>""")
 rep("""<input id="f_oef" name="oefenen" maxlength="300">""","""<input id="f_oef" name="oefenen" maxlength="300" hidden disabled>""")
 rep("""<label for="f_oef">${T('Wat oefen je?','What are you practising?','Was übst du?')}</label>""","")
+# formulier: "meer details" weg
+_a=s.index("<details><summary style=\"color:var(--a);margin:10px 0;cursor:pointer\">");_b=s.index("</details>",_a)+len("</details>");s=s[:_a]+s[_b:]
 out=R/"spots";(out/"en").mkdir(parents=True,exist_ok=True)
-s=s.replace('?v=20261014-42','?v=20261020-spots8')
+s=s.replace('?v=20261014-42','?v=20261020-spots9')
 (out/"index.html").write_text(s,encoding="utf-8")
 for l in ("en","de"):
     (out/l).mkdir(exist_ok=True);(out/l/"index.html").write_text(s.replace('<html lang="nl">',f'<html lang="{l}">',1),encoding="utf-8")
