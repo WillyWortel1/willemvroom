@@ -10,17 +10,16 @@ def rep(a,b,n=1):
 # taal: alleen nl/en
 rep("try{if(['en','nl','de'].includes(q))localStorage.setItem('foilassist-lang',q);if(!l)l=localStorage.getItem('foilassist-lang')}catch(e){}","try{if(['en','nl','de'].includes(q))localStorage.setItem('spots-lang',q);if(!l)l=localStorage.getItem('spots-lang')}catch(e){}")
 rep("function setLang(l){try{localStorage.setItem('foilassist-lang',l)}catch(e){}location.href='/foilassist/'+(l=='nl'?'?lang=nl':l+'/')}","function setLang(l){try{localStorage.setItem('spots-lang',l)}catch(e){}location.href='/spots/'+(l=='nl'?'?lang=nl':l+'/')}")
-rep('<meta name="robots" content="noindex">','<meta name="robots" content="noindex,nofollow">')
+rep('<meta name="robots" content="noindex">','<!--HREF-->')
 rep("<title>Foilassist – condities per spot</title><script>if(LANG=='en')document.title='Foilassist – conditions per spot';if(LANG=='de')document.title='Foilassist – Bedingungen pro Spot'</script>","<title>Spots🤙 – condities per spot</title><script>if(LANG=='en')document.title='Spots🤙 – conditions per spot';if(LANG=='de')document.title='Spots🤙 – Bedingungen pro Spot'</script>")
 # paden naar foilassist-data (alleen lezen)
 rep('href="leaflet/leaflet.css','href="/foilassist/leaflet/leaflet.css')
 rep('src="leaflet/leaflet.js','src="/foilassist/leaflet/leaflet.js')
-rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=11"></script><script src="/spots/beachpos.js?v=1"></script>')
+rep('<script src="spots.js?v=20261014-42"></script>','<script src="/foilassist/spots.js?v=20261014-42"></script><script src="/spots/coast.js?v=11"></script><script src="/spots/beachpos.js?v=2"></script>')
 rep("tfetch('data.json?h=","tfetch('/foilassist/data.json?h=")
 rep("const KEY='foilassist-cache-v1';","const KEY='spots-cache-v1';")
 # kop
 rep("""</span><h1>🏄 Foilassist spots</h1>""","""</span><h1>Spots🤙</h1>""")
-rep("""<p><span class="nl">Golven,""","""<p class="pv" style="color:#ffc83d">⚙️ <span class="nl">Voorbeeldversie – nog niet openbaar.</span><span class="en">Preview – not public yet.</span><span class="de">Vorschauversion – noch nicht öffentlich.</span></p><p><span class="nl">Golven,""")
 # footer: vervang 'hoe de sterren werken' door generiek blok
 s=re.sub(r'<details><summary><b>Hoe de sterren werken</b></summary>.*?</details>','<div id="rules-nl"></div>',s,flags=re.S)
 s=re.sub(r'<details><summary><b>How the stars work</b></summary>.*?</details>','<div id="rules-en"></div>',s,flags=re.S)
@@ -58,7 +57,9 @@ rep("L.marker([s.lat,s.lon]","L.marker(dp(s)")
 # formulier: "meer details" weg
 _a=s.index("<details><summary style=\"color:var(--a);margin:10px 0;cursor:pointer\">");_b=s.index("</details>",_a)+len("</details>");s=s[:_a]+s[_b:]
 out=R/"spots";(out/"en").mkdir(parents=True,exist_ok=True)
-s=s.replace('?v=20261014-42','?v=20261020-spots13')
-(out/"index.html").write_text(s,encoding="utf-8")
+U={'nl':'https://willemvroom.nl/spots/','en':'https://willemvroom.nl/spots/en/','de':'https://willemvroom.nl/spots/de/'}
+HREF=lambda l:'<link rel="canonical" href="'+U[l]+'">'+''.join(f'<link rel="alternate" hreflang="{k}" href="{v}">' for k,v in U.items())+'<link rel="alternate" hreflang="x-default" href="'+U['nl']+'">'
+s=s.replace('?v=20261014-42','?v=20261020-spots14')
+(out/"index.html").write_text(s.replace('<!--HREF-->',HREF('nl')),encoding="utf-8")
 for l in ("en","de"):
-    (out/l).mkdir(exist_ok=True);(out/l/"index.html").write_text(s.replace('<html lang="nl">',f'<html lang="{l}">',1),encoding="utf-8")
+    (out/l).mkdir(exist_ok=True);(out/l/"index.html").write_text(s.replace('<html lang="nl">',f'<html lang="{l}">',1).replace('<!--HREF-->',HREF(l)),encoding="utf-8")
