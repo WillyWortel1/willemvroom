@@ -9,9 +9,9 @@ async function get(u){const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw 0
 async function load(){let races,src='live';
  try{races=(await get('https://api.jolpi.ca/ergast/f1/current.json')).RaceTable.Races;
   const last=races[races.length-1];if(new Date()>new Date(T(last).getTime()+864e5)){try{const n=(await get('https://api.jolpi.ca/ergast/f1/'+(+last.season+1)+'.json')).RaceTable.Races;if(n.length)races=n}catch(e){}}}
- catch(e){races=(await (await fetch('/f1/fallback.json?v=20261020-f1b')).json()).MRData.RaceTable.Races;src='fb'}
+ catch(e){races=(await (await fetch('/f1/fallback.json?v=20261020-f1c')).json()).MRData.RaceTable.Races;src='fb'}
  let win={};try{(await get('https://api.jolpi.ca/ergast/f1/'+races[0].season+'/results/1.json?limit=100')).RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}
- catch(e){try{(await (await fetch('/f1/winners.json?v=20261020-f1b')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
+ catch(e){try{(await (await fetch('/f1/winners.json?v=20261020-f1c')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
  render(races,win,src)}
 function render(races,win,src){const now=Date.now();const el=document.getElementById('list');
  document.getElementById('season').textContent=races[0].season;
