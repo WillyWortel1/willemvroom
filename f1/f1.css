@@ -30,3 +30,4 @@ td{padding:6px 6px 6px 0;border-top:1px solid #f0f0f0}tr.race td{font-weight:700
 article.past:has(details[open]){opacity:1}
 .test .rd{background:#666}
 .h p.wk{color:#111;font-weight:600;margin-top:2px}
+.note{font-size:.72rem;color:#888;margin:6px 0 0}
