@@ -49,7 +49,9 @@ function genRules(){const t={
  ['nl','en','de'].forEach(l=>{const e=document.getElementById('rules-'+l);if(e)e.innerHTML=t[l]});}
 try{localStorage.removeItem('spots-sport')}catch(e){}
 // kaartstip met windpijl (pijl wijst waar de wind heen waait)
-function dotIcon(k,c,sz){const z=map&&map._loaded?map.getZoom():5;sz=z<5?14:z<7?18:z<9?22:26;const col=condCol(c,k),wd=c?c.wd:null;
- const ar=wd==null?'':`<svg viewBox="-10 -10 20 20" width="${sz}" height="${sz}" style="position:absolute;left:0;top:0;transform:rotate(${(wd+180)%360}deg)"><path d="M0,-8 L5,1 L1.6,1 L1.6,8 L-1.6,8 L-1.6,1 L-5,1 Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
- return L.divIcon({className:'wdot',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],tooltipAnchor:[0,-sz/2],html:`<div style="position:relative;width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2px solid #fff;box-sizing:border-box;box-shadow:0 0 2px rgba(0,0,0,.5)">${ar}</div>`});}
+function seaB(k,c){const cb=(window.COAST||{})[spots[k].naam];if(cb)return cb[0];const wv=c?M[k].hourly.wave_direction[c.i]:null;return wv!=null?wv:270;}
+function dotIcon(k,c){const z=map&&map._loaded?map.getZoom():5;const sz=z<5?12:z<7?16:z<9?20:24,as=Math.round(sz*1.1),W=sz*4;const col=condCol(c,k),wd=c?c.wd:null;
+ const b=seaB(k,c)*Math.PI/180,dist=sz/2+as/2+1,ax=W/2+Math.sin(b)*dist-as/2,ay=W/2-Math.cos(b)*dist-as/2;
+ const ar=wd==null?'':`<svg class="hit" viewBox="-10 -10 20 20" width="${as}" height="${as}" style="position:absolute;left:${ax}px;top:${ay}px;transform:rotate(${(wd+180)%360}deg)"><path d="M0,-9 L6,1 L2,1 L2,9 L-2,9 L-2,1 L-6,1 Z" fill="#000" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg>`;
+ return L.divIcon({className:'wdot',iconSize:[W,W],iconAnchor:[W/2,W/2],tooltipAnchor:[0,-sz/2],html:`<div class="hit" style="position:absolute;left:${W/2-sz/2}px;top:${W/2-sz/2}px;width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2px solid #fff;box-sizing:border-box;box-shadow:0 0 2px rgba(0,0,0,.5)"></div>${ar}`});}
 const miniArrow=c=>c&&c.wd!=null?`<span aria-hidden="true" style="display:inline-block;transform:rotate(${(c.wd+180)%360}deg);font-size:.9em;margin-right:4px">↑</span>`:'';
