@@ -46,4 +46,25 @@
     <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/hypersail-sjabloon/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/hypersail-sjabloon/en/"/>
   </url>
+  <url>
+    <loc>https://willemvroom.nl/spots/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/spots/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/spots/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://willemvroom.nl/spots/de/"/>
+  </url>
+  <url>
+    <loc>https://willemvroom.nl/spots/en/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/spots/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/spots/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://willemvroom.nl/spots/de/"/>
+  </url>
+  <url>
+    <loc>https://willemvroom.nl/spots/de/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://willemvroom.nl/spots/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://willemvroom.nl/spots/en/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://willemvroom.nl/spots/de/"/>
+  </url>
 </urlset>
