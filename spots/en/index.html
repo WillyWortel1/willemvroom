@@ -105,7 +105,7 @@ function scoreFoil(k,i){const m=M[k].hourly,w=F[k].hourly;if(i<0)return null;let
  if(wc!=null&&wc>=95)s-=2;else if(r!=null){if(r>2)s-=1;else if(r>0.5)s-=0.5;}
  return Math.max(0,Math.min(5,s));}
 const SPORTS=[
- {id:'foil',nl:'Foilassist',en:'Foil assist'},{id:'prone',nl:'Foilen (prone)',en:'Prone foiling'},{id:'supfoil',nl:'Supfoil',en:'SUP foiling'},{id:'surf',nl:'Golfsurfen',en:'Surfing'},{id:'wind',nl:'Windsurfen',en:'Windsurfing'},
+ {id:'foil',nl:'Foilassist',en:'Foil assist'},{id:'prone',nl:'Foilen (prone)',en:'Prone foiling'},{id:'supfoil',nl:'Supfoil',en:'SUP foiling'},{id:'dw',nl:'Downwinder',en:'Downwinder'},{id:'surf',nl:'Golfsurfen',en:'Surfing'},{id:'wind',nl:'Windsurfen',en:'Windsurfing'},
  {id:'kite',nl:'Kitesurfen',en:'Kitesurfing'},{id:'kitefoil',nl:'Kitefoilen',en:'Kite foiling'},{id:'wing',nl:'Wingen',en:'Wing foiling'},{id:'parawing',nl:'Parawing',en:'Parawing'},{id:'sup',nl:'SUP',en:'SUP'}].map(x=>({...x,n:()=>T(x.nl,x.en,x.en)}));
 let SPORT=(()=>{try{const v=localStorage.getItem('spots-sport');if(SPORTS.some(x=>x.id==v))return v}catch(e){}return 'foil'})();
 const SP=()=>SPORTS.find(x=>x.id==SPORT);
@@ -116,6 +116,10 @@ function sportNav(){document.getElementById('sports').innerHTML=SPORTS.map(x=>`<
 function rel(k,i){const wd=F[k].hourly.wind_direction_10m[i],gd=M[k].hourly.wave_direction[i];const cb=(window.COAST||{})[spots[k].naam];
  if(cb&&cb[1]&&wd!=null){let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;return d<=67.5?'on':d>=112.5?'off':'side';}
 if(wd==null||gd==null||M[k].hourly.wave_height[i]==null||M[k].hourly.wave_height[i]<0.5)return 'unk';let d=Math.abs(wd-gd)%360;if(d>180)d=360-d;return d<60?'on':d>120?'off':'side';}
+function cAng(k,i){const cb=(window.COAST||{})[spots[k].naam],wd=F[k].hourly.wind_direction_10m[i];if(!cb||!cb[1]||wd==null)return null;let d=Math.abs(wd-cb[0])%360;if(d>180)d=360-d;return d;}
+function alongH(k,i){const cb=(window.COAST||{})[spots[k].naam],wd=F[k].hourly.wind_direction_10m[i];if(!cb||!cb[1]||wd==null)return '';
+ const to=(wd+180)%360,t1=(cb[0]+90)%360,t2=(cb[0]+270)%360;const df=(a,b)=>{let d=Math.abs(a-b)%360;return d>180?360-d:d};const tt=df(to,t1)<df(to,t2)?t1:t2,ff=(tt+180)%360;
+ return T(`Wind langs de kust: loopt van ${card(ff)} naar ${card(tt)}.`,`Wind along the coast: runs from ${card(ff)} to ${card(tt)}.`)}
 function common(k,i){const w=F[k].hourly,r=w.precipitation[i],wc=w.weather_code[i];let s=0;if(wc!=null&&wc>=95)s-=2;else if(r!=null){if(r>2)s-=1;else if(r>0.5)s-=0.5;}return s;}
 function score(k,i){if(i<0)return null;if(SPORT=='foil')return scoreFoil(k,i);
  const m=M[k].hourly,w=F[k].hourly;if(w.is_day&&w.is_day[i]===0)return 0;
@@ -148,6 +152,11 @@ function score(k,i){if(i<0)return null;if(SPORT=='foil')return scoreFoil(k,i);
   if(o=='off'&&ws!=null&&ws>=8)s-=2;if(o=='unk'&&ws!=null&&ws>=8)s-=1;
   if(H!=null&&H>3)s-=1;
   if(c!=null&&c>1.5)s-=1;
+ }else if(SPORT=='dw'){const d=cAng(k,i);
+  if(ws!=null){if(ws<12)s-=3;else if(ws<15)s-=1;else if(ws>30)s-=3;else if(ws>25)s-=1;}
+  if(d==null)s-=1.5;else if(d>100)s-=3;else if(d<30)s-=1;
+  if(H!=null){if(H<0.3)s-=1;else if(H>2.5)s-=1;}
+  if(c!=null&&c>1.5)s-=1;
  }else if(SPORT=='wind'||SPORT=='kite'||SPORT=='wing'){const lo=SPORT=='wing'?[7,11,1.5]:[8,12,2];
   if(ws!=null){if(ws<lo[0])s-=4;else if(ws<lo[1])s-=lo[2];else if(ws>35)s-=3;else if(ws>30)s-=1.5;}
   if(g!=null&&ws!=null){if(g-ws>15)s-=1;if(g>40)s-=1;}
@@ -173,6 +182,7 @@ const RULES={
  foil:['Golven 0,8–1,5 m ideaal, periode ≥9 s; lichte of aflandige wind; aftrek bij aanlandige wind &gt;8 kn, wind &gt;25 kn, stroming &gt;0,8 kn.','Waves 0.8–1.5 m ideal, period ≥9 s; light or offshore wind; deductions for onshore wind &gt;8 kn, wind &gt;25 kn, current &gt;0.8 kn.'],
  prone:['Golven 0,4–2 m ideaal (&lt;0,25 m −3; 0,25–0,4 m −1; 2–3 m −1; &gt;3 m −2,5); periode &lt;5 s −1,5, 5–7 s −1. Wind &gt;20 kn −2; 12–20 kn −1,5 aanlandig (anders −0,5); 8–12 kn aanlandig −0,5. Stroming &gt;0,8 kn −0,5, &gt;1,5 kn −1.','Waves 0.4–2 m ideal (&lt;0.25 m −3; 0.25–0.4 m −1; 2–3 m −1; &gt;3 m −2.5); period &lt;5 s −1.5, 5–7 s −1. Wind &gt;20 kn −2; 12–20 kn −1.5 onshore (else −0.5); 8–12 kn onshore −0.5. Current &gt;0.8 kn −0.5, &gt;1.5 kn −1.'],
  supfoil:['Golven/bulten 0,3–1,8 m ideaal (&lt;0,2 m −2,5; 0,2–0,3 m −1; 1,8–3 m −1; &gt;3 m −2,5); periode &lt;6 s −0,5. Wind &gt;15 kn −1,5, &gt;22 kn −3; aanlandig 12–15 kn −1; geschat aflandig &gt;8 kn −2 extra. Stroming &gt;1 kn −1.','Waves/bumps 0.3–1.8 m ideal (&lt;0.2 m −2.5; 0.2–0.3 m −1; 1.8–3 m −1; &gt;3 m −2.5); period &lt;6 s −0.5. Wind &gt;15 kn −1.5, &gt;22 kn −3; onshore 12–15 kn −1; estimated offshore &gt;8 kn −2 extra. Current &gt;1 kn −1.'],
+ dw:['Wind 15–25 kn ideaal (&lt;12 kn −3; 12–15 kn −1; 25–30 kn −1; &gt;30 kn −3). Richting t.o.v. de kust: zijwaarts of schuin aanlandig (30–100° van recht aanlandig) ideaal; recht aanlandig (&lt;30°) −1; aflandige component (&gt;100°) −3 met waarschuwing; kustrichting onbekend −1,5. Bulten 0,5–2 m goed, &lt;0,3 m −1, &gt;2,5 m −1. Stroming &gt;1,5 kn −1. Regel altijd je ophaalpunt en ga niet alleen.','Wind 15–25 kn ideal (&lt;12 kn −3; 12–15 kn −1; 25–30 kn −1; &gt;30 kn −3). Direction vs. coast: side-shore or side-onshore (30–100° from straight onshore) ideal; straight onshore (&lt;30°) −1; offshore component (&gt;100°) −3 with warning; coast bearing unknown −1.5. Bumps 0.5–2 m good, &lt;0.3 m −1, &gt;2.5 m −1. Current &gt;1.5 kn −1. Always arrange your pick-up and don\'t go alone.'],
  surf:['Golven 0,8–2,5 m ideaal (&lt;0,5 m −3; 0,5–0,8 m −1; 2,5–3,5 m −1; &gt;3,5 m −2,5); periode &lt;6 s −1,5, 6–8 s −1, 8–10 s −0,5. Wind &gt;20 kn −2; 12–20 kn −1,5 aanlandig (anders −0,5); 8–12 kn aanlandig −0,5. Stroming &gt;0,8 kn −0,5, &gt;1,5 kn −1.','Waves 0.8–2.5 m ideal (&lt;0.5 m −3; 0.5–0.8 m −1; 2.5–3.5 m −1; &gt;3.5 m −2.5); period &lt;6 s −1.5, 6–8 s −1, 8–10 s −0.5. Wind &gt;20 kn −2; 12–20 kn −1.5 onshore (else −0.5); 8–12 kn onshore −0.5. Current &gt;0.8 kn −0.5, &gt;1.5 kn −1.'],
  wind:['Wind 12–30 kn ideaal (&lt;8 kn −4; 8–12 kn −2; 30–35 kn −1,5; &gt;35 kn −3). Vlagen meer dan 15 kn boven de wind −1, vlagen &gt;40 kn −1. Geschat aflandig −1,5; bij golven &lt;0,5 m onbekend: −0,5. Golven &gt;3 m −1, stroming &gt;1,5 kn −1.','Wind 12–30 kn ideal (&lt;8 kn −4; 8–12 kn −2; 30–35 kn −1.5; &gt;35 kn −3). Gusts more than 15 kn above the wind −1, gusts &gt;40 kn −1. Estimated offshore −1.5; with waves &lt;0.5 m unknown: −0.5. Waves &gt;3 m −1, current &gt;1.5 kn −1.'],
  kite:['Wind 12–30 kn ideaal (&lt;8 kn −4; 8–12 kn −2; 30–35 kn −1,5; &gt;35 kn −3). Vlagen meer dan 15 kn boven de wind −1, vlagen &gt;40 kn −1. Geschat aflandig −2 (aflandig kiten is gevaarlijk); zonder kustrichting en bij golven &lt;0,5 m onbekend: −1. Golven &gt;3 m −1, stroming &gt;1,5 kn −1.','Wind 12–30 kn ideal (&lt;8 kn −4; 8–12 kn −2; 30–35 kn −1.5; &gt;35 kn −3). Gusts more than 15 kn above the wind −1, gusts &gt;40 kn −1. Estimated offshore −2 (offshore kiting is dangerous); without coast bearing and waves &lt;0.5 m unknown: −1. Waves &gt;3 m −1, current &gt;1.5 kn −1.'],
@@ -183,10 +193,15 @@ const RULES={
 function rulesH(l){const x=SP(),r=RULES[SPORT][l=='en'?1:0];return l=='en'
  ?`<details><summary><b>How the rating works – ${x.en}</b></summary><p>An <b>indication</b> for ${x.en.toLowerCase()}, not safety advice. Today: the current hour; other days: best of 9, 13 and 17 h. Start at 5 stars, then deductions. Good ≥3.5, fair 2–3.5, poor &lt;2.</p><p>${r}</p><p>All sports: rain &gt;0.5 mm/h −0.5, &gt;2 mm/h −1; thunderstorm −2; dark 0. Onshore/side/offshore: wind direction vs. the seaward direction of the coast per spot (derived from the OpenStreetMap coastline; onshore ≤67.5°, offshore ≥112.5°). Where the coastline is unclear, it is estimated from wind vs. wave direction. Shallows, rips, zones and crowds are not included.</p></details>`
  :`<details><summary><b>Hoe de beoordeling werkt – ${x.nl}</b></summary><p>Een <b>indicatie</b> voor ${x.nl.toLowerCase()}, geen veiligheidsadvies. Vandaag: het huidige uur; andere dagen: het beste van 9, 13 en 17 uur. Start op 5 sterren, daarna aftrek. Goed ≥3,5, matig 2–3,5, slecht &lt;2.</p><p>${r}</p><p>Alle sporten: regen &gt;0,5 mm/u −0,5, &gt;2 mm/u −1; onweer −2; donker 0. Aanlandig/zijwaarts/aflandig: windrichting t.o.v. de zeewaartse richting van de kust per spot (afgeleid uit de OpenStreetMap-kustlijn; aanlandig ≤67,5°, aflandig ≥112,5°). Waar de kustlijn onduidelijk is, wordt het geschat uit wind- t.o.v. golfrichting. Ondieptes, muistromen, zones en drukte zitten er niet in.</p></details>`}
-function offW(k,date){if(!['wind','kite','kitefoil','wing','parawing','sup','supfoil'].includes(SPORT))return '';const m=M[k].hourly;let i;
+function offW(k,date){if(SPORT=='dw')return dwW(k,date);if(!['wind','kite','kitefoil','wing','parawing','sup','supfoil'].includes(SPORT))return '';const m=M[k].hourly;let i;
  if(day==0)i=m.time.indexOf(new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00');else i=m.time.indexOf(date+'T13:00');
  if(i<0)return '';const ws=F[k].hourly.wind_speed_10m[i];if(rel(k,i)!='off'||ws==null||ws<5)return '';
  return `<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind')} (${card(F[k].hourly.wind_direction_10m[i])}, ${Math.round(ws)} kn${day?' · 13:00':''}) – ${T('je drijft van de kust af. Niet zonder begeleiding of rescue.','you drift away from the shore. Not without supervision or rescue.')}</p>`}
+function dwW(k,date){const m=M[k].hourly;const i=day==0?m.time.indexOf(new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00'):m.time.indexOf(date+'T13:00');if(i<0)return '';
+ const d=cAng(k,i),ws=F[k].hourly.wind_speed_10m[i];let h='';
+ if(d!=null&&d>100&&ws!=null&&ws>=5)h+=`<p class="info" style="color:#ffb4a8;font-weight:600;margin:0 0 8px">⚠️ ${T('Aflandige wind','Offshore wind')} (${card(F[k].hourly.wind_direction_10m[i])}, ${Math.round(ws)} kn${day?' · 13:00':''}) – ${T('geen downwinder: je drijft van de kust af.','no downwinder: you drift away from the shore.')}</p>`;
+ const a=alongH(k,i);if(a)h+=`<p class="info" style="margin:0 0 8px">↔️ ${a}${day?' (13:00)':''}</p>`;else h+=`<p class="info" style="color:var(--m);margin:0 0 8px">${T('Kustrichting voor deze spot onzeker; controleer de windrichting t.o.v. de kust zelf.','Coast bearing for this spot is uncertain; check the wind direction vs. the coast yourself.')}</p>`;
+ return h}
 
 function rating(k,date){const m=M[k].hourly;
  if(day==0){const t=new Date(Date.now()+M[k].utc_offset_seconds*1000).toISOString().slice(0,13)+':00';return {v:score(k,m.time.indexOf(t)),t:T('nu','now','jetzt')+' ('+t.slice(11)+')'};}
