@@ -48,3 +48,8 @@ function genRules(){const t={
  de:'<p><b>Orientierung, kein Sicherheitsrat.</b> Heute: die aktuelle Stunde; andere Tage: 13:00. Auflandig/sideshore/ablandig: Windrichtung zur Küste pro Spot (wo die Küste unklar ist, aus Wind- gegenüber Wellenrichtung geschätzt). Beurteile immer selbst vor Ort.</p>'};
  ['nl','en','de'].forEach(l=>{const e=document.getElementById('rules-'+l);if(e)e.innerHTML=t[l]});}
 try{localStorage.removeItem('spots-sport')}catch(e){}
+// kaartstip met windpijl (pijl wijst waar de wind heen waait)
+function dotIcon(k,c,sz){const z=map&&map._loaded?map.getZoom():5;sz=z<5?14:z<7?18:z<9?22:26;const col=condCol(c,k),wd=c?c.wd:null;
+ const ar=wd==null?'':`<svg viewBox="-10 -10 20 20" width="${sz}" height="${sz}" style="position:absolute;left:0;top:0;transform:rotate(${(wd+180)%360}deg)"><path d="M0,-8 L5,1 L1.6,1 L1.6,8 L-1.6,8 L-1.6,1 L-5,1 Z" fill="#000" stroke="#fff" stroke-width="1.3" stroke-linejoin="round"/></svg>`;
+ return L.divIcon({className:'wdot',iconSize:[sz,sz],iconAnchor:[sz/2,sz/2],tooltipAnchor:[0,-sz/2],html:`<div style="position:relative;width:${sz}px;height:${sz}px;border-radius:50%;background:${col};border:2px solid #fff;box-sizing:border-box;box-shadow:0 0 2px rgba(0,0,0,.5)">${ar}</div>`});}
+const miniArrow=c=>c&&c.wd!=null?`<span aria-hidden="true" style="display:inline-block;transform:rotate(${(c.wd+180)%360}deg);font-size:.9em;margin-right:4px">↑</span>`:'';
