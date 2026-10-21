@@ -69,3 +69,4 @@ article{scroll-margin-top:16px}
 .pj{cursor:pointer}.pj+.pj{margin-top:6px;padding-top:6px;border-top:1px solid #ddd}.pj em{display:block;font-style:normal;font-weight:600;color:#d62828;margin-top:2px}html.dark .pj+.pj{border-top-color:#333}
 
 article.next .ical,html.dark article.next .ical{color:#d62828!important}
+.ical svg{width:22px;height:22px}
