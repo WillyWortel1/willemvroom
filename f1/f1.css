@@ -63,3 +63,4 @@ html.dark .calsheet{background:#161616;border-color:#2a2a2a;box-shadow:0 8px 28p
 .pastgrp{background:#fff;border:1px solid #e6e6e6;border-radius:16px;padding:6px 16px;margin:0}.pastgrp>summary{font-size:.95rem;font-weight:700;color:#444;min-height:44px}.pastl{display:grid;gap:12px;padding:4px 0 12px}.pastl article{box-shadow:none}
 html.dark .pastgrp{background:#161616;border-color:#2a2a2a}html.dark .pastgrp>summary{color:#ccc}
 main>article{margin:0}
+.leaflet-tile-pane{filter:none}.leaflet-tile{-webkit-filter:grayscale(1) contrast(.95);filter:grayscale(1) contrast(.95)}html.dark .leaflet-tile{-webkit-filter:grayscale(1) invert(1) brightness(.85) contrast(.9);filter:grayscale(1) invert(1) brightness(.85) contrast(.9)}
