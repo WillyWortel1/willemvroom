@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Azerbaijan GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r17-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250919T083000Z
+DTEND:20250919T093000Z
+SUMMARY:🏁 F1 FP1 – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 17 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r17-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250919T120000Z
+DTEND:20250919T130000Z
+SUMMARY:🏁 F1 FP2 – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 17 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r17-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250920T083000Z
+DTEND:20250920T093000Z
+SUMMARY:🏁 F1 FP3 – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 17 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r17-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250920T120000Z
+DTEND:20250920T130000Z
+SUMMARY:🏁 F1 Qualifying – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 17 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Azerbaijan GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r17-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250921T110000Z
+DTEND:20250921T130000Z
+SUMMARY:🏁 F1 Race – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 17 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Azerbaijan GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

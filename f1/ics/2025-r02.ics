@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Chinese GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r02-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250321T033000Z
+DTEND:20250321T043000Z
+SUMMARY:🏁 F1 FP1 – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r02-sq@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250321T073000Z
+DTEND:20250321T081400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r02-sprint@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250322T030000Z
+DTEND:20250322T040000Z
+SUMMARY:🏁 F1 Sprint – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Chinese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r02-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250322T070000Z
+DTEND:20250322T080000Z
+SUMMARY:🏁 F1 Qualifying – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Chinese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r02-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250323T070000Z
+DTEND:20250323T090000Z
+SUMMARY:🏁 F1 Race – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Chinese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Australian GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r01-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250314T013000Z
+DTEND:20250314T023000Z
+SUMMARY:🏁 F1 FP1 – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r01-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250314T050000Z
+DTEND:20250314T060000Z
+SUMMARY:🏁 F1 FP2 – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r01-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250315T013000Z
+DTEND:20250315T023000Z
+SUMMARY:🏁 F1 FP3 – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r01-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250315T050000Z
+DTEND:20250315T060000Z
+SUMMARY:🏁 F1 Qualifying – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Australian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r01-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250316T040000Z
+DTEND:20250316T060000Z
+SUMMARY:🏁 F1 Race – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Australian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

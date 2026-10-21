@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Qatar GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r23-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251128T133000Z
+DTEND:20251128T143000Z
+SUMMARY:🏁 F1 FP1 – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 23 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r23-sq@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251128T173000Z
+DTEND:20251128T181400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 23 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r23-sprint@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251129T140000Z
+DTEND:20251129T150000Z
+SUMMARY:🏁 F1 Sprint – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 23 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Qatar GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r23-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251129T180000Z
+DTEND:20251129T190000Z
+SUMMARY:🏁 F1 Qualifying – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 23 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Qatar GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r23-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251130T160000Z
+DTEND:20251130T180000Z
+SUMMARY:🏁 F1 Race – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 23 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Qatar GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

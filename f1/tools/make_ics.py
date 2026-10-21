@@ -89,20 +89,22 @@ def write(path, text):
 
 
 def main():
-    try:
-        races = fetch('https://api.jolpi.ca/ergast/f1/2026.json?limit=100')
-        assert races
-    except Exception:
-        with open(os.path.join(F1, 'fallback.json'), encoding='utf-8') as f:
-            races = json.load(f)['MRData']['RaceTable']['Races']
     os.makedirs(os.path.join(F1, 'ics'), exist_ok=True)
-    allev = []
-    for r in races:
-        ev = timed(r)
-        allev += ev
-        write(os.path.join(F1, 'ics', f"2026-r{int(r['round']):02d}.ics"), cal(f"F1 2026 – {gp(r)}", ev))
-    write(os.path.join(F1, 'f1-2026.ics'), cal('F1 2026', allev))
-    n26 = len(allev)
+    counts = {}
+    for year, fb in (('2025', '2025.json'), ('2026', 'fallback.json')):
+        try:
+            races = fetch(f'https://api.jolpi.ca/ergast/f1/{year}.json?limit=100')
+            assert races
+        except Exception:
+            with open(os.path.join(F1, fb), encoding='utf-8') as f:
+                races = json.load(f)['MRData']['RaceTable']['Races']
+        allev = []
+        for r in races:
+            ev = timed(r)
+            allev += ev
+            write(os.path.join(F1, 'ics', f"{year}-r{int(r['round']):02d}.ics"), cal(f"F1 {year} – {gp(r)}", ev))
+        write(os.path.join(F1, f'f1-{year}.ics'), cal(f'F1 {year}', allev))
+        counts[year] = len(allev)
 
     with open(os.path.join(F1, '2027.json'), encoding='utf-8') as f:
         r27 = json.load(f)['MRData']['RaceTable']['Races']
@@ -118,7 +120,7 @@ def main():
         all27 += ev
         write(os.path.join(F1, 'ics', f"2027-r{int(r['round']):02d}.ics"), cal(f"F1 2027 – {gp(r)}", ev))
     write(os.path.join(F1, 'f1-2027.ics'), cal('F1 2027', all27))
-    print('2026 events', n26, '| 2027 events', len(all27))
+    print(counts, '| 2027 events', len(all27))
 
 
 if __name__ == '__main__':

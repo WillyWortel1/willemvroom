@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Singapore GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r18-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251003T093000Z
+DTEND:20251003T103000Z
+SUMMARY:🏁 F1 FP1 – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 18 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r18-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251003T130000Z
+DTEND:20251003T140000Z
+SUMMARY:🏁 F1 FP2 – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 18 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r18-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251004T093000Z
+DTEND:20251004T103000Z
+SUMMARY:🏁 F1 FP3 – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 18 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r18-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251004T130000Z
+DTEND:20251004T140000Z
+SUMMARY:🏁 F1 Qualifying – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 18 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Singapore GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r18-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251005T120000Z
+DTEND:20251005T140000Z
+SUMMARY:🏁 F1 Race – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 18 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Singapore GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

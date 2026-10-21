@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Saudi Arabian GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r05-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250418T133000Z
+DTEND:20250418T143000Z
+SUMMARY:🏁 F1 FP1 – Saudi Arabian GP
+LOCATION:Jeddah Corniche Circuit\, Jeddah\, Saudi Arabia
+GEO:21.6319;39.1044
+DESCRIPTION:Ronde 5 – Saudi Arabian Grand Prix. Bron: Jolpica-F1. https:/
+ /willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r05-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250418T170000Z
+DTEND:20250418T180000Z
+SUMMARY:🏁 F1 FP2 – Saudi Arabian GP
+LOCATION:Jeddah Corniche Circuit\, Jeddah\, Saudi Arabia
+GEO:21.6319;39.1044
+DESCRIPTION:Ronde 5 – Saudi Arabian Grand Prix. Bron: Jolpica-F1. https:/
+ /willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r05-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250419T133000Z
+DTEND:20250419T143000Z
+SUMMARY:🏁 F1 FP3 – Saudi Arabian GP
+LOCATION:Jeddah Corniche Circuit\, Jeddah\, Saudi Arabia
+GEO:21.6319;39.1044
+DESCRIPTION:Ronde 5 – Saudi Arabian Grand Prix. Bron: Jolpica-F1. https:/
+ /willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r05-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250419T170000Z
+DTEND:20250419T180000Z
+SUMMARY:🏁 F1 Qualifying – Saudi Arabian GP
+LOCATION:Jeddah Corniche Circuit\, Jeddah\, Saudi Arabia
+GEO:21.6319;39.1044
+DESCRIPTION:Ronde 5 – Saudi Arabian Grand Prix. Bron: Jolpica-F1. https:/
+ /willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Saudi Arabian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r05-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250420T170000Z
+DTEND:20250420T190000Z
+SUMMARY:🏁 F1 Race – Saudi Arabian GP
+LOCATION:Jeddah Corniche Circuit\, Jeddah\, Saudi Arabia
+GEO:21.6319;39.1044
+DESCRIPTION:Ronde 5 – Saudi Arabian Grand Prix. Bron: Jolpica-F1. https:/
+ /willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Saudi Arabian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

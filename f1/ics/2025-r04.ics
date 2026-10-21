@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Bahrain GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r04-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250411T113000Z
+DTEND:20250411T123000Z
+SUMMARY:🏁 F1 FP1 – Bahrain GP
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Ronde 4 – Bahrain Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r04-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250411T150000Z
+DTEND:20250411T160000Z
+SUMMARY:🏁 F1 FP2 – Bahrain GP
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Ronde 4 – Bahrain Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r04-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250412T123000Z
+DTEND:20250412T133000Z
+SUMMARY:🏁 F1 FP3 – Bahrain GP
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Ronde 4 – Bahrain Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r04-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250412T160000Z
+DTEND:20250412T170000Z
+SUMMARY:🏁 F1 Qualifying – Bahrain GP
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Ronde 4 – Bahrain Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Bahrain GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r04-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250413T150000Z
+DTEND:20250413T170000Z
+SUMMARY:🏁 F1 Race – Bahrain GP
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Ronde 4 – Bahrain Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Bahrain GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

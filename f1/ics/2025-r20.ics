@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Mexico City GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r20-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251024T183000Z
+DTEND:20251024T193000Z
+SUMMARY:🏁 F1 FP1 – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 20 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r20-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251024T220000Z
+DTEND:20251024T230000Z
+SUMMARY:🏁 F1 FP2 – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 20 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r20-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251025T173000Z
+DTEND:20251025T183000Z
+SUMMARY:🏁 F1 FP3 – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 20 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r20-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251025T210000Z
+DTEND:20251025T220000Z
+SUMMARY:🏁 F1 Qualifying – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 20 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Mexico City GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r20-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251026T200000Z
+DTEND:20251026T220000Z
+SUMMARY:🏁 F1 Race – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 20 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Mexico City GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Emilia Romagna GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r07-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250516T113000Z
+DTEND:20250516T123000Z
+SUMMARY:🏁 F1 FP1 – Emilia Romagna GP
+LOCATION:Autodromo Enzo e Dino Ferrari\, Imola\, Italy
+GEO:44.3439;11.7167
+DESCRIPTION:Ronde 7 – Emilia Romagna Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r07-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250516T150000Z
+DTEND:20250516T160000Z
+SUMMARY:🏁 F1 FP2 – Emilia Romagna GP
+LOCATION:Autodromo Enzo e Dino Ferrari\, Imola\, Italy
+GEO:44.3439;11.7167
+DESCRIPTION:Ronde 7 – Emilia Romagna Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r07-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250517T103000Z
+DTEND:20250517T113000Z
+SUMMARY:🏁 F1 FP3 – Emilia Romagna GP
+LOCATION:Autodromo Enzo e Dino Ferrari\, Imola\, Italy
+GEO:44.3439;11.7167
+DESCRIPTION:Ronde 7 – Emilia Romagna Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r07-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250517T140000Z
+DTEND:20250517T150000Z
+SUMMARY:🏁 F1 Qualifying – Emilia Romagna GP
+LOCATION:Autodromo Enzo e Dino Ferrari\, Imola\, Italy
+GEO:44.3439;11.7167
+DESCRIPTION:Ronde 7 – Emilia Romagna Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Emilia Romagna GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r07-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250518T130000Z
+DTEND:20250518T150000Z
+SUMMARY:🏁 F1 Race – Emilia Romagna GP
+LOCATION:Autodromo Enzo e Dino Ferrari\, Imola\, Italy
+GEO:44.3439;11.7167
+DESCRIPTION:Ronde 7 – Emilia Romagna Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Emilia Romagna GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

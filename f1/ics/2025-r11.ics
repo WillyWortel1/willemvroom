@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Austrian GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r11-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250627T113000Z
+DTEND:20250627T123000Z
+SUMMARY:🏁 F1 FP1 – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 11 – Austrian Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r11-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250627T150000Z
+DTEND:20250627T160000Z
+SUMMARY:🏁 F1 FP2 – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 11 – Austrian Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r11-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250628T103000Z
+DTEND:20250628T113000Z
+SUMMARY:🏁 F1 FP3 – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 11 – Austrian Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r11-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250628T140000Z
+DTEND:20250628T150000Z
+SUMMARY:🏁 F1 Qualifying – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 11 – Austrian Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Austrian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r11-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250629T130000Z
+DTEND:20250629T150000Z
+SUMMARY:🏁 F1 Race – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 11 – Austrian Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Austrian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

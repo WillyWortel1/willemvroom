@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Las Vegas GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r22-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251121T003000Z
+DTEND:20251121T013000Z
+SUMMARY:🏁 F1 FP1 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 22 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r22-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251121T040000Z
+DTEND:20251121T050000Z
+SUMMARY:🏁 F1 FP2 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 22 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r22-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251122T003000Z
+DTEND:20251122T013000Z
+SUMMARY:🏁 F1 FP3 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 22 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r22-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251122T040000Z
+DTEND:20251122T050000Z
+SUMMARY:🏁 F1 Qualifying – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 22 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Las Vegas GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r22-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251123T040000Z
+DTEND:20251123T060000Z
+SUMMARY:🏁 F1 Race – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 22 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Las Vegas GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

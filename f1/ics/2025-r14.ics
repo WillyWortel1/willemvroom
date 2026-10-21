@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Hungarian GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r14-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250801T113000Z
+DTEND:20250801T123000Z
+SUMMARY:🏁 F1 FP1 – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 14 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r14-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250801T150000Z
+DTEND:20250801T160000Z
+SUMMARY:🏁 F1 FP2 – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 14 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r14-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250802T103000Z
+DTEND:20250802T113000Z
+SUMMARY:🏁 F1 FP3 – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 14 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r14-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250802T140000Z
+DTEND:20250802T150000Z
+SUMMARY:🏁 F1 Qualifying – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 14 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Hungarian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r14-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250803T130000Z
+DTEND:20250803T150000Z
+SUMMARY:🏁 F1 Race – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 14 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Hungarian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

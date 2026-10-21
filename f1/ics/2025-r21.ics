@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – São Paulo GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r21-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251107T143000Z
+DTEND:20251107T153000Z
+SUMMARY:🏁 F1 FP1 – São Paulo GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 21 – São Paulo Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r21-sq@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251107T183000Z
+DTEND:20251107T191400Z
+SUMMARY:🏁 F1 Sprint Qualifying – São Paulo GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 21 – São Paulo Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r21-sprint@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251108T140000Z
+DTEND:20251108T150000Z
+SUMMARY:🏁 F1 Sprint – São Paulo GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 21 – São Paulo Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – São Paulo GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r21-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251108T180000Z
+DTEND:20251108T190000Z
+SUMMARY:🏁 F1 Qualifying – São Paulo GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 21 – São Paulo Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – São Paulo GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r21-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251109T170000Z
+DTEND:20251109T190000Z
+SUMMARY:🏁 F1 Race – São Paulo GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 21 – São Paulo Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – São Paulo GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

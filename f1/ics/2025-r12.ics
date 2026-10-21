@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – British GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r12-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250704T113000Z
+DTEND:20250704T123000Z
+SUMMARY:🏁 F1 FP1 – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 12 – British Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r12-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250704T150000Z
+DTEND:20250704T160000Z
+SUMMARY:🏁 F1 FP2 – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 12 – British Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r12-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250705T103000Z
+DTEND:20250705T113000Z
+SUMMARY:🏁 F1 FP3 – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 12 – British Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r12-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250705T140000Z
+DTEND:20250705T150000Z
+SUMMARY:🏁 F1 Qualifying – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 12 – British Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r12-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250706T140000Z
+DTEND:20250706T160000Z
+SUMMARY:🏁 F1 Race – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 12 – British Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

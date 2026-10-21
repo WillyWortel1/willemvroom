@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Monaco GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r08-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250523T113000Z
+DTEND:20250523T123000Z
+SUMMARY:🏁 F1 FP1 – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 8 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r08-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250523T150000Z
+DTEND:20250523T160000Z
+SUMMARY:🏁 F1 FP2 – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 8 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r08-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250524T103000Z
+DTEND:20250524T113000Z
+SUMMARY:🏁 F1 FP3 – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 8 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r08-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250524T140000Z
+DTEND:20250524T150000Z
+SUMMARY:🏁 F1 Qualifying – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 8 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Monaco GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r08-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250525T130000Z
+DTEND:20250525T150000Z
+SUMMARY:🏁 F1 Race – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 8 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Monaco GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Italian GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r16-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250905T113000Z
+DTEND:20250905T123000Z
+SUMMARY:🏁 F1 FP1 – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 16 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r16-fp2@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250905T150000Z
+DTEND:20250905T160000Z
+SUMMARY:🏁 F1 FP2 – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 16 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r16-fp3@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250906T103000Z
+DTEND:20250906T113000Z
+SUMMARY:🏁 F1 FP3 – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 16 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r16-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250906T140000Z
+DTEND:20250906T150000Z
+SUMMARY:🏁 F1 Qualifying – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 16 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Italian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r16-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250907T130000Z
+DTEND:20250907T150000Z
+SUMMARY:🏁 F1 Race – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 16 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Italian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

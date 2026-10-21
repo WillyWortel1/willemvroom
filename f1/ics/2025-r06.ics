@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – Miami GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r06-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250502T163000Z
+DTEND:20250502T173000Z
+SUMMARY:🏁 F1 FP1 – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 6 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r06-sq@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250502T203000Z
+DTEND:20250502T211400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 6 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r06-sprint@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250503T160000Z
+DTEND:20250503T170000Z
+SUMMARY:🏁 F1 Sprint – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 6 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Miami GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r06-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250503T200000Z
+DTEND:20250503T210000Z
+SUMMARY:🏁 F1 Qualifying – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 6 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Miami GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r06-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20250504T200000Z
+DTEND:20250504T220000Z
+SUMMARY:🏁 F1 Race – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 6 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Miami GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

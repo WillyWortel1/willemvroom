@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2025 – United States GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2025-r19-fp1@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251017T173000Z
+DTEND:20251017T183000Z
+SUMMARY:🏁 F1 FP1 – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 19 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r19-sq@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251017T213000Z
+DTEND:20251017T221400Z
+SUMMARY:🏁 F1 Sprint Qualifying – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 19 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r19-sprint@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251018T170000Z
+DTEND:20251018T180000Z
+SUMMARY:🏁 F1 Sprint – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 19 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – United States GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r19-quali@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251018T210000Z
+DTEND:20251018T220000Z
+SUMMARY:🏁 F1 Qualifying – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 19 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – United States GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2025-r19-race@willemvroom.nl
+DTSTAMP:20261021T110850Z
+DTSTART:20251019T190000Z
+DTEND:20251019T210000Z
+SUMMARY:🏁 F1 Race – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 19 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – United States GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
