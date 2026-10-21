@@ -76,3 +76,42 @@
     .observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["open"] });
   scan();
 })();
+/* Willem: site-kop (willemvroom.nl + thema) zoals de rest van de site */
+(function () {
+  function appBtn() { return document.querySelector('header button[aria-label$="thema"]'); }
+  function isDark() { return document.documentElement.classList.contains("dark"); }
+  function head() {
+    if (document.querySelector(".wv-head")) return;
+    var h = document.querySelector("header.sticky");
+    if (!h) return;
+    var d = document.createElement("div");
+    d.className = "wv-head";
+    d.innerHTML = '<a href="/" class="home">willemvroom.nl</a><button id="thm" type="button" aria-label="Thema wisselen"><svg class="moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>';
+    h.parentNode.insertBefore(d, h);
+    d.querySelector("#thm").addEventListener("click", function () {
+      var b = appBtn();
+      if (b) b.click(); else document.documentElement.classList.toggle("dark");
+      setTimeout(function () {
+        var t = isDark() ? "dark" : "light";
+        try { localStorage.setItem("wv-theme", t); localStorage.setItem("aangifte-theme", t); } catch (e) {}
+        var m = document.querySelector('meta[name="theme-color"]'); if (m) m.setAttribute("content", t === "dark" ? "#0b0b0b" : "#f6f6f6");
+      }, 0);
+    });
+  }
+  function foot() {
+    var a = document.querySelector('a[href="https://www.willemvroom.nl"]');
+    if (!a || document.querySelector(".wv-copy")) return;
+    var p = document.createElement("p"); p.className = "wv-copy"; p.textContent = "© 2026";
+    (a.parentElement || a).insertAdjacentElement("afterend", p);
+  }
+  /* site-thema (wv-theme) volgen als de app iets anders toont */
+  function sync() {
+    var w; try { w = localStorage.getItem("wv-theme"); } catch (e) {}
+    if (!w) return;
+    if ((w === "dark") !== isDark()) { var b = appBtn(); if (b) b.click(); else document.documentElement.classList.toggle("dark", w === "dark"); }
+  }
+  var done = false;
+  function run() { head(); foot(); if (!done && appBtn()) { done = true; sync(); } }
+  function start() { setTimeout(function () { new MutationObserver(run).observe(document.body, { childList: true, subtree: true }); run(); }, 400); }
+  if (document.readyState === "complete") start(); else window.addEventListener("load", start);
+})();
