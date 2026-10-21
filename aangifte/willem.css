@@ -50,3 +50,6 @@ html.dark #thm .moon{opacity:1;transform:none}
 html.dark #thm{color:#fff}
 header.sticky button[aria-label$="thema"]{display:none!important}
 .wv-copy{text-align:center;font-size:.85rem;color:var(--color-fg-subtle);margin:6px 0 0}
+
+/* bloktitels zoals op de site */
+h2.font-serif{font-size:1.875rem!important;line-height:1.25!important;font-weight:500!important;letter-spacing:-.025em!important}
