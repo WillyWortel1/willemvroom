@@ -60,3 +60,7 @@ html{scroll-behavior:smooth}#werk{scroll-margin-top:8px}.to-werk{grid-column:1/-
 .pdfpages a{display:block}
 .pdfpages img{display:block;width:100%;height:auto;background:#fff;border:1px solid var(--color-line);border-radius:8px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .pdf-tip{color:var(--color-subtle);font-size:.85rem;margin:0}
+a.dl,html.dark a.dl,a.dl svg{color:#d62828!important}
+a.dl.hs-btn{border-color:#d62828!important}
+a.dl.hs-btn.solid,html.dark a.dl.hs-btn.solid{background:#d62828!important;color:#fff!important}
+a.dl.hs-btn.solid svg{color:#fff!important}
