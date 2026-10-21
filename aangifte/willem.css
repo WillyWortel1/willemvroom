@@ -7,3 +7,4 @@ summary.text-sm:not(.list-none)::before{content:"";display:inline-block;width:0;
 details[open]>summary.text-sm:not(.list-none)::before{rotate:90deg}
 @media (prefers-reduced-motion:reduce){svg.lucide-chevron-down,svg.lucide-chevrons-up-down,svg.lucide-arrow-down-right,svg.lucide-arrow-up-right,summary.text-sm::before{animation:none!important}}
 svg.lucide-chevron-down{width:26px!important;height:26px!important;stroke-width:2.4}
+a[href="https://www.willemvroom.nl"]{color:#d62828!important;font-weight:600}
