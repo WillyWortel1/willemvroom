@@ -9,12 +9,12 @@ details[open]>summary.text-sm:not(.list-none)::before{rotate:90deg}
 svg.lucide-chevron-down{width:26px!important;height:26px!important;stroke-width:2.4}
 a[href="https://www.willemvroom.nl"]{color:#d62828!important;font-weight:600}
 /* n.v.t.-schakelaar */
-.wv-nvt-btn{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 4px;margin-left:auto;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;font-size:12px;color:var(--color-fg-muted,#71717a);user-select:none}
-.wv-nvt-track{position:relative;width:34px;height:20px;border-radius:999px;background:#d4d4d8;transition:background .2s}
-.dark .wv-nvt-track{background:#3f3f46}
-.wv-nvt-knob{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.25);transition:transform .2s}
-.wv-nvt-btn[aria-checked=true] .wv-nvt-track{background:#d62828}
-.wv-nvt-btn[aria-checked=true] .wv-nvt-knob{transform:translateX(14px)}
+.wv-nvt-btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px;margin-left:auto;cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;font-size:12px;color:var(--color-fg-muted,#71717a);user-select:none}
+.wv-nvt-track{position:relative;box-sizing:border-box;width:48px;height:28px;border-radius:999px;border:2px solid transparent;background:#e4e4e7;box-shadow:0 0 0 1px rgba(10,10,10,.08),0 1px 2px -1px rgba(10,10,10,.04),0 2px 6px rgba(10,10,10,.03);transition:background .2s}
+.dark .wv-nvt-track{background:#27272a}
+.wv-nvt-knob{position:absolute;top:0;left:0;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.45),0 1px 3px rgba(0,0,0,.1),0 1px 2px -1px rgba(0,0,0,.1);transition:transform .2s}
+.wv-nvt-btn[aria-checked=true] .wv-nvt-track{background:var(--color-primary,#0a0a0a)}.wv-nvt-btn[aria-checked=true] .wv-nvt-knob{background:var(--color-primary-foreground,#fff);box-shadow:0 1px 3px rgba(0,0,0,.1)}
+.wv-nvt-btn[aria-checked=true] .wv-nvt-knob{transform:translateX(20px)}
 .wv-nvt-btn[aria-checked=true] .wv-nvt-txt{color:#d62828;font-weight:600}
 section.wv-nvt{opacity:.45;padding-top:10px!important;padding-bottom:10px!important}
 section.wv-nvt h2{font-size:1rem!important;text-decoration:line-through}
