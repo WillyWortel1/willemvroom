@@ -6,3 +6,4 @@ summary.text-sm:not(.list-none)::-webkit-details-marker{display:none}
 summary.text-sm:not(.list-none)::before{content:"";display:inline-block;width:0;height:0;margin-right:.5em;vertical-align:.08em;border-style:solid;border-width:.32em 0 .32em .5em;border-color:transparent transparent transparent #d62828;rotate:0deg;transition:rotate .2s ease;animation:wv-bob 2.4s ease-in-out infinite}
 details[open]>summary.text-sm:not(.list-none)::before{rotate:90deg}
 @media (prefers-reduced-motion:reduce){svg.lucide-chevron-down,svg.lucide-chevrons-up-down,svg.lucide-arrow-down-right,svg.lucide-arrow-up-right,summary.text-sm::before{animation:none!important}}
+svg.lucide-chevron-down{width:26px!important;height:26px!important;stroke-width:2.4}
