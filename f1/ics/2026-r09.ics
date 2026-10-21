@@ -1,0 +1,85 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026 – British GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r09-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260703T113000Z
+DTEND:20260703T123000Z
+SUMMARY:🏁 F1 FP1 – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-sq@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260703T153000Z
+DTEND:20260703T161400Z
+SUMMARY:🏁 F1 Sprint Qualifying – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-sprint@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260704T110000Z
+DTEND:20260704T120000Z
+SUMMARY:🏁 F1 Sprint – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260704T150000Z
+DTEND:20260704T160000Z
+SUMMARY:🏁 F1 Qualifying – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260705T140000Z
+DTEND:20260705T160000Z
+SUMMARY:🏁 F1 Race – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

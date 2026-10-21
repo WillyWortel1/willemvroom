@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026 – Qatar GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r22-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261127T133000Z
+DTEND:20261127T143000Z
+SUMMARY:🏁 F1 FP1 – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261127T170000Z
+DTEND:20261127T180000Z
+SUMMARY:🏁 F1 FP2 – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261128T143000Z
+DTEND:20261128T153000Z
+SUMMARY:🏁 F1 FP3 – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261128T180000Z
+DTEND:20261128T190000Z
+SUMMARY:🏁 F1 Qualifying – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Qatar GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261129T160000Z
+DTEND:20261129T180000Z
+SUMMARY:🏁 F1 Race – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Qatar GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

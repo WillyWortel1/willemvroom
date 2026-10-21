@@ -1,0 +1,374 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2027
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2027-test-d1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270224
+DTEND;VALUE=DATE:20270225
+SUMMARY:🏁 F1 Wintertest dag 1 / Pre-season testing day 1
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-test-d2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270225
+DTEND;VALUE=DATE:20270226
+SUMMARY:🏁 F1 Wintertest dag 2 / Pre-season testing day 2
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-test-d3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
+SUMMARY:🏁 F1 Wintertest dag 3 / Pre-season testing day 3
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-test-d4@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270227
+DTEND;VALUE=DATE:20270228
+SUMMARY:🏁 F1 Wintertest dag 4 / Pre-season testing day 4
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r01-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270312
+DTEND;VALUE=DATE:20270315
+SUMMARY:🏁 F1 Bahrain GP (Sprint)
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r02-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270319
+DTEND;VALUE=DATE:20270322
+SUMMARY:🏁 F1 Saudi Arabian GP
+LOCATION:Jeddah Corniche Circuit\, Jeddah\, Saudi Arabia
+GEO:21.6319;39.1044
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r03-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270402
+DTEND;VALUE=DATE:20270405
+SUMMARY:🏁 F1 Australian GP (Sprint)
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r04-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270409
+DTEND;VALUE=DATE:20270412
+SUMMARY:🏁 F1 Japanese GP (Sprint)
+LOCATION:Suzuka Circuit\, Suzuka\, Japan
+GEO:34.8431;136.5410
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r05-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270416
+DTEND;VALUE=DATE:20270419
+SUMMARY:🏁 F1 Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r06-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270430
+DTEND;VALUE=DATE:20270503
+SUMMARY:🏁 F1 Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r07-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270521
+DTEND;VALUE=DATE:20270524
+SUMMARY:🏁 F1 Canadian GP (Sprint)
+LOCATION:Circuit Gilles Villeneuve\, Montreal\, Canada
+GEO:45.5000;-73.5228
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r08-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270604
+DTEND;VALUE=DATE:20270607
+SUMMARY:🏁 F1 Monaco GP (Sprint)
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r09-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270618
+DTEND;VALUE=DATE:20270621
+SUMMARY:🏁 F1 Portuguese GP
+LOCATION:Autódromo Internacional do Algarve\, Portimão\, Portugal
+GEO:37.2270;-8.6267
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r10-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270702
+DTEND;VALUE=DATE:20270705
+SUMMARY:🏁 F1 British GP (Sprint)
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r11-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270709
+DTEND;VALUE=DATE:20270712
+SUMMARY:🏁 F1 Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r12-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270723
+DTEND;VALUE=DATE:20270726
+SUMMARY:🏁 F1 Belgian GP
+LOCATION:Circuit de Spa-Francorchamps\, Spa\, Belgium
+GEO:50.4372;5.9714
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r13-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270730
+DTEND;VALUE=DATE:20270802
+SUMMARY:🏁 F1 Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r14-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270903
+DTEND;VALUE=DATE:20270906
+SUMMARY:🏁 F1 Italian GP (Sprint)
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r15-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270910
+DTEND;VALUE=DATE:20270913
+SUMMARY:🏁 F1 Spanish GP
+LOCATION:Madring\, Madrid\, Spain
+GEO:40.4653;-3.6153
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r16-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270924
+DTEND;VALUE=DATE:20270927
+SUMMARY:🏁 F1 Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r17-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271001
+DTEND;VALUE=DATE:20271004
+SUMMARY:🏁 F1 Turkish GP
+LOCATION:Istanbul Park\, Istanbul\, Turkey
+GEO:40.9517;29.4050
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r18-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271008
+DTEND;VALUE=DATE:20271011
+SUMMARY:🏁 F1 Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r19-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271022
+DTEND;VALUE=DATE:20271025
+SUMMARY:🏁 F1 United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r20-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271029
+DTEND;VALUE=DATE:20271101
+SUMMARY:🏁 F1 Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r21-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271105
+DTEND;VALUE=DATE:20271108
+SUMMARY:🏁 F1 São Paulo GP (Sprint)
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r22-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271118
+DTEND;VALUE=DATE:20271121
+SUMMARY:🏁 F1 Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r23-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271203
+DTEND;VALUE=DATE:20271206
+SUMMARY:🏁 F1 Qatar GP (Sprint)
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-r24-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20271210
+DTEND;VALUE=DATE:20271213
+SUMMARY:🏁 F1 Abu Dhabi GP (Sprint)
+LOCATION:Yas Marina Circuit\, Abu Dhabi\, UAE
+GEO:24.4672;54.6031
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+END:VCALENDAR

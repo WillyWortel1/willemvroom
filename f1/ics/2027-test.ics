@@ -1,0 +1,62 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2027 – Wintertest
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2027-test-d1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270224
+DTEND;VALUE=DATE:20270225
+SUMMARY:🏁 F1 Wintertest dag 1 / Pre-season testing day 1
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-test-d2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270225
+DTEND;VALUE=DATE:20270226
+SUMMARY:🏁 F1 Wintertest dag 2 / Pre-season testing day 2
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-test-d3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270226
+DTEND;VALUE=DATE:20270227
+SUMMARY:🏁 F1 Wintertest dag 3 / Pre-season testing day 3
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+BEGIN:VEVENT
+UID:2027-test-d4@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270227
+DTEND;VALUE=DATE:20270228
+SUMMARY:🏁 F1 Wintertest dag 4 / Pre-season testing day 4
+LOCATION:Bahrain International Circuit\, Sakhir\, Bahrain
+GEO:26.0325;50.5106
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026 – Barcelona GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r07-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260612T113000Z
+DTEND:20260612T123000Z
+SUMMARY:🏁 F1 FP1 – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260612T150000Z
+DTEND:20260612T160000Z
+SUMMARY:🏁 F1 FP2 – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260613T103000Z
+DTEND:20260613T113000Z
+SUMMARY:🏁 F1 FP3 – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260613T140000Z
+DTEND:20260613T150000Z
+SUMMARY:🏁 F1 Qualifying – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Barcelona GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260614T130000Z
+DTEND:20260614T150000Z
+SUMMARY:🏁 F1 Race – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Barcelona GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

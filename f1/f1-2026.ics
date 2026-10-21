@@ -1,0 +1,1650 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r01-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260306T013000Z
+DTEND:20260306T023000Z
+SUMMARY:🏁 F1 FP1 – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r01-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260306T050000Z
+DTEND:20260306T060000Z
+SUMMARY:🏁 F1 FP2 – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r01-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260307T013000Z
+DTEND:20260307T023000Z
+SUMMARY:🏁 F1 FP3 – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r01-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260307T050000Z
+DTEND:20260307T060000Z
+SUMMARY:🏁 F1 Qualifying – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Australian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r01-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260308T040000Z
+DTEND:20260308T060000Z
+SUMMARY:🏁 F1 Race – Australian GP
+LOCATION:Albert Park Grand Prix Circuit\, Melbourne\, Australia
+GEO:-37.8497;144.9680
+DESCRIPTION:Ronde 1 – Australian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Australian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r02-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260313T033000Z
+DTEND:20260313T043000Z
+SUMMARY:🏁 F1 FP1 – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r02-sq@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260313T073000Z
+DTEND:20260313T081400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r02-sprint@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260314T030000Z
+DTEND:20260314T040000Z
+SUMMARY:🏁 F1 Sprint – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Chinese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r02-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260314T070000Z
+DTEND:20260314T080000Z
+SUMMARY:🏁 F1 Qualifying – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Chinese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r02-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260315T070000Z
+DTEND:20260315T090000Z
+SUMMARY:🏁 F1 Race – Chinese GP
+LOCATION:Shanghai International Circuit\, Shanghai\, China
+GEO:31.3389;121.2200
+DESCRIPTION:Ronde 2 – Chinese Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Chinese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r03-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260327T023000Z
+DTEND:20260327T033000Z
+SUMMARY:🏁 F1 FP1 – Japanese GP
+LOCATION:Suzuka Circuit\, Suzuka\, Japan
+GEO:34.8431;136.5410
+DESCRIPTION:Ronde 3 – Japanese Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r03-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260327T060000Z
+DTEND:20260327T070000Z
+SUMMARY:🏁 F1 FP2 – Japanese GP
+LOCATION:Suzuka Circuit\, Suzuka\, Japan
+GEO:34.8431;136.5410
+DESCRIPTION:Ronde 3 – Japanese Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r03-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260328T023000Z
+DTEND:20260328T033000Z
+SUMMARY:🏁 F1 FP3 – Japanese GP
+LOCATION:Suzuka Circuit\, Suzuka\, Japan
+GEO:34.8431;136.5410
+DESCRIPTION:Ronde 3 – Japanese Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r03-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260328T060000Z
+DTEND:20260328T070000Z
+SUMMARY:🏁 F1 Qualifying – Japanese GP
+LOCATION:Suzuka Circuit\, Suzuka\, Japan
+GEO:34.8431;136.5410
+DESCRIPTION:Ronde 3 – Japanese Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Japanese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r03-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260329T050000Z
+DTEND:20260329T070000Z
+SUMMARY:🏁 F1 Race – Japanese GP
+LOCATION:Suzuka Circuit\, Suzuka\, Japan
+GEO:34.8431;136.5410
+DESCRIPTION:Ronde 3 – Japanese Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Japanese GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r04-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260501T160000Z
+DTEND:20260501T170000Z
+SUMMARY:🏁 F1 FP1 – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 4 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r04-sq@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260501T203000Z
+DTEND:20260501T211400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 4 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r04-sprint@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260502T160000Z
+DTEND:20260502T170000Z
+SUMMARY:🏁 F1 Sprint – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 4 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Miami GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r04-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260502T200000Z
+DTEND:20260502T210000Z
+SUMMARY:🏁 F1 Qualifying – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 4 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Miami GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r04-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260503T200000Z
+DTEND:20260503T220000Z
+SUMMARY:🏁 F1 Race – Miami GP
+LOCATION:Miami International Autodrome\, Miami\, USA
+GEO:25.9581;-80.2389
+DESCRIPTION:Ronde 4 – Miami Grand Prix. Bron: Jolpica-F1. https://willemv
+ room.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Miami GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r05-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260522T163000Z
+DTEND:20260522T173000Z
+SUMMARY:🏁 F1 FP1 – Canadian GP
+LOCATION:Circuit Gilles Villeneuve\, Montreal\, Canada
+GEO:45.5000;-73.5228
+DESCRIPTION:Ronde 5 – Canadian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r05-sq@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260522T203000Z
+DTEND:20260522T211400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Canadian GP
+LOCATION:Circuit Gilles Villeneuve\, Montreal\, Canada
+GEO:45.5000;-73.5228
+DESCRIPTION:Ronde 5 – Canadian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r05-sprint@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260523T160000Z
+DTEND:20260523T170000Z
+SUMMARY:🏁 F1 Sprint – Canadian GP
+LOCATION:Circuit Gilles Villeneuve\, Montreal\, Canada
+GEO:45.5000;-73.5228
+DESCRIPTION:Ronde 5 – Canadian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Canadian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r05-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260523T200000Z
+DTEND:20260523T210000Z
+SUMMARY:🏁 F1 Qualifying – Canadian GP
+LOCATION:Circuit Gilles Villeneuve\, Montreal\, Canada
+GEO:45.5000;-73.5228
+DESCRIPTION:Ronde 5 – Canadian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Canadian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r05-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260524T200000Z
+DTEND:20260524T220000Z
+SUMMARY:🏁 F1 Race – Canadian GP
+LOCATION:Circuit Gilles Villeneuve\, Montreal\, Canada
+GEO:45.5000;-73.5228
+DESCRIPTION:Ronde 5 – Canadian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Canadian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r06-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260605T113000Z
+DTEND:20260605T123000Z
+SUMMARY:🏁 F1 FP1 – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 6 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r06-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260605T150000Z
+DTEND:20260605T160000Z
+SUMMARY:🏁 F1 FP2 – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 6 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r06-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260606T103000Z
+DTEND:20260606T113000Z
+SUMMARY:🏁 F1 FP3 – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 6 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r06-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260606T140000Z
+DTEND:20260606T150000Z
+SUMMARY:🏁 F1 Qualifying – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 6 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Monaco GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r06-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260607T130000Z
+DTEND:20260607T150000Z
+SUMMARY:🏁 F1 Race – Monaco GP
+LOCATION:Circuit de Monaco\, Monte Carlo\, Monaco
+GEO:43.7347;7.4206
+DESCRIPTION:Ronde 6 – Monaco Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Monaco GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260612T113000Z
+DTEND:20260612T123000Z
+SUMMARY:🏁 F1 FP1 – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260612T150000Z
+DTEND:20260612T160000Z
+SUMMARY:🏁 F1 FP2 – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260613T103000Z
+DTEND:20260613T113000Z
+SUMMARY:🏁 F1 FP3 – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260613T140000Z
+DTEND:20260613T150000Z
+SUMMARY:🏁 F1 Qualifying – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Barcelona GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r07-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260614T130000Z
+DTEND:20260614T150000Z
+SUMMARY:🏁 F1 Race – Barcelona GP
+LOCATION:Circuit de Barcelona-Catalunya\, Barcelona\, Spain
+GEO:41.5700;2.2611
+DESCRIPTION:Ronde 7 – Barcelona Grand Prix. Bron: Jolpica-F1. https://wil
+ lemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Barcelona GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r08-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260626T113000Z
+DTEND:20260626T123000Z
+SUMMARY:🏁 F1 FP1 – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 8 – Austrian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r08-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260626T150000Z
+DTEND:20260626T160000Z
+SUMMARY:🏁 F1 FP2 – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 8 – Austrian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r08-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260627T103000Z
+DTEND:20260627T113000Z
+SUMMARY:🏁 F1 FP3 – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 8 – Austrian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r08-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260627T140000Z
+DTEND:20260627T150000Z
+SUMMARY:🏁 F1 Qualifying – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 8 – Austrian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Austrian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r08-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260628T130000Z
+DTEND:20260628T150000Z
+SUMMARY:🏁 F1 Race – Austrian GP
+LOCATION:Red Bull Ring\, Spielberg\, Austria
+GEO:47.2197;14.7647
+DESCRIPTION:Ronde 8 – Austrian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Austrian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260703T113000Z
+DTEND:20260703T123000Z
+SUMMARY:🏁 F1 FP1 – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-sq@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260703T153000Z
+DTEND:20260703T161400Z
+SUMMARY:🏁 F1 Sprint Qualifying – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-sprint@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260704T110000Z
+DTEND:20260704T120000Z
+SUMMARY:🏁 F1 Sprint – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260704T150000Z
+DTEND:20260704T160000Z
+SUMMARY:🏁 F1 Qualifying – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r09-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260705T140000Z
+DTEND:20260705T160000Z
+SUMMARY:🏁 F1 Race – British GP
+LOCATION:Silverstone Circuit\, Silverstone\, UK
+GEO:52.0786;-1.0169
+DESCRIPTION:Ronde 9 – British Grand Prix. Bron: Jolpica-F1. https://wille
+ mvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – British GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r10-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260717T113000Z
+DTEND:20260717T123000Z
+SUMMARY:🏁 F1 FP1 – Belgian GP
+LOCATION:Circuit de Spa-Francorchamps\, Spa\, Belgium
+GEO:50.4372;5.9714
+DESCRIPTION:Ronde 10 – Belgian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r10-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260717T150000Z
+DTEND:20260717T160000Z
+SUMMARY:🏁 F1 FP2 – Belgian GP
+LOCATION:Circuit de Spa-Francorchamps\, Spa\, Belgium
+GEO:50.4372;5.9714
+DESCRIPTION:Ronde 10 – Belgian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r10-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260718T103000Z
+DTEND:20260718T113000Z
+SUMMARY:🏁 F1 FP3 – Belgian GP
+LOCATION:Circuit de Spa-Francorchamps\, Spa\, Belgium
+GEO:50.4372;5.9714
+DESCRIPTION:Ronde 10 – Belgian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r10-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260718T140000Z
+DTEND:20260718T150000Z
+SUMMARY:🏁 F1 Qualifying – Belgian GP
+LOCATION:Circuit de Spa-Francorchamps\, Spa\, Belgium
+GEO:50.4372;5.9714
+DESCRIPTION:Ronde 10 – Belgian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Belgian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r10-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260719T130000Z
+DTEND:20260719T150000Z
+SUMMARY:🏁 F1 Race – Belgian GP
+LOCATION:Circuit de Spa-Francorchamps\, Spa\, Belgium
+GEO:50.4372;5.9714
+DESCRIPTION:Ronde 10 – Belgian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Belgian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r11-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260724T113000Z
+DTEND:20260724T123000Z
+SUMMARY:🏁 F1 FP1 – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 11 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r11-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260724T150000Z
+DTEND:20260724T160000Z
+SUMMARY:🏁 F1 FP2 – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 11 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r11-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260725T103000Z
+DTEND:20260725T113000Z
+SUMMARY:🏁 F1 FP3 – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 11 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r11-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260725T140000Z
+DTEND:20260725T150000Z
+SUMMARY:🏁 F1 Qualifying – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 11 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Hungarian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r11-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260726T130000Z
+DTEND:20260726T150000Z
+SUMMARY:🏁 F1 Race – Hungarian GP
+LOCATION:Hungaroring\, Budapest\, Hungary
+GEO:47.5789;19.2486
+DESCRIPTION:Ronde 11 – Hungarian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Hungarian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r12-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260821T103000Z
+DTEND:20260821T113000Z
+SUMMARY:🏁 F1 FP1 – Dutch GP
+LOCATION:Circuit Park Zandvoort\, Zandvoort\, Netherlands
+GEO:52.3888;4.5409
+DESCRIPTION:Ronde 12 – Dutch Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r12-sq@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260821T143000Z
+DTEND:20260821T151400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Dutch GP
+LOCATION:Circuit Park Zandvoort\, Zandvoort\, Netherlands
+GEO:52.3888;4.5409
+DESCRIPTION:Ronde 12 – Dutch Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r12-sprint@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260822T100000Z
+DTEND:20260822T110000Z
+SUMMARY:🏁 F1 Sprint – Dutch GP
+LOCATION:Circuit Park Zandvoort\, Zandvoort\, Netherlands
+GEO:52.3888;4.5409
+DESCRIPTION:Ronde 12 – Dutch Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Dutch GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r12-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260822T140000Z
+DTEND:20260822T150000Z
+SUMMARY:🏁 F1 Qualifying – Dutch GP
+LOCATION:Circuit Park Zandvoort\, Zandvoort\, Netherlands
+GEO:52.3888;4.5409
+DESCRIPTION:Ronde 12 – Dutch Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Dutch GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r12-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260823T130000Z
+DTEND:20260823T150000Z
+SUMMARY:🏁 F1 Race – Dutch GP
+LOCATION:Circuit Park Zandvoort\, Zandvoort\, Netherlands
+GEO:52.3888;4.5409
+DESCRIPTION:Ronde 12 – Dutch Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Dutch GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r13-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260904T103000Z
+DTEND:20260904T113000Z
+SUMMARY:🏁 F1 FP1 – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 13 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r13-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260904T140000Z
+DTEND:20260904T150000Z
+SUMMARY:🏁 F1 FP2 – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 13 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r13-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260905T103000Z
+DTEND:20260905T113000Z
+SUMMARY:🏁 F1 FP3 – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 13 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r13-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260905T140000Z
+DTEND:20260905T150000Z
+SUMMARY:🏁 F1 Qualifying – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 13 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Italian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r13-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260906T130000Z
+DTEND:20260906T150000Z
+SUMMARY:🏁 F1 Race – Italian GP
+LOCATION:Autodromo Nazionale di Monza\, Monza\, Italy
+GEO:45.6156;9.2811
+DESCRIPTION:Ronde 13 – Italian Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Italian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r14-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260911T113000Z
+DTEND:20260911T123000Z
+SUMMARY:🏁 F1 FP1 – Spanish GP
+LOCATION:Madring\, Madrid\, Spain
+GEO:40.4653;-3.6153
+DESCRIPTION:Ronde 14 – Spanish Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r14-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260911T150000Z
+DTEND:20260911T160000Z
+SUMMARY:🏁 F1 FP2 – Spanish GP
+LOCATION:Madring\, Madrid\, Spain
+GEO:40.4653;-3.6153
+DESCRIPTION:Ronde 14 – Spanish Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r14-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260912T103000Z
+DTEND:20260912T113000Z
+SUMMARY:🏁 F1 FP3 – Spanish GP
+LOCATION:Madring\, Madrid\, Spain
+GEO:40.4653;-3.6153
+DESCRIPTION:Ronde 14 – Spanish Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r14-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260912T140000Z
+DTEND:20260912T150000Z
+SUMMARY:🏁 F1 Qualifying – Spanish GP
+LOCATION:Madring\, Madrid\, Spain
+GEO:40.4653;-3.6153
+DESCRIPTION:Ronde 14 – Spanish Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Spanish GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r14-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260913T130000Z
+DTEND:20260913T150000Z
+SUMMARY:🏁 F1 Race – Spanish GP
+LOCATION:Madring\, Madrid\, Spain
+GEO:40.4653;-3.6153
+DESCRIPTION:Ronde 14 – Spanish Grand Prix. Bron: Jolpica-F1. https://will
+ emvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Spanish GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r15-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260924T083000Z
+DTEND:20260924T093000Z
+SUMMARY:🏁 F1 FP1 – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 15 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r15-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260924T120000Z
+DTEND:20260924T130000Z
+SUMMARY:🏁 F1 FP2 – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 15 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r15-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260925T083000Z
+DTEND:20260925T093000Z
+SUMMARY:🏁 F1 FP3 – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 15 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r15-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260925T120000Z
+DTEND:20260925T130000Z
+SUMMARY:🏁 F1 Qualifying – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 15 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Azerbaijan GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r15-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20260926T110000Z
+DTEND:20260926T130000Z
+SUMMARY:🏁 F1 Race – Azerbaijan GP
+LOCATION:Baku City Circuit\, Baku\, Azerbaijan
+GEO:40.3725;49.8533
+DESCRIPTION:Ronde 15 – Azerbaijan Grand Prix. Bron: Jolpica-F1. https://w
+ illemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Azerbaijan GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261002T043000Z
+DTEND:20261002T053000Z
+SUMMARY:🏁 F1 FP1 – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261002T080000Z
+DTEND:20261002T090000Z
+SUMMARY:🏁 F1 FP2 – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261003T043000Z
+DTEND:20261003T053000Z
+SUMMARY:🏁 F1 FP3 – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261003T080000Z
+DTEND:20261003T090000Z
+SUMMARY:🏁 F1 Qualifying – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Bahrain GP in Malaysia
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261004T070000Z
+DTEND:20261004T090000Z
+SUMMARY:🏁 F1 Race – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Bahrain GP in Malaysia
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r17-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261009T083000Z
+DTEND:20261009T093000Z
+SUMMARY:🏁 F1 FP1 – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 17 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r17-sq@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261009T123000Z
+DTEND:20261009T131400Z
+SUMMARY:🏁 F1 Sprint Qualifying – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 17 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r17-sprint@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261010T090000Z
+DTEND:20261010T100000Z
+SUMMARY:🏁 F1 Sprint – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 17 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Sprint – Singapore GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r17-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261010T130000Z
+DTEND:20261010T140000Z
+SUMMARY:🏁 F1 Qualifying – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 17 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Singapore GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r17-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261011T120000Z
+DTEND:20261011T140000Z
+SUMMARY:🏁 F1 Race – Singapore GP
+LOCATION:Marina Bay Street Circuit\, Marina Bay\, Singapore
+GEO:1.2914;103.8640
+DESCRIPTION:Ronde 17 – Singapore Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Singapore GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261023T173000Z
+DTEND:20261023T183000Z
+SUMMARY:🏁 F1 FP1 – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261023T210000Z
+DTEND:20261023T220000Z
+SUMMARY:🏁 F1 FP2 – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261024T173000Z
+DTEND:20261024T183000Z
+SUMMARY:🏁 F1 FP3 – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261024T210000Z
+DTEND:20261024T220000Z
+SUMMARY:🏁 F1 Qualifying – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – United States GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261025T200000Z
+DTEND:20261025T220000Z
+SUMMARY:🏁 F1 Race – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – United States GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r19-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261030T183000Z
+DTEND:20261030T193000Z
+SUMMARY:🏁 F1 FP1 – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 19 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r19-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261030T220000Z
+DTEND:20261030T230000Z
+SUMMARY:🏁 F1 FP2 – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 19 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r19-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261031T173000Z
+DTEND:20261031T183000Z
+SUMMARY:🏁 F1 FP3 – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 19 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r19-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261031T210000Z
+DTEND:20261031T220000Z
+SUMMARY:🏁 F1 Qualifying – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 19 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Mexico City GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r19-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261101T200000Z
+DTEND:20261101T220000Z
+SUMMARY:🏁 F1 Race – Mexico City GP
+LOCATION:Autódromo Hermanos Rodríguez\, Mexico City\, Mexico
+GEO:19.4042;-99.0907
+DESCRIPTION:Ronde 19 – Mexico City Grand Prix. Bron: Jolpica-F1. https://
+ willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Mexico City GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261106T153000Z
+DTEND:20261106T163000Z
+SUMMARY:🏁 F1 FP1 – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261106T190000Z
+DTEND:20261106T200000Z
+SUMMARY:🏁 F1 FP2 – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261107T143000Z
+DTEND:20261107T153000Z
+SUMMARY:🏁 F1 FP3 – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261107T180000Z
+DTEND:20261107T190000Z
+SUMMARY:🏁 F1 Qualifying – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Brazilian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261108T170000Z
+DTEND:20261108T190000Z
+SUMMARY:🏁 F1 Race – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Brazilian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261120T003000Z
+DTEND:20261120T013000Z
+SUMMARY:🏁 F1 FP1 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261120T040000Z
+DTEND:20261120T050000Z
+SUMMARY:🏁 F1 FP2 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261121T003000Z
+DTEND:20261121T013000Z
+SUMMARY:🏁 F1 FP3 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261121T040000Z
+DTEND:20261121T050000Z
+SUMMARY:🏁 F1 Qualifying – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Las Vegas GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261122T040000Z
+DTEND:20261122T060000Z
+SUMMARY:🏁 F1 Race – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Las Vegas GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261127T133000Z
+DTEND:20261127T143000Z
+SUMMARY:🏁 F1 FP1 – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261127T170000Z
+DTEND:20261127T180000Z
+SUMMARY:🏁 F1 FP2 – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261128T143000Z
+DTEND:20261128T153000Z
+SUMMARY:🏁 F1 FP3 – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261128T180000Z
+DTEND:20261128T190000Z
+SUMMARY:🏁 F1 Qualifying – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Qatar GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r22-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261129T160000Z
+DTEND:20261129T180000Z
+SUMMARY:🏁 F1 Race – Qatar GP
+LOCATION:Lusail International Circuit\, Lusail\, Qatar
+GEO:25.4900;51.4542
+DESCRIPTION:Ronde 22 – Qatar Grand Prix. Bron: Jolpica-F1. https://willem
+ vroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Qatar GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r23-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261204T093000Z
+DTEND:20261204T103000Z
+SUMMARY:🏁 F1 FP1 – Abu Dhabi GP
+LOCATION:Yas Marina Circuit\, Abu Dhabi\, UAE
+GEO:24.4672;54.6031
+DESCRIPTION:Ronde 23 – Abu Dhabi Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r23-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261204T130000Z
+DTEND:20261204T140000Z
+SUMMARY:🏁 F1 FP2 – Abu Dhabi GP
+LOCATION:Yas Marina Circuit\, Abu Dhabi\, UAE
+GEO:24.4672;54.6031
+DESCRIPTION:Ronde 23 – Abu Dhabi Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r23-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261205T103000Z
+DTEND:20261205T113000Z
+SUMMARY:🏁 F1 FP3 – Abu Dhabi GP
+LOCATION:Yas Marina Circuit\, Abu Dhabi\, UAE
+GEO:24.4672;54.6031
+DESCRIPTION:Ronde 23 – Abu Dhabi Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r23-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261205T140000Z
+DTEND:20261205T150000Z
+SUMMARY:🏁 F1 Qualifying – Abu Dhabi GP
+LOCATION:Yas Marina Circuit\, Abu Dhabi\, UAE
+GEO:24.4672;54.6031
+DESCRIPTION:Ronde 23 – Abu Dhabi Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Abu Dhabi GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r23-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261206T130000Z
+DTEND:20261206T150000Z
+SUMMARY:🏁 F1 Race – Abu Dhabi GP
+LOCATION:Yas Marina Circuit\, Abu Dhabi\, UAE
+GEO:24.4672;54.6031
+DESCRIPTION:Ronde 23 – Abu Dhabi Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Abu Dhabi GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

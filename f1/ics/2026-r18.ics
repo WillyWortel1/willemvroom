@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026 – United States GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r18-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261023T173000Z
+DTEND:20261023T183000Z
+SUMMARY:🏁 F1 FP1 – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261023T210000Z
+DTEND:20261023T220000Z
+SUMMARY:🏁 F1 FP2 – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261024T173000Z
+DTEND:20261024T183000Z
+SUMMARY:🏁 F1 FP3 – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261024T210000Z
+DTEND:20261024T220000Z
+SUMMARY:🏁 F1 Qualifying – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – United States GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r18-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261025T200000Z
+DTEND:20261025T220000Z
+SUMMARY:🏁 F1 Race – United States GP
+LOCATION:Circuit of the Americas\, Austin\, USA
+GEO:30.1328;-97.6411
+DESCRIPTION:Ronde 18 – United States Grand Prix. Bron: Jolpica-F1. https:
+ //willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – United States GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

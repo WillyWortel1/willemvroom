@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026 – Bahrain GP in Malaysia
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r16-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261002T043000Z
+DTEND:20261002T053000Z
+SUMMARY:🏁 F1 FP1 – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261002T080000Z
+DTEND:20261002T090000Z
+SUMMARY:🏁 F1 FP2 – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261003T043000Z
+DTEND:20261003T053000Z
+SUMMARY:🏁 F1 FP3 – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261003T080000Z
+DTEND:20261003T090000Z
+SUMMARY:🏁 F1 Qualifying – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Bahrain GP in Malaysia
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r16-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261004T070000Z
+DTEND:20261004T090000Z
+SUMMARY:🏁 F1 Race – Bahrain GP in Malaysia
+LOCATION:Sepang International Circuit\, Kuala Lumpur\, Malaysia
+GEO:2.7608;101.7380
+DESCRIPTION:Ronde 16 – Bahrain Grand Prix in Malaysia. Bron: Jolpica-F1. 
+ https://willemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Bahrain GP in Malaysia
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

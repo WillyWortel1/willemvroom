@@ -1,0 +1,23 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2027 – Portuguese GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2027-r09-weekend@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART;VALUE=DATE:20270618
+DTEND;VALUE=DATE:20270621
+SUMMARY:🏁 F1 Portuguese GP
+LOCATION:Autódromo Internacional do Algarve\, Portimão\, Portugal
+GEO:37.2270;-8.6267
+DESCRIPTION:Voorlopig\, tijden volgen. Provisional\, times to follow. Bron/
+ source: formula1.com / FIA (16-09-2026).
+TRANSP:TRANSPARENT
+URL:https://willemvroom.nl/f1/?s=2027
+END:VEVENT
+END:VCALENDAR

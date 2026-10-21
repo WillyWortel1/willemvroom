@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026 – Brazilian GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r20-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261106T153000Z
+DTEND:20261106T163000Z
+SUMMARY:🏁 F1 FP1 – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261106T190000Z
+DTEND:20261106T200000Z
+SUMMARY:🏁 F1 FP2 – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261107T143000Z
+DTEND:20261107T153000Z
+SUMMARY:🏁 F1 FP3 – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261107T180000Z
+DTEND:20261107T190000Z
+SUMMARY:🏁 F1 Qualifying – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Brazilian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r20-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261108T170000Z
+DTEND:20261108T190000Z
+SUMMARY:🏁 F1 Race – Brazilian GP
+LOCATION:Autódromo José Carlos Pace\, São Paulo\, Brazil
+GEO:-23.7036;-46.6997
+DESCRIPTION:Ronde 20 – Brazilian Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Brazilian GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR

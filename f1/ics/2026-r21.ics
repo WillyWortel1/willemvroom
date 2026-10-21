@@ -1,0 +1,80 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//willemvroom.nl//F1 kalender//NL
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:F1 2026 – Las Vegas GP
+X-WR-TIMEZONE:UTC
+REFRESH-INTERVAL;VALUE=DURATION:P1D
+X-PUBLISHED-TTL:P1D
+BEGIN:VEVENT
+UID:2026-r21-fp1@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261120T003000Z
+DTEND:20261120T013000Z
+SUMMARY:🏁 F1 FP1 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-fp2@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261120T040000Z
+DTEND:20261120T050000Z
+SUMMARY:🏁 F1 FP2 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-fp3@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261121T003000Z
+DTEND:20261121T013000Z
+SUMMARY:🏁 F1 FP3 – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-quali@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261121T040000Z
+DTEND:20261121T050000Z
+SUMMARY:🏁 F1 Qualifying – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Qualifying – Las Vegas GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:2026-r21-race@willemvroom.nl
+DTSTAMP:20261021T101210Z
+DTSTART:20261122T040000Z
+DTEND:20261122T060000Z
+SUMMARY:🏁 F1 Race – Las Vegas GP
+LOCATION:Las Vegas Strip Street Circuit\, Las Vegas\, USA
+GEO:36.1147;-115.1730
+DESCRIPTION:Ronde 21 – Las Vegas Grand Prix. Bron: Jolpica-F1. https://wi
+ llemvroom.nl/f1/
+URL:https://willemvroom.nl/f1/
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:F1 Race – Las Vegas GP
+TRIGGER:-PT15M
+END:VALARM
+END:VEVENT
+END:VCALENDAR
