@@ -62,3 +62,4 @@ html.dark .calb{background:#eee;border-color:#eee;color:#111}html.dark .calb:hov
 html.dark .calsheet{background:#161616;border-color:#2a2a2a;box-shadow:0 8px 28px rgba(0,0,0,.6)}html.dark .calsheet a{color:#eee}html.dark .calsheet a:hover{background:#222;color:#d62828}html.dark .calsheet a+a{border-top-color:#262626}html.dark .calsheet p{color:#999}html.dark .ical{color:#777}
 .pastgrp{background:#fff;border:1px solid #e6e6e6;border-radius:16px;padding:6px 16px;margin:0}.pastgrp>summary{font-size:.95rem;font-weight:700;color:#444;min-height:44px}.pastl{display:grid;gap:12px;padding:4px 0 12px}.pastl article{box-shadow:none}
 html.dark .pastgrp{background:#161616;border-color:#2a2a2a}html.dark .pastgrp>summary{color:#ccc}
+main>article{margin:0}
