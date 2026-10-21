@@ -67,3 +67,5 @@ main>article{margin:0}
 article{scroll-margin-top:16px}
 @keyframes fl{0%,100%{outline-color:rgba(214,40,40,0)}20%,60%{outline-color:#d62828}}article.flash{outline:3px solid transparent;outline-offset:3px;animation:fl 2s ease}
 .pj{cursor:pointer}.pj+.pj{margin-top:6px;padding-top:6px;border-top:1px solid #ddd}.pj em{display:block;font-style:normal;font-weight:600;color:#d62828;margin-top:2px}html.dark .pj+.pj{border-top-color:#333}
+
+article.next .ical,html.dark article.next .ical{color:#d62828!important}
