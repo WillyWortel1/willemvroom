@@ -13,48 +13,63 @@ let TR=[],CR={},CN=null;
 const CAL='<svg viewBox="0 0 24 24" width=16 height=16 fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round><rect x=3 y=5 width=18 height=16 rx=2 /><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
 const SEA=new URLSearchParams(location.search).get('s');
 function calUI(y){const b=document.getElementById('cal');if(!b)return;const f=`willemvroom.nl/f1/f1-${y}.ics`;
- b.innerHTML=`<button type=button class=calb aria-expanded=false>${CAL}<span>${L('Zet in je agenda','Add to calendar')}</span></button><div class=calsheet hidden><a href="webcal://${f}">${L('Abonneren (iPhone/Mac)','Subscribe (iPhone/Mac)')}</a><a href="https://calendar.google.com/calendar/r?cid=webcal://${f}" target=_blank rel=noopener>${L('Google Agenda','Google Calendar')}</a><a href="/f1/f1-${y}.ics?v=20261021-f1w">Download .ics</a><p>${L('Abonneren houdt tijden automatisch bij.','Subscribing keeps times up to date automatically.')}${y=='2027'?' '+L('2027: voorlopige weekenddata, tijden volgen.','2027: provisional weekend dates, times to follow.'):''}</p></div>`;
+ b.innerHTML=`<button type=button class=calb aria-expanded=false>${CAL}<span>${L('Zet in je agenda','Add to calendar')}</span></button><div class=calsheet hidden><a href="webcal://${f}">${L('Abonneren (iPhone/Mac)','Subscribe (iPhone/Mac)')}</a><a href="https://calendar.google.com/calendar/r?cid=webcal://${f}" target=_blank rel=noopener>${L('Google Agenda','Google Calendar')}</a><a href="/f1/f1-${y}.ics?v=20261021-f1x">Download .ics</a><p>${L('Abonneren houdt tijden automatisch bij.','Subscribing keeps times up to date automatically.')}${y=='2027'?' '+L('2027: voorlopige weekenddata, tijden volgen.','2027: provisional weekend dates, times to follow.'):''}</p></div>`;
  const bt=b.querySelector('.calb'),sh=b.querySelector('.calsheet');bt.onclick=()=>{sh.hidden=!sh.hidden;bt.setAttribute('aria-expanded',!sh.hidden)}}
 async function load(){let races,src='live';calUI(['2025','2027'].includes(SEA)?SEA:'2026');
- try{CR=await (await fetch('/f1/tracks/credits.json?v=20261021-f1w')).json();TR=Object.keys(CR)}catch(e){}
+ try{CR=await (await fetch('/f1/tracks/credits.json?v=20261021-f1x')).json();TR=Object.keys(CR)}catch(e){}
  document.getElementById('sw').innerHTML=['2025','2026','2027'].map(y=>(SEA||'2026')==y?`<b>${y}</b>`:`<a href="?s=${y}">${y}</a>`).join(' ');
  if(SEA=='2025'){try{races=(await get('https://api.jolpi.ca/ergast/f1/2025.json?limit=100')).RaceTable.Races}catch(e){}
-  if(!races||!races.length){races=(await (await fetch('/f1/2025.json?v=20261021-f1w')).json()).MRData.RaceTable.Races;src='fb'}
+  if(!races||!races.length){races=(await (await fetch('/f1/2025.json?v=20261021-f1x')).json()).MRData.RaceTable.Races;src='fb'}
   let win={};try{(await get('https://api.jolpi.ca/ergast/f1/2025/results/1.json?limit=100')).RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}
-  catch(e){try{(await (await fetch('/f1/2025-winners.json?v=20261021-f1w')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
-  let ch=null;try{ch=(await get('https://api.jolpi.ca/ergast/f1/2025/driverStandings.json')).StandingsTable.StandingsLists[0]}catch(e){try{ch=(await (await fetch('/f1/2025-champion.json?v=20261021-f1w')).json()).MRData.StandingsTable.StandingsLists[0]}catch(e){}}
+  catch(e){try{(await (await fetch('/f1/2025-winners.json?v=20261021-f1x')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
+  let ch=null;try{ch=(await get('https://api.jolpi.ca/ergast/f1/2025/driverStandings.json')).StandingsTable.StandingsLists[0]}catch(e){try{ch=(await (await fetch('/f1/2025-champion.json?v=20261021-f1x')).json()).MRData.StandingsTable.StandingsLists[0]}catch(e){}}
   render(races,win,src);
   if(ch&&+ch.round===races.length){const d=ch.DriverStandings[0];document.getElementById('subt').textContent=L(`Seizoen afgelopen · Wereldkampioen: ${d.Driver.givenName} ${d.Driver.familyName} (${d.points} punten)`,`Season complete · World Champion: ${d.Driver.givenName} ${d.Driver.familyName} (${d.points} points)`)}
   return}
  if(SEA=='2027'){try{races=(await get('https://api.jolpi.ca/ergast/f1/2027.json')).RaceTable.Races}catch(e){}
-  if(!races||!races.length){try{races=(await (await fetch('/f1/2027.json?v=20261021-f1w')).json()).MRData.RaceTable.Races;src='prov'}catch(e){}}
+  if(!races||!races.length){try{races=(await (await fetch('/f1/2027.json?v=20261021-f1x')).json()).MRData.RaceTable.Races;src='prov'}catch(e){}}
   if(!races||!races.length){document.getElementById('list').innerHTML='<p class=sub>'+L('Kalender 2027 nog niet bekend.','2027 calendar not yet published.')+'</p>';return}
   return render(races,{},src)}
  try{races=(await get('https://api.jolpi.ca/ergast/f1/current.json')).RaceTable.Races;
   const last=races[races.length-1];if(new Date()>new Date(T(last).getTime()+864e5)){try{const n=(await get('https://api.jolpi.ca/ergast/f1/'+(+last.season+1)+'.json')).RaceTable.Races;if(n.length)races=n}catch(e){}}}
- catch(e){races=(await (await fetch('/f1/fallback.json?v=20261021-f1w')).json()).MRData.RaceTable.Races;src='fb'}
+ catch(e){races=(await (await fetch('/f1/fallback.json?v=20261021-f1x')).json()).MRData.RaceTable.Races;src='fb'}
  let win={};try{(await get('https://api.jolpi.ca/ergast/f1/'+races[0].season+'/results/1.json?limit=100')).RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}
- catch(e){try{(await (await fetch('/f1/winners.json?v=20261021-f1w')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
+ catch(e){try{(await (await fetch('/f1/winners.json?v=20261021-f1x')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
  render(races,win,src)}
 function provTimes(r,tz){const d0=new Date(r.start+'T12:00:00Z'),day=i=>new Date(d0.getTime()+i*864e5);
  const S=r.sprint?[['VT1','FP1',0],['Sprintkwalificatie','Sprint Qualifying',0],['Sprint','Sprint',1],['Kwalificatie','Qualifying',1],['Race','Race',2]]:[['VT1','FP1',0],['VT2','FP2',0],['VT3','FP3',1],['Kwalificatie','Qualifying',1],['Race','Race',2]];
  const ref=day(2),tbc=L('nog niet bekend','TBC');
  return `<details><summary>${L('Tijden','Times')}</summary><table><tr><th></th><th>${L('Lokaal','Local')} (${off(ref,tz)})</th><th>NL (${off(ref,'Europe/Amsterdam')})</th></tr>${S.map(([nl,en,i])=>`<tr${en=='Race'?' class=race':''}><td>${L(nl,en)}</td><td>${fmt(day(i),'UTC',W)}* · ${tbc}</td><td>${tbc}</td></tr>`).join('')}</table><p class=note>* ${L('Verwacht op basis van het standaard F1-weekendformat; het officiële 2027-schema is nog niet gepubliceerd.','Expected, based on the standard F1 weekend format; the official 2027 schedule has not been published yet.')}</p></details>`}
 function testCard(){const dd=['24','25','26','27'].map((d,i)=>`<tr><td>${L('Dag','Day')} ${i+1}</td><td>${fmt(new Date(`2027-02-${d}T12:00:00Z`),'UTC',{weekday:'short',day:'numeric',month:'short'})} · ${L('nog niet bekend','TBC')}</td><td>${L('nog niet bekend','TBC')}</td></tr>`).join('');
- return `<article class=test id=rT><div class=h><span class=rd>T</span><a class=ical href="/f1/ics/2027-test.ics?v=20261021-f1w" aria-label="${L('In agenda','Add to calendar')}" title="${L('In agenda','Add to calendar')}">${CAL}</a><div><h2>${L('Wintertest','Pre-season testing')}</h2><p>Bahrain International Circuit · Sakhir, Bahrain</p></div></div><p class=prov>${fmt(new Date('2027-02-24T12:00:00Z'),'UTC',W)} – ${fmt(new Date('2027-02-27T12:00:00Z'),'UTC',W)} · ${L('Bron','Source')}: FIA / formula1.com</p>
+ return `<article class=test id=rT><div class=h><span class=rd>T</span><a class=ical href="/f1/ics/2027-test.ics?v=20261021-f1x" aria-label="${L('In agenda','Add to calendar')}" title="${L('In agenda','Add to calendar')}">${CAL}</a><div><h2>${L('Wintertest','Pre-season testing')}</h2><p>Bahrain International Circuit · Sakhir, Bahrain</p></div></div><p class=prov>${fmt(new Date('2027-02-24T12:00:00Z'),'UTC',W)} – ${fmt(new Date('2027-02-27T12:00:00Z'),'UTC',W)} · ${L('Bron','Source')}: FIA / formula1.com</p>
  <details><summary>${L('Tijden','Times')}</summary><table><tr><th></th><th>${L('Lokaal','Local')} (${off(new Date('2027-02-25T12:00:00Z'),'Asia/Bahrain')})</th><th>NL (${off(new Date('2027-02-25T12:00:00Z'),'Europe/Amsterdam')})</th></tr>${dd}</table></details>${TR.includes('bahrain')?`<details class=trk data-c="bahrain"><summary>${L('Plattegrond','Circuit map')}</summary><div class=tb></div></details>`:''}</article>`}
 function jump(id){const a=document.getElementById(id);if(!a)return;const g=a.closest('details');if(g&&!g.open)g.open=true;requestAnimationFrame(()=>{a.scrollIntoView({behavior:'smooth',block:'start'});a.classList.remove('flash');void a.offsetWidth;a.classList.add('flash');setTimeout(()=>a.classList.remove('flash'),2200)})}
+let LASTPAST=null;
+function stdBlock(r,past,isN){if(r.season=='2027'||r.provisional)return'';if(past)return`<details class=std data-k="${r.season}-r${String(r.round).padStart(2,'0')}" data-api="${r.season}/${r.round}"><summary>${L('Stand','Standings')}</summary><div class=sb></div></details>`;
+ if(isN&&LASTPAST)return`<details class=std data-k="${LASTPAST}" data-api="${r.season}/${+LASTPAST.slice(6)}"><summary>${L('Stand','Standings')}</summary><p class=note>${L('Stand vóór deze race','Standings before this race')}</p><div class=sb></div></details>`;return''}
+function ptsBlock(r){const sp=!!(r.Sprint||r.sprint),R=[25,18,15,12,10,8,6,4,2,1],S=[8,7,6,5,4,3,2,1],row=(a,n)=>a.map((p,i)=>`<li><span>P${i+1}</span>${p}</li>`).join('');
+ return`<details class=pts><summary>${L('Punten','Points')}</summary><div class=pb><b>Race</b><ol>${row(R)}</ol>${sp?`<b>Sprint</b><ol>${row(S)}</ol>`:''}<p class=mx>${L('Max. per coureur dit weekend','Max. per driver this weekend')}: <strong>${sp?33:25}</strong></p><p class=note>${L('Geen punt meer voor de snelste ronde.','No point for fastest lap.')}${r.season=='2027'?' '+L('2027: onder voorbehoud van het FIA-reglement.','2027: subject to the FIA regulations.'):''}</p></div></details>`}
+const STC={};async function stData(k,api){if(STC[k])return STC[k];try{const v=sessionStorage.getItem('f1st-'+k);if(v)return STC[k]=JSON.parse(v)}catch(e){}
+ let o=null;try{const r=await fetch(`/f1/standings/${k}.json?v=20261021-f1x`);if(r.ok)o=await r.json()}catch(e){}
+ if(!o){try{const[d,c]=await Promise.all(['driverStandings','constructorStandings'].map(t=>get(`https://api.jolpi.ca/ergast/f1/${api}/${t}.json?limit=100`)));const D=d.StandingsTable.StandingsLists[0],C=c.StandingsTable.StandingsLists[0];
+  if(D&&C)o={d:D.DriverStandings.map(x=>[x.positionText||x.position,x.Driver.givenName+' '+x.Driver.familyName,(x.Constructors||[]).slice(-1)[0]?.name||'',x.points]),c:C.ConstructorStandings.map(x=>[x.positionText||x.position,x.Constructor.name,x.points])}}catch(e){}}
+ if(o){STC[k]=o;try{sessionStorage.setItem('f1st-'+k,JSON.stringify(o))}catch(e){}}return o}
+async function openStd(d){if(d.dataset.l)return;d.dataset.l=1;const b=d.querySelector('.sb');b.innerHTML='<p class=note>…</p>';const o=await stData(d.dataset.k,d.dataset.api);
+ if(!o){b.innerHTML=`<p class=note>${L('Stand niet beschikbaar.','Standings unavailable.')}</p>`;delete d.dataset.l;return}
+ const li=(a,t)=>a.map((x,i)=>`<li${i<3?' class=top':''}><span>${x[0]}</span><em>${x[1]}${t&&x[2]?` <small>${x[2]}</small>`:''}</em><b>${x[x.length-1]}</b></li>`).join('');
+ b.innerHTML=`<h4>${L('Coureurs','Drivers')}</h4><ol>${li(o.d,1)}</ol><h4>${L('Teams','Constructors')}</h4><ol>${li(o.c,0)}</ol><p class=note>Jolpica-F1</p>`}
 function render(races,win,src){const now=Date.now();const el=document.getElementById('list');
  document.getElementById('season').textContent=races[0].season;
  const next=races.find(r=>T(r).getTime()+2*36e5>now);
+ {const lp=races.filter(x=>T(x).getTime()+2*36e5<now).pop();LASTPAST=lp?`${lp.season}-r${String(lp.round).padStart(2,'0')}`:null}
  const card=r=>{const c=r.Circuit,tz=TZ[c.circuitId]||'UTC',past=T(r).getTime()+2*36e5<now,isN=r===next;
   const rows=r.provisional?'':SES.map(([k,nl,en])=>{const s=k?r[k]:r;if(!s)return'';const d=T(s);
    return `<tr${k?'':' class=race'}><td>${L(nl,en)}</td><td>${fmt(d,tz,{weekday:'short',day:'numeric',month:'short'})} ${fmt(d,tz,{hour:'2-digit',minute:'2-digit'})}</td><td><b>${fmt(d,'Europe/Amsterdam',{weekday:'short',day:'numeric',month:'short'})} ${fmt(d,'Europe/Amsterdam',{hour:'2-digit',minute:'2-digit'})}</b></td></tr>`}).join('');
   const w=win[r.round];
-  return `<article class="${past?'past':''}${isN?' next':''}" id="r${r.round}"><div class=h><span class=rd>${r.round}</span><a class=ical href="/f1/ics/${r.season}-r${String(r.round).padStart(2,'0')}.ics?v=20261021-f1w" aria-label="${L('In agenda','Add to calendar')}: ${r.raceName}" title="${L('In agenda','Add to calendar')}">${CAL}</a><div><h2>${r.raceName.replace('Grand Prix','GP')}</h2><p>${c.circuitName} · ${c.Location.locality}, ${c.Location.country}</p>${r.provisional?'':`<p class=wk>${wr(r,tz)}</p>`}</div></div>
+  return `<article class="${past?'past':''}${isN?' next':''}" id="r${r.round}"><div class=h><span class=rd>${r.round}</span><a class=ical href="/f1/ics/${r.season}-r${String(r.round).padStart(2,'0')}.ics?v=20261021-f1x" aria-label="${L('In agenda','Add to calendar')}: ${r.raceName}" title="${L('In agenda','Add to calendar')}">${CAL}</a><div><h2>${r.raceName.replace('Grand Prix','GP')}</h2><p>${c.circuitName} · ${c.Location.locality}, ${c.Location.country}</p>${r.provisional?'':`<p class=wk>${wr(r,tz)}</p>`}</div></div>
   ${isN&&!r.provisional?`<p class=cd data-t="${T(r).toISOString()}"></p>`:''}${past&&w?`<p class=win>${L('Winnaar','Winner')}: ${w.givenName} ${w.familyName}</p>`:''}
   ${r.provisional?`<p class=prov>${pd(r)} · ${r.sprint?'Sprint · ':''}${L('Voorlopig, sessietijden nog niet bekend','Provisional, session times not yet published')}</p>${provTimes(r,tz)}`:`<details${isN?' open':''}><summary>${L('Tijden','Times')}</summary><table><tr><th></th><th>${L('Lokaal','Local')} (${off(T(r),tz)})</th><th>NL</th></tr>${rows}</table>
-  </details>`}${TR.includes(c.circuitId)?`<details class=trk data-c="${c.circuitId}"><summary>${L('Plattegrond','Circuit map')}</summary><div class=tb></div></details>`:''}</article>`};
+  </details>`}${stdBlock(r,past,isN)}${ptsBlock(r)}${TR.includes(c.circuitId)?`<details class=trk data-c="${c.circuitId}"><summary>${L('Plattegrond','Circuit map')}</summary><div class=tb></div></details>`:''}</article>`};
  const isPast=r=>T(r).getTime()+2*36e5<now,pr=races.filter(isPast),up=races.filter(r=>!isPast(r));
  el.innerHTML=(races[0].season=='2027'?testCard():'')+(pr.length?`<details class=pastgrp${up.length?'':' open'}><summary>${L('Verreden races','Past races')} (${pr.length})</summary><div class=pastl>${pr.map(card).join('')}</div></details>`:'')+(up.length?card(up[0]):'')+(up.length>1?`<details class=pastgrp><summary>${L('Volgende races','Later races')} (${up.length-1})</summary><div class=pastl>${up.slice(1).map(card).join('')}</div></details>`:'');
  if(src=='prov')document.getElementById('subt').textContent=L('Officiële racedatums; sessietijden volgen zodra ze bekend zijn.','Official race dates; session times will follow once published.');
@@ -63,10 +78,11 @@ function render(races,win,src){const now=Date.now();const el=document.getElement
  const map=L_.map('map',{scrollWheelZoom:false,attributionControl:false}).setView([25,10],1);L_.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:''}).addTo(map);L_.control.attribution({prefix:false}).addAttribution('© OpenStreetMap').addTo(map);
  const mk={};races.forEach(r=>{const c=r.Circuit,n=r===next;mk[r.round]=L_.circleMarker([+c.Location.lat,+c.Location.long],{radius:n?8:5,color:n?'#d62828':'#111',fillColor:n?'#d62828':(T(r)<now?'#999':'#111'),fillOpacity:1,weight:n?3:1,className:(n?'mk nx':(T(r)<now?'mk ps':'mk up'))+' mk-r'+r.round}).addTo(map).bindPopup(`<div class=pj data-j="r${r.round}"><b>${r.round}. ${r.raceName}</b><br>${c.circuitName}<em>${L('Bekijk ›','View ›')}</em></div>${r.season=='2027'&&c.circuitId=='bahrain'?`<div class=pj data-j="rT"><b>${L('Wintertest','Pre-season testing')}</b><em>${L('Bekijk ›','View ›')}</em></div>`:''}`)});
  map.on('popupopen',e=>{e.popup.getElement().querySelectorAll('.pj').forEach(b=>b.onclick=()=>{map.closePopup();jump(b.dataset.j)})});
+ el.addEventListener('toggle',e=>{const d=e.target;if(d.classList&&d.classList.contains('std')&&d.open)openStd(d)},true);
  el.addEventListener('toggle',async e=>{const d=e.target;if(!(d.classList&&d.classList.contains('trk')&&d.open&&!d.dataset.l))return;d.dataset.l=1;const tb=d.querySelector('.tb'),id=d.dataset.c,cr=CR[id];
   const cap=`<small><a href="${cr.u}" target=_blank rel=noopener>${cr.a}</a>, ${cr.l}, Wikimedia Commons</small>`;
-  try{if(!CN)CN=(await (await fetch('/f1/tracks/corners.json?v=20261021-f1w')).json()).circuits;}catch(x){CN={}}
-  try{const tx=await (await fetch(`/f1/tracks/${id}.svg?v=20261021-f1w`)).text();tb.innerHTML='<div class=sv></div><div class=tip hidden></div>'+cap;const sv=tb.querySelector('.sv');sv.innerHTML=tx.replace(/<\?xml[^>]*>|<!DOCTYPE[^>]*>/g,'');
+  try{if(!CN)CN=(await (await fetch('/f1/tracks/corners.json?v=20261021-f1x')).json()).circuits;}catch(x){CN={}}
+  try{const tx=await (await fetch(`/f1/tracks/${id}.svg?v=20261021-f1x`)).text();tb.innerHTML='<div class=sv></div><div class=tip hidden></div>'+cap;const sv=tb.querySelector('.sv');sv.innerHTML=tx.replace(/<\?xml[^>]*>|<!DOCTYPE[^>]*>/g,'');
    const g=sv.querySelector('svg');if(!g.getAttribute('viewBox')){const w=parseFloat(g.getAttribute('width')),h=parseFloat(g.getAttribute('height'));if(w&&h)g.setAttribute('viewBox',`0 0 ${w} ${h}`)}g.removeAttribute('width');g.removeAttribute('height');
    const nm=CN[id]||{},tip=tb.querySelector('.tip'),seen=new Set();
    const M=g.getScreenCTM().inverse(),sc=1/g.getScreenCTM().a,P=(x,y)=>{const p=g.createSVGPoint();p.x=x;p.y=y;return p.matrixTransform(M)};
@@ -75,7 +91,7 @@ function render(races,win,src){const now=Date.now();const el=document.getElement
     r.addEventListener('click',ev=>{ev.stopPropagation();const q=r.getBoundingClientRect(),o=tb.getBoundingClientRect();tip.innerHTML=`<b>${L('Bocht','Turn')} ${n}</b>${nm[n]?' · '+nm[n]:''}`;tip.hidden=false;tip.style.left=Math.min(Math.max(q.left-o.left+q.width/2,80),o.width-80)+'px';tip.style.top=(q.top-o.top)+'px'})});
    sv.addEventListener('click',()=>tip.hidden=true);
    const ks=Object.keys(nm).filter(k=>seen.has(+k)).sort((a,b)=>a-b);if(ks.length)tb.insertAdjacentHTML('beforeend',`<div class=bl><b>${L('Bochten','Corners')}</b><ol>${ks.map(k=>`<li><span>${k}</span>${nm[k]}</li>`).join('')}</ol></div>`);
-  }catch(x){tb.innerHTML=`<img src="/f1/tracks/${id}.svg?v=20261021-f1w" alt="">`+cap}},true);
+  }catch(x){tb.innerHTML=`<img src="/f1/tracks/${id}.svg?v=20261021-f1x" alt="">`+cap}},true);
  el.addEventListener('click',e=>{const a=e.target.closest('[data-r]');if(a){const m=mk[a.dataset.r];map.setView(m.getLatLng(),11);m.openPopup()}});
  const cd=document.querySelector('.cd');const tick=()=>{if(!cd)return;let s=Math.max(0,(new Date(cd.dataset.t)-Date.now())/1e3|0);const d=s/86400|0,h=s%86400/3600|0,m=s%3600/60|0;cd.textContent=L('Race over ','Race in ')+`${d}d ${h}u ${m}m`.replace('u',L('u','h'))};tick();setInterval(tick,3e4);
  if(next)setTimeout(()=>document.getElementById('r'+next.round).scrollIntoView({block:'start'}),50)}
