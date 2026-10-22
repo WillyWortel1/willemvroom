@@ -64,12 +64,17 @@ function stopNoise(){cancelAnimationFrame(raf);raf=0}
 $("skipbtn").onclick=function(){tune(cur+1)};
 $("autoskip").checked=LS.get("tv-autoskip")!=="0";$("autoskip").onchange=function(){LS.set("tv-autoskip",this.checked?"1":"0");if(!this.checked)clearTimeout(skipT)};
 $("chup").onclick=function(){tune(cur+1)};$("chdn").onclick=function(){tune(cur-1)};
-function setMute(m){vid.muted=m;$("mute").textContent=m?"🔇":"🔊";$("unmute").hidden=!m||vid.paused}
+function setMute(m){vid.muted=m;$("mute").textContent=$("mmute").textContent=m?"🔇":"🔊";$("unmute").hidden=!m||vid.paused}
 $("mute").onclick=function(){setMute(!vid.muted)};$("unmute").onclick=function(){setMute(false);vid.play()};
 var v=parseFloat(LS.get("tv-vol"));if(!isNaN(v))$("vol").value=v;vid.volume=+$("vol").value;
 $("vol").oninput=function(){vid.volume=+this.value;LS.set("tv-vol",this.value);if(vid.muted&&+this.value>0)setMute(false)};
 function fs(){var t=$("tv");if(document.fullscreenElement||document.webkitFullscreenElement){(document.exitFullscreen||document.webkitExitFullscreen).call(document)}else if(t.requestFullscreen)t.requestFullscreen();else if(t.webkitRequestFullscreen)t.webkitRequestFullscreen();else if(vid.webkitEnterFullscreen)vid.webkitEnterFullscreen()}
 $("fs").onclick=fs;
+var mini=$("mini"),miniT;function showMini(){mini.classList.add("show");clearTimeout(miniT);miniT=setTimeout(function(){mini.classList.remove("show")},3500)}
+$("scr").addEventListener("click",function(e){if(e.target.closest("button,input,label"))return showMini();if(mini.classList.contains("show")){mini.classList.remove("show")}else showMini()});
+$("mup").onclick=function(){tune(cur+1);showMini()};$("mdn").onclick=function(){tune(cur-1);showMini()};$("mmute").onclick=function(){setMute(!vid.muted);showMini()};
+function onRot(){if(vid.paused&&vid.getAttribute("src")||vid.paused&&hls){var p=vid.play();if(p&&p.catch)p.catch(function(){})}}
+window.addEventListener("orientationchange",onRot);window.addEventListener("resize",onRot);
 selC.onchange=function(){LS.set("tv-country",selC.value);filter(view[cur]&&view[cur].id)};selK.onchange=function(){LS.set("tv-cat",selK.value);filter(view[cur]&&view[cur].id)};
 var qt;q.oninput=function(){clearTimeout(qt);qt=setTimeout(function(){filter(view[cur]&&view[cur].id,true)},250)};
 document.addEventListener("keydown",function(e){var t=e.target.tagName;if(t==="INPUT"||t==="SELECT"||t==="TEXTAREA"||e.metaKey||e.ctrlKey)return;

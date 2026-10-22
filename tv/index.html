@@ -2,7 +2,7 @@
 <html lang="nl" class="antialiased">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>TV</title>
 <meta name="description" content="Kijk gratis tv-zenders van over de hele wereld, op een moderne tv.">
 <link rel="canonical" href="https://willemvroom.nl/tv/">
@@ -10,7 +10,7 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="stylesheet" href="/styles.css?v=20261018"><link rel="stylesheet" href="/site.css?v=20261021-sf">
 <script>(function(){try{var t=localStorage.getItem("wv-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches)){document.documentElement.classList.add("dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#0b0b0b");}}catch(e){}})();</script>
-<link rel="stylesheet" href="/tv/tv.css?v=20261022-1">
+<link rel="stylesheet" href="/tv/tv.css?v=20261022-2">
 </head>
 <body>
 <div id="top" class="bg-bg text-fg">
@@ -23,6 +23,7 @@
 <div class="nosig" id="nosig" hidden><canvas id="noise" width="160" height="90"></canvas><div class="bars"></div><div class="nosig-t"><b>Geen signaal</b><span id="nosigmsg">Deze zender is nu niet te ontvangen.</span><span><button id="skipbtn" type="button">Volgende zender</button> <label><input type="checkbox" id="autoskip" checked> automatisch</label></span></div></div>
 <div class="osd" id="osd" hidden><span class="osd-n" id="osdn"></span><span class="osd-name" id="osdname"></span></div>
 <div class="tv-load" id="load">Zenders laden…</div>
+<div class="mini" id="mini"><button type="button" id="mdn" aria-label="Vorige zender">▼</button><button type="button" id="mup" aria-label="Volgende zender">▲</button><button type="button" id="mmute" aria-label="Geluid aan/uit">🔇</button></div>
 <button class="unmute" id="unmute" type="button" hidden>🔊 Tik voor geluid</button>
 </div></div><div class="tv-stand"><i></i></div></div>
 <div class="remote">
@@ -47,6 +48,6 @@
 </div>
 <script src="/site.js?v=20261020-n2"></script>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.20/dist/hls.min.js"></script>
-<script src="/tv/tv.js?v=20261022-1"></script>
+<script src="/tv/tv.js?v=20261022-2"></script>
 </body>
 </html>
