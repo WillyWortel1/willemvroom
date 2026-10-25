@@ -9,6 +9,7 @@ const W={weekday:'short',day:'numeric',month:'short'};const pd=r=>fmt(new Date(r
 const wr=(r,tz)=>{const a=r.FirstPractice||r;return fmt(T(a),tz,W)+' – '+fmt(T(r),tz,W)};
 const T=s=>new Date(s.date+'T'+(s.time||'12:00:00Z'));
 async function get(u){const r=await fetch(u,{cache:'no-store'});if(!r.ok)throw 0;return (await r.json()).MRData}
+const LAPS={albert_park:58,shanghai:56,suzuka:53,bahrain:57,jeddah:50,miami:57,imola:63,monaco:78,catalunya:66,madring:57,villeneuve:70,red_bull_ring:71,silverstone:52,spa:44,hungaroring:70,zandvoort:72,monza:53,baku:51,sepang:56,marina_bay:62,americas:56,rodriguez:71,interlagos:71,vegas:50,losail:57,yas_marina:58,istanbul:58,portimao:66},SLAPS={shanghai:19,miami:19,spa:15,americas:19,interlagos:24,villeneuve:23,silverstone:17,zandvoort:24,red_bull_ring:23,losail:19},WL={};
 let TR=[],CR={},CN=null;
 const CAL='<svg viewBox="0 0 24 24" width=16 height=16 fill=none stroke=currentColor stroke-width=2 stroke-linecap=round stroke-linejoin=round><rect x=3 y=5 width=18 height=16 rx=2 /><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
 const SEA=new URLSearchParams(location.search).get('s');
@@ -20,8 +21,8 @@ async function load(){let races,src='live';calUI(['2025','2027'].includes(SEA)?S
  document.getElementById('sw').innerHTML=['2025','2026','2027'].map(y=>(SEA||'2026')==y?`<b>${y}</b>`:`<a href="?s=${y}">${y}</a>`).join(' ');
  if(SEA=='2025'){try{races=(await get('https://api.jolpi.ca/ergast/f1/2025.json?limit=100')).RaceTable.Races}catch(e){}
   if(!races||!races.length){races=(await (await fetch('/f1/2025.json?v=20261021-f1x')).json()).MRData.RaceTable.Races;src='fb'}
-  let win={};try{(await get('https://api.jolpi.ca/ergast/f1/2025/results/1.json?limit=100')).RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}
-  catch(e){try{(await (await fetch('/f1/2025-winners.json?v=20261021-f1x')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
+  let win={};try{(await get('https://api.jolpi.ca/ergast/f1/2025/results/1.json?limit=100')).RaceTable.Races.forEach(r=>{win[r.round]=r.Results[0].Driver;WL[r.season+'-'+r.round]=+r.Results[0].laps})}
+  catch(e){try{(await (await fetch('/f1/2025-winners.json?v=20261021-f1x')).json()).MRData.RaceTable.Races.forEach(r=>{win[r.round]=r.Results[0].Driver;WL[r.season+'-'+r.round]=+r.Results[0].laps})}catch(e){}}
   let ch=null;try{ch=(await get('https://api.jolpi.ca/ergast/f1/2025/driverStandings.json')).StandingsTable.StandingsLists[0]}catch(e){try{ch=(await (await fetch('/f1/2025-champion.json?v=20261021-f1x')).json()).MRData.StandingsTable.StandingsLists[0]}catch(e){}}
   render(races,win,src);
   if(ch&&+ch.round===races.length){const d=ch.DriverStandings[0];document.getElementById('subt').textContent=L(`Seizoen afgelopen · Wereldkampioen: ${d.Driver.givenName} ${d.Driver.familyName} (${d.points} punten)`,`Season complete · World Champion: ${d.Driver.givenName} ${d.Driver.familyName} (${d.points} points)`)}
@@ -33,8 +34,8 @@ async function load(){let races,src='live';calUI(['2025','2027'].includes(SEA)?S
  try{races=(await get('https://api.jolpi.ca/ergast/f1/current.json')).RaceTable.Races;
   const last=races[races.length-1];if(new Date()>new Date(T(last).getTime()+864e5)){try{const n=(await get('https://api.jolpi.ca/ergast/f1/'+(+last.season+1)+'.json')).RaceTable.Races;if(n.length)races=n}catch(e){}}}
  catch(e){races=(await (await fetch('/f1/fallback.json?v=20261021-f1x')).json()).MRData.RaceTable.Races;src='fb'}
- let win={};try{(await get('https://api.jolpi.ca/ergast/f1/'+races[0].season+'/results/1.json?limit=100')).RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}
- catch(e){try{(await (await fetch('/f1/winners.json?v=20261021-f1x')).json()).MRData.RaceTable.Races.forEach(r=>win[r.round]=r.Results[0].Driver)}catch(e){}}
+ let win={};try{(await get('https://api.jolpi.ca/ergast/f1/'+races[0].season+'/results/1.json?limit=100')).RaceTable.Races.forEach(r=>{win[r.round]=r.Results[0].Driver;WL[r.season+'-'+r.round]=+r.Results[0].laps})}
+ catch(e){try{(await (await fetch('/f1/winners.json?v=20261021-f1x')).json()).MRData.RaceTable.Races.forEach(r=>{win[r.round]=r.Results[0].Driver;WL[r.season+'-'+r.round]=+r.Results[0].laps})}catch(e){}}
  render(races,win,src)}
 function provTimes(r,tz){const d0=new Date(r.start+'T12:00:00Z'),day=i=>new Date(d0.getTime()+i*864e5);
  const S=r.sprint?[['VT1','FP1',0],['Sprintkwalificatie','Sprint Qualifying',0],['Sprint','Sprint',1],['Kwalificatie','Qualifying',1],['Race','Race',2]]:[['VT1','FP1',0],['VT2','FP2',0],['VT3','FP3',1],['Kwalificatie','Qualifying',1],['Race','Race',2]];
@@ -78,13 +79,14 @@ document.addEventListener('toggle',async e=>{const d=e.target;if(!d.classList||!
   if(res.length){src='OpenF1';rows=res.sort((x,y)=>x.position-y.position).map(x=>{const u=D[x.driver_number]||{};return{p:String(x.position),n:u.first_name?u.first_name+' '+u.last_name[0]+u.last_name.slice(1).toLowerCase():'#'+x.driver_number,tm:u.team_name||''}})}}catch(x){}
  if(!rows){delete d.dataset.ok;b.innerHTML=`<p class=note>${L('Nog niet beschikbaar.','Not available yet.')}</p>`;return}
  b.innerHTML=`<table><tr><th>#</th><th>${L('Coureur','Driver')}</th><th>${L('Team','Team')}</th></tr>${rows.map(x=>`<tr${x.p=='1'?' class=race':''}><td>${x.p}</td><td>${x.n}</td><td>${x.tm}</td></tr>`).join('')}</table><p class=note>${L('Bron','Source')}: ${src}.${src=='OpenF1'?' '+L('Voorlopig; straffen kunnen de grid nog wijzigen.','Provisional; penalties may still change the grid.'):''}</p>`},true);
+function lp(k,r,id){const m=k==null?LAPS[id]:k=='Sprint'?SLAPS[id]:0;if(!m)return'';const g=k==null?WL[r.season+'-'+r.round]:0;return ` · ${m} ${L('ronden','laps')}${g&&g<m?` (${L('gereden','completed')}: ${g})`:''}`}
 function render(races,win,src){const now=Date.now();const el=document.getElementById('list');
  document.getElementById('season').textContent=races[0].season;
  const next=races.find(r=>T(r).getTime()+2*36e5>now);
  {const lp=races.filter(x=>T(x).getTime()+2*36e5<now).pop();LASTPAST=lp?`${lp.season}-r${String(lp.round).padStart(2,'0')}`:null}
  const card=r=>{const c=r.Circuit,tz=TZ[c.circuitId]||'UTC',past=T(r).getTime()+2*36e5<now,isN=r===next;
   const rows=r.provisional?'':SES.map(([k,nl,en])=>{const s=k?r[k]:r;if(!s)return'';const d=T(s);
-   return `<tr${k?'':' class=race'}><td>${L(nl,en)}</td><td>${fmt(d,tz,{weekday:'short',day:'numeric',month:'short'})} ${fmt(d,tz,{hour:'2-digit',minute:'2-digit'})}</td><td><b>${fmt(d,'Europe/Amsterdam',{weekday:'short',day:'numeric',month:'short'})} ${fmt(d,'Europe/Amsterdam',{hour:'2-digit',minute:'2-digit'})}</b></td></tr>`}).join('');
+   return `<tr${k?'':' class=race'}><td>${L(nl,en)}</td><td>${fmt(d,tz,{weekday:'short',day:'numeric',month:'short'})} ${fmt(d,tz,{hour:'2-digit',minute:'2-digit'})}</td><td><b>${fmt(d,'Europe/Amsterdam',{weekday:'short',day:'numeric',month:'short'})} ${fmt(d,'Europe/Amsterdam',{hour:'2-digit',minute:'2-digit'})}</b>${lp(k,r,c.circuitId)}</td></tr>`}).join('');
   const w=win[r.round];
   return `<article class="${past?'past':''}${isN?' next':''}" id="r${r.round}"><div class=h><span class=rd>${r.round}</span><a class=ical href="/f1/ics/${r.season}-r${String(r.round).padStart(2,'0')}.ics?v=20261021-f1x" aria-label="${L('In agenda','Add to calendar')}: ${r.raceName}" title="${L('In agenda','Add to calendar')}">${CAL}</a><div><h2>${r.raceName.replace('Grand Prix','GP')}</h2><p>${c.circuitName} · ${c.Location.locality}, ${c.Location.country}</p>${r.provisional?'':`<p class=wk>${wr(r,tz)}</p>`}</div></div>
   ${isN&&!r.provisional?`<p class=cd data-t="${T(r).toISOString()}"></p>`:''}${past&&w?`<p class=win>${L('Winnaar','Winner')}: ${w.givenName} ${w.familyName}</p>`:''}
