@@ -58,11 +58,17 @@ async function openStd(d){if(d.dataset.l)return;d.dataset.l=1;const b=d.querySel
  if(!o){b.innerHTML=`<p class=note>${L('Stand niet beschikbaar.','Standings unavailable.')}</p>`;delete d.dataset.l;return}
  const li=(a,t)=>a.map((x,i)=>`<li${i<3?' class=top':''}><span>${x[0]}</span><em>${x[1]}${t&&x[2]?` <small>${x[2]}</small>`:''}</em><b>${x[x.length-1]}</b></li>`).join('');
  b.innerHTML=`<h4>${L('Coureurs','Drivers')}</h4><ol>${li(o.d,1)}</ol><h4>${L('Teams','Constructors')}</h4><ol>${li(o.c,0)}</ol><p class=note>Jolpica-F1</p>`}
-function qBlock(r){if(r.season=='2027'||r.provisional||!r.Qualifying||T(r.Qualifying).getTime()+2*36e5>Date.now())return'';return`<details class=qual data-api="${r.season}/${r.round}"><summary>${L('Kwalificatie','Qualifying')}</summary><div class=qb></div></details>`}
+function qBlock(r){if(r.season=='2027'||r.provisional||!r.Qualifying||T(r.Qualifying).getTime()+2*36e5>Date.now())return'';return`<details class=qual data-api="${r.season}/${r.round}" data-qd="${r.Qualifying.date}"><summary>${L('Kwalificatie','Qualifying')}</summary><div class=qb></div></details>`}
 document.addEventListener('toggle',async e=>{const d=e.target;if(!d.classList||!d.classList.contains('qual')||!d.open||d.dataset.ok)return;d.dataset.ok=1;const b=d.querySelector('.qb');b.innerHTML=`<p class=note>${L('Laden…','Loading…')}</p>`;
- try{const q=(await get(`https://api.jolpi.ca/ergast/f1/${d.dataset.api}/qualifying.json?limit=30`)).RaceTable.Races[0].QualifyingResults;
-  b.innerHTML=`<table><tr><th>#</th><th>${L('Coureur','Driver')}</th><th>${L('Team','Team')}</th><th>${L('Tijd','Time')}</th></tr>${q.map(x=>`<tr${x.position=='1'?' class=race':''}><td>${x.position}</td><td>${x.Driver.givenName} ${x.Driver.familyName}</td><td>${x.Constructor.name}</td><td>${x.Q3||x.Q2||x.Q1||'–'}${x.Q3?' (Q3)':x.Q2?' (Q2)':x.Q1?' (Q1)':''}</td></tr>`).join('')}</table><p class=note>${L('Bron: Jolpica-F1. Startgrid kan afwijken door straffen.','Source: Jolpica-F1. Starting grid may differ due to penalties.')}</p>`}
- catch(x){delete d.dataset.ok;b.innerHTML=`<p class=note>${L('Uitslag nog niet beschikbaar.','Result not yet available.')}</p>`}},true);
+ const ft=s=>{const m=s/60|0,r=(s-m*60).toFixed(3);return m+':'+(r<10?'0':'')+r};let rows=null,src='Jolpica-F1';
+ try{const q=(await get(`https://api.jolpi.ca/ergast/f1/${d.dataset.api}/qualifying.json?limit=30`)).RaceTable.Races[0].QualifyingResults;if(q&&q.length)rows=q.map(x=>({p:x.position,n:x.Driver.givenName+' '+x.Driver.familyName,tm:x.Constructor.name,t:x.Q3||x.Q2||x.Q1||'–',q:x.Q3?'Q3':x.Q2?'Q2':x.Q1?'Q1':''}))}catch(x){}
+ if(!rows)try{const O='https://api.openf1.org/v1/',j=async u=>{const r=await fetch(O+u);if(!r.ok)throw 0;return r.json()},qd=new Date(d.dataset.qd+'T12:00:00Z'),a=new Date(qd-2*864e5).toISOString().slice(0,10),z=new Date(+qd+2*864e5).toISOString().slice(0,10);
+  const ss=await j(`sessions?year=${d.dataset.api.split('/')[0]}&session_name=Qualifying&date_start>=${a}&date_start<${z}`);const k=ss[0].session_key;
+  const[res,dr]=await Promise.all([j('session_result?session_key='+k),j('drivers?session_key='+k)]);const D={};dr.forEach(x=>D[x.driver_number]=x);
+  if(res.length){src='OpenF1';rows=res.sort((x,y)=>x.position-y.position).map(x=>{const u=D[x.driver_number]||{},du=x.duration||[];let i=du.length-1;while(i>=0&&du[i]==null)i--;
+   return{p:String(x.position??'–'),n:u.first_name?u.first_name+' '+u.last_name[0]+u.last_name.slice(1).toLowerCase():'#'+x.driver_number,tm:u.team_name||'',t:i>=0?ft(du[i]):'–',q:i>=0?'Q'+(i+1):''}})}}catch(x){}
+ if(!rows){delete d.dataset.ok;b.innerHTML=`<p class=note>${L('Uitslag nog niet beschikbaar.','Result not yet available.')}</p>`;return}
+ b.innerHTML=`<table><tr><th>#</th><th>${L('Coureur','Driver')}</th><th>${L('Team','Team')}</th><th>${L('Tijd','Time')}</th></tr>${rows.map(x=>`<tr${x.p=='1'?' class=race':''}><td>${x.p}</td><td>${x.n}</td><td>${x.tm}</td><td>${x.t}${x.q?' ('+x.q+')':''}</td></tr>`).join('')}</table><p class=note>${L('Bron','Source')}: ${src}. ${L('Startgrid kan afwijken door straffen.','Starting grid may differ due to penalties.')}</p>`},true);
 function render(races,win,src){const now=Date.now();const el=document.getElementById('list');
  document.getElementById('season').textContent=races[0].season;
  const next=races.find(r=>T(r).getTime()+2*36e5>now);
