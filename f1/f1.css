@@ -79,3 +79,4 @@ footer a.home{color:#d62828!important;font-weight:600;text-decoration:none}
 html.dark .sb li{border-top-color:#262626}html.dark .pb li{background:#222}html.dark .sb li em small{color:#888}
 .lpi{font-size:.8rem;color:#111;font-weight:700;margin:8px 0 0;text-align:center}.lpi span{white-space:nowrap}
 html.dark .lpi{color:#fff}
+.sb .resall{margin-top:6px}.sb .resall summary{font-size:.8rem;cursor:pointer;color:#d62828;padding:4px 0}html.dark .sb .resall summary{color:#ff6b6b}

@@ -4,7 +4,7 @@ on:
     - cron: "41 4 * * *"
   workflow_dispatch:
   push:
-    paths: ["f1/tools/make_ics.py", "f1/2027.json"]
+    paths: ["f1/tools/make_ics.py", "f1/2027.json", "f1/tools/make_results.py"]
 permissions:
   contents: write
 concurrency: f1-ics
@@ -15,10 +15,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: python3 -u f1/tools/make_ics.py
+      - run: python3 -u f1/tools/make_results.py $(date -u +%Y) || true
+      - run: python3 -u f1/tools/make_standings.py $(date -u +%Y) || true
       - run: |
           git config user.name WillyWortel1
           git config user.email WillyWortel1@users.noreply.github.com
-          git add f1/f1-2025.ics f1/f1-2026.ics f1/f1-2027.ics f1/ics
+          git add f1/f1-2025.ics f1/f1-2026.ics f1/f1-2027.ics f1/ics f1/results f1/standings
           # DTSTAMP changes every run; only commit when something other than DTSTAMP changed
           if git diff --cached -U0 | grep -E '^[+-][^+-]' | grep -qv 'DTSTAMP:'; then
             git commit -m "F1 agenda update" && git pull --rebase -X theirs && git push
