@@ -80,3 +80,11 @@ html.dark .oc{background:#141414;border-color:#2a2a2a;border-top-color:#d69e2e;b
 html.dark .lb{background:#2a2110;color:#f6c76b}html.dark .oc.ess .lb{background:#211a3a;color:#c4b5fd}
 html.dark .ewarn{background:#2a1610;border-color:#a2492c}html.dark .ewarn h2{color:#ff8a50}html.dark .ewarn .warn{background:#1a0f0b}html.dark .xlink a{background:#2a2110}
 @media(max-width:600px){.ewarn{padding:16px 14px}}
+.faqs{display:grid;gap:10px;margin:8px 0 20px}
+.qa{border:1px solid #e3e3e3;border-radius:14px;background:#fff;box-shadow:0 2px 8px rgba(0,0,0,.03);overflow:hidden}
+.qa>summary{list-style:none;cursor:pointer;padding:16px 48px 16px 18px;font-weight:700;font-size:1.05rem;position:relative}
+.qa>summary::-webkit-details-marker{display:none}
+.qa>summary:after{content:"+";position:absolute;right:16px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:#e8f6ee;color:#1a7f4b;display:grid;place-items:center;font-size:1.1rem;transition:transform .2s}
+.qa[open]>summary:after{content:"−"}.qa[open]>summary{color:#1a7f4b}
+.ans{padding:0 18px 14px;line-height:1.65}.ans p{margin:0 0 10px}.ans .sub{margin:12px 0 4px}
+html.dark .qa{background:#141414;border-color:#2a2a2a;box-shadow:none}html.dark .qa>summary:after{background:#12261b;color:#5fd39a}html.dark .qa[open]>summary{color:#5fd39a}
