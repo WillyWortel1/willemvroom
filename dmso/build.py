@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """Generate dmso/data.js from src/library.json (Essential DMSO Protocol Library export)
 and src/summaries.json (own NL/EN summaries + Dutch titles). Run: python3 dmso/build.py
-Dosage text is copied verbatim from the source (steps + frequency); never edited or estimated."""
+Dosage text is copied verbatim from the source (steps + frequency); never edited or estimated.
+NL page uses src/dosage_nl.json translations; run check_nl.py (numbers/units must match)."""
 import json, re, pathlib
 H = pathlib.Path(__file__).parent
 lib = json.load(open(H/'src/library.json'))['entries']
 S = json.load(open(H/'src/summaries.json'))
+NL = json.load(open(H/'src/dosage_nl.json'))  # EN string -> NL translation (numbers checked by check_nl.py)
 DOSE = re.compile(r'\d\s*(%|ml|mL|drops?|mg|g\b|cc|teaspoons?|tsp|tablespoons?|×|x/|times)|\b(teaspoon|tablespoon|drop|once|twice|daily|nightly|weekly)\b', re.I)
 out, n = [], 0
 for e, s in zip(lib, S['p']):
@@ -15,6 +17,7 @@ for e, s in zip(lib, S['p']):
     p = {k: s[k] for k in ('t', 'tn', 'c', 'en', 'nl') if k in s}
     if has:
         p['d'] = steps; p['fr'] = fr; n += 1
+        p['dn'] = [NL[x] for x in steps]; p['frn'] = NL[fr] if fr else ''
     out.append(p)
 (H/'data.js').write_text('window.DM=' + json.dumps({'cats': S['cats'], 'p': out}, ensure_ascii=False, separators=(',', ':')) + ';\n')
 print(f'{len(out)} protocols, {n} with dosage, {len(out)-n} without')
