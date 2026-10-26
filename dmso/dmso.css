@@ -1,0 +1,11 @@
+*{box-sizing:border-box}body{margin:0;font:16px/1.45 -apple-system,system-ui,sans-serif;background:#fff;color:#111;padding:0 14px 40px;max-width:760px;margin:auto}
+html.dark body{background:#0a0a0a;color:#eee}a{color:#1a7f4b}html.dark a{color:#5fd39a}
+header{display:flex;justify-content:space-between;align-items:center;padding:12px 0}header .home{font-weight:700;text-decoration:none;color:inherit}
+nav{display:flex;gap:8px;align-items:center}#thm{background:none;border:1px solid #ccc;border-radius:8px;padding:4px 6px;color:inherit}html.dark #thm{border-color:#444}
+h1{font-size:1.5rem;margin:4px 0 8px}.disc{font-size:.85rem;background:#f3f7f4;border-left:4px solid #1a7f4b;padding:8px 10px;border-radius:6px}html.dark .disc{background:#14201a}
+#q{width:100%;font-size:16px;padding:10px 12px;border:1px solid #ccc;border-radius:10px;margin:10px 0;background:inherit;color:inherit}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch}.chips button{flex:0 0 auto;border:1px solid #ccc;background:none;color:inherit;border-radius:16px;padding:5px 10px;font-size:.85rem}
+.chips button.on{background:#1a7f4b;border-color:#1a7f4b;color:#fff}#cnt{font-size:.85rem;opacity:.7;margin:6px 0}
+.card{border:1px solid #ddd;border-radius:10px;margin:8px 0;overflow:hidden}html.dark .card,html.dark .chips button,html.dark #q{border-color:#333}
+.hd{display:flex;align-items:center;gap:8px;padding:10px 12px;cursor:pointer}.hd b{flex:1;font-size:.95rem}.hd small{display:block;font-weight:400;opacity:.6;font-size:.75rem}
+.st{background:none;border:0;font-size:1.3rem;color:#bbb;padding:0 4px}.st.on{color:#f5b301}.bd{display:none;padding:0 12px 12px;font-size:.9rem}.card.open .bd{display:block}.src{font-size:.8rem;opacity:.85}
