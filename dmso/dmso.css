@@ -11,3 +11,5 @@ h1{font-size:1.5rem;margin:4px 0 8px}.disc{font-size:.85rem;background:#f3f7f4;b
 .st{background:none;border:0;font-size:1.3rem;color:#bbb;padding:0 4px}.st.on{color:#f5b301}.bd{display:none;padding:0 12px 12px;font-size:.9rem}.card.open .bd{display:block}.src{font-size:.8rem;opacity:.85}
 #ext{display:block;width:100%;margin:14px 0;padding:12px;border-radius:10px;border:1px solid #1a7f4b;background:none;color:#1a7f4b;font-size:1rem;font-weight:600}html.dark #ext{color:#5fd39a;border-color:#5fd39a}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#111;color:#fff;padding:10px 14px;border-radius:10px;font-size:.9rem;z-index:9;max-width:90%;text-align:center}html.dark .toast{background:#eee;color:#111}
+.faq{margin:10px 0;border:1px solid #ddd;border-radius:10px;padding:0 12px}html.dark .faq,html.dark .fq{border-color:#333}.faq>summary{font-weight:700;padding:10px 0;cursor:pointer}
+.fq{border-top:1px solid #eee}.fq summary{padding:9px 0;font-size:.92rem;cursor:pointer}.fq p{margin:0 0 10px;font-size:.88rem}
