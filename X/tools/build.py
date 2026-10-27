@@ -29,13 +29,22 @@ cal=[]
 for r in R["Kalender"]:
   s,e=pdates(r["datum"])
   if s and s<=today+dt.timedelta(days=7) and e>=today: cal.append({"datum":r["datum"],"onderwerp":r["onderwerp"],"waarom":r["waarom relevant"],"bron":r["bron (URL)"]})
+lk=[p["likes"] for p in posts];byday={}
+for p in posts: byday[p["datum"][:10]]=byday.get(p["datum"][:10],0)+p["likes"]
+wk=[{"week":t["week"],"likes":sum(p["likes"] for p in weeks[t["week"]]),"avg":round(st.mean(p["likes"] for p in weeks[t["week"]]),2)} for t in trend]
 try: old=json.load(open(out))
 except: old={}
 hist={h["d"]:h["n"] for h in old.get("followers",{}).get("history",[{"d":"2026-10-26","n":245}])}
 hist[today.isoformat()]=fol
+lh={h["d"]:h for h in old.get("likes",{}).get("history",[])}
+lh[today.isoformat()]={"d":today.isoformat(),"total":sum(lk),"posts":len(lk)}
+likes={"total":sum(lk),"avg":round(st.mean(lk),2) if lk else 0,"median":st.median(lk) if lk else 0,"with_likes":sum(1 for x in lk if x>0),"posts":len(lk),
+ "avg_vs_median_views":round(sum(lk)/max(1,sum(p["views"] for p in posts))*1000,2),"top":sorted(posts,key=lambda p:-p["likes"])[:3],
+ "byday":[{"d":k,"likes":v} for k,v in sorted(byday.items())],"byweek":wk,"history":[lh[k] for k in sorted(lh)]}
 data={"updated":now.isoformat(timespec="minutes"),
  "followers":{"current":fol,"baseline":{"d":"2026-10-26","n":245},"goal":{"d":"2026-12-31","n":300},"history":[{"d":k,"n":v} for k,v in sorted(hist.items())]},
  "score":{"formula":M.get("scoreformule",{}).get("waarde",""),"note":M.get("scoreformule",{}).get("toelichting",""),"median_basis":num(M.get("mediaan score-basis (rijen >0)",{}).get("waarde")),"median_views":num(M.get("mediaan weergaven",{}).get("waarde")),"peildatum":M.get("peildatum",{}).get("waarde",""),"rows":len(posts),"top":ss[:5],"flop":[p for p in sorted(posts,key=lambda p:(p["score"],-p["views"]))][:5],"weeks":trend},
+ "likes":likes,
  "tasks":[{"t":"08:30","nl":"Ochtendbriefing"},{"t":"19:00","nl":"Avondreacties"},{"t":"","nl":"Eén hoofdpost (reageer binnen de eerste 2 uur)"},{"t":"22:00","nl":"Postlog"},{"t":"ma","nl":"Volgerscheck (maandag)"}],
  "calendar":cal}
 json.dump(data,open(out,"w"),ensure_ascii=False,indent=1);print("built",out,"followers",fol,"rows",len(posts),"cal",len(cal))
