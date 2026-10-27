@@ -6,7 +6,7 @@ const k=await crypto.subtle.deriveKey({name:'PBKDF2',hash:'SHA-256',salt:d64(enc
 return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({name:'AES-GCM',iv:d64(enc.iv)},k,d64(enc.ct))))}
 return ()=>new Promise(async res=>{const enc=await (await fetch(base+'data.enc.json',{cache:'no-store'})).json();
 const s=sessionStorage.getItem('hqpin');if(s){try{return res(await dec(enc,s))}catch(e){sessionStorage.removeItem('hqpin')}}
-const o=document.createElement('div');o.id='lock';o.innerHTML=`<div class="lbox"><div class="ltitle">Willem HQ</div><div class="lsub">${T.t}</div><div class="dots"></div><div class="lerr"></div><div class="pad">${[1,2,3,4,5,6,7,8,9,'⌫',0,'OK'].map(k=>`<button data-k="${k}">${k}</button>`).join('')}</div></div>`;
+const o=document.createElement('div');o.id='lock';o.innerHTML=`<div class="lbox"><div class="ltitle">${document.body.dataset.lock||"Willem HQ"}</div><div class="lsub">${T.t}</div><div class="dots"></div><div class="lerr"></div><div class="pad">${[1,2,3,4,5,6,7,8,9,'⌫',0,'OK'].map(k=>`<button data-k="${k}">${k}</button>`).join('')}</div></div>`;
 document.body.appendChild(o);let pin='',busy=false;const dots=o.querySelector('.dots'),err=o.querySelector('.lerr'),box=o.querySelector('.lbox');
 const draw=()=>dots.textContent='•'.repeat(pin.length)||' ';draw();
 async function ok(){if(busy||!pin)return;busy=true;try{const d=await dec(enc,pin);sessionStorage.setItem('hqpin',pin);o.classList.add('out');setTimeout(()=>o.remove(),400);res(d)}
