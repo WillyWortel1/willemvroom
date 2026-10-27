@@ -26,3 +26,4 @@ h1{margin:0;font-size:28px}.sub{color:#8b949e;margin:6px 0 18px}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}.pad button{background:#161b22;border:1px solid #30363d;color:#e6edf3;border-radius:50%;aspect-ratio:1;font-size:22px;cursor:pointer}
 .pad button:active{background:#12261a;border-color:#3fb950}.pad button[data-k=OK]{color:#3fb950;font-size:17px;font-weight:700}
 .shake{animation:sh .4s}@keyframes sh{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}
+.lang a.rf{display:inline-block;margin-right:10px;padding:4px 10px;border:1px solid #3fb950;border-radius:999px;color:#3fb950}
