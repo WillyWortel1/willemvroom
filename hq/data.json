@@ -1,0 +1,46 @@
+{
+ "updated": "2026-10-27T10:40:00+01:00",
+ "bots": [
+  {"id":"maker","name":"Maker","role":{"nl":"Websites & code","en":"Websites & code"},"color":"#3fb950",
+   "now":{"nl":"HQ-dashboard bouwen (deze pagina)","en":"Building the HQ dashboard (this page)"},
+   "next":{"nl":"F1-uitslagen automatisch bijwerken, dagelijks 05:41","en":"F1 results auto-update, daily 05:41"},"last":"2026-10-27"},
+  {"id":"assistent","name":"Assistent","role":{"nl":"Agenda, mail & Drive","en":"Calendar, mail & Drive"},"color":"#58a6ff",
+   "now":{"nl":"Rustig: ochtendbriefje 26/10 overgeslagen, niets te melden","en":"Quiet: 26 Oct morning brief skipped, nothing to report"},
+   "next":{"nl":"Nachtelijke back-up regelboek","en":"Nightly rulebook backup"},"last":"2026-10-26"},
+  {"id":"x","name":"X","role":{"nl":"X-account @willemvroom","en":"X account @willemvroom"},"color":"#e6edf3",
+   "now":{"nl":"Volgersdoel 247 → 300 voor nieuwjaar","en":"Follower goal 247 → 300 by New Year"},
+   "next":{"nl":"Ochtenddigest morgen 08:30","en":"Morning digest tomorrow 08:30"},"last":"2026-10-27"},
+  {"id":"wifi","name":"Wifi","role":{"nl":"Thuisinternet & netwerk","en":"Home internet & network"},"color":"#d29922",
+   "now":{"nl":"Geen open werk: modem (Zyxel NR5307) heeft nieuwste firmware","en":"No open work: modem (Zyxel NR5307) has latest firmware"},
+   "next":{"nl":"—","en":"—"},"last":"2026-10-26"},
+  {"id":"expert","name":"Expert","role":{"nl":"Onderzoek & advies","en":"Research & advice"},"color":"#bc8cff",
+   "now":{"nl":"Onderbouwde reactie aan Sander Schimmelpennink (vermogensbelasting)","en":"Fact-checked reply to Sander Schimmelpennink (wealth tax)"},
+   "next":{"nl":"Jouw persoonlijke ervaring verwerken in de reactie","en":"Work your personal experience into the reply"},"last":"2026-10-27"}
+ ],
+ "waiting":[
+  {"bot":"maker","due":"today","nl":"Kies: FAQ noemt orale dosering, Toepassing zegt dat die is verwijderd","en":"Decide: FAQ gives an oral dose, Toepassing says oral dosing was removed"},
+  {"bot":"maker","due":"today","nl":"Controleer de Amazon.nl-link van DMSO Healing Bible zelf","en":"Check the Amazon.nl link for DMSO Healing Bible by hand"},
+  {"bot":"x","due":"today","nl":"Plaats concept 1 (Tesla FSD-cijfers) vanavond na 20:00","en":"Post draft 1 (Tesla FSD numbers) tonight after 20:00"},
+  {"bot":"x","due":"","nl":"Plaats de post over je bot ('My Grok Bot runs my X account') 's avonds","en":"Post the bot post ('My Grok Bot runs my X account') in the evening"},
+  {"bot":"expert","due":"","nl":"Stuur een paar zinnen eigen ervaring voor de reactie aan Sander","en":"Send a few lines of your own experience for the reply to Sander"}
+ ],
+ "tasks":[
+  {"bot":"maker","status":"active","when":{"nl":"Nu","en":"Now"},"nl":"HQ-dashboard NL/EN","en":"HQ dashboard NL/EN"},
+  {"bot":"maker","status":"active","when":{"nl":"Dagelijks 05:41","en":"Daily 05:41"},"nl":"F1-uitslagen en stand bijwerken","en":"Update F1 results and standings"},
+  {"bot":"x","status":"active","when":{"nl":"Dagelijks 08:30","en":"Daily 08:30"},"nl":"Ochtenddigest met concepten","en":"Morning digest with drafts"},
+  {"bot":"x","status":"active","when":{"nl":"Dagelijks 03:30","en":"Daily 03:30"},"nl":"Nachtelijke backup X-regels","en":"Nightly backup of X rules"},
+  {"bot":"assistent","status":"active","when":{"nl":"Werkdagen","en":"Weekdays"},"nl":"Ochtendbriefje","en":"Morning brief"},
+  {"bot":"assistent","status":"active","when":{"nl":"Nachtelijk","en":"Nightly"},"nl":"Back-up regelboek","en":"Rulebook backup"},
+  {"bot":"assistent","status":"active","when":{"nl":"Ochtend","en":"Morning"},"nl":"Emigreren-reacties sorteren","en":"Sort Emigreren replies"},
+  {"bot":"assistent","status":"active","when":{"nl":"Wekelijks","en":"Weekly"},"nl":"Tesla Roadster nieuws","en":"Tesla Roadster news"},
+  {"bot":"maker","status":"done","when":{"nl":"Vandaag","en":"Today"},"nl":"Boccaccio-kop 'Kijk & luister naar Boccaccio Life' met rode gloed","en":"Boccaccio heading 'Watch & listen to Boccaccio Life' with red glow"},
+  {"bot":"maker","status":"done","when":{"nl":"Vandaag","en":"Today"},"nl":"F1: uitslag per race (18 races) + verreden races volledig zichtbaar","en":"F1: result per race (18 races) + past races fully visible"},
+  {"bot":"maker","status":"done","when":{"nl":"Vandaag","en":"Today"},"nl":"DMSO: disclaimer-popup, groene zoekrand, protocollen-link","en":"DMSO: disclaimer popup, green search outline, protocols link"},
+  {"bot":"maker","status":"done","when":{"nl":"Gisteren","en":"Yesterday"},"nl":"DMSO: Amazon.nl-productlinks bij Boeken + disclaimerpagina","en":"DMSO: Amazon.nl product links on Books + disclaimer page"},
+  {"bot":"x","status":"done","when":{"nl":"Vandaag","en":"Today"},"nl":"Ochtenddigest 27 okt verstuurd","en":"Morning digest 27 Oct sent"},
+  {"bot":"x","status":"done","when":{"nl":"Gisteren","en":"Yesterday"},"nl":"X-postlog + contentkalender nov/dec in Drive","en":"X post log + Nov/Dec content calendar in Drive"},
+  {"bot":"expert","status":"done","when":{"nl":"Vandaag","en":"Today"},"nl":"Claims nagetrokken + aanvulling over Zuckerberg","en":"Claims fact-checked + addendum on Zuckerberg"},
+  {"bot":"wifi","status":"done","when":{"nl":"Gisteren","en":"Yesterday"},"nl":"Signaal en modem-firmware gecontroleerd","en":"Checked signal and modem firmware"},
+  {"bot":"assistent","status":"done","when":{"nl":"Gisteren","en":"Yesterday"},"nl":"Back-up 26-10 gecontroleerd, niets hersteld","en":"Backup 26 Oct verified, nothing restored"}
+ ]
+}

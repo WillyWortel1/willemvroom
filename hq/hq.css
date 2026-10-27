@@ -1,0 +1,22 @@
+*{box-sizing:border-box}body{margin:0;background:#0d1117;color:#e6edf3;font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+.wrap{max-width:1400px;margin:0 auto;padding:20px 16px 48px}
+header{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+h1{margin:0;font-size:28px}.sub{color:#8b949e;margin:6px 0 18px}
+.lang a{color:#8b949e;text-decoration:none;font-weight:600}.lang a.on{color:#3fb950}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px}
+.stat{background:#161b22;border:1px solid #30363d;border-radius:10px;padding:12px}.stat b{font-size:24px;display:block}.stat span{color:#8b949e;font-size:13px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:14px}
+.chip{flex:none;background:#161b22;border:1px solid #30363d;color:#e6edf3;border-radius:999px;padding:6px 12px;cursor:pointer;font:inherit;font-size:13px;display:flex;gap:6px;align-items:center}
+.chip.on{border-color:#3fb950;background:#12261a}
+.dot{width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;font-size:11px;font-weight:700;color:#0d1117}
+.cols{display:grid;gap:14px}
+.col{background:#161b22;border:1px solid #30363d;border-radius:12px;padding:14px}
+.col h2{margin:0 0 10px;font-size:18px;display:flex;justify-content:space-between}.col h2 small{color:#8b949e;font-weight:400;font-size:12px}
+.item{display:flex;gap:10px;padding:10px 0;border-top:1px solid #21262d}.item input{margin-top:4px;accent-color:#3fb950}
+.meta{font-size:12px;color:#8b949e;display:flex;gap:6px;align-items:center}.badge{font-size:11px;border-radius:6px;padding:1px 6px;background:#3a2a10;color:#e3b341}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.card{background:#0d1117;border:1px solid #30363d;border-radius:10px;padding:10px;font-size:13px}.card .lbl{color:#8b949e;font-size:11px;text-transform:uppercase;margin-top:6px}
+.card .cnt{color:#8b949e;font-size:12px;margin-top:8px}.idle{color:#8b949e;font-style:italic}
+.done{opacity:.7}.done .t{text-decoration:line-through}h3{font-size:13px;color:#8b949e;margin:14px 0 4px}
+@media(min-width:760px){.stats{grid-template-columns:repeat(5,1fr)}}
+@media(min-width:1100px){.cols{grid-template-columns:1fr 2fr 1fr}}
