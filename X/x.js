@@ -8,13 +8,24 @@ const chart=`<svg viewBox="0 0 ${W} ${H}"><line x1="${x(b.d)}" y1="${y(b.n)}" x2
 <polyline fill="none" stroke="#3fb950" stroke-width="2.5" points="${F.history.map(h=>x(h.d)+','+y(h.n)).join(' ')}"/>${F.history.map(h=>`<circle cx="${x(h.d)}" cy="${y(h.n)}" r="3" fill="#3fb950"/>`).join('')}
 <text x="10" y="12" fill="#8b949e" font-size="10">— werkelijk  - - plan</text><text x="${W-10}" y="${y(F.goal.n)+12}" fill="#8b949e" font-size="10" text-anchor="end">300 · 31-12</text></svg>`;
 const S=D.score,row=p=>`<tr><td class="sc">${p.score.toFixed(2)}</td><td><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.onderwerp)}</a><div class="meta">${esc(p.datum)} · ${p.type} · ${p.views} weergaven</div></td></tr>`;
-function likesSec(){const L=D.likes;if(!L)return '';const mx=Math.max(1,...L.byday.map(x=>x.likes)),bw=300/L.byday.length;
-const bars=`<svg viewBox="0 0 320 130">${L.byday.map((x,i)=>{const h=95*x.likes/mx;return `<rect x="${10+i*bw}" y="${110-h}" width="${bw-3}" height="${h}" rx="2" fill="#3fb950"><title>${x.d}: ${x.likes}</title></rect>${x.likes?`<text x="${10+i*bw+(bw-3)/2}" y="${106-h}" fill="#8b949e" font-size="8" text-anchor="middle">${x.likes}</text>`:''}`}).join('')}<text x="10" y="125" fill="#8b949e" font-size="9">${L.byday[0].d.slice(5)}</text><text x="310" y="125" fill="#8b949e" font-size="9" text-anchor="end">${L.byday.at(-1).d.slice(5)}</text></svg>`;
+function likesSec(){const L=D.likes;if(!L)return '';setTimeout(()=>drawLikes('d'));
 return `<section class="col"><h2>Likes<small>${L.posts} posts</small></h2><div class="big">${L.total}</div><div class="meta">likes totaal</div>
 <div class="stats" style="grid-template-columns:repeat(3,1fr);margin:12px 0"><div class="stat"><b>${L.avg}</b><span>gem. per post</span></div><div class="stat"><b>${L.median}</b><span>mediaan per post</span></div><div class="stat"><b>${L.avg_vs_median_views}</b><span>per 1.000 weergaven</span></div></div>
-<div class="meta">${L.with_likes} van ${L.posts} posts hebben likes</div><h3>Likes per dag (op postdatum)</h3>${bars}
-<h3>Per week</h3><table><tr><th>Week</th><th>Likes</th><th>Gem.</th></tr>${L.byweek.map(w=>`<tr><td>${w.week.slice(5)}</td><td>${w.likes}</td><td>${w.avg}</td></tr>`).join('')}</table>
+<div class="meta">${L.with_likes} van ${L.posts} posts hebben likes</div>
+<div class="chips" id="lper" style="margin:12px 0 4px">${[['d','Dag'],['w','Week'],['m','Maand'],['y','Jaar']].map(([k,t])=>`<button class="chip" data-p="${k}">${t}</button>`).join('')}</div>
+<div id="lchart"></div>
 <h3>Meeste likes</h3><table>${L.top.map(p=>`<tr><td class="sc">${p.likes}</td><td><a href="${esc(p.url)}" target="_blank" rel="noopener">${esc(p.onderwerp)}</a></td></tr>`).join('')}</table></section>`}
+const MN=['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'];
+function isoW(ds){const d=day(ds),n=(d.getUTCDay()+6)%7;d.setUTCDate(d.getUTCDate()-n+3);const y=d.getUTCFullYear(),f=new Date(Date.UTC(y,0,4));return y+'-W'+String(1+Math.round(((d-f)/864e5-3+((f.getUTCDay()+6)%7))/7)).padStart(2,'0')}
+function drawLikes(per){const L=D.likes,g={};const key={d:x=>x.d,w:x=>isoW(x.d),m:x=>x.d.slice(0,7),y:x=>x.d.slice(0,4)}[per];
+L.byday.forEach(x=>{const k=key(x);g[k]=(g[k]||0)+x.likes});const E=Object.entries(g).sort();
+const lab=k=>per==='d'?k.slice(8)+'-'+k.slice(5,7):per==='w'?k.slice(5):per==='m'?MN[+k.slice(5)-1]+' '+k.slice(2,4):k;
+const mx=Math.max(1,...E.map(e=>e[1])),bw=300/E.length,cur=E.at(-1),tot=E.reduce((a,e)=>a+e[1],0);
+const name={d:'Dag',w:'Week',m:'Maand',y:'Jaar'}[per];
+document.querySelectorAll('#lper .chip').forEach(c=>{c.classList.toggle('on',c.dataset.p===per);c.onclick=()=>drawLikes(c.dataset.p)});
+document.getElementById('lchart').innerHTML=`<div class="meta">Laatste ${name.toLowerCase()} (${lab(cur[0])}): <b style="color:#e6edf3">${cur[1]}</b> likes · ${E.length} ${per==='d'?'dagen met posts':'periodes'} · gem. ${(tot/E.length).toFixed(1)} per periode</div>
+<svg viewBox="0 0 320 135">${E.map(([k,v],i)=>{const h=95*v/mx,x=10+i*bw,w=Math.max(2,bw-3);return `<rect x="${x}" y="${112-h}" width="${w}" height="${h}" rx="2" fill="#3fb950"><title>${lab(k)}: ${v}</title></rect>${v?`<text x="${x+w/2}" y="${108-h}" fill="#8b949e" font-size="8" text-anchor="middle">${v}</text>`:''}${(E.length<=8||i===0||i===E.length-1)?`<text x="${x+w/2}" y="126" fill="#8b949e" font-size="8" text-anchor="middle">${lab(k)}</text>`:''}`}).join('')}</svg>
+<div class="meta">Likes geteld op de postdatum (bron: postlog)</div>`}
 const nl=d=>new Date(d).toLocaleString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Amsterdam'});
 $('#sub').textContent='Bijgewerkt '+nl(D.updated)+' (Amsterdamse tijd)';
 $('#app').innerHTML=`<section class="col"><h2>Volgers</h2><div class="big">${F.current}</div>
