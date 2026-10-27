@@ -1,7 +1,7 @@
 (async()=>{const L=document.documentElement.lang==='en'?'en':'nl';
 const T={nl:{w:'Wacht op jou',d:'Vandaag',a:'Bezig',k:'Vandaag klaar',u:'Bijgewerkt',all:'Alle bots',team:'Team',now:'Nu',next:'Volgende',wt:'wachtend',ac:'actief',dn:'klaar',nu:'Volgende stappen',tasks:'Taken',ip:'Bezig',fin:'Klaar',idle:'geen recente activiteit',today:'Vandaag'},
 en:{w:'Waiting on you',d:'Due today',a:'In progress',k:'Done today',u:'Updated',all:'All bots',team:'Team',now:'Now',next:'Next',wt:'waiting',ac:'active',dn:'done',nu:'Next up',tasks:'Tasks',ip:'In progress',fin:'Done',idle:'no recent activity',today:'Today'}}[L];
-const D=await (await fetch((L==='en'?'../':'')+'data.json',{cache:'no-store'})).json();
+const D=await HQUnlock();
 const B=Object.fromEntries(D.bots.map(b=>[b.id,b]));let f='all';const $=s=>document.querySelector(s);
 const dot=id=>`<span class="dot" style="background:${B[id].color}">${B[id].name[0]}</span>`;
 const who=id=>`<span class="meta">${dot(id)}${B[id].name}</span>`;
