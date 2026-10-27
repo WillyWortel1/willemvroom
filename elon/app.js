@@ -3,7 +3,7 @@ var L=document.documentElement.lang=='en',T=L?{acc:'unique accounts',since:'sinc
 var nf=new Intl.NumberFormat(L?'en-GB':'nl-NL'),tz='Europe/Amsterdam';
 function f(t,o){return new Date(t).toLocaleString(L?'en-GB':'nl-NL',Object.assign({timeZone:tz},o))}
 function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
-fetch("/elon/data.json?'+Date.now()).then(function(r){return r.json()}).then(function(d){
+fetch('/elon/data.json?'+Date.now()).then(function(r){return r.json()}).then(function(d){
 var P=Object.keys(d.posts).map(function(k){var p=d.posts[k];p.id=k;return p});
 document.getElementById('n').textContent=nf.format(d.total);
 document.getElementById('acc').textContent=nf.format(d.accounts)+' '+T.acc+' · '+T.since;
