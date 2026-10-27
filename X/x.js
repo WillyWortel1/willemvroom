@@ -23,7 +23,7 @@ const lab=k=>per==='d'?k.slice(8)+'-'+k.slice(5,7):per==='w'?k.slice(5):per==='m
 const mx=Math.max(1,...E.map(e=>e[1])),bw=300/E.length,cur=E.at(-1),tot=E.reduce((a,e)=>a+e[1],0);
 const name={d:'Dag',w:'Week',m:'Maand',y:'Jaar'}[per];
 document.querySelectorAll('#lper .chip').forEach(c=>{c.classList.toggle('on',c.dataset.p===per);c.onclick=()=>drawLikes(c.dataset.p)});
-document.getElementById('lchart').innerHTML=`<div class="meta">Laatste ${name.toLowerCase()} (${lab(cur[0])}): <b style="color:#e6edf3">${cur[1]}</b> likes · ${E.length} ${per==='d'?'dagen met posts':'periodes'} · gem. ${(tot/E.length).toFixed(1)} per periode</div>
+document.getElementById('lchart').innerHTML=`<div class="meta" style="display:block">Laatste ${name.toLowerCase()} (${lab(cur[0])}): <b style="color:#e6edf3">${cur[1]}</b> likes · ${E.length} ${per==='d'?'dagen met posts':'periodes'} · gem. ${(tot/E.length).toFixed(1)} per periode</div>
 <svg viewBox="0 0 320 135">${E.map(([k,v],i)=>{const h=95*v/mx,x=10+i*bw,w=Math.max(2,bw-3);return `<rect x="${x}" y="${112-h}" width="${w}" height="${h}" rx="2" fill="#3fb950"><title>${lab(k)}: ${v}</title></rect>${v?`<text x="${x+w/2}" y="${108-h}" fill="#8b949e" font-size="8" text-anchor="middle">${v}</text>`:''}${(E.length<=8||i===0||i===E.length-1)?`<text x="${x+w/2}" y="126" fill="#8b949e" font-size="8" text-anchor="middle">${lab(k)}</text>`:''}`}).join('')}</svg>
 <div class="meta">Likes geteld op de postdatum (bron: postlog)</div>`}
 const nl=d=>new Date(d).toLocaleString('nl-NL',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit',timeZone:'Europe/Amsterdam'});
