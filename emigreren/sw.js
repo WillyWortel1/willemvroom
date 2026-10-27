@@ -1,4 +1,4 @@
-const CACHE = "emigreren-v48";
+const CACHE = "emigreren-v49";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(self.skipWaiting());

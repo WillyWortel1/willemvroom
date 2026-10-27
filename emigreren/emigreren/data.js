@@ -203,6 +203,16 @@ window.EMIGREER_DATA = {
       ],
     },
     {
+      id: "testament-erfbelasting",
+      phase: "voorbereiden",
+      cat: "financieel",
+      title: "Testament en schenkingen herzien: 10-jaarsregel erfbelasting en erfrecht in het nieuwe land.",
+      why: "Met de Nederlandse nationaliteit geld je tot 10 jaar na emigratie nog als inwoner voor erf- en schenkbelasting (art. 3 Successiewet). Je nieuwe woonland kan ook heffen en heeft eigen erfrecht.",
+      links: [
+        { label: "Art. 3 Successiewet 1956", href: "https://wetten.overheid.nl/BWBR0002226" },
+      ],
+    },
+    {
       id: "aow-check",
       phase: "orientatie",
       cat: "financieel",

@@ -1102,6 +1102,17 @@
         </ul>
       </article>
 
+      ${(() => {
+        const e = window.EMIGREER_FISCAL && EMIGREER_FISCAL.erfInfo;
+        return e
+          ? `<article class="card">
+        <h2>${e.title}</h2>
+        <p>${e.text}</p>
+        <p class="tiny"><a href="${e.bron}" target="_blank" rel="noopener">Successiewet 1956, art. 3 (wetten.nl)</a></p>
+      </article>`
+          : "";
+      })()}
+
       <article class="card">
         <h2>Na emigratie: wat NL nog heft</h2>
         <p class="muted">Buitenlands belastingplichtige = alleen inkomen dat Nederland mag belasten. Geen wereldwijd box 3 meer.</p>

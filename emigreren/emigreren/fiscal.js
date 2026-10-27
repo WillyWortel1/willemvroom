@@ -152,6 +152,11 @@ Met vriendelijke groet,
   };
 
   window.EMIGREER_FISCAL = {
+    erfInfo: {
+      title: "Erf- en schenkbelasting: 10 jaar ‘Nederlander’",
+      text: "Heb je de Nederlandse nationaliteit, dan geld je tot 10 jaar na emigratie nog als inwoner voor de erf- en schenkbelasting (art. 3 Successiewet). Overlijd je in die periode of doe je een schenking, dan kan Nederland heffen over de hele nalatenschap of schenking. Voor schenkingen geldt bovendien voor iedereen een termijn van 1 jaar. Je nieuwe woonland kan ook heffen; er zijn maar weinig verdragen die dubbele heffing voorkomen. Plan grote schenkingen en je testament daarom met een adviseur.",
+      bron: "https://wetten.overheid.nl/BWBR0002226",
+    },
     ties: [
       { id: "woning-nl", label: "Ik houd een gemeubileerde woning in NL die voor mij beschikbaar blijft" },
       { id: "gezin-nl", label: "Partner of gezin blijft in Nederland wonen" },
