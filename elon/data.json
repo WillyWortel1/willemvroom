@@ -1,6 +1,6 @@
 {
-"accounts": 314,
-"newest_id": "2115487962574045458",
+"accounts": 316,
+"newest_id": "2115522665129574579",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4391,8 +4391,30 @@
 "verified": true,
 "views": 2,
 "vtype": "blue"
+},
+"2115498692111479169": {
+"followers": 15,
+"likes": 0,
+"name": "2TallNorman",
+"t": "2026-10-28T17:39:26.000Z",
+"text": "@SenAlexPadilla Investigate Elon for what? Are you alright a crime or are you just saying we should use lawfare to go after people we disagree with politically? Could you worry about the pathetic state California is in instead of harrassing Elon?",
+"user": "Xertzengrit",
+"verified": false,
+"views": 3,
+"vtype": "none"
+},
+"2115522665129574579": {
+"followers": 319811,
+"likes": 20,
+"name": "Ashton Forbes",
+"t": "2026-10-28T19:14:42.000Z",
+"text": "@Awk20000 It's always pure hypocrisy with these people.\n\nThey want to investigate Elon Musk for unspecified imaginary crimes while they claim Ilhan Omar is being politically prosecuted because she doesn't have any paperwork and lied about the year she was born.\n\nIt's mental illne",
+"user": "AshtonForbes",
+"verified": true,
+"views": 682,
+"vtype": "blue"
 }
 },
-"total": 399,
-"updated": "2026-10-28T17:09:37Z"
+"total": 401,
+"updated": "2026-10-28T20:02:25Z"
 }
