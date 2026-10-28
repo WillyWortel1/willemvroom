@@ -34,13 +34,13 @@ root.innerHTML=
 '<circle cx="425" cy="36" r="9" fill="#111"/>'+
 '<g id="ttArm" style="transform-origin:455px 85px"><rect x="449" y="40" width="12" height="34" rx="3" fill="#555"/><line x1="455" y1="85" x2="455" y2="300" stroke="#cfcfcf" stroke-width="6" stroke-linecap="round"/><line x1="455" y1="85" x2="455" y2="300" stroke="#8a8a8a" stroke-width="1.5"/><g transform="rotate(18 455 312)"><rect x="446" y="296" width="18" height="34" rx="2" fill="#1d1d1d"/><rect x="451" y="318" width="8" height="8" fill="#777"/></g></g>'+
 '<circle cx="455" cy="85" r="12" fill="#999" stroke="#666"/><rect x="483" y="140" width="8" height="40" rx="2" fill="#ccc" stroke="#888"/>'+
-'</svg></div>'+
+'<rect id="ttPitchHit" x="440" y="218" width="60" height="154" fill="transparent" role="slider" tabindex="0" aria-label="Pitch-schuif op de draaitafel" aria-valuemin="-8" aria-valuemax="8" aria-valuenow="0"/>'+'</svg></div>'+
 '<div class="tt-sleeve-box" aria-hidden="true"><div class="tt-sleeve-rec"></div><div class="tt-sleeve"><span class="tt-s1">A SPLIT-SECOND</span><span class="tt-s2">FLESH</span><span class="tt-s3">12" MAXI · ANTLER</span></div></div></div>'+
 '<div class="tt-ctrl"><div class="tt-row"><button type="button" id="ttPlay" class="tt-b">▶ Start</button><button type="button" id="ttB33" class="tt-b">33⅓</button><button type="button" id="ttB45" class="tt-b">45</button></div>'+
-'<label class="tt-lab" for="ttPitch">Pitch <b id="ttPv">+0,0%</b></label><input id="ttPitch" type="range" min="-8" max="8" step="0.1" value="0" aria-label="Pitch van −8 tot +8 procent">'+
+'<label class="tt-lab" for="ttPitch">Pitch <b id="ttPv">+0,0%</b></label><input id="ttPitch" type="range" min="-8" max="8" step="0.1" value="0" aria-label="Pitch van −8 tot +8 procent"><p class="tt-note" id="ttStep" aria-live="polite">Druk op Start; daarna test de pagina welke snelheden YouTube op dit apparaat toestaat.</p>'+
 '<div class="tt-row"><button type="button" id="ttZ" class="tt-b">0</button><button type="button" id="ttBoc" class="tt-b tt-hot">Boccaccio-stand: 33⅓ +8</button><button type="button" id="ttOrig" class="tt-b">45 origineel</button><button type="button" id="ttReset" class="tt-b">Reset</button></div>'+
 '<dl class="tt-dl"><div><dt>Toerental</dt><dd id="ttRpm">45</dd></div><div><dt>Pitch</dt><dd id="ttPp">+0,0%</dd></div><div><dt>Echte draaitafel</dt><dd id="ttReal">1,000×</dd></div><div><dt>YouTube speelt af op</dt><dd id="ttYt">—</dd></div><div><dt>BPM (draaitafel)</dt><dd id="ttBpm">≈130</dd></div><div><dt>BPM (wat je hoort)</dt><dd id="ttBpmYt">—</dd></div></dl>'+
-'<p class="tt-note">YouTube ondersteunt alleen vaste snelheden; je hoort de dichtstbijzijnde (<span id="ttRates">nog niet geladen</span>). YouTube houdt de toonhoogte gelijk, op een echte draaitafel zakt de toon mee: daardoor klonk Flesh in Boccaccio zo zwaar en donker.</p>'+
+'<p class="tt-note">YouTube-snelheden in de lijst: <span id="ttRates">nog niet geladen</span>; je hoort de dichtstbijzijnde stap. YouTube houdt de toonhoogte gelijk, op een echte draaitafel zakt de toon mee: daardoor klonk Flesh in Boccaccio zo zwaar en donker.</p>'+
 '<div class="tt-row"><button type="button" id="ttDemo" class="tt-b" aria-pressed="false">Echt-vinyl-effect: eigen demobeat</button></div>'+
 '<p class="tt-note">De demobeat is een eigen synthbeat (geen Flesh), die met de draaitafel mee vertraagt <i>én</i> lager gaat klinken, zoals vinyl. YouTube wordt dan gedempt.</p>'+
 '<div class="tt-yt"><div id="ttPlayer"></div></div><p class="tt-note">Video: A Split Second – Flesh (Full 12" Version), officiële video op YouTube (kanaal Abstructure).</p></div>';
@@ -48,7 +48,9 @@ root.innerHTML=
 var $=function(id){return document.getElementById(id)};
 var st={on:false,rpm:45,pitch:0,ang:0,cur:0,demo:false},player=null,ready=false,rates=[1];
 function speed(){return st.rpm/45*(1+st.pitch/100)}
-function nearest(v){var b=rates[0];rates.forEach(function(r){if(Math.abs(r-v)<Math.abs(b-v))b=r});return b}
+var custom=null;/* null = onbekend, true = YouTube accepteert 0,05-stappen */
+function nearest(v){if(custom!==false){return Math.min(2,Math.max(.25,Math.round(v*20)/20))}var b=rates[0];rates.forEach(function(r){if(Math.abs(r-v)<Math.abs(b-v))b=r});return b}
+function probe(){if(!ready||custom!==null)return;try{player.setPlaybackRate(1.05);setTimeout(function(){try{var g=player.getPlaybackRate();custom=Math.abs(g-1.05)<.001;$('ttStep').textContent=custom?'YouTube volgt de pitch in stappen van 0,05× (dichtstbij: zie hieronder).':'Dit apparaat speelt YouTube alleen af op '+rates.map(function(r){return nl(r,2)+'×'}).join(', ')+'; gebruik het echt-vinyl-effect om de pitch traploos te horen.';root.setAttribute('data-custom',custom);upd()}catch(e){}},700)}catch(e){}}
 function nl(n,d){return n.toFixed(d).replace('.',',')}
 function upd(){
   var s=speed(),ap=nearest(s),p=(st.pitch>=0?'+':'−')+nl(Math.abs(st.pitch),1)+'%';
@@ -57,19 +59,19 @@ function upd(){
   $('ttYt').textContent=st.demo?'gedempt (demobeat)':(ready?nl(ap,2)+'×':'—');
   $('ttBpmYt').textContent=st.demo?'≈'+Math.round(BPM0*s)+' (demo)':(ready?'≈'+Math.round(BPM0*ap):'—');
   $('ttKnob').setAttribute('transform','translate(0,'+(-st.pitch/8*63)+')');
-  $('ttZero').style.opacity=st.pitch===0?1:.2;
+  $('ttPitchHit').setAttribute('aria-valuenow',st.pitch);$('ttZero').style.opacity=st.pitch===0?1:.2;
   $('tt33l').style.opacity=st.rpm!==45?1:0;$('tt45l').style.opacity=st.rpm===45?1:0;
   $('ttB33').setAttribute('aria-pressed',st.rpm!==45);$('ttB45').setAttribute('aria-pressed',st.rpm===45);
   $('ttPlay').textContent=st.on?'■ Stop':'▶ Start';$('ttPlay').setAttribute('aria-pressed',st.on);
   $('ttArm').style.transform='rotate('+(st.on?25:0)+'deg)';
   $('ttStrobe').setAttribute('opacity',st.on?1:.35);
-  if(ready){try{player.setPlaybackRate(ap);player.setVolume(st.demo?0:100);}catch(e){}}
+  if(ready){try{if(custom!==null)player.setPlaybackRate(ap);player.setVolume(st.demo?0:100);}catch(e){}}
   if(demo.ctx)demo.set(s);
 }
 function loop(t){var tgt=st.on?st.rpm*(1+st.pitch/100)*6/1000:0;st.cur+=(tgt-st.cur)*0.08;if(loop.t)st.ang=(st.ang+st.cur*(t-loop.t))%360;loop.t=t;$('ttPlat').setAttribute('transform','rotate('+st.ang.toFixed(2)+' 235 205)');requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 function toggle(){st.on=!st.on;
-  if(ready){try{st.on?player.playVideo():player.pauseVideo()}catch(e){}}
+  if(ready){try{st.on?player.playVideo():player.pauseVideo()}catch(e){}if(st.on)setTimeout(probe,600)}
   if(st.demo){st.on?demo.start():demo.stop()}
   upd()}
 function rpm(v){st.rpm=v;upd()}
@@ -77,24 +79,31 @@ function pitch(v){v=Math.round(v*10)/10;if(Math.abs(v)<0.35)v=0;st.pitch=v;$('tt
 function act(el,f){el.addEventListener('click',f);el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();f()}})}
 act($('ttStart'),toggle);act($('tt33'),function(){rpm(100/3)});act($('tt45'),function(){rpm(45)});
 $('ttPlay').onclick=toggle;$('ttB33').onclick=function(){rpm(100/3)};$('ttB45').onclick=function(){rpm(45)};
-$('ttPitch').oninput=function(){pitch(+this.value)};$('ttZ').onclick=function(){pitch(0)};
+$('ttPitch').addEventListener('input',function(){pitch(+this.value)});$('ttPitch').addEventListener('change',function(){pitch(+this.value)});$('ttZ').onclick=function(){pitch(0)};
 $('ttBoc').onclick=function(){st.rpm=100/3;pitch(8);if(!st.on)toggle()};
 $('ttOrig').onclick=function(){st.rpm=45;pitch(0);if(!st.on)toggle()};
 $('ttReset').onclick=function(){if(st.on)toggle();st.rpm=45;pitch(0);if(ready){try{player.seekTo(0,true);player.pauseVideo()}catch(e){}}};
+(function(){var h=$('ttPitchHit'),svg=h.ownerSVGElement,drag=false;
+ function at(e){var pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var y=pt.matrixTransform(svg.getScreenCTM().inverse()).y;pitch(Math.max(-8,Math.min(8,(295-y)/63*8)))}
+ h.addEventListener('pointerdown',function(e){drag=true;try{h.setPointerCapture(e.pointerId)}catch(x){}at(e);e.preventDefault()});
+ h.addEventListener('pointermove',function(e){if(drag){at(e);e.preventDefault()}});
+ ['pointerup','pointercancel'].forEach(function(n){h.addEventListener(n,function(){drag=false})});
+ h.addEventListener('keydown',function(e){if(e.key==='ArrowUp'||e.key==='ArrowRight'){pitch(Math.min(8,st.pitch+.1));e.preventDefault()}if(e.key==='ArrowDown'||e.key==='ArrowLeft'){pitch(Math.max(-8,st.pitch-.1));e.preventDefault()}});
+})();
 root._tt={st:st,player:function(){return player},speed:speed};
 $('ttDemo').onclick=function(){st.demo=!st.demo;this.setAttribute('aria-pressed',st.demo);
   if(st.demo){demo.init();if(st.on)demo.start()}else demo.stop();upd()};
 
 /* Eigen demobeat via Web Audio: tempo én toonhoogte schalen met de draaisnelheid */
 var demo={ctx:null,s:1,timer:null,next:0,step:0,
- init:function(){if(!this.ctx){var C=window.AudioContext||window.webkitAudioContext;this.ctx=new C();this.out=this.ctx.createGain();this.out.gain.value=.5;this.out.connect(this.ctx.destination)}this.ctx.resume()},
+ init:function(){if(!this.ctx){var C=window.AudioContext||window.webkitAudioContext;this.ctx=new C();this.out=this.ctx.createGain();this.out.gain.value=.8;this.out.connect(this.ctx.destination)}this.ctx.resume()},
  set:function(s){this.s=s},
  note:function(t,f,d,type,vol){var c=this.ctx,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f*this.s,t);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(this.out);o.start(t);o.stop(t+d+.02);return o},
  tick:function(){var c=this.ctx,self=this;while(this.next<c.currentTime+.15){var t=this.next,i=this.step%16,s=this.s;
    if(i%4===0){var k=this.note(t,120,.35,'sine',1);k.frequency.exponentialRampToValueAtTime(40*s,t+.3)}
    if(i%2===1)this.note(t,7000,.04,'square',.04);
    var bass=[55,0,55,0,65.4,0,55,0,49,0,49,0,58.3,0,55,0][i];if(bass)this.note(t,bass,.22,'sawtooth',.25);
-   if(i===0||i===8)this.note(t,440,.5,'triangle',.12);
+   var lead=[440,0,523.3,0,440,0,392,0,440,0,659.3,0,587.3,0,523.3,0][i];if(lead)this.note(t,lead,.18,'square',.07);
    this.next+=60/(BPM0*s)/4;this.step++}},
  start:function(){if(!this.ctx)return;this.ctx.resume();this.next=this.ctx.currentTime+.05;var self=this;clearInterval(this.timer);this.timer=setInterval(function(){self.tick()},40)},
  stop:function(){clearInterval(this.timer)}};
