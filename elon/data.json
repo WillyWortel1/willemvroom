@@ -1,6 +1,6 @@
 {
-"accounts": 316,
-"newest_id": "2115522665129574579",
+"accounts": 320,
+"newest_id": "2115567681604616238",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4413,8 +4413,52 @@
 "verified": true,
 "views": 682,
 "vtype": "blue"
+},
+"2115542421585133971": {
+"followers": 459,
+"likes": 0,
+"name": "Drake Sadron",
+"t": "2026-10-28T20:33:12.000Z",
+"text": "@MarcoFoster_ @TheGoodLiars Reminder Dems have no answers on costs.\nThey have sworn to investigate Elon Musk tho lol",
+"user": "DrakeSadron",
+"verified": false,
+"views": 6,
+"vtype": "none"
+},
+"2115547495652802569": {
+"followers": 154,
+"likes": 0,
+"name": "Bob Cheveldave",
+"t": "2026-10-28T20:53:22.000Z",
+"text": "Is that because they need to use all available resources to investigate Elon Musk?\nNot sure why they can’t do more than one. Also was anyone charged in the Learing Centre fraud? https://t.co/n92BTHg3zp",
+"user": "bobcheveldave",
+"verified": true,
+"views": 3,
+"vtype": "blue"
+},
+"2115557353051619644": {
+"followers": 1134,
+"likes": 0,
+"name": "SavvyG",
+"t": "2026-10-28T21:32:32.000Z",
+"text": "@chrisdmowrey “We want to investigate Elon Musk”\n\n“I wonder why he is donating to the opposite political party”",
+"user": "SavvyGCali",
+"verified": true,
+"views": 15,
+"vtype": "blue"
+},
+"2115567681604616238": {
+"followers": 2713,
+"likes": 25,
+"name": "Joe Rogaine",
+"t": "2026-10-28T22:13:35.000Z",
+"text": "@Polymarket @MargoinWNC We must investigate Elon!\n   -the left probably",
+"user": "Davidpee400",
+"verified": true,
+"views": 759,
+"vtype": "blue"
 }
 },
-"total": 401,
-"updated": "2026-10-28T20:02:25Z"
+"total": 405,
+"updated": "2026-10-28T23:06:31Z"
 }
