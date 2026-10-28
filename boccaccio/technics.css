@@ -31,3 +31,5 @@
 @media (prefers-reduced-motion:reduce){#ttArm{transition:none}}
 #ttPitch{touch-action:pan-y;-webkit-appearance:auto;position:relative;z-index:2}
 #ttPitchHit{touch-action:none;cursor:ns-resize}
+
+#ttArm.trk{transition:transform .3s linear}

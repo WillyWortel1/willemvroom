@@ -45,7 +45,7 @@ root.innerHTML=
 '<div class="tt-yt"><div id="ttPlayer"></div></div><p class="tt-note">Video: A Split Second – Flesh (Full 12" Version), officiële video op YouTube (kanaal Abstructure).</p></div>';
 
 var $=function(id){return document.getElementById(id)};
-var st={on:false,rpm:45,pitch:0,ang:0,cur:0},player=null,ready=false,rates=[1];
+var st={on:false,rpm:45,pitch:0,ang:0,cur:0,arm:0},ARM_OUT=25,ARM_IN=46,player=null,ready=false,rates=[1];
 function speed(){return st.rpm/45*(1+st.pitch/100)}
 var custom=null;/* null = onbekend, true = YouTube accepteert 0,05-stappen */
 function nearest(v){if(custom!==false){return Math.min(2,Math.max(.25,Math.round(v*20)/20))}var b=rates[0];rates.forEach(function(r){if(Math.abs(r-v)<Math.abs(b-v))b=r});return b}
@@ -62,7 +62,7 @@ function upd(){
   $('tt33l').style.opacity=st.rpm!==45?1:0;$('tt45l').style.opacity=st.rpm===45?1:0;
   $('ttB33').setAttribute('aria-pressed',st.rpm!==45);$('ttB45').setAttribute('aria-pressed',st.rpm===45);
   $('ttPlay').textContent=st.on?'■ Stop':'▶ Start';$('ttPlay').setAttribute('aria-pressed',st.on);
-  $('ttArm').style.transform='rotate('+(st.on?25:0)+'deg)';
+  if(st.on&&st.arm<ARM_OUT)st.arm=ARM_OUT;if(!st.on||st.arm<=ARM_OUT)$('ttArm').classList.remove('trk');$('ttArm').style.transform='rotate('+st.arm+'deg)';
   $('ttStrobe').setAttribute('opacity',st.on?1:.35);
   if(ready){try{if(custom!==null)player.setPlaybackRate(ap);}catch(e){}}
 }
@@ -79,7 +79,7 @@ $('ttPlay').onclick=toggle;$('ttB33').onclick=function(){rpm(100/3)};$('ttB45').
 $('ttPitch').addEventListener('input',function(){pitch(+this.value)});$('ttPitch').addEventListener('change',function(){pitch(+this.value)});$('ttZ').onclick=function(){pitch(0)};
 $('ttBoc').onclick=function(){st.rpm=100/3;pitch(8);if(!st.on)toggle()};
 $('ttOrig').onclick=function(){st.rpm=45;pitch(0);if(!st.on)toggle()};
-$('ttReset').onclick=function(){if(st.on)toggle();st.rpm=45;pitch(0);if(ready){try{player.seekTo(0,true);player.pauseVideo()}catch(e){}}};
+$('ttReset').onclick=function(){if(st.on)toggle();st.arm=0;upd();st.rpm=45;pitch(0);if(ready){try{player.seekTo(0,true);player.pauseVideo()}catch(e){}}};
 (function(){var h=$('ttPitchHit'),svg=h.ownerSVGElement,drag=false;
  function at(e){var pt=svg.createSVGPoint();pt.x=e.clientX;pt.y=e.clientY;var y=pt.matrixTransform(svg.getScreenCTM().inverse()).y;pitch(Math.max(-8,Math.min(8,(295-y)/63*8)))}
  h.addEventListener('pointerdown',function(e){drag=true;try{h.setPointerCapture(e.pointerId)}catch(x){}at(e);e.preventDefault()});
@@ -87,13 +87,14 @@ $('ttReset').onclick=function(){if(st.on)toggle();st.rpm=45;pitch(0);if(ready){t
  ['pointerup','pointercancel'].forEach(function(n){h.addEventListener(n,function(){drag=false})});
  h.addEventListener('keydown',function(e){if(e.key==='ArrowUp'||e.key==='ArrowRight'){pitch(Math.min(8,st.pitch+.1));e.preventDefault()}if(e.key==='ArrowDown'||e.key==='ArrowLeft'){pitch(Math.max(-8,st.pitch-.1));e.preventDefault()}});
 })();
+setInterval(function(){if(!st.on||!ready)return;try{var d=player.getDuration(),t=player.getCurrentTime();if(d>0){st.arm=ARM_OUT+(ARM_IN-ARM_OUT)*Math.min(1,t/d);$('ttArm').classList.add('trk');$('ttArm').style.transform='rotate('+st.arm+'deg)'}}catch(e){}},250);
 root._tt={st:st,player:function(){return player},speed:speed};
 
 
 
 
 window.onYouTubeIframeAPIReady=function(){player=new YT.Player('ttPlayer',{videoId:VID,width:'100%',height:'100%',host:'https://www.youtube-nocookie.com',playerVars:{playsinline:1,rel:0,modestbranding:1},events:{onReady:function(){ready=true;try{rates=player.getAvailablePlaybackRates()||[1]}catch(e){}$('ttRates').textContent=rates.map(function(r){return nl(r,2)+'×'}).join(', ');root.setAttribute('data-rates',rates.join(','));upd()},
- onStateChange:function(e){if(e.data===1&&!st.on){st.on=true;upd()}if(e.data===2&&st.on){st.on=false;upd()}}}})};
+ onStateChange:function(e){if(e.data===1&&!st.on){st.on=true;upd()}if(e.data===2&&st.on){st.on=false;upd()}if(e.data===0){st.on=false;st.arm=0;upd()}}}})};
 var sc=document.createElement('script');sc.src='https://www.youtube.com/iframe_api';document.head.appendChild(sc);
 upd();
 })();
