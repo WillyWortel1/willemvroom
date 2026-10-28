@@ -21,10 +21,10 @@ root.innerHTML=
 '<text x="235" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#c8102e">FLESH</text>'+
 '<text x="235" y="243" text-anchor="middle" font-family="Arial,sans-serif" font-size="6.5" fill="#333">45 RPM · ANTLER</text></g>'+
 '<circle cx="235" cy="205" r="4" fill="#ddd" stroke="#777"/>'+
-'<circle id="ttStrobe" cx="44" cy="300" r="20" fill="url(#ttRed)" opacity=".35"/><circle cx="44" cy="300" r="9" fill="#333" stroke="#777"/><circle cx="44" cy="300" r="3.5" fill="#ff2a3a"/>'+
-'<g id="ttStart" class="tt-btn" role="button" tabindex="0" aria-label="Start / stop"><rect x="18" y="335" width="58" height="50" rx="3" fill="#f4f4f4" stroke="#777"/><text x="47" y="377" text-anchor="middle" font-size="7" font-family="Arial" fill="#333">START·STOP</text></g>'+
-'<g id="tt33" class="tt-btn" role="button" tabindex="0" aria-label="33 toeren"><rect x="90" y="368" width="32" height="14" rx="2" fill="#f4f4f4" stroke="#777"/><text x="106" y="378" text-anchor="middle" font-size="8" font-family="Arial" fill="#333">33</text><rect id="tt33l" x="111" y="371" width="8" height="3" fill="#ff2a3a"/></g>'+
-'<g id="tt45" class="tt-btn" role="button" tabindex="0" aria-label="45 toeren"><rect x="126" y="368" width="32" height="14" rx="2" fill="#f4f4f4" stroke="#777"/><text x="142" y="378" text-anchor="middle" font-size="8" font-family="Arial" fill="#333">45</text><rect id="tt45l" x="147" y="371" width="8" height="3" fill="#ff2a3a"/></g>'+
+'<defs><clipPath id="ttLitC"><circle cx="73" cy="286" r="28"/></clipPath><radialGradient id="ttBeamG" cx="73" cy="286" r="34" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff2a3a" stop-opacity=".55"/><stop offset="1" stop-color="#ff2a3a" stop-opacity="0"/></radialGradient><linearGradient id="ttConeG" x1="44" y1="300" x2="78" y2="283" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff3b4a" stop-opacity=".85"/><stop offset="1" stop-color="#ff2a3a" stop-opacity=".15"/></linearGradient></defs>'+'<g id="ttBeam" style="pointer-events:none"><polygon points="41.3,294.6 61.4,262.7 84.6,309.3 46.7,305.4" fill="url(#ttConeG)"/><circle cx="73" cy="286" r="34" fill="url(#ttBeamG)"/><g clip-path="url(#ttLitC)"><g id="ttLit">'+dots.replace(/#c9c9c9/g,'#ff3b4a')+'</g></g></g>'+'<circle id="ttStrobe" cx="44" cy="300" r="20" fill="url(#ttRed)" opacity=".35"/><circle cx="44" cy="300" r="9" fill="#333" stroke="#777"/><circle cx="44" cy="300" r="3.5" fill="#ff2a3a"/>'+
+'<g id="ttStart" class="tt-btn" role="button" tabindex="0" aria-label="Start / stop"><rect x="18" y="330" width="58" height="40" rx="3" fill="#f4f4f4" stroke="#777"/><text x="47" y="364" text-anchor="middle" font-size="7" font-family="Arial" fill="#333">START·STOP</text></g>'+
+'<g id="tt33" class="tt-btn" role="button" tabindex="0" aria-label="33 toeren"><rect x="18" y="375" width="28" height="14" rx="2" fill="#f4f4f4" stroke="#777"/><text x="30" y="385" text-anchor="middle" font-size="8" font-family="Arial" fill="#333">33</text><rect id="tt33l" x="36" y="378" width="8" height="3" fill="#ff2a3a"/></g>'+
+'<g id="tt45" class="tt-btn" role="button" tabindex="0" aria-label="45 toeren"><rect x="48" y="375" width="28" height="14" rx="2" fill="#f4f4f4" stroke="#777"/><text x="60" y="385" text-anchor="middle" font-size="8" font-family="Arial" fill="#333">45</text><rect id="tt45l" x="66" y="378" width="8" height="3" fill="#ff2a3a"/></g>'+
 '<text x="400" y="388" font-family="Georgia,serif" font-size="13" font-weight="700" fill="#333">Technics</text><text x="400" y="396" font-size="5" font-family="Arial" fill="#555">SL-1200MK2 DIRECT DRIVE</text>'+
 '<rect x="462" y="225" width="14" height="140" rx="2" fill="#2b2b2b"/><line x1="469" y1="232" x2="469" y2="358" stroke="#555"/>'+
 '<g font-size="6" font-family="Arial" fill="#333"><text x="448" y="234">+8</text><text x="450" y="298">0</text><text x="448" y="362">−8</text></g><circle cx="482" cy="295" r="2.5" fill="#2ecc40" id="ttZero"/>'+
@@ -63,10 +63,10 @@ function upd(){
   $('ttB33').setAttribute('aria-pressed',st.rpm!==45);$('ttB45').setAttribute('aria-pressed',st.rpm===45);
   $('ttPlay').textContent=st.on?'■ Stop':'▶ Start';$('ttPlay').setAttribute('aria-pressed',st.on);
   if(st.on&&st.arm<ARM_OUT)st.arm=ARM_OUT;if(!st.on||st.arm<=ARM_OUT)$('ttArm').classList.remove('trk');$('ttArm').style.transform='rotate('+st.arm+'deg)';
-  $('ttStrobe').setAttribute('opacity',st.on?1:.35);
+  $('ttStrobe').setAttribute('opacity',st.on?1:.35);$('ttBeam').setAttribute('opacity',st.on?1:.6);
   if(ready){try{if(custom!==null)player.setPlaybackRate(ap);}catch(e){}}
 }
-function loop(t){var tgt=st.on?st.rpm*(1+st.pitch/100)*6/1000:0;st.cur+=(tgt-st.cur)*0.08;if(loop.t)st.ang=(st.ang+st.cur*(t-loop.t))%360;loop.t=t;$('ttPlat').setAttribute('transform','rotate('+st.ang.toFixed(2)+' 235 205)');requestAnimationFrame(loop)}
+function loop(t){var tgt=st.on?st.rpm*(1+st.pitch/100)*6/1000:0;st.cur+=(tgt-st.cur)*0.08;if(loop.t)st.ang=(st.ang+st.cur*(t-loop.t))%360;loop.t=t;var tr='rotate('+st.ang.toFixed(2)+' 235 205)';$('ttPlat').setAttribute('transform',tr);$('ttLit').setAttribute('transform',tr);requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 function toggle(){st.on=!st.on;
   if(ready){try{st.on?player.playVideo():player.pauseVideo()}catch(e){}if(st.on)setTimeout(probe,600)}
