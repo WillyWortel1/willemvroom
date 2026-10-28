@@ -40,24 +40,23 @@ root.innerHTML=
 '<label class="tt-lab" for="ttPitch">Pitch <b id="ttPv">+0,0%</b></label><input id="ttPitch" type="range" min="-8" max="8" step="0.1" value="0" aria-label="Pitch van −8 tot +8 procent"><p class="tt-note" id="ttStep" aria-live="polite">Druk op Start; daarna test de pagina welke snelheden YouTube op dit apparaat toestaat.</p>'+
 '<div class="tt-row"><button type="button" id="ttZ" class="tt-b">0</button><button type="button" id="ttBoc" class="tt-b tt-hot">Boccaccio-stand: 33⅓ +8</button><button type="button" id="ttOrig" class="tt-b">45 origineel</button><button type="button" id="ttReset" class="tt-b">Reset</button></div>'+
 '<dl class="tt-dl"><div><dt>Toerental</dt><dd id="ttRpm">45</dd></div><div><dt>Pitch</dt><dd id="ttPp">+0,0%</dd></div><div><dt>Echte draaitafel</dt><dd id="ttReal">1,000×</dd></div><div><dt>YouTube speelt af op</dt><dd id="ttYt">—</dd></div><div><dt>BPM (draaitafel)</dt><dd id="ttBpm">≈130</dd></div><div><dt>BPM (wat je hoort)</dt><dd id="ttBpmYt">—</dd></div></dl>'+
-'<p class="tt-note">YouTube-snelheden in de lijst: <span id="ttRates">nog niet geladen</span>; je hoort de dichtstbijzijnde stap. YouTube houdt de toonhoogte gelijk, op een echte draaitafel zakt de toon mee: daardoor klonk Flesh in Boccaccio zo zwaar en donker.</p>'+
-'<div class="tt-row"><button type="button" id="ttDemo" class="tt-b" aria-pressed="false">Echt-vinyl-effect: eigen demobeat</button></div>'+
-'<p class="tt-note">De demobeat is een eigen synthbeat (geen Flesh), die met de draaitafel mee vertraagt <i>én</i> lager gaat klinken, zoals vinyl. YouTube wordt dan gedempt.</p>'+
+'<p class="tt-note">YouTube-snelheden in de lijst: <span id="ttRates">nog niet geladen</span>; je hoort de dichtstbijzijnde stap. YouTube houdt de toonhoogte gelijk; op een echte draaitafel zakt de toon mee, daardoor klonk Flesh in Boccaccio zo zwaar en donker.</p>'+
+
 '<div class="tt-yt"><div id="ttPlayer"></div></div><p class="tt-note">Video: A Split Second – Flesh (Full 12" Version), officiële video op YouTube (kanaal Abstructure).</p></div>';
 
 var $=function(id){return document.getElementById(id)};
-var st={on:false,rpm:45,pitch:0,ang:0,cur:0,demo:false},player=null,ready=false,rates=[1];
+var st={on:false,rpm:45,pitch:0,ang:0,cur:0},player=null,ready=false,rates=[1];
 function speed(){return st.rpm/45*(1+st.pitch/100)}
 var custom=null;/* null = onbekend, true = YouTube accepteert 0,05-stappen */
 function nearest(v){if(custom!==false){return Math.min(2,Math.max(.25,Math.round(v*20)/20))}var b=rates[0];rates.forEach(function(r){if(Math.abs(r-v)<Math.abs(b-v))b=r});return b}
-function probe(){if(!ready||custom!==null)return;try{player.setPlaybackRate(1.05);setTimeout(function(){try{var g=player.getPlaybackRate();custom=Math.abs(g-1.05)<.001;$('ttStep').textContent=custom?'YouTube volgt de pitch in stappen van 0,05× (dichtstbij: zie hieronder).':'Dit apparaat speelt YouTube alleen af op '+rates.map(function(r){return nl(r,2)+'×'}).join(', ')+'; gebruik het echt-vinyl-effect om de pitch traploos te horen.';root.setAttribute('data-custom',custom);upd()}catch(e){}},700)}catch(e){}}
+function probe(){if(!ready||custom!==null)return;try{player.setPlaybackRate(1.05);setTimeout(function(){try{var g=player.getPlaybackRate();custom=Math.abs(g-1.05)<.001;$('ttStep').textContent=custom?'YouTube volgt de pitch in stappen van 0,05× (dichtstbij: zie hieronder).':'Dit apparaat speelt YouTube alleen af op '+rates.map(function(r){return nl(r,2)+'×'}).join(', ')+', dus je hoort de pitch hier in grove stappen.';root.setAttribute('data-custom',custom);upd()}catch(e){}},700)}catch(e){}}
 function nl(n,d){return n.toFixed(d).replace('.',',')}
 function upd(){
   var s=speed(),ap=nearest(s),p=(st.pitch>=0?'+':'−')+nl(Math.abs(st.pitch),1)+'%';
   $('ttRpm').textContent=st.rpm===45?'45':'33⅓';$('ttPp').textContent=p;$('ttPv').textContent=p;
   $('ttReal').textContent=nl(s,3)+'×';$('ttBpm').textContent='≈'+Math.round(BPM0*s);
-  $('ttYt').textContent=st.demo?'gedempt (demobeat)':(ready?nl(ap,2)+'×':'—');
-  $('ttBpmYt').textContent=st.demo?'≈'+Math.round(BPM0*s)+' (demo)':(ready?'≈'+Math.round(BPM0*ap):'—');
+  $('ttYt').textContent=(ready?nl(ap,2)+'×':'—');
+  $('ttBpmYt').textContent=(ready?'≈'+Math.round(BPM0*ap):'—');
   $('ttKnob').setAttribute('transform','translate(0,'+(-st.pitch/8*63)+')');
   $('ttPitchHit').setAttribute('aria-valuenow',st.pitch);$('ttZero').style.opacity=st.pitch===0?1:.2;
   $('tt33l').style.opacity=st.rpm!==45?1:0;$('tt45l').style.opacity=st.rpm===45?1:0;
@@ -65,14 +64,12 @@ function upd(){
   $('ttPlay').textContent=st.on?'■ Stop':'▶ Start';$('ttPlay').setAttribute('aria-pressed',st.on);
   $('ttArm').style.transform='rotate('+(st.on?25:0)+'deg)';
   $('ttStrobe').setAttribute('opacity',st.on?1:.35);
-  if(ready){try{if(custom!==null)player.setPlaybackRate(ap);player.setVolume(st.demo?0:100);}catch(e){}}
-  if(demo.ctx)demo.set(s);
+  if(ready){try{if(custom!==null)player.setPlaybackRate(ap);}catch(e){}}
 }
 function loop(t){var tgt=st.on?st.rpm*(1+st.pitch/100)*6/1000:0;st.cur+=(tgt-st.cur)*0.08;if(loop.t)st.ang=(st.ang+st.cur*(t-loop.t))%360;loop.t=t;$('ttPlat').setAttribute('transform','rotate('+st.ang.toFixed(2)+' 235 205)');requestAnimationFrame(loop)}
 requestAnimationFrame(loop);
 function toggle(){st.on=!st.on;
   if(ready){try{st.on?player.playVideo():player.pauseVideo()}catch(e){}if(st.on)setTimeout(probe,600)}
-  if(st.demo){st.on?demo.start():demo.stop()}
   upd()}
 function rpm(v){st.rpm=v;upd()}
 function pitch(v){v=Math.round(v*10)/10;if(Math.abs(v)<0.35)v=0;st.pitch=v;$('ttPitch').value=v;upd()}
@@ -91,22 +88,9 @@ $('ttReset').onclick=function(){if(st.on)toggle();st.rpm=45;pitch(0);if(ready){t
  h.addEventListener('keydown',function(e){if(e.key==='ArrowUp'||e.key==='ArrowRight'){pitch(Math.min(8,st.pitch+.1));e.preventDefault()}if(e.key==='ArrowDown'||e.key==='ArrowLeft'){pitch(Math.max(-8,st.pitch-.1));e.preventDefault()}});
 })();
 root._tt={st:st,player:function(){return player},speed:speed};
-$('ttDemo').onclick=function(){st.demo=!st.demo;this.setAttribute('aria-pressed',st.demo);
-  if(st.demo){demo.init();if(st.on)demo.start()}else demo.stop();upd()};
 
-/* Eigen demobeat via Web Audio: tempo én toonhoogte schalen met de draaisnelheid */
-var demo={ctx:null,s:1,timer:null,next:0,step:0,
- init:function(){if(!this.ctx){var C=window.AudioContext||window.webkitAudioContext;this.ctx=new C();this.out=this.ctx.createGain();this.out.gain.value=.8;this.out.connect(this.ctx.destination)}this.ctx.resume()},
- set:function(s){this.s=s},
- note:function(t,f,d,type,vol){var c=this.ctx,o=c.createOscillator(),g=c.createGain();o.type=type;o.frequency.setValueAtTime(f*this.s,t);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+d);o.connect(g);g.connect(this.out);o.start(t);o.stop(t+d+.02);return o},
- tick:function(){var c=this.ctx,self=this;while(this.next<c.currentTime+.15){var t=this.next,i=this.step%16,s=this.s;
-   if(i%4===0){var k=this.note(t,120,.35,'sine',1);k.frequency.exponentialRampToValueAtTime(40*s,t+.3)}
-   if(i%2===1)this.note(t,7000,.04,'square',.04);
-   var bass=[55,0,55,0,65.4,0,55,0,49,0,49,0,58.3,0,55,0][i];if(bass)this.note(t,bass,.22,'sawtooth',.25);
-   var lead=[440,0,523.3,0,440,0,392,0,440,0,659.3,0,587.3,0,523.3,0][i];if(lead)this.note(t,lead,.18,'square',.07);
-   this.next+=60/(BPM0*s)/4;this.step++}},
- start:function(){if(!this.ctx)return;this.ctx.resume();this.next=this.ctx.currentTime+.05;var self=this;clearInterval(this.timer);this.timer=setInterval(function(){self.tick()},40)},
- stop:function(){clearInterval(this.timer)}};
+
+
 
 window.onYouTubeIframeAPIReady=function(){player=new YT.Player('ttPlayer',{videoId:VID,width:'100%',height:'100%',host:'https://www.youtube-nocookie.com',playerVars:{playsinline:1,rel:0,modestbranding:1},events:{onReady:function(){ready=true;try{rates=player.getAvailablePlaybackRates()||[1]}catch(e){}$('ttRates').textContent=rates.map(function(r){return nl(r,2)+'×'}).join(', ');root.setAttribute('data-rates',rates.join(','));upd()},
  onStateChange:function(e){if(e.data===1&&!st.on){st.on=true;upd()}if(e.data===2&&st.on){st.on=false;upd()}}}})};
