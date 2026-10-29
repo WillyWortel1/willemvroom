@@ -1,6 +1,6 @@
 {
-"accounts": 334,
-"newest_id": "2115669305681408330",
+"accounts": 335,
+"newest_id": "2115688419166912974",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4666,8 +4666,19 @@
 "verified": false,
 "views": 7,
 "vtype": "none"
+},
+"2115688419166912974": {
+"followers": 17,
+"likes": 0,
+"name": "Official Bluechecks",
+"t": "2026-10-29T06:13:21.000Z",
+"text": "Time to investigate Elon. He doesn't seem human to do all of these and more..! https://t.co/iN05qVzt3e",
+"user": "blue_checkmarks",
+"verified": false,
+"views": 4,
+"vtype": "none"
 }
 },
-"total": 424,
-"updated": "2026-10-29T05:05:15Z"
+"total": 425,
+"updated": "2026-10-29T08:08:15Z"
 }
