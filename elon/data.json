@@ -1,6 +1,6 @@
 {
-"accounts": 336,
-"newest_id": "2115755376872431670",
+"accounts": 337,
+"newest_id": "2115800998820135167",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4688,8 +4688,19 @@
 "verified": true,
 "views": 3,
 "vtype": "blue"
+},
+"2115800998820135167": {
+"followers": 229,
+"likes": 1,
+"name": "Mark Crumley",
+"t": "2026-10-29T13:40:42.000Z",
+"text": "Don’t worry about affordability, democrats say they have the answer. Impeach Trump, investigate Elon Musk and spend 50 trillion dollars on Medicare for all. Yep, that should most likely do it and if your stupid, that’s who you should vote for.",
+"user": "markcr421961",
+"verified": true,
+"views": 13,
+"vtype": "blue"
 }
 },
-"total": 426,
-"updated": "2026-10-29T11:02:12Z"
+"total": 427,
+"updated": "2026-10-29T14:12:01Z"
 }
