@@ -1,0 +1,14 @@
+<!doctype html><html lang="nl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Bitcoin dashboard</title><link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script>try{var t=localStorage.getItem("wv-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches))document.documentElement.classList.add("dark")}catch(e){}</script>
+<style>:root{--bg:#fff;--fg:#111;--card:#f6f6f6;--bd:#ddd;--mu:#666}html.dark{--bg:#0b0b0b;--fg:#f2f2f2;--card:#141414;--bd:#2a2a2a;--mu:#8a8a8a}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.45 -apple-system,system-ui,Segoe UI,Roboto,sans-serif}
+#lock{position:fixed;inset:0;background:var(--bg);display:grid;place-items:center;z-index:99;transition:opacity .4s}#lock.out{opacity:0}
+.lbox{text-align:center;width:280px}.ltitle{font-size:26px;font-weight:700;text-shadow:0 0 12px rgba(255,42,42,.5)}.lsub{color:var(--mu);margin:6px 0 16px}
+.dots{font-size:30px;letter-spacing:8px;min-height:40px}.lerr{color:#ff2a2a;min-height:22px;font-size:14px}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:10px}
+.pad button{background:var(--card);border:1px solid var(--bd);color:var(--fg);border-radius:50%;aspect-ratio:1;font-size:22px;cursor:pointer}
+.pad button:active{border-color:#ff2a2a;box-shadow:0 0 10px rgba(255,42,42,.6)}.pad button[data-k=OK]{color:#ff2a2a;font-size:17px;font-weight:700}
+.shake{animation:sh .4s}@keyframes sh{20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}</style></head>
+<body data-lock="Bitcoin"><div id="app"></div>
+<script src="lock.js?v=3"></script>
+<script>HQUnlock()().then(d=>{const s=document.createElement('style');s.textContent=d.css;document.head.appendChild(s);document.getElementById('app').innerHTML=d.html;new Function(d.js)()})</script></body></html>
