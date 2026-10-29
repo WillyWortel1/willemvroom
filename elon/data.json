@@ -1,6 +1,6 @@
 {
-"accounts": 335,
-"newest_id": "2115688419166912974",
+"accounts": 336,
+"newest_id": "2115755376872431670",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4677,8 +4677,19 @@
 "verified": false,
 "views": 4,
 "vtype": "none"
+},
+"2115755376872431670": {
+"followers": 2324,
+"likes": 0,
+"name": "LopezM",
+"t": "2026-10-29T10:39:25.000Z",
+"text": "@ReillyBelle57 @NHarris5758 If Talarico looses we need to investigate Elon",
+"user": "mannylopez60110",
+"verified": true,
+"views": 3,
+"vtype": "blue"
 }
 },
-"total": 425,
-"updated": "2026-10-29T08:08:15Z"
+"total": 426,
+"updated": "2026-10-29T11:02:12Z"
 }
