@@ -45,7 +45,7 @@ root.innerHTML=
 '<div class="tt-yt"><div id="ttPlayer"></div></div><p class="tt-note">Video: A Split Second – Flesh (Full 12" Version), officiële video op YouTube (kanaal Abstructure).</p></div>';
 
 var $=function(id){return document.getElementById(id)};
-var st={on:false,rpm:45,pitch:0,ang:0,cur:0,arm:0},ARM_OUT=25,ARM_IN=46,player=null,ready=false,rates=[1];window.ttState=st;
+var st={on:false,rpm:45,pitch:0,ang:0,cur:0,arm:0},ARM_OUT=25,ARM_IN=46,player=null,ready=false,rates=[1];
 function speed(){return st.rpm/45*(1+st.pitch/100)}
 var custom=null;/* null = onbekend, true = YouTube accepteert 0,05-stappen */
 function nearest(v){if(custom!==false){return Math.min(2,Math.max(.25,Math.round(v*20)/20))}var b=rates[0];rates.forEach(function(r){if(Math.abs(r-v)<Math.abs(b-v))b=r});return b}
