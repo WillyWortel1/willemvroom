@@ -1,6 +1,6 @@
 {
-"accounts": 344,
-"newest_id": "2115895113235009648",
+"accounts": 346,
+"newest_id": "2115923342452760829",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4787,8 +4787,30 @@
 "verified": true,
 "views": 6,
 "vtype": "blue"
+},
+"2115912504153178437": {
+"followers": 406,
+"likes": 0,
+"name": "Queen Antifa",
+"t": "2026-10-29T21:03:47.000Z",
+"text": "INVESTIGATE\nELON\nMUSK https://t.co/XSzalpR3R5",
+"user": "NoMuskNoMas",
+"verified": false,
+"views": 7,
+"vtype": "none"
+},
+"2115923342452760829": {
+"followers": 372,
+"likes": 0,
+"name": "Coolhand Luke",
+"t": "2026-10-29T21:46:51.000Z",
+"text": "@GuntherEagleman And he does not have to wait until the end of the term. This can quickly shut down the Dems talking point about investigate Elon and his companies",
+"user": "Coolhanded_Luke",
+"verified": false,
+"views": 3,
+"vtype": "none"
 }
 },
-"total": 435,
-"updated": "2026-10-29T20:03:01Z"
+"total": 437,
+"updated": "2026-10-29T23:06:13Z"
 }
