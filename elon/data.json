@@ -1,6 +1,6 @@
 {
-"accounts": 346,
-"newest_id": "2115923342452760829",
+"accounts": 348,
+"newest_id": "2115977862331388209",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4809,8 +4809,30 @@
 "verified": false,
 "views": 3,
 "vtype": "none"
+},
+"2115946859445485859": {
+"followers": 256,
+"likes": 0,
+"name": "FREEDOM",
+"t": "2026-10-29T23:20:18.000Z",
+"text": "@elonmusk @Anc_Aesthetics Investigate Elon Musk\n\nhttps://t.co/eEbAEsY58U",
+"user": "DB_6556",
+"verified": false,
+"views": 0,
+"vtype": "none"
+},
+"2115977862331388209": {
+"followers": 1891,
+"likes": 0,
+"name": "Merlin",
+"t": "2026-10-30T01:23:30.000Z",
+"text": "@Harvinatortnxt Yeah man, it's not like multiple senators are making \"I'm going to investigate Elon until I find something because he's Mean\" their entire goddamn platform.\n\nReal mystery why he's politically active. Completely ineffable!",
+"user": "TheWizardTower",
+"verified": true,
+"views": 5,
+"vtype": "blue"
 }
 },
-"total": 437,
-"updated": "2026-10-29T23:06:13Z"
+"total": 439,
+"updated": "2026-10-30T02:07:31Z"
 }
