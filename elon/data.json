@@ -1,6 +1,6 @@
 {
-"accounts": 351,
-"newest_id": "2116058755498446924",
+"accounts": 356,
+"newest_id": "2116154569419833608",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4875,8 +4875,63 @@
 "verified": true,
 "views": 17,
 "vtype": "blue"
+},
+"2116132979651068267": {
+"followers": 1795,
+"likes": 0,
+"name": "Josh",
+"t": "2026-10-30T11:39:52.000Z",
+"text": "@wholemars Investigate Elon!",
+"user": "CyberSolarX",
+"verified": true,
+"views": 10,
+"vtype": "blue"
+},
+"2116142484653035635": {
+"followers": 384,
+"likes": 0,
+"name": "Dragonus",
+"t": "2026-10-30T12:17:39.000Z",
+"text": "@elonmusk 4. Investigate Elon Musk and his companies and make up charges of corruption. Nationalize SpaceX.",
+"user": "YoDragonus",
+"verified": true,
+"views": 55,
+"vtype": "blue"
+},
+"2116143385207587119": {
+"followers": 7722,
+"likes": 2,
+"name": "Trump is a PEDO ⚖️",
+"t": "2026-10-30T12:21:13.000Z",
+"text": "Democrats need to investigate Elon Musk.",
+"user": "TrumpPedophile2",
+"verified": true,
+"views": 14,
+"vtype": "blue"
+},
+"2116153414786666652": {
+"followers": 18689,
+"likes": 188,
+"name": "Cameron 🇺🇸 🗽🦅",
+"t": "2026-10-30T13:01:04.000Z",
+"text": "\"investigate Elon for what?\" people ask\n\nlet's start with treason https://t.co/JBL8kIgPNb",
+"user": "CameronCorduroy",
+"verified": true,
+"views": 1635,
+"vtype": "blue"
+},
+"2116154569419833608": {
+"followers": 18,
+"likes": 0,
+"name": "Adam Dinklar",
+"t": "2026-10-30T13:05:40.000Z",
+"text": "@elonmusk 4.  Investigate Elon Musk for meddling in elections and for war crimes in Ukraine",
+"user": "AdamDinklar",
+"verified": false,
+"views": 0,
+"vtype": "none"
 }
 },
-"total": 443,
-"updated": "2026-10-30T08:06:33Z"
+"total": 448,
+"updated": "2026-10-30T14:08:18Z"
 }
