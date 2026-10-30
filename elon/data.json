@@ -1,6 +1,6 @@
 {
-"accounts": 350,
-"newest_id": "2116027546554806506",
+"accounts": 351,
+"newest_id": "2116058755498446924",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4864,8 +4864,19 @@
 "verified": false,
 "views": 4,
 "vtype": "none"
+},
+"2116058755498446924": {
+"followers": 187,
+"likes": 0,
+"name": "Amos",
+"t": "2026-10-30T06:44:56.000Z",
+"text": "@elonmusk You should be concerned at No 4 &amp; 5\n\n4. Investigate Elon Musk’s immigration documents \n\n5. Investigate Melania Trump’s immigration documents. \n\n👏🏽👏🏽👏🏽👏🏽",
+"user": "Amossv8n",
+"verified": true,
+"views": 17,
+"vtype": "blue"
 }
 },
-"total": 442,
-"updated": "2026-10-30T05:09:03Z"
+"total": 443,
+"updated": "2026-10-30T08:06:33Z"
 }
