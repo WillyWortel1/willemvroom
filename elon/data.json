@@ -1,6 +1,6 @@
 {
-"accounts": 356,
-"newest_id": "2116154569419833608",
+"accounts": 359,
+"newest_id": "2116204182441275404",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -4930,8 +4930,41 @@
 "verified": false,
 "views": 0,
 "vtype": "none"
+},
+"2116176465180135469": {
+"followers": 463,
+"likes": 0,
+"name": "PillowTalker",
+"t": "2026-10-30T14:32:40.000Z",
+"text": "@elonmusk As long as they investigate Elon Musk, I’m good with it",
+"user": "BillBar09541052",
+"verified": false,
+"views": 5,
+"vtype": "none"
+},
+"2116202485207515505": {
+"followers": 2882,
+"likes": 0,
+"name": "Node Father🤖⚡️",
+"t": "2026-10-30T16:16:04.000Z",
+"text": "Trying to think of how the media will frame this as bad here’s what I have so far\n\n“Elon Musk is turning blind people into terminators. If we allow the blind to see the inevitable result is that they will kill us all. This must be stopped. Investigate Elon Musk.”\n\nHow did I do? h",
+"user": "OGNodeFather",
+"verified": true,
+"views": 23,
+"vtype": "blue"
+},
+"2116204182441275404": {
+"followers": 640,
+"likes": 0,
+"name": "Gabriel Dorosz",
+"t": "2026-10-30T16:22:48.000Z",
+"text": "CLEAN SWEEP + INVESTIGATE ELON. Time for the DogeFather to face real justice. https://t.co/bBT69M3MTX",
+"user": "gabedorosz",
+"verified": false,
+"views": 14,
+"vtype": "none"
 }
 },
-"total": 448,
-"updated": "2026-10-30T14:08:18Z"
+"total": 451,
+"updated": "2026-10-30T17:08:29Z"
 }
