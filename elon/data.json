@@ -1,6 +1,6 @@
 {
-"accounts": 386,
-"newest_id": "2116592872111603851",
+"accounts": 388,
+"newest_id": "2116643757127036963",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5403,8 +5403,30 @@
 "verified": true,
 "views": 55,
 "vtype": "blue"
+},
+"2116635932946243847": {
+"followers": 210,
+"likes": 2,
+"name": "Emerging Crises",
+"t": "2026-10-31T20:58:26.000Z",
+"text": "The Pentagon IG refused to investigate Elon Musk cutting Starlink access to Ukraine. This type of critical technology can't stay \"so dependent on one system, one person, one company.\" Hopefully next year's Congress starts putting pressure + oversight on private contractors. https",
+"user": "EmergingCrises",
+"verified": false,
+"views": 21,
+"vtype": "none"
+},
+"2116643757127036963": {
+"followers": 557,
+"likes": 0,
+"name": "Kelpaw2",
+"t": "2026-10-31T21:29:31.000Z",
+"text": "@elonmusk Investigate Elon!",
+"user": "Kelpaw2",
+"verified": false,
+"views": 4,
+"vtype": "none"
 }
 },
-"total": 491,
-"updated": "2026-10-31T20:09:00Z"
+"total": 493,
+"updated": "2026-10-31T23:08:41Z"
 }
