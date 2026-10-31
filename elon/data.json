@@ -1,6 +1,6 @@
 {
-"accounts": 376,
-"newest_id": "2116433955901805036",
+"accounts": 378,
+"newest_id": "2116479616244236652",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5183,8 +5183,30 @@
 "verified": false,
 "views": 2,
 "vtype": "none"
+},
+"2116471144941277441": {
+"followers": 0,
+"likes": 1,
+"name": "ERM",
+"t": "2026-10-31T10:03:37.000Z",
+"text": "INVESTIGATE ELON MUSK AND FORCE HIM TO TESTIFY UNDER OATH ON NATIONAL TV. Do you agree? https://t.co/OR4t2508nB",
+"user": "ERM1971ssy",
+"verified": false,
+"views": 5,
+"vtype": "none"
+},
+"2116479616244236652": {
+"followers": 668,
+"likes": 0,
+"name": "Aakeem Duncan",
+"t": "2026-10-31T10:37:17.000Z",
+"text": "Investigate Elon and cancel them government contracts. https://t.co/1gKC1jMnYp",
+"user": "AakeemDuncan",
+"verified": true,
+"views": 4,
+"vtype": "blue"
 }
 },
-"total": 471,
-"updated": "2026-10-31T08:03:37Z"
+"total": 473,
+"updated": "2026-10-31T11:02:43Z"
 }
