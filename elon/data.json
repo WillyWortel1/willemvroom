@@ -1,6 +1,6 @@
 {
-"accounts": 372,
-"newest_id": "2116347534184440214",
+"accounts": 375,
+"newest_id": "2116361208118890582",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5128,8 +5128,41 @@
 "verified": false,
 "views": 0,
 "vtype": "none"
+},
+"2116356758494929029": {
+"followers": 94,
+"likes": 0,
+"name": "Free Citizens",
+"t": "2026-10-31T02:29:05.000Z",
+"text": "40 Texas lawmakers asked AG Ken Paxton to investigate Elon Musk's Grok AI over sexualized images of women and children nine months ago. Paxton never responded. Musk has since donated $158 million to Paxton's Senate campaign. https://t.co/gwYz9y56f1",
+"user": "free_citizens1",
+"verified": false,
+"views": 21,
+"vtype": "none"
+},
+"2116357163148877917": {
+"followers": 7,
+"likes": 0,
+"name": "Small Town Truth",
+"t": "2026-10-31T02:30:42.000Z",
+"text": "Paxton has sued Google, Facebook, and Meta over child safety — but nine months after 40 Texas lawmakers asked him to investigate Elon Musk's Grok AI for sexualized images of minors, he still hasn't responded. Musk has given him $158 million for his Senate race. https://t.co/zVbnN",
+"user": "SmaIITownTruth",
+"verified": false,
+"views": 0,
+"vtype": "none"
+},
+"2116361208118890582": {
+"followers": 1474,
+"likes": 0,
+"name": "NaSCΞNT 🍄",
+"t": "2026-10-31T02:46:46.000Z",
+"text": "@alluringmedia The \"most embarrassing loser on the internet\" got more likes in 38 minutes than a sitting US Senator got in 6 hours.\n\nPadilla: 14K. Elon: 22K.\n\nAnd the Senator typed \"INVESTIGATE ELON MUSK\" in all caps like a Facebook uncle. Pretty sure we know who the embarrassing",
+"user": "CryptoCitizen88",
+"verified": true,
+"views": 26,
+"vtype": "blue"
 }
 },
-"total": 466,
-"updated": "2026-10-31T02:05:09Z"
+"total": 469,
+"updated": "2026-10-31T05:09:36Z"
 }
