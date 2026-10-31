@@ -1,6 +1,6 @@
 {
-"accounts": 381,
-"newest_id": "2116529407024087177",
+"accounts": 384,
+"newest_id": "2116556188884365647",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5238,8 +5238,41 @@
 "verified": false,
 "views": 4,
 "vtype": "none"
+},
+"2116542245318938947": {
+"followers": 417,
+"likes": 0,
+"name": "WHY",
+"t": "2026-10-31T14:46:09.000Z",
+"text": "@microfuckaround @saltynutbutter @robinivski From what I understand, the stock donations are write-offs and can be a way of looking charitable by donating and dumping a bad stock.  Is it possible that Space X stock is overvalued and will take a big hit when we investigate Elon fo",
+"user": "BachelorGriffin",
+"verified": false,
+"views": 13,
+"vtype": "none"
+},
+"2116542983424336361": {
+"followers": 836,
+"likes": 0,
+"name": "Trump Lost",
+"t": "2026-10-31T14:49:05.000Z",
+"text": "@elonmusk Hey government, investigate Elon Musk.",
+"user": "CurtOsmond",
+"verified": false,
+"views": 4,
+"vtype": "none"
+},
+"2116556188884365647": {
+"followers": 1335,
+"likes": 0,
+"name": "neal guvner",
+"t": "2026-10-31T15:41:33.000Z",
+"text": "After the Republicans lose both Congress and Senate next week. They should investigate Elon Musk and Dems can be petty.",
+"user": "nealguvnor",
+"verified": false,
+"views": 4,
+"vtype": "none"
 }
 },
-"total": 476,
-"updated": "2026-10-31T14:04:50Z"
+"total": 479,
+"updated": "2026-10-31T17:07:01Z"
 }
