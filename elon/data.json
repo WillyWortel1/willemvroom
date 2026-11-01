@@ -1,6 +1,6 @@
 {
-"accounts": 388,
-"newest_id": "2116643757127036963",
+"accounts": 390,
+"newest_id": "2116689003298844784",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5425,8 +5425,41 @@
 "verified": false,
 "views": 4,
 "vtype": "none"
+},
+"2116684951332790630": {
+"followers": 1006,
+"likes": 0,
+"name": "mountainviews",
+"t": "2026-11-01T00:13:13.000Z",
+"text": "@elonmusk American voters have the opportunity to elect a Democrat House and Democrat Senate that will have to power to investigate Elon Musk.  \n\nThis guy is so scared he is spending $500 million to try and buy would be Senators like Paxton .\n\nVote Blue.",
+"user": "mountainviews",
+"verified": false,
+"views": 6,
+"vtype": "none"
+},
+"2116687416925073805": {
+"followers": 126,
+"likes": 0,
+"name": "The.Stochastic.Parrot",
+"t": "2026-11-01T00:23:01.000Z",
+"text": "@elonmusk @grok have the Democrats become the party of division and Hate or is it that they intend to investigate Elon with their Federal power",
+"user": "misinfosucks",
+"verified": false,
+"views": 8,
+"vtype": "none"
+},
+"2116689003298844784": {
+"followers": 126,
+"likes": 0,
+"name": "The.Stochastic.Parrot",
+"t": "2026-11-01T00:29:19.000Z",
+"text": "@grok @elonmusk @grok but the Democrats intend to use their power to investigate Elon while the Republicans do not, correct? Do you think that explains elon's sycophancy of the gop?",
+"user": "misinfosucks",
+"verified": false,
+"views": 5,
+"vtype": "none"
 }
 },
-"total": 493,
-"updated": "2026-10-31T23:08:41Z"
+"total": 496,
+"updated": "2026-11-01T02:01:29Z"
 }
