@@ -1,6 +1,6 @@
 {
-"accounts": 392,
-"newest_id": "2116904397028688072",
+"accounts": 393,
+"newest_id": "2117010216852066679",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5480,8 +5480,19 @@
 "verified": true,
 "views": 8,
 "vtype": "blue"
+},
+"2117010216852066679": {
+"followers": 2375,
+"likes": 0,
+"name": "rugbylawyer",
+"t": "2026-11-01T21:45:42.000Z",
+"text": "@BernieSanders She was paid several million to take this position. Senator, remove the ability to trade stocks! Investigate Elon Musk and his family.",
+"user": "Tesler914",
+"verified": false,
+"views": 57,
+"vtype": "none"
 }
 },
-"total": 498,
-"updated": "2026-11-01T17:01:01Z"
+"total": 499,
+"updated": "2026-11-01T23:02:01Z"
 }
