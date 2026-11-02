@@ -1,6 +1,6 @@
 {
-"accounts": 401,
-"newest_id": "2117281082878071022",
+"accounts": 402,
+"newest_id": "2117345025168458095",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5590,8 +5590,30 @@
 "verified": true,
 "views": 314,
 "vtype": "blue"
+},
+"2117319721448058889": {
+"followers": 405,
+"likes": 0,
+"name": "kristian jenner",
+"t": "2026-11-02T18:15:34.000Z",
+"text": "@Forbes It's ok the next president will just use the DOJ to investigate Elon and his brother's immigration fraud. 😉",
+"user": "steezyrocko",
+"verified": false,
+"views": 12,
+"vtype": "none"
+},
+"2117345025168458095": {
+"followers": 1,
+"likes": 0,
+"name": "Ron",
+"t": "2026-11-02T19:56:07.000Z",
+"text": "@Timodc Please consider signing &amp; sharing petition to the ICC urging them to investigate Elon Musk, Trump, Hegseth, for complicity in Russian war crimes by slowing Starshield &amp; withholding intel knowing it would lead to civilian deaths. https://t.co/SpF6wqXAsr",
+"user": "gulfcoa",
+"verified": false,
+"views": 0,
+"vtype": "none"
 }
 },
-"total": 508,
-"updated": "2026-11-02T17:06:36Z"
+"total": 510,
+"updated": "2026-11-02T20:03:51Z"
 }
