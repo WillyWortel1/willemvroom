@@ -1,6 +1,6 @@
 {
-"accounts": 395,
-"newest_id": "2117081930915344439",
+"accounts": 396,
+"newest_id": "2117149542210822241",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5513,8 +5513,19 @@
 "verified": false,
 "views": 25,
 "vtype": "none"
+},
+"2117149542210822241": {
+"followers": 927,
+"likes": 0,
+"name": "🇬🇧 High Altitude Alaska Research Pyramid",
+"t": "2026-11-02T06:59:20.000Z",
+"text": "@GavinNewsom Read this thread here.  It's about Dan Sullivan's account getting banned the other day, but the thing is, bans are largely manual at this point.  Investigate Elon.\nhttps://t.co/ItLyv0lSgo",
+"user": "HouseOfLeavesMD",
+"verified": false,
+"views": 13,
+"vtype": "none"
 }
 },
-"total": 501,
-"updated": "2026-11-02T05:10:31Z"
+"total": 502,
+"updated": "2026-11-02T08:03:14Z"
 }
