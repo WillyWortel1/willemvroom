@@ -1,6 +1,6 @@
 {
-"accounts": 397,
-"newest_id": "2117179081288729041",
+"accounts": 398,
+"newest_id": "2117233384594542737",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5546,8 +5546,19 @@
 "verified": true,
 "views": 19,
 "vtype": "blue"
+},
+"2117233384594542737": {
+"followers": 27,
+"likes": 1,
+"name": "Moreinevuchim",
+"t": "2026-11-02T12:32:29.000Z",
+"text": "@JoeMcCarley @Priyanshuorig @grok Stupid. If the dems win they will do nothing except investigate Elon and tear his companies down. Nationalize everything. They say it openly.",
+"user": "moreinevuchim",
+"verified": true,
+"views": 13,
+"vtype": "blue"
 }
 },
-"total": 504,
-"updated": "2026-11-02T11:03:19Z"
+"total": 505,
+"updated": "2026-11-02T14:00:59Z"
 }
