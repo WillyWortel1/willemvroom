@@ -1,6 +1,6 @@
 {
-"accounts": 398,
-"newest_id": "2117233384594542737",
+"accounts": 401,
+"newest_id": "2117281082878071022",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5557,8 +5557,41 @@
 "verified": true,
 "views": 13,
 "vtype": "blue"
+},
+"2117266549727768980": {
+"followers": 4669,
+"likes": 0,
+"name": "Anne Maggs",
+"t": "2026-11-02T14:44:17.000Z",
+"text": "@BrittanyinTexas Only if he loses. If he wins, someone really needs to investigate Elon Musk more thoroughly",
+"user": "Annemaggsart",
+"verified": false,
+"views": 4,
+"vtype": "none"
+},
+"2117274951690412176": {
+"followers": 127,
+"likes": 0,
+"name": "Natalie Harp Truth Social Post On X",
+"t": "2026-11-02T15:17:40.000Z",
+"text": "🚨 JUST IN: TRUMP ADDRESSES POSSIBLE DEMOCRATIC EFFORTS TO TARGET ELON MUSK! 🇺🇸\n\nDuring a discussion about calls to investigate Elon Musk and potentially seize his companies, President Trump responded:\n\n“We’ll have to protect them…that’s what Biden did, gave everybody a PARDON!” h",
+"user": "NatalieHarpQ",
+"verified": true,
+"views": 18,
+"vtype": "blue"
+},
+"2117281082878071022": {
+"followers": 500,
+"likes": 4,
+"name": "Heckles the Zucchini",
+"t": "2026-11-02T15:42:01.000Z",
+"text": "@SawyerMerritt They are making explicit threats.  “Investigate Elon” is not exactly a passive statement.",
+"user": "HecklesTheZucci",
+"verified": true,
+"views": 314,
+"vtype": "blue"
 }
 },
-"total": 505,
-"updated": "2026-11-02T14:00:59Z"
+"total": 508,
+"updated": "2026-11-02T17:06:36Z"
 }
