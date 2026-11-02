@@ -1,6 +1,6 @@
 {
-"accounts": 396,
-"newest_id": "2117149542210822241",
+"accounts": 397,
+"newest_id": "2117179081288729041",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5524,8 +5524,30 @@
 "verified": false,
 "views": 13,
 "vtype": "none"
+},
+"2117177761752096927": {
+"followers": 6026,
+"likes": 0,
+"name": "Civil Society Lost",
+"t": "2026-11-02T08:51:28.000Z",
+"text": "@TreatHunterDog @PoliticalAnt @ZWV134 @Crystal8999698 @bischu24 @Knowing14557733 @Vickie627 @PiggyShitCock @grok @Native_living @2aHistory @leavercm @JustUnderReal @KrispiLargo2 @jacqui683 @ZyghostByChance @tmccartyreleng @kpopnquarantine @HamRadioJoe @RabbitofHorror @AnitaBeerTo",
+"user": "CivilLost",
+"verified": true,
+"views": 23,
+"vtype": "blue"
+},
+"2117179081288729041": {
+"followers": 6026,
+"likes": 0,
+"name": "Civil Society Lost",
+"t": "2026-11-02T08:56:42.000Z",
+"text": "@PoliticalAnt @TreatHunterDog @ZWV134 @Crystal8999698 @bischu24 @Knowing14557733 @Vickie627 @PiggyShitCock @grok @Native_living @2aHistory @leavercm @JustUnderReal @KrispiLargo2 @jacqui683 @ZyghostByChance @tmccartyreleng @kpopnquarantine @HamRadioJoe @RabbitofHorror @AnitaBeerTo",
+"user": "CivilLost",
+"verified": true,
+"views": 19,
+"vtype": "blue"
 }
 },
-"total": 502,
-"updated": "2026-11-02T08:03:14Z"
+"total": 504,
+"updated": "2026-11-02T11:03:19Z"
 }
