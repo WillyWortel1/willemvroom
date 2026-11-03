@@ -1,6 +1,6 @@
 {
-"accounts": 410,
-"newest_id": "2117686994835026303",
+"accounts": 413,
+"newest_id": "2117739755249037776",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5733,8 +5733,41 @@
 "verified": false,
 "views": 33,
 "vtype": "none"
+},
+"2117723420746248567": {
+"followers": 86,
+"likes": 7,
+"name": "Austin Smith",
+"t": "2026-11-03T20:59:43.000Z",
+"text": "@elonmusk @bot Hey Grok can you call my senator and ask them to investigate Elon Musk.",
+"user": "EscVLive",
+"verified": true,
+"views": 207,
+"vtype": "blue"
+},
+"2117733721159942611": {
+"followers": 169,
+"likes": 0,
+"name": "Mimi",
+"t": "2026-11-03T21:40:39.000Z",
+"text": "@TheJusticeDept @USAO_LosAngeles @HSI_HQ Investigate Elon Musk. I’m sure he’s up to something.",
+"user": "mimihere123",
+"verified": false,
+"views": 2,
+"vtype": "none"
+},
+"2117739755249037776": {
+"followers": 294,
+"likes": 0,
+"name": "Jim Swanson",
+"t": "2026-11-03T22:04:38.000Z",
+"text": "@MACav003 @PollTracker2024 We’re not gonna win with this fake one anymore either. Time to move on from the Ukrainian guy. He can “investigate Elon” from his couch.",
+"user": "JimSwan20138530",
+"verified": true,
+"views": 20,
+"vtype": "blue"
 }
 },
-"total": 521,
-"updated": "2026-11-03T20:07:41Z"
+"total": 524,
+"updated": "2026-11-03T23:07:12Z"
 }
