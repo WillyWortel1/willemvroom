@@ -1,6 +1,6 @@
 {
-"accounts": 408,
-"newest_id": "2117642845364596801",
+"accounts": 410,
+"newest_id": "2117686994835026303",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5700,8 +5700,41 @@
 "verified": false,
 "views": 10,
 "vtype": "none"
+},
+"2117671893490688253": {
+"followers": 104,
+"likes": 0,
+"name": "Jay",
+"t": "2026-11-03T17:34:58.000Z",
+"text": "@elonmusk Investigate Elon &amp; nationalize his companies!",
+"user": "Cjgrindz",
+"verified": false,
+"views": 2,
+"vtype": "none"
+},
+"2117685970762178972": {
+"followers": 453,
+"likes": 0,
+"name": "kimberly callahan",
+"t": "2026-11-03T18:30:54.000Z",
+"text": "@SecMullinDHS @DHSgov Why don’t you investigate Elon Musk? Hmmm.",
+"user": "k_callahan17",
+"verified": false,
+"views": 7,
+"vtype": "none"
+},
+"2117686994835026303": {
+"followers": 797,
+"likes": 2,
+"name": "HoldingmyBreath",
+"t": "2026-11-03T18:34:58.000Z",
+"text": "@DemocraticWins I hope Garcia is ready on day-one to investigate Elon Musk businesses https://t.co/1ctIxPCTi4",
+"user": "BernardMalmamud",
+"verified": false,
+"views": 33,
+"vtype": "none"
 }
 },
-"total": 518,
-"updated": "2026-11-03T17:03:30Z"
+"total": 521,
+"updated": "2026-11-03T20:07:41Z"
 }
