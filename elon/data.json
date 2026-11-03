@@ -1,6 +1,6 @@
 {
-"accounts": 405,
-"newest_id": "2117556374049640563",
+"accounts": 408,
+"newest_id": "2117642845364596801",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -5656,8 +5656,52 @@
 "verified": false,
 "views": 3,
 "vtype": "none"
+},
+"2117630112250359998": {
+"followers": 3387,
+"likes": 3,
+"name": "🇨🇦Shapeshifter 🇨🇦🇮🇳",
+"t": "2026-11-03T14:48:57.000Z",
+"text": "Vote for anyone who will investigate Elon musk https://t.co/zdqjFg6bJb",
+"user": "generalthemoon",
+"verified": false,
+"views": 128,
+"vtype": "none"
+},
+"2117631392335159386": {
+"followers": 32,
+"likes": 0,
+"name": "GB",
+"t": "2026-11-03T14:54:02.000Z",
+"text": "@elonmusk @zerohedge Investigate Elon, vote blue",
+"user": "Fellowdevolver",
+"verified": false,
+"views": 5,
+"vtype": "none"
+},
+"2117633862331511099": {
+"followers": 103,
+"likes": 0,
+"name": "Jay",
+"t": "2026-11-03T15:03:51.000Z",
+"text": "@elonmusk Fuck No! Im voting to investigate Elon.",
+"user": "Cjgrindz",
+"verified": false,
+"views": 0,
+"vtype": "none"
+},
+"2117642845364596801": {
+"followers": 39,
+"likes": 1,
+"name": "Hmmm.",
+"t": "2026-11-03T15:39:32.000Z",
+"text": "@elonmusk Vote blue to investigate Elon",
+"user": "nononononoyas",
+"verified": false,
+"views": 10,
+"vtype": "none"
 }
 },
-"total": 514,
-"updated": "2026-11-03T11:07:57Z"
+"total": 518,
+"updated": "2026-11-03T17:03:30Z"
 }
