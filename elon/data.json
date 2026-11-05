@@ -1,6 +1,6 @@
 {
-"accounts": 532,
-"newest_id": "2118198655748538781",
+"accounts": 534,
+"newest_id": "2118234912549712111",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -7427,8 +7427,41 @@
 "verified": false,
 "views": 31,
 "vtype": "none"
+},
+"2118221185318355383": {
+"followers": 1599,
+"likes": 0,
+"name": "Jason",
+"t": "2026-11-05T05:57:39.000Z",
+"text": "Dems should investigate Elon until he brings back the 240 char limit https://t.co/3DGoTF5mSV",
+"user": "thesidetrack",
+"verified": false,
+"views": 22,
+"vtype": "none"
+},
+"2118229857368744273": {
+"followers": 463,
+"likes": 0,
+"name": "Emmanuel Blimie",
+"t": "2026-11-05T06:32:07.000Z",
+"text": "Let’s move \n\n-Make governing difficult for Trump, no compromising.\n\n-Vote to end Iran’s war and bring relief to Americans \n\n-Investigate Elon \n\n-Investigate Pete Hegseth &amp; kickbacks then impeach \n\n-Investigate Trump’s holdings linked to the war \n\n-Investigate Don Jr contracts",
+"user": "esblimie",
+"verified": true,
+"views": 19,
+"vtype": "blue"
+},
+"2118234912549712111": {
+"followers": 1238,
+"likes": 0,
+"name": "Sandra Clapp - Budgetary Burden🏳️‍🌈🇦🇺🇸🇪 🇺🇦",
+"t": "2026-11-05T06:52:12.000Z",
+"text": "Investigate Elon Musk's Legal Residency Status - Sign the Petition! https://t.co/7pu5gsBV1C via @ChangeAUS",
+"user": "ClappSandra",
+"verified": false,
+"views": 3,
+"vtype": "none"
 }
 },
-"total": 675,
-"updated": "2026-11-05T05:07:12Z"
+"total": 678,
+"updated": "2026-11-05T08:09:22Z"
 }
