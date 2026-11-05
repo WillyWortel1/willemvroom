@@ -8,7 +8,10 @@ R={r["sheet"]:list(csv.DictReader(io.StringIO(r["content"]))) for r in json.load
 def num(x):
   try:return float(str(x).replace(",","."))
   except:return 0.0
-log=[r for r in R["Log"] if r.get("datum")]
+def iso(x):
+  try:return (dt.datetime(1899,12,30)+dt.timedelta(days=float(x))).strftime("%Y-%m-%d %H:%M")
+  except:return x
+log=[dict(r,datum=iso(r["datum"])) for r in R["Log"] if r.get("datum")]
 posts=[{"datum":r["datum"],"type":r["type"],"onderwerp":r["onderwerp"],"url":r["url"],"views":int(num(r["weergaven"])),"likes":int(num(r["likes"])),"reacties":int(num(r["reacties"])),"reposts":int(num(r["reposts"])),"score":round(num(r["score_vs_mediaan"]),2)} for r in log]
 ss=sorted(posts,key=lambda p:-p["score"])
 M={r["meting"]:r for r in R["Mediaan"]}
