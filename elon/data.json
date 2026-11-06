@@ -1,6 +1,6 @@
 {
-"accounts": 576,
-"newest_id": "2118568735145357661",
+"accounts": 577,
+"newest_id": "2118583658189914127",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -8604,8 +8604,19 @@
 "verified": false,
 "views": 13,
 "vtype": "none"
+},
+"2118583658189914127": {
+"followers": 471,
+"likes": 0,
+"name": "DFF",
+"t": "2026-11-06T05:58:00.000Z",
+"text": "@MykhailoRohoza Investigate Elon! Investigate! 👏🏻👏🏻👏🏻",
+"user": "fatinfatiha",
+"verified": false,
+"views": 6,
+"vtype": "none"
 }
 },
-"total": 782,
-"updated": "2026-11-06T05:10:47Z"
+"total": 783,
+"updated": "2026-11-06T08:09:43Z"
 }
