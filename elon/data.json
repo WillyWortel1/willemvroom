@@ -1,6 +1,6 @@
 {
-"accounts": 577,
-"newest_id": "2118583658189914127",
+"accounts": 579,
+"newest_id": "2118628532754567306",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -8615,8 +8615,30 @@
 "verified": false,
 "views": 6,
 "vtype": "none"
+},
+"2118621647972298846": {
+"followers": 2553,
+"likes": 0,
+"name": "Beate Landefeld",
+"t": "2026-11-06T08:28:57.000Z",
+"text": "🇺🇸 🇺🇦 Democrats prepare investigation against Musk over Starlink restrictions in Ukraine\n\nDemocrats in the US Senate intend to investigate Elon Musk's actions regarding the restriction of the Starlink satellite system on Ukrainian territory.\n\nSimultaneously, a Senate committee ht",
+"user": "BeateLandefeld",
+"verified": true,
+"views": 20,
+"vtype": "blue"
+},
+"2118628532754567306": {
+"followers": 228,
+"likes": 0,
+"name": "Kalman Mahlich",
+"t": "2026-11-06T08:56:19.000Z",
+"text": "POV: your entire stock portfolio is in Elon Musk companies and the democrats got elected with promises to ban AI, investigate Elon, and tax companies more https://t.co/VdXOjYr6TC",
+"user": "KalmanMahlich",
+"verified": true,
+"views": 6,
+"vtype": "blue"
 }
 },
-"total": 783,
-"updated": "2026-11-06T08:09:43Z"
+"total": 785,
+"updated": "2026-11-06T11:12:29Z"
 }
