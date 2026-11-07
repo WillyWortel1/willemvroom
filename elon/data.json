@@ -1,6 +1,6 @@
 {
-"accounts": 603,
-"newest_id": "2118973404036424182",
+"accounts": 604,
+"newest_id": "2118991875386286091",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -9594,8 +9594,19 @@
 "verified": true,
 "views": 30,
 "vtype": "blue"
+},
+"2118991875386286091": {
+"followers": 20951,
+"likes": 0,
+"name": "Bloomberg Law: Environment",
+"t": "2026-11-07T09:00:06.000Z",
+"text": "Resurgent Democrats are wrestling with how best to investigate Elon Musk and the DOGE against a long list of priority targets. https://t.co/YBabn2KLXz",
+"user": "environment",
+"verified": true,
+"views": 82,
+"vtype": "business"
 }
 },
-"total": 872,
-"updated": "2026-11-07T08:07:34Z"
+"total": 873,
+"updated": "2026-11-07T11:10:03Z"
 }
