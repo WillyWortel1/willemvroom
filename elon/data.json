@@ -1,6 +1,6 @@
 {
-"accounts": 602,
-"newest_id": "2118907391949541839",
+"accounts": 603,
+"newest_id": "2118973404036424182",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -9572,8 +9572,30 @@
 "verified": true,
 "views": 6,
 "vtype": "blue"
+},
+"2118940472655630407": {
+"followers": 58,
+"likes": 0,
+"name": "Angrychair 🇸🇪",
+"t": "2026-11-07T05:35:51.000Z",
+"text": "@RepRobertGarcia Don't forget to INVESTIGATE ELON MUSK. He is definitely in bed with russia, and has been for a long time (they helped him acquire twitter to host russian \"pro-maga bots\" to spread disinformation in USA and all of Europe).\n\nAlso investigate Zuck.",
+"user": "Oneangrychair",
+"verified": false,
+"views": 7,
+"vtype": "none"
+},
+"2118973404036424182": {
+"followers": 6886,
+"likes": 0,
+"name": "PATRIOTISM NEWS",
+"t": "2026-11-07T07:46:42.000Z",
+"text": "🚨 Elon Musk and other tech billionaires could face congressional investigations as Democrats prepare to take control of Congress.\n\nShould Congress investigate Elon Musk?\n\nYES 🔥 / NO 👎 https://t.co/BcAv9NuoyO",
+"user": "Patriotism87543",
+"verified": true,
+"views": 30,
+"vtype": "blue"
 }
 },
-"total": 870,
-"updated": "2026-11-07T05:07:05Z"
+"total": 872,
+"updated": "2026-11-07T08:07:34Z"
 }
