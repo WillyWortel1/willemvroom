@@ -4,8 +4,9 @@ build_nieuws.py --title T --date 2026-11-08 --text voiceover.md --video FILE.mp4
 Sources are hard-listed below from bronnen.md (verified). Refuses to run without a real video file."""
 import argparse, html, os, re, shutil, sys
 p=argparse.ArgumentParser();a=p.add_argument
-a('--title',required=True);a('--date',required=True);a('--text',required=True);a('--video');a('--poster');a('--assets')
+a('--title',required=True);a('--date',required=True);a('--text',required=True);a('--video');a('--poster');a('--assets');a('--met-video',action='store_true',help='alleen op expliciet verzoek van Willem')
 o=p.parse_args()
+if (o.video or o.poster) and not o.met_video: sys.exit('Video staat uit (Willem: "Verwijder de video"); gebruik --met-video alleen op nieuw verzoek')
 if o.video and not os.path.isfile(o.video): sys.exit('video ontbreekt: '+o.video)
 root=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));d=os.path.join(root,'nieuws');os.makedirs(d,exist_ok=True)
 o.video and shutil.copy(o.video,os.path.join(d,'video.mp4'))
@@ -77,5 +78,6 @@ if got!=want: sys.exit(f'BRONNEN-CONTROLE MISLUKT: {len(got)} van {len(want)} li
 print('bronnen ok',len(got))
 if 'textsize.js' not in H or 'id="thm"' not in H: sys.exit('HEADER-CONTROLE MISLUKT')
 if re.search(r'privéadres|woninglocatie|plaats van de woning|verschillende steden|niet dezelfde plaats|andere stad|gereden route',H): sys.exit('KAARTTEKST-CONTROLE MISLUKT')
+if not o.met_video and re.search(r'<video|\.mp4|poster\.png',H): sys.exit('VIDEO-CONTROLE MISLUKT')
 if re.search(r'<track|\.vtt|\.srt|ondertitel',H,re.I): sys.exit('ONDERTITEL-CONTROLE MISLUKT')
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
