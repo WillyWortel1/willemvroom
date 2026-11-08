@@ -6,7 +6,7 @@ import {mountReview} from './review-ui.mjs';
 import {mountLibrary} from './library.mjs';
 const $=id=>document.getElementById(id), lang=document.documentElement.lang==='nl'?'nl':'en', c=copy[lang];
 document.title=c.title;document.querySelectorAll('[data-copy]').forEach(el=>el.textContent=c[el.dataset.copy]);
-if(lang==='en'){$('language').textContent='NL ↗';$('language').href='https://willemvroom.nl/foilcoach/';$('language').lang='nl';document.querySelector('footer a').textContent='willemvroom.com';}
+$('language').textContent=lang==='en'?'NL':'EN';$('language').href=lang==='en'?'/foilcoach/':'/foilcoach/en/';$('language').lang=lang==='en'?'nl':'en';
 $('theme').ariaLabel=c.theme;$('theme').title=c.theme;$('theme').textContent='◐';$('size').ariaLabel=c.size;$('size').title=c.size;$('size').textContent='Aa';
 $('scrub').ariaLabel=lang==='nl'?'Videotijdlijn':'Video timeline';$('progress').ariaLabel=lang==='nl'?'Analysevoortgang':'Analysis progress';
 for(const id of ['upload','replacement'])$(id).ariaLabel=c.choose;

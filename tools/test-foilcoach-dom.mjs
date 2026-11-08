@@ -12,7 +12,7 @@ for(const lang of ['nl','en']){
  console.log(lang,'guided review / evidence / plan / reset and library DOM passed');
 }
 for(const lang of ['nl','en']){
- const html=fs.readFileSync(new URL('index.html',appBase),'utf8').replace('lang="nl"',`lang="${lang}"`);const dom=new JSDOM(html,{url:'http://localhost/foilcoach/'});
+ const page=lang==='en'&&fs.existsSync(new URL('en/index.html',appBase))?'en/index.html':'index.html';const html=fs.readFileSync(new URL(page,appBase),'utf8').replace('lang="nl"',`lang="${lang}"`);const dom=new JSDOM(html,{url:'http://localhost/foilcoach/'});
  global.document=dom.window.document;global.window=dom.window;global.Option=dom.window.Option;global.Image=dom.window.Image;global.requestAnimationFrame=()=>0;global.ResizeObserver=class{observe(){}};
  await import(new URL(`app.mjs?domtest=${lang}`,appBase));
  assert.equal(document.querySelector('h1').textContent,'Prone foil');assert.ok(document.querySelector('#selectRider').textContent);assert.equal(document.querySelectorAll('#roiFields input').length,4);assert.equal(document.querySelectorAll('.checkpoint').length,4);assert.equal(document.querySelector('#analyse').disabled,true);assert.equal(document.querySelectorAll('#discipline option').length,1);

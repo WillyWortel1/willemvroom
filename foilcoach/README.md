@@ -1,10 +1,12 @@
 # Prone foil · first release: prone / surf foil
 
 Static, local-first video inspection app. No backend, API key, payment or video upload.
-Core modules and model assets are identical on the NL and EN sites. `index.html` chooses
-`nl` or `en`; all UI/status/error/content strings live in `copy.mjs`.
-Run `python3 tools/sync-foilcoach.py /path/to/willemvroom-com` from the NL repository
-to reproduce the English page. Never edit the English core independently.
+Both languages are hosted ONLY on willemvroom.nl: `/foilcoach/` (Dutch) and
+`/foilcoach/en/` (English). The English route contains HTML only; both documents load
+the same root `/foilcoach/app.mjs`, CSS, model and WASM. `index.html` chooses the
+language; UI/status/error/content strings live in `copy.mjs`.
+Run `python3 tools/sync-foilcoach.py` to regenerate the nested English HTML.
+Do not publish a separate .com version.
 
 ## Architecture
 
@@ -85,7 +87,7 @@ the WASM/browser pipeline or foil-specific tracking. No claim of foil-coaching v
   not automatic technique diagnoses.
 - Full Josh Ku reference review is organized in a collapsible bilingual library.
   Equipment preferences and advanced ideas are separated from beginner practice.
-- URL remains /foilcoach/ on both sites; exact visible name is Prone foil.
+- Dutch URL remains /foilcoach/; English is /foilcoach/en/, both on .nl. Exact visible name is Prone foil.
 - Josh Ku source contains a large presenter and distant surfer. It is NOT training
   data or proof of valid on-water pose measurement. Native full-frame crop: 41 poses,
   zero accepted torso/knee samples. Cropping removes competing people, not lost detail.
@@ -115,3 +117,7 @@ DOM regression test (jsdom dev dependency, not used by the app):
 `JSDOM_MODULE=/absolute/path/to/jsdom/lib/api.js node tools/test-foilcoach-dom.mjs`
 Tests both localizations, plan evidence/provenance, review reset, actual app initialization
          and manual-only JSON export containing the generated plan.
+
+Routing regression: `node tools/test-foilcoach-routing.mjs`. Canonical/hreflang and
+locale switches resolve exclusively to .nl. Nested English loads shared absolute
+entrypoint/CSS URLs; module-relative model/WASM imports therefore stay under /foilcoach/.
