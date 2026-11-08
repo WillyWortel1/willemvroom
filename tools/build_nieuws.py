@@ -4,11 +4,11 @@ build_nieuws.py --title T --date 2026-11-08 --text voiceover.md --video FILE.mp4
 Sources are hard-listed below from bronnen.md (verified). Refuses to run without a real video file."""
 import argparse, html, os, re, shutil, sys
 p=argparse.ArgumentParser();a=p.add_argument
-a('--title',required=True);a('--date',required=True);a('--text',required=True);a('--video',required=True);a('--poster');a('--vtt')
+a('--title',required=True);a('--date',required=True);a('--text',required=True);a('--video');a('--poster');a('--vtt')
 o=p.parse_args()
-if not os.path.isfile(o.video): sys.exit('video ontbreekt: '+o.video)
+if o.video and not os.path.isfile(o.video): sys.exit('video ontbreekt: '+o.video)
 root=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));d=os.path.join(root,'nieuws');os.makedirs(d,exist_ok=True)
-shutil.copy(o.video,os.path.join(d,'video.mp4'))
+o.video and shutil.copy(o.video,os.path.join(d,'video.mp4'))
 poster=''
 if o.poster: shutil.copy(o.poster,os.path.join(d,'poster.png'));poster=' poster="/nieuws/poster.png"'
 track=''
@@ -36,6 +36,7 @@ S=[('Politie Małopolska (X), 7–8 november','https://x.com/kwpkrakow'),
 src=''.join(f'<li><a href="{e(u)}" rel="noreferrer noopener" target="_blank">{e(n)}</a></li>' for n,u in S)
 body=''.join(f'<p class="mt-4">{e(x)}</p>' for x in paras)
 desc=e(paras[0][:155])
+fig=bool(o.video)
 H=f'''<!DOCTYPE html>
 <html lang="nl" class="antialiased"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{t} – Nieuws – Willem Vroom</title><meta name="description" content="{desc}">
@@ -49,8 +50,8 @@ H=f'''<!DOCTYPE html>
 <main id="inhoud" class="landing"><article class="mx-auto max-w-3xl px-5 pt-16 pb-16 sm:px-8 sm:pt-24">
 <p class="text-sm text-subtle">Nieuws van de dag · <time datetime="{o.date}">{nl}</time></p>
 <h1 class="font-display mt-4 text-4xl sm:text-5xl">{t}</h1>
-<figure class="mt-8"><video class="nw-v" controls preload="metadata" playsinline{poster} aria-label="Video: {t}"><source src="/nieuws/video.mp4" type="video/mp4">{track}Je browser kan deze video niet afspelen. <a href="/nieuws/video.mp4">Download de video</a>.</video>
-<figcaption class="mt-2 text-sm text-subtle">Video met ondertitels. Kaartdata © OpenStreetMap-bijdragers.</figcaption></figure>
+{{FIG_START}}<video class="nw-v" controls preload="metadata" playsinline{poster} aria-label="Video: {t}"><source src="/nieuws/video.mp4" type="video/mp4">{track}Je browser kan deze video niet afspelen. <a href="/nieuws/video.mp4">Download de video</a>.</video>
+<figcaption class="mt-2 text-sm text-subtle">Video met ondertitels. Kaartdata © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-bijdragers</a> (ODbL); landsgrenzen Natural Earth. Gesproken tekst is synthetisch (computerstem).</figcaption></figure>{{FIG_END}}
 <div class="mt-8 text-lg">{body}</div>
 <p class="mt-6 text-sm text-subtle">Getuigenverklaringen en reacties zijn parafrases, geen letterlijke citaten. Het aantal gewonden verschilt per bron (15 tot 17) en is daarom niet genoemd.</p>
 <h2 class="mt-12 text-2xl">Bronnen</h2><ul class="nw-src mt-4">{src}</ul>
@@ -58,4 +59,6 @@ H=f'''<!DOCTYPE html>
 </article></main>
 <footer class="border-t border-line"><div class="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 py-8 text-center text-sm text-subtle sm:px-8"><p>willemvroom.nl</p><p>© 2026</p></div></footer>
 </div><script src="/site.js?v=20261020-n2"></script></body></html>'''
+H=re.sub(r'\{FIG_START\}.*?\{FIG_END\}','',H,flags=re.S) if not fig else H.replace('{FIG_START}','<figure class="mt-8">').replace('{FIG_END}','')
+H=H.replace('Video met ondertitels','Video met ondertitels')
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
