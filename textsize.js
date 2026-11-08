@@ -6,7 +6,7 @@ function get(){try{var v=parseFloat(localStorage.getItem(K));return S.indexOf(v)
 function set(v){d.style.fontSize=v===100?"":v+"%";try{v===100?localStorage.removeItem(K):localStorage.setItem(K,v)}catch(e){}}
 set(get());
 function css(){if(document.getElementById("ts-css"))return;var s=document.createElement("style");s.id="ts-css";s.textContent=
-'body{font-size:.9375rem}#ts{display:inline-flex;align-items:center;margin-right:12px;gap:0}'+
+'body{font-size:.9375rem}#top>header.wv-head{font-size:14.4px}#ts{display:inline-flex;align-items:center;margin-right:12px;gap:0}'+
 '#ts button{background:none;border:0;color:#111;font-weight:700;cursor:pointer;line-height:1.5;padding:0 1px;min-width:0;min-height:0;position:relative;display:inline-flex;align-items:center;justify-content:center}'+
 '#ts button::after{content:"";position:absolute;inset:-12px -6px}'+
 '#ts .ts-s{font-size:11px}#ts .ts-l{font-size:15px}'+
