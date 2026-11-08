@@ -1,0 +1,11 @@
+import fs from 'node:fs';import path from 'node:path';import assert from 'node:assert/strict';import {fileURLToPath} from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+for(const [lang,route,other]of [['nl','/foilcoach/','/foilcoach/en/'],['en','/foilcoach/en/','/foilcoach/']]){
+ const html=fs.readFileSync(path.join(root,route,'index.html'),'utf8');assert.ok(html.includes(`<html lang="${lang}">`));assert.ok(html.includes(`rel="canonical" href="https://willemvroom.nl${route}"`));for(const [code,p]of [['nl','/foilcoach/'],['en','/foilcoach/en/']])assert.ok(html.includes(`hreflang="${code}" href="https://willemvroom.nl${p}"`));assert.ok(html.includes(`id="language" href="${other}"`));
+ for(const asset of ['/foilcoach/style.css','/foilcoach/app.mjs']){assert.ok(html.includes(`="${asset}"`));assert.ok(fs.existsSync(path.join(root,asset)));}
+ assert.equal(html.includes('willemvroom.com'),false);
+ const entryURL=new URL('/foilcoach/app.mjs','https://willemvroom.nl');for(const asset of ['./models/pose_landmarker_lite.task','./vendor/wasm/vision_wasm_internal.wasm','./vendor/wasm/vision_wasm_nosimd_internal.wasm','./vendor/vision_bundle.mjs']){const url=new URL(asset,entryURL);assert.ok(url.pathname.startsWith('/foilcoach/'));assert.ok(fs.existsSync(path.join(root,url.pathname)));}
+ console.log(lang,route,'canonical/hreflang/language switch/shared CSS/JS/model/WASM paths passed');
+}
+assert.equal(fs.existsSync(path.join(root,'foilcoach/en/app.mjs')),false);assert.equal(fs.existsSync(path.join(root,'foilcoach/en/models')),false);
+const js=fs.readFileSync(path.join(root,'foilcoach/app.mjs'),'utf8');assert.equal(js.includes('willemvroom.com'),false);const home=fs.readFileSync(path.join(root,'index.html'),'utf8');assert.ok(home.includes('href="/foilcoach/en/"'));const sitemap=fs.readFileSync(path.join(root,'sitemap.xml'),'utf8');assert.ok(sitemap.includes('https://willemvroom.nl/foilcoach/en/'));console.log('No nested asset duplication or .com app target; home and sitemap expose both locales');
