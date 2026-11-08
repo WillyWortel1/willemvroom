@@ -1,22 +1,16 @@
 #!/usr/bin/env python3
 """Build nieuws/index.html from Creator's real files. Usage:
-build_nieuws.py --title T --date 2026-11-08 --text voiceover.md --video FILE.mp4 [--poster P.png] [--vtt subs.srt]
+build_nieuws.py --title T --date 2026-11-08 --text voiceover.md --video FILE.mp4 [--poster P.png]
 Sources are hard-listed below from bronnen.md (verified). Refuses to run without a real video file."""
 import argparse, html, os, re, shutil, sys
 p=argparse.ArgumentParser();a=p.add_argument
-a('--title',required=True);a('--date',required=True);a('--text',required=True);a('--video');a('--poster');a('--vtt');a('--assets')
+a('--title',required=True);a('--date',required=True);a('--text',required=True);a('--video');a('--poster');a('--assets')
 o=p.parse_args()
 if o.video and not os.path.isfile(o.video): sys.exit('video ontbreekt: '+o.video)
 root=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));d=os.path.join(root,'nieuws');os.makedirs(d,exist_ok=True)
 o.video and shutil.copy(o.video,os.path.join(d,'video.mp4'))
 poster=''
 if o.poster: shutil.copy(o.poster,os.path.join(d,'poster.png'));poster=' poster="/nieuws/poster.png"'
-track=''
-if o.vtt:
-    s=open(o.vtt,encoding='utf-8').read().replace('\r','')
-    s='WEBVTT\n\n'+re.sub(r'(\d\d:\d\d:\d\d),(\d\d\d)',r'\1.\2',s)
-    open(os.path.join(d,'ondertitels.vtt'),'w',encoding='utf-8').write(s)
-    track='<track kind="subtitles" srclang="nl" label="Nederlands" src="/nieuws/ondertitels.vtt" default>'
 paras=[l.strip() for l in open(o.text,encoding='utf-8').read().split('\n') if l.strip() and not l.startswith('#')]
 M=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december']
 y,m,dd=o.date.split('-');nl=f'{int(dd)} {M[int(m)-1]} {y}';e=html.escape;t=e(o.title)
@@ -65,8 +59,8 @@ H=f'''<!DOCTYPE html>
 <main id="inhoud"><article class="mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 sm:pt-24 sm:pb-28">
 <p class="text-sm text-subtle">Nieuws van de dag · <time datetime="{o.date}">{nl}</time></p>
 <h1 class="section-title nw-w mt-3">{t}</h1>
-{{FIG_START}}<video class="nw-v" controls preload="metadata" playsinline{poster} aria-label="Video: {t}"><source src="/nieuws/video.mp4" type="video/mp4">{track}Je browser kan deze video niet afspelen. <a href="/nieuws/video.mp4">Download de video</a>.</video>
-<figcaption class="mt-2 text-sm text-subtle">Video met ondertitels. Kaartdata © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-bijdragers</a> (ODbL); landsgrenzen Natural Earth. Gesproken tekst is synthetisch (computerstem).</figcaption></figure>{{FIG_END}}
+{{FIG_START}}<video class="nw-v" controls preload="metadata" playsinline{poster} aria-label="Video: {t}"><source src="/nieuws/video.mp4" type="video/mp4">Je browser kan deze video niet afspelen. <a href="/nieuws/video.mp4">Download de video</a>.</video>
+<figcaption class="mt-2 text-sm text-subtle">Kaartdata © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-bijdragers</a> (ODbL); landsgrenzen Natural Earth. Gesproken tekst is synthetisch (computerstem).</figcaption></figure>{{FIG_END}}
 <div class="nw-w nw-m text-lg text-fg">{body}</div>
 <p class="nw-w nw-m text-sm text-subtle">Getuigenverklaringen en reacties zijn parafrases, geen letterlijke citaten. Het aantal gewonden verschilt per bron (15 tot 17) en is daarom niet genoemd.</p>
 <div class="nw-w border-t border-line pt-4 nw-m"><h2 class="font-display text-2xl leading-tight font-medium tracking-tight">Bronnen</h2><ul class="nw-src mt-4">{src}</ul></div>
@@ -75,10 +69,10 @@ H=f'''<!DOCTYPE html>
 <footer class="border-t border-line"><div class="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 py-8 text-center text-sm text-subtle sm:px-8"><p>willemvroom.nl</p><p>© 2026</p></div></footer>
 </div><script src="/site.js?v=20261020-n2"></script></body></html>'''
 H=re.sub(r'\{FIG_START\}.*?\{FIG_END\}','',H,flags=re.S) if not fig else H.replace('{FIG_START}','<figure class="nw-m">').replace('{FIG_END}','')
-H=H.replace('Video met ondertitels','Video met ondertitels')
 m=re.search(r'<ul class="nw-src mt-4">(.*?)</ul>',H,re.S)
 got=re.findall(r'<li><a href="([^"]+)"',m.group(1) if m else '')
 want=[html.escape(u) for _,u in S]
 if got!=want: sys.exit(f'BRONNEN-CONTROLE MISLUKT: {len(got)} van {len(want)} links')
 print('bronnen ok',len(got))
+if re.search(r'<track|\.vtt|\.srt|ondertitel',H,re.I): sys.exit('ONDERTITEL-CONTROLE MISLUKT')
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
