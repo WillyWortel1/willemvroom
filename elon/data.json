@@ -1,6 +1,6 @@
 {
-"accounts": 622,
-"newest_id": "2119410641886752824",
+"accounts": 623,
+"newest_id": "2119462797968810386",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -10133,8 +10133,30 @@
 "verified": true,
 "views": 8,
 "vtype": "blue"
+},
+"2119453468272582842": {
+"followers": 48322,
+"likes": 9,
+"name": "Adam Wren",
+"t": "2026-11-08T15:34:19.000Z",
+"text": "Your Sunday longread in @POLITICOMag: James Talarico in his first print interview following his Texas victory. We talk about Charlie Kirk, his culture-first campaign and whether Congress should investigate Elon Musk. \n\nhttps://t.co/doacIDUELk",
+"user": "adamwren",
+"verified": true,
+"views": 1372,
+"vtype": "blue"
+},
+"2119462797968810386": {
+"followers": 680788,
+"likes": 28,
+"name": "@amuse",
+"t": "2026-11-08T16:11:23.000Z",
+"text": "WEAPONIZATION: Rep. Gene Wu is making it clear that Texas Democrats will investigate Elon Musk and his companies. https://t.co/nLBCivC1wU",
+"user": "amuse",
+"verified": true,
+"views": 3833,
+"vtype": "blue"
 }
 },
-"total": 921,
-"updated": "2026-11-08T14:10:14Z"
+"total": 923,
+"updated": "2026-11-08T17:09:18Z"
 }
