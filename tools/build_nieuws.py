@@ -49,7 +49,8 @@ H=f'''<!DOCTYPE html>
 <title>{t} – Nieuws – Willem Vroom</title><meta name="description" content="{desc}">
 <link rel="canonical" href="https://willemvroom.nl/nieuws/"><meta name="theme-color" content="#ffffff"><link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preload" href="/fonts/ibm-plex-sans-latin-wght-normal-IvpUvPa2.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/styles.css?v=20261018"><link rel="stylesheet" href="/site.css?v=20261021-sf">
+<link rel="stylesheet" href="/styles.css?v=20261018"><script src="/textsize.js?v=1"></script>
+<link rel="stylesheet" href="/site.css?v=20261021-sf">
 <script>(function(){{try{{var t=localStorage.getItem("wv-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches)){{document.documentElement.classList.add("dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#0b0b0b");}}}}catch(e){{}}}})();</script>
 <meta property="og:type" content="article"><meta property="og:url" content="https://willemvroom.nl/nieuws/"><meta property="og:title" content="{t}"><meta property="og:description" content="{desc}">
 <style>.nw-v{{display:block;width:100%;height:auto;border-radius:16px;background:#000}}.nw-w{{max-width:42rem}}.nw-m{{margin-top:2.5rem}}.nw-w p+p{{margin-top:1.1em}}.text-lg{{line-height:1.65}}figure.nw-m{{max-width:56rem}}.nw-f img{{display:block;width:100%;height:auto;border-radius:16px}}.nw-f a,figcaption a{{color:inherit;text-decoration:underline}}.nw-src a{{color:var(--accent)}}.nw-src{{font-size:.875rem;word-break:break-word}}.nw-src li{{margin:.35rem 0}}</style></head>
@@ -74,5 +75,6 @@ got=re.findall(r'<li><a href="([^"]+)"',m.group(1) if m else '')
 want=[html.escape(u) for _,u in S]
 if got!=want: sys.exit(f'BRONNEN-CONTROLE MISLUKT: {len(got)} van {len(want)} links')
 print('bronnen ok',len(got))
+if 'textsize.js' not in H or 'id="thm"' not in H: sys.exit('HEADER-CONTROLE MISLUKT')
 if re.search(r'<track|\.vtt|\.srt|ondertitel',H,re.I): sys.exit('ONDERTITEL-CONTROLE MISLUKT')
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
