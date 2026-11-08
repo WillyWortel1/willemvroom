@@ -1,6 +1,6 @@
 {
-"accounts": 618,
-"newest_id": "2119281366122578385",
+"accounts": 620,
+"newest_id": "2119358719314313464",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -10078,8 +10078,30 @@
 "verified": false,
 "views": 3,
 "vtype": "none"
+},
+"2119353984376783076": {
+"followers": 28998,
+"likes": 35,
+"name": "Aleksandar Djokic (Александар Джокич)",
+"t": "2026-11-08T08:59:00.000Z",
+"text": "Democrats on the US Senate Foreign Relations Committee want to investigate Elon Musk’s role in the slowdown of Starlink services in Ukraine, CNN reports. The committee has sent letters to private companies and the Trump administration requesting that they preserve relevant",
+"user": "polidemitolog",
+"verified": true,
+"views": 857,
+"vtype": "blue"
+},
+"2119358719314313464": {
+"followers": 8562,
+"likes": 1,
+"name": "Cave Man Steve",
+"t": "2026-11-08T09:17:49.000Z",
+"text": "Breaking: 🚨\n\nDemocrats vow to investigate Elon Musk for the crime of not being brown",
+"user": "shopkins776",
+"verified": true,
+"views": 31,
+"vtype": "blue"
 }
 },
-"total": 916,
-"updated": "2026-11-08T05:07:19Z"
+"total": 918,
+"updated": "2026-11-08T11:03:16Z"
 }
