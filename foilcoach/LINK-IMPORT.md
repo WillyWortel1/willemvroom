@@ -41,3 +41,8 @@ local/internal names, credentials, non-HTTPS, alternate ports and redirects. Cli
 JavaScript cannot verify DNS answers for arbitrary public-looking hostnames; it does
 not claim to replace browser private-network protection. Nothing sends fetched
 video contents to another server.
+
+
+Update: YouTube page links now route separately to supported embedded viewing via
+its documented IFrame API (YOUTUBE-VIEWING.md). The no-raw-frame-import boundary above
+still applies to automatic measurements. Other social-page links remain unsupported.

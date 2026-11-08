@@ -147,3 +147,15 @@ MDN flower fixture was downloaded through the actual importer: 1,128,375 bytes,
 video/mp4. This is a no-person technical fixture, not foil tracking validation.
 Real browser CORS import, playback/inference, errors and visual/mobile/theme/text-size
 QA remain required for this change; server/DOM tests do not substitute for them.
+
+
+## YouTube reference viewing
+
+YouTube links now route to an explicit-load privacy-enhanced player rather than the
+raw-file downloader. Watch Josh Ku opens the user's supplied source. This mode is
+viewing/manual review only, with old pose data cleared and automatic controls hidden.
+The documented IFrame API provides same-video chapter seeking and optional true
+playback-time provenance; it does not provide pixels or pose measurements.
+YouTube's player receives network requests after explicit load; the interface states
+this. Actual files/direct media continue through the unchanged local pose pipeline.
+See YOUTUBE-VIEWING.md for the module contract, error/lifetime model and QA checklist.

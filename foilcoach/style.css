@@ -154,3 +154,13 @@ progress{width:100%;height:6px;accent-color:var(--accent);margin:0 0 12px}
  .review-tabs button{flex:1 1 auto}
 }
 @media(prefers-reduced-motion:reduce){.wrap *{transition:none!important}}
+/* The explicit-load reference player uses the same site card, never the pose canvas. */
+.youtube-section{margin:0 16px 16px;padding-top:18px;padding-bottom:18px;background:var(--card);border:1px solid var(--color-line);border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.04)}
+.youtube-section h2{font-size:1.3rem;font-weight:750;letter-spacing:-.015em}
+.youtube-section>p{font-size:.95rem;color:var(--color-muted)}
+.youtube-player{aspect-ratio:16/9;min-height:200px;margin:16px 0;background:var(--color-bg);border-radius:8px;overflow:hidden}
+.youtube-player iframe{display:block;border:0;width:100%;height:100%;min-height:200px}
+.youtube-section label{display:block;border-top:1px solid var(--color-line);padding-top:16px}
+.export-actions{display:flex;justify-content:flex-end;margin:16px}
+.capture-reference{margin-top:12px}
+.captured-reference{overflow-wrap:anywhere}
