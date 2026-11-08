@@ -121,3 +121,29 @@ Tests both localizations, plan evidence/provenance, review reset, actual app ini
 Routing regression: `node tools/test-foilcoach-routing.mjs`. Canonical/hreflang and
 locale switches resolve exclusively to .nl. Nested English loads shared absolute
 entrypoint/CSS URLs; module-relative model/WASM imports therefore stay under /foilcoach/.
+
+
+## URL import and website integration
+
+Public direct HTTPS MP4/WebM/Ogg files can be downloaded into the same local blob
+pipeline. `media-import.mjs` validates the URL, CORS response, container signature,
+200 MB streamed limit and 60-second timeout. It never uses cookies, a referrer,
+redirect following or a proxy. Cancellation/file replacement invalidate stale jobs.
+The JSON source field records host origin/type/size, not signed URL query strings.
+
+YouTube/social page URLs are recognized without fetching. This static Pages app has
+no authorized platform video-frame importer; IFrame playback is not pose analysis.
+The localized explanation offers the original file or a CORS-enabled direct file.
+See `LINK-IMPORT.md` for research and boundaries.
+
+The app reuses `/styles.css`, `/site.css`, `/site.js` and `/textsize.js`, the shared
+`.wv-head`, system typography, 760px body width, red controls and white/gray cards.
+Its former custom theme/text controls are replaced by the site's existing controls.
+No shared site resource, homepage/news content or .com file is modified.
+
+Tests: 26 pure logic/import tests plus both-locale DOM import/reset/export/cancel/
+stale-job tests (mocked decoder/network), routing and XML validation. The public CC0
+MDN flower fixture was downloaded through the actual importer: 1,128,375 bytes,
+video/mp4. This is a no-person technical fixture, not foil tracking validation.
+Real browser CORS import, playback/inference, errors and visual/mobile/theme/text-size
+QA remain required for this change; server/DOM tests do not substitute for them.
