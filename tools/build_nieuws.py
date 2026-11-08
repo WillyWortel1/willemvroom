@@ -29,7 +29,7 @@ S=[('Politie Małopolska (X), 7–8 november','https://x.com/kwpkrakow'),
 ('Kaartdata: © OpenStreetMap-bijdragers (ODbL), Natural Earth','https://www.openstreetmap.org/copyright')]
 src=''.join(f'<li><a href="{e(u)}" rel="noreferrer noopener" target="_blank">{e(n)}</a></li>' for n,u in S)
 OSM='<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap-bijdragers</a>, ODbL'
-FIGS=[('De stadsplattegrond laat','kaart-krakau.png','kaart-krakau.png',1920,1080,'Plattegrond van Krakau met punt 1 bij de Grote Markt en punt 2 bij Dietla en Stradomska.','Grote Markt (1): gebied van de schietpartij. Dietla/Stradomska (2): omgeving van de aanhouding. Markeringen duiden gebieden aan; geen exacte positie of gereden route. Kaart: '+OSM+'.'),
+FIGS=[('De stadsplattegrond laat','kaart-krakau.png','kaart-krakau.png',1920,1080,'Plattegrond van Krakau met punt 1 bij de Grote Markt en punt 2 bij Dietla en Stradomska.','Grote Markt (1): gebied van de schietpartij. Dietla/Stradomska (2): omgeving van de aanhouding. Markeringen duiden gebieden aan; geen exacte positie. Kaart: '+OSM+'.'),
 ('Op de overzichtskaart van Polen','kaart-polen.png','kaart-polen.png',1920,1080,'Kaart van Polen met Krakau en punt 3 bij Ostrowiec Świętokrzyski.','Punt 3: Ostrowiec Świętokrzyski. Kaart: <a href="https://www.naturalearthdata.com/about/terms-of-use/">Natural Earth</a> (publiek domein); stadsposities: OpenStreetMap en Pools PRNG.'),
 ('Polen houdt op acht en negen november','rouwfoto-candle-vela-cc0.jpg','kaars.jpg',1600,1200,'Brandende kaars tegen een donkere achtergrond; illustratieve foto.','Illustratieve foto; niet gemaakt bij deze gebeurtenis. Foto: <a href="https://commons.wikimedia.org/wiki/File:Candle-Vela.jpg">ViajeroExtraviado / Wikimedia Commons</a>, 11 juni 2018, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.')]
 out=[]
@@ -76,6 +76,6 @@ want=[html.escape(u) for _,u in S]
 if got!=want: sys.exit(f'BRONNEN-CONTROLE MISLUKT: {len(got)} van {len(want)} links')
 print('bronnen ok',len(got))
 if 'textsize.js' not in H or 'id="thm"' not in H: sys.exit('HEADER-CONTROLE MISLUKT')
-if re.search(r'privéadres|woninglocatie|plaats van de woning|verschillende steden|niet dezelfde plaats|andere stad',H): sys.exit('KAARTTEKST-CONTROLE MISLUKT')
+if re.search(r'privéadres|woninglocatie|plaats van de woning|verschillende steden|niet dezelfde plaats|andere stad|gereden route',H): sys.exit('KAARTTEKST-CONTROLE MISLUKT')
 if re.search(r'<track|\.vtt|\.srt|ondertitel',H,re.I): sys.exit('ONDERTITEL-CONTROLE MISLUKT')
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
