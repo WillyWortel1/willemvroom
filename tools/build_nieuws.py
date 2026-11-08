@@ -12,7 +12,7 @@ root=os.path.dirname(os.path.dirname(os.path.abspath(__file__)));d=os.path.join(
 o.video and shutil.copy(o.video,os.path.join(d,'video.mp4'))
 poster=''
 if o.poster: shutil.copy(o.poster,os.path.join(d,'poster.png'));poster=' poster="/nieuws/poster.png"'
-paras=[l.strip() for l in open(o.text,encoding='utf-8').read().split('\n') if l.strip() and not l.startswith('#')]
+paras=[l.strip() for l in open(o.text,encoding='utf-8').read().split('\n') if l.strip() and not l.lstrip().startswith(('#','![','*'))]
 M=['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december']
 y,m,dd=o.date.split('-');nl=f'{int(dd)} {M[int(m)-1]} {y}';e=html.escape;t=e(o.title)
 S=[('Politie Małopolska (X), 7–8 november','https://x.com/kwpkrakow'),
@@ -30,19 +30,21 @@ S=[('Politie Małopolska (X), 7–8 november','https://x.com/kwpkrakow'),
 ('Kaartdata: © OpenStreetMap-bijdragers (ODbL), Natural Earth','https://www.openstreetmap.org/copyright')]
 src=''.join(f'<li><a href="{e(u)}" rel="noreferrer noopener" target="_blank">{e(n)}</a></li>' for n,u in S)
 OSM='<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap-bijdragers</a>, ODbL'
-FIGS=[('De stadsplattegrond laat','kaart-krakau.png','kaart-krakau.png',1920,1080,'Plattegrond van Krakau met punt 1 bij de Grote Markt en punt 2 bij Dietla en Stradomska.','Grote Markt (1): gebied van de schietpartij. Dietla/Stradomska (2): omgeving van de aanhouding. Markeringen duiden gebieden aan; geen exacte positie. Kaart: '+OSM+'.'),
-('Op de overzichtskaart van Polen','kaart-polen.png','kaart-polen.png',1920,1080,'Kaart van Polen met Krakau en punt 3 bij Ostrowiec Świętokrzyski.','Punt 3: Ostrowiec Świętokrzyski. Kaart: <a href="https://www.naturalearthdata.com/about/terms-of-use/">Natural Earth</a> (publiek domein); stadsposities: OpenStreetMap en Pools PRNG.'),
+FIGS=[('Punt één is de Grote Markt','kaart-krakau.png','kaart-krakau.png',1920,1080,'Plattegrond van Krakau met punt 1 bij de Grote Markt en punt 2 bij Dietla en Stradomska.','Grote Markt (1): gebied van de schietpartij. Dietla/Stradomska (2): omgeving van de aanhouding. Kaart: '+OSM+'.'),
+('Ostrowiec ligt ten noordoosten','kaart-polen.png','kaart-polen.png',1920,1080,'Kaart van Polen met Krakau en punt 3 bij Ostrowiec Świętokrzyski.','Punt 3: Ostrowiec Świętokrzyski. Kaart: <a href="https://www.naturalearthdata.com/about/terms-of-use/">Natural Earth</a> (publiek domein); stadsposities: OpenStreetMap en Pools PRNG.'),
 ('Polen houdt op acht en negen november','rouwfoto-candle-vela-cc0.jpg','kaars.jpg',1600,1200,'Brandende kaars tegen een donkere achtergrond; illustratieve foto.','Illustratieve foto; niet gemaakt bij deze gebeurtenis. Foto: <a href="https://commons.wikimedia.org/wiki/File:Candle-Vela.jpg">ViajeroExtraviado / Wikimedia Commons</a>, 11 juni 2018, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.')]
-out=[]
+out=[];nfig=0
 for x in paras:
     for pre,fsrc,dst,w,h,alt,cap in (FIGS if o.assets else []):
         if x.startswith(pre):
             sp=os.path.join(o.assets,fsrc);tp=os.path.join(d,dst)
             if dst.endswith('.jpg'): __import__("PIL.Image").Image.open(sp).convert("RGB").resize((1600,1200)).save(tp,quality=82,optimize=True)
             else: shutil.copy(sp,tp)
+            nfig+=1
             out.append(f'</div><figure class="nw-m nw-f"><img src="/nieuws/{dst}" width="{w}" height="{h}" loading="lazy" decoding="async" alt="{e(alt)}"><figcaption class="mt-2 text-sm text-subtle">{cap}</figcaption></figure><div class="nw-w nw-m text-lg text-fg">')
     out.append(f'<p>{e(x)}</p>')
 body=''.join(out)
+if o.assets and nfig!=len(FIGS): sys.exit(f'AFBEELDINGEN-CONTROLE MISLUKT: {nfig} van {len(FIGS)} geplaatst')
 desc=e(paras[0][:155])
 fig=bool(o.video)
 H=f'''<!DOCTYPE html>
@@ -64,7 +66,6 @@ H=f'''<!DOCTYPE html>
 {{FIG_START}}<video class="nw-v" controls preload="metadata" playsinline{poster} aria-label="Video: {t}"><source src="/nieuws/video.mp4" type="video/mp4">Je browser kan deze video niet afspelen. <a href="/nieuws/video.mp4">Download de video</a>.</video>
 <figcaption class="mt-2 text-sm text-subtle">Kaartdata © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-bijdragers</a> (ODbL); landsgrenzen Natural Earth. Gesproken tekst is synthetisch (computerstem).</figcaption></figure>{{FIG_END}}
 <div class="nw-w nw-m text-lg text-fg">{body}</div>
-<p class="nw-w nw-m text-sm text-subtle">Getuigenverklaringen en reacties zijn parafrases, geen letterlijke citaten. Het aantal gewonden verschilt per bron (15 tot 17) en is daarom niet genoemd.</p>
 <div class="nw-w border-t border-line pt-4 nw-m"><h2 class="font-display text-2xl leading-tight font-medium tracking-tight">Bronnen</h2><ul class="nw-src mt-4">{src}</ul></div>
 <p class="nw-m"><a class="link-line press inline-flex min-h-11 items-center text-sm font-medium" href="/">← Terug naar willemvroom.nl</a></p>
 </article></main>
@@ -77,7 +78,7 @@ want=[html.escape(u) for _,u in S]
 if got!=want: sys.exit(f'BRONNEN-CONTROLE MISLUKT: {len(got)} van {len(want)} links')
 print('bronnen ok',len(got))
 if 'textsize.js' not in H or 'id="thm"' not in H: sys.exit('HEADER-CONTROLE MISLUKT')
-if re.search(r'privéadres|woninglocatie|plaats van de woning|verschillende steden|niet dezelfde plaats|andere stad|gereden route',H): sys.exit('KAARTTEKST-CONTROLE MISLUKT')
+if re.search(r'privéadres|woninglocatie|plaats van de woning|verschillende steden|niet dezelfde plaats|andere stad|gereden route|Markeringen duiden|De markeringen geven|op de stadskaart|stadsplattegrond laat|overzichtskaart van Polen|omvang van de tragedie|Het onderzoek loopt|parafrases, geen letterlijke|daarom niet genoemd|gaat het onderzoek verder',H): sys.exit('KAARTTEKST-CONTROLE MISLUKT')
 if not o.met_video and re.search(r'<video|\.mp4|poster\.png',H): sys.exit('VIDEO-CONTROLE MISLUKT')
 if re.search(r'<track|\.vtt|\.srt|ondertitel',H,re.I): sys.exit('ONDERTITEL-CONTROLE MISLUKT')
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
