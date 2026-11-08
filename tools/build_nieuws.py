@@ -40,9 +40,9 @@ FIGS=[('De stadsplattegrond laat','kaart-krakau.png','kaart-krakau.png',1920,108
 ('Polen houdt op acht en negen november','rouwfoto-candle-vela-cc0.jpg','kaars.jpg',1600,1200,'Brandende kaars tegen een donkere achtergrond; illustratieve foto.','Illustratieve foto; niet gemaakt bij deze gebeurtenis. Foto: <a href="https://commons.wikimedia.org/wiki/File:Candle-Vela.jpg">ViajeroExtraviado / Wikimedia Commons</a>, 11 juni 2018, <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>.')]
 out=[]
 for x in paras:
-    for pre,src,dst,w,h,alt,cap in (FIGS if o.assets else []):
+    for pre,fsrc,dst,w,h,alt,cap in (FIGS if o.assets else []):
         if x.startswith(pre):
-            sp=os.path.join(o.assets,src);tp=os.path.join(d,dst)
+            sp=os.path.join(o.assets,fsrc);tp=os.path.join(d,dst)
             if dst.endswith('.jpg'): __import__("PIL.Image").Image.open(sp).convert("RGB").resize((1600,1200)).save(tp,quality=82,optimize=True)
             else: shutil.copy(sp,tp)
             out.append(f'</div><figure class="nw-m nw-f"><img src="/nieuws/{dst}" width="{w}" height="{h}" loading="lazy" decoding="async" alt="{e(alt)}"><figcaption class="mt-2 text-sm text-subtle">{cap}</figcaption></figure><div class="nw-w nw-m text-lg text-fg">')
@@ -76,4 +76,9 @@ H=f'''<!DOCTYPE html>
 </div><script src="/site.js?v=20261020-n2"></script></body></html>'''
 H=re.sub(r'\{FIG_START\}.*?\{FIG_END\}','',H,flags=re.S) if not fig else H.replace('{FIG_START}','<figure class="nw-m">').replace('{FIG_END}','')
 H=H.replace('Video met ondertitels','Video met ondertitels')
+m=re.search(r'<ul class="nw-src mt-4">(.*?)</ul>',H,re.S)
+got=re.findall(r'<li><a href="([^"]+)"',m.group(1) if m else '')
+want=[html.escape(u) for _,u in S]
+if got!=want: sys.exit(f'BRONNEN-CONTROLE MISLUKT: {len(got)} van {len(want)} links')
+print('bronnen ok',len(got))
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
