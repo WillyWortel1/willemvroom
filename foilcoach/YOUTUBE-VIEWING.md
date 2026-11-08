@@ -41,3 +41,18 @@ Browser QA: actual Josh Ku playback after clicking Watch Josh Ku / loading the g
 youtu.be link; in-app timestamp seek; manual review/export; switch to local/direct
 video and confirm real pose analysis resumes. Check both locales, errors, dark mode
 and shared page appearance. Do not merge until this passes.
+
+Manual evidence/export update:
+- The shared JSON export action sits outside the hidden local-analysis section and
+  remains visible/enabled for a YouTube source, including a manual-only plan.
+- YouTube review cards have no nonexistent checkpoint menu. Explicit “Use current
+  YouTube time” captures getCurrentTime only when the ready API responds. Captures
+  include video ID, seconds, method and frameCaptured:false; nothing captures pixels.
+- A captured review moment is stored separately from the live export-time playback
+  position and separately from static Josh Ku coaching citations. Both card and plan
+  label these distinctly. Player events never read current playback time themselves.
+- Local checkpoint options include only existing checkpoints. Switching sources
+  clears captured reference evidence; choosing a local file also clears the URL field.
+- Both-language DOM tests assert no hidden export ancestor, API reads only on explicit
+  capture/export, distinct captured/export seconds, nonexistent-option removal and
+  complete local replacement reset.
