@@ -56,14 +56,14 @@ H=f'''<!DOCTYPE html>
 <link rel="stylesheet" href="/site.css?v=20261021-sf">
 <script>(function(){{try{{var t=localStorage.getItem("wv-theme");if(t==="dark"||(!t&&matchMedia("(prefers-color-scheme: dark)").matches)){{document.documentElement.classList.add("dark");var m=document.querySelector('meta[name="theme-color"]');if(m)m.setAttribute("content","#0b0b0b");}}}}catch(e){{}}}})();</script>
 <meta property="og:type" content="article"><meta property="og:url" content="https://willemvroom.nl/nieuws/"><meta property="og:title" content="{t}"><meta property="og:description" content="{desc}">
-<style>.nw-v{{display:block;width:100%;height:auto;border-radius:16px;background:#000}}.nw-w{{max-width:42rem}}.nw-m{{margin-top:2.5rem}}.nw-w p+p{{margin-top:1.1em}}.text-lg{{line-height:1.65}}figure.nw-m{{max-width:56rem}}.nw-f img{{display:block;width:100%;height:auto;border-radius:16px}}.nw-f a,figcaption a{{color:inherit;text-decoration:underline}}.nw-src a{{color:var(--accent)}}.nw-src{{font-size:.875rem;word-break:break-word}}.nw-src li{{margin:.35rem 0}}.nw-ls{{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem}}.nw-ls[hidden]{{display:none}}.nw-ls button{{min-height:44px;padding:0 1.1rem;border:1px solid currentColor;border-radius:999px;background:none;color:var(--accent);font-weight:600;font-size:.875rem;cursor:pointer}}.nw-ls button:disabled{{opacity:.4;cursor:default}}.nw-ls button:focus-visible{{outline:3px solid #ff2a3a;outline-offset:2px}}</style></head>
+<style>.nw-v{{display:block;width:100%;height:auto;border-radius:16px;background:#000}}.nw-w{{max-width:42rem}}.nw-m{{margin-top:2.5rem}}.nw-w p+p{{margin-top:1.1em}}.text-lg{{line-height:1.65}}figure.nw-m{{max-width:56rem}}.nw-f img{{display:block;width:100%;height:auto;border-radius:16px}}.nw-f a,figcaption a{{color:inherit;text-decoration:underline}}.nw-src a{{color:var(--accent)}}.nw-src{{font-size:.875rem;word-break:break-word}}.nw-src li{{margin:.35rem 0}}.nw-ls{{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1rem}}.nw-ls[hidden]{{display:none}}.nw-ls button{{min-height:44px;padding:0 1.1rem;border:1px solid currentColor;border-radius:999px;background:none;color:var(--accent);font-weight:600;font-size:.875rem;cursor:pointer}}.nw-ls button:disabled{{opacity:.4;cursor:default}}.nw-ls input[type=range]{{flex:1 1 10rem;min-width:8rem;accent-color:var(--accent)}}.nw-ls button:focus-visible{{outline:3px solid #ff2a3a;outline-offset:2px}}</style></head>
 <body><div id="top" class="bg-bg text-fg">
 <a class="skip" href="#inhoud">Naar inhoud</a>
 <header class="wv-head"><a href="/" class="home">willemvroom.nl</a><nav><button id="thm" type="button" aria-label=""><svg class="moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav></header>
 <main id="inhoud"><article class="mx-auto max-w-6xl px-5 pt-16 pb-20 sm:px-8 sm:pt-24 sm:pb-28">
 <p class="text-sm text-subtle">Nieuws van de dag · <time datetime="{o.date}">{nl}</time></p>
 <h1 class="section-title nw-w mt-3">{t}</h1>
-<div id="listen" class="nw-w mt-4 nw-ls" role="group" aria-label="Artikel voorlezen" hidden><button type="button" data-a="play" aria-pressed="false">Voorlezen</button><button type="button" data-a="stop" disabled>Stoppen</button><span data-s role="status" aria-live="polite" class="text-sm text-subtle"></span></div>
+<div id="listen" class="nw-w mt-4 nw-ls" role="group" aria-label="Artikel voorlezen" hidden><audio preload="none" src="/nieuws/voorlezen.mp3"></audio><button type="button" data-a="play" aria-pressed="false">Voorlezen</button><button type="button" data-a="stop" disabled>Stoppen</button><input type="range" data-a="seek" min="0" max="0" step="1" value="0" aria-label="Positie in de audio"><span data-s role="status" aria-live="off" class="text-sm text-subtle"></span></div>
 {{FIG_START}}<video class="nw-v" controls preload="metadata" playsinline{poster} aria-label="Video: {t}"><source src="/nieuws/video.mp4" type="video/mp4">Je browser kan deze video niet afspelen. <a href="/nieuws/video.mp4">Download de video</a>.</video>
 <figcaption class="mt-2 text-sm text-subtle">Kaartdata © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap-bijdragers</a> (ODbL); landsgrenzen Natural Earth. Gesproken tekst is synthetisch (computerstem).</figcaption></figure>{{FIG_END}}
 <div class="nw-w nw-m text-lg text-fg nw-body">{body}</div>
@@ -72,7 +72,7 @@ H=f'''<!DOCTYPE html>
 </article></main>
 <footer class="border-t border-line"><div class="mx-auto flex max-w-6xl flex-col items-center gap-2 px-5 py-8 text-center text-sm text-subtle sm:px-8"><p>willemvroom.nl</p><p>© 2026</p></div></footer>
 </div><script src="/site.js?v=20261020-n2"></script>
-<script src="/nieuws/listen.js?v=1"></script></body></html>'''
+<script src="/nieuws/listen.js?v=2"></script></body></html>'''
 H=re.sub(r'\{FIG_START\}.*?\{FIG_END\}','',H,flags=re.S) if not fig else H.replace('{FIG_START}','<figure class="nw-m">').replace('{FIG_END}','')
 m=re.search(r'<ul class="nw-src mt-4">(.*?)</ul>',H,re.S)
 got=re.findall(r'<li><a href="([^"]+)"',m.group(1) if m else '')
@@ -83,5 +83,7 @@ if 'textsize.js' not in H or 'id="thm"' not in H: sys.exit('HEADER-CONTROLE MISL
 if re.search(r'privéadres|woninglocatie|plaats van de woning|verschillende steden|niet dezelfde plaats|andere stad|gereden route|Markeringen duiden|De markeringen geven|op de stadskaart|stadsplattegrond laat|overzichtskaart van Polen|omvang van de tragedie|Het onderzoek loopt|parafrases, geen letterlijke|daarom niet genoemd|gaat het onderzoek verder',H): sys.exit('KAARTTEKST-CONTROLE MISLUKT')
 if not o.met_video and re.search(r'<video|\.mp4|poster\.png',H): sys.exit('VIDEO-CONTROLE MISLUKT')
 if re.search(r'<track|\.vtt|\.srt|ondertitel',H,re.I): sys.exit('ONDERTITEL-CONTROLE MISLUKT')
+if '/nieuws/voorlezen.mp3' not in H or 'speechSynthesis' in H: sys.exit('AUDIO CHECK FAILED')
+if not os.path.isfile(os.path.join(d,'voorlezen.mp3')): sys.exit('AUDIO FILE MISSING: '+'voorlezen.mp3')
 if 'id="listen"' not in H or 'listen.js' not in H: sys.exit('LISTEN CHECK FAILED')
 open(os.path.join(d,'index.html'),'w',encoding='utf-8').write(H);print('ok',d)
