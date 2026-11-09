@@ -1,6 +1,6 @@
 {
-"accounts": 633,
-"newest_id": "2119600024187482513",
+"accounts": 635,
+"newest_id": "2119676548320031152",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -10276,8 +10276,30 @@
 "verified": false,
 "views": 3,
 "vtype": "none"
+},
+"2119666666871431218": {
+"followers": 2,
+"likes": 1,
+"name": "Sovereign Thoughts",
+"t": "2026-11-09T05:41:29.000Z",
+"text": "@DAlperovitch Investigate Elon Musk as well, you'll find a deeply entrenched relationship with the Chinese.\n\nSave this tweet.",
+"user": "Game_of_nationX",
+"verified": false,
+"views": 33,
+"vtype": "none"
+},
+"2119676548320031152": {
+"followers": 95956,
+"likes": 0,
+"name": "Gokhshtein",
+"t": "2026-11-09T06:20:45.000Z",
+"text": "Democrats intend to investigate Elon Musk, Stephen Miller and some major companies after gaining control of Congress in January. https://t.co/nigD6AHDV1",
+"user": "gokhshtein",
+"verified": true,
+"views": 865,
+"vtype": "business"
 }
 },
-"total": 934,
-"updated": "2026-11-09T02:09:40Z"
+"total": 936,
+"updated": "2026-11-09T08:10:04Z"
 }
