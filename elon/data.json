@@ -1,6 +1,6 @@
 {
-"accounts": 636,
-"newest_id": "2119740079367201277",
+"accounts": 637,
+"newest_id": "2119773784068784496",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -10309,8 +10309,19 @@
 "verified": true,
 "views": 16,
 "vtype": "blue"
+},
+"2119773784068784496": {
+"followers": 6,
+"likes": 0,
+"name": "PoliticalComedyshow",
+"t": "2026-11-09T12:47:08.000Z",
+"text": "Musk big trouble. Democrats plan to investigate Elon Musk’s role in federal job cuts and Stephen Miller’s immigration policies after taking control of Congress in January. No hearing dates, subpoenas, or criminal charges were announced.\nhttps://t.co/oXZgG2MSUO",
+"user": "lifangfanhh",
+"verified": false,
+"views": 3,
+"vtype": "none"
 }
 },
-"total": 937,
-"updated": "2026-11-09T11:04:55Z"
+"total": 938,
+"updated": "2026-11-09T14:11:02Z"
 }
