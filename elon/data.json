@@ -1,6 +1,6 @@
 {
-"accounts": 637,
-"newest_id": "2119773784068784496",
+"accounts": 639,
+"newest_id": "2119834949259870369",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -10320,8 +10320,30 @@
 "verified": false,
 "views": 3,
 "vtype": "none"
+},
+"2119828080311107815": {
+"followers": 15,
+"likes": 0,
+"name": "Zark News",
+"t": "2026-11-09T16:22:53.000Z",
+"text": "Democrats Plan Probes of Musk, Miller and Big Companies When They Take Over Congress. Incoming Democratic leaders say Congress will investigate Elon Musk, Stephen Miller and unnamed companies next year. https://t.co/ijPbAzE5Xb",
+"user": "ZarkNewsHQ",
+"verified": true,
+"views": 10,
+"vtype": "blue"
+},
+"2119834949259870369": {
+"followers": 429,
+"likes": 2,
+"name": "Harry Bōlz",
+"t": "2026-11-09T16:50:11.000Z",
+"text": "Congress may be putting DOGE under the microscope. 👀\n\nLawmakers are planning to investigate Elon Musk's role in federal workforce cuts.\n\n.@elonmusk, what measurable results from DOGE do you think Congress should examine first: savings, efficiency, or impact on services?",
+"user": "HarryBolzParody",
+"verified": true,
+"views": 13,
+"vtype": "blue"
 }
 },
-"total": 938,
-"updated": "2026-11-09T14:11:02Z"
+"total": 940,
+"updated": "2026-11-09T17:03:55Z"
 }
