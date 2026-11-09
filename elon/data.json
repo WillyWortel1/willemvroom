@@ -1,6 +1,6 @@
 {
-"accounts": 635,
-"newest_id": "2119676548320031152",
+"accounts": 636,
+"newest_id": "2119740079367201277",
 "origin": "2114798781778862589",
 "posts": {
 "2114798781778862589": {
@@ -10298,8 +10298,19 @@
 "verified": true,
 "views": 865,
 "vtype": "business"
+},
+"2119740079367201277": {
+"followers": 1071,
+"likes": 1,
+"name": "NewsTongue",
+"t": "2026-11-09T10:33:12.000Z",
+"text": "🔴 Democrats prepare probe of Musk's government access, AI data centers\n\nDemocrats are preparing to investigate Elon Musk's DOGE operation, its access to sensitive government data, and whether his companies benefited from influence over the Trump administration. Scrutiny also http",
+"user": "NewsTongueX",
+"verified": true,
+"views": 16,
+"vtype": "blue"
 }
 },
-"total": 936,
-"updated": "2026-11-09T08:10:04Z"
+"total": 937,
+"updated": "2026-11-09T11:04:55Z"
 }
