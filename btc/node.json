@@ -1,0 +1,35 @@
+{
+  "source": "umbrel",
+  "updated_at": "2026-11-10T14:21:08+01:00",
+  "updated_nl": "10 nov 2026, 14:21",
+  "height": 975303,
+  "block": {
+    "hash": "000000000000000000011cb28e0826a1478e958872421da6c47e1910917eead0",
+    "timestamp": 1794316685,
+    "time_nl": "10 nov 2026, 14:18",
+    "tx_count": 2668
+  },
+  "fees": {
+    "fastest": 2,
+    "halfHour": 1,
+    "hour": 1,
+    "economy": 1
+  },
+  "mempool": {
+    "count": 61869,
+    "vsize": 30858999,
+    "total_fee": 6257672
+  },
+  "difficulty": {
+    "progress_percent": 78.125,
+    "change_percent": -6.889818634049227,
+    "remaining_blocks": 441,
+    "next_height": 975744,
+    "estimated_retarget_ms": 1794601228446,
+    "estimated_nl": "13 nov 2026, 21:20"
+  },
+  "hashrate": {
+    "eh_s": 965.8,
+    "window": "3d"
+  }
+}
