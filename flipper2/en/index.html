@@ -269,7 +269,7 @@ function closeNameBox(save){if(!nameOpen)return;const n=cleanName(nI.value);
 nB.addEventListener('submit',e=>{e.preventDefault();closeNameBox(true);});
 document.getElementById('nameOk').addEventListener('click',e=>{e.preventDefault();closeNameBox(true);});
 document.getElementById('nameSkip').addEventListener('click',e=>{e.preventDefault();closeNameBox(false);});
-nI.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter'){e.preventDefault();closeNameBox(true);}});
+nI.addEventListener('keydown',e=>{e.stopPropagation();if(e.key==='Enter'){e.preventDefault();if(e.isComposing||e.keyCode===229)return;closeNameBox(true);}});
 ['pointerdown','touchstart','touchend','keydown','keyup'].forEach(t=>nB.addEventListener(t,e=>e.stopPropagation(),{passive:true}));
 function startGame(){gameT0=simT;score=0;ballNo=1;extraBalls=0;extraGiven=false;newRecord=false;kickback=true;level=1;mi=0;prog=0;missionsDone=0;jackpots=0;ramps=0;skills=0;newBall();sfx.start();message('BAL 1',1.5);}
 function curM(){return MISSIONS[mi];}
