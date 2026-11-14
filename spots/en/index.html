@@ -4,7 +4,7 @@ try{if(['en','nl','de'].includes(q))localStorage.setItem('spots-lang',q);if(!l)l
 const nv=(navigator.language||'nl').toLowerCase();return l||(nv.startsWith('nl')?'nl':nv.startsWith('de')?'de':'en')})();document.documentElement.lang=LANG;
 function setLang(l){try{localStorage.setItem('spots-lang',l)}catch(e){}location.href='/spots/'+(l=='nl'?'?lang=nl':l+'/')}
 const T=(nl,en,de)=>LANG=='de'?de:LANG=='en'?en:nl;</script>
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Waves, current, wind, weather, water temperature and tides per spot.">
 <link rel="canonical" href="https://willemvroom.nl/spots/en/"><link rel="alternate" hreflang="nl" href="https://willemvroom.nl/spots/"><link rel="alternate" hreflang="en" href="https://willemvroom.nl/spots/en/"><link rel="alternate" hreflang="de" href="https://willemvroom.nl/spots/de/"><link rel="alternate" hreflang="x-default" href="https://willemvroom.nl/spots/">
 <link rel="icon" href="/favicon.svg">
 <title>Spots🤙 – condities per spot</title><script>if(LANG=='en')document.title='Spots🤙 – conditions per spot';if(LANG=='de')document.title='Spots🤙 – Bedingungen pro Spot'</script>

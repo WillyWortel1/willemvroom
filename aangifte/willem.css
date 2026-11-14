@@ -25,7 +25,7 @@ section.wv-nvt summary>div.min-w-0::after{content:"niet van toepassing";display:
 #wv-nvt-link[hidden]{display:none}
 /* Willem: zelfde stijl als willemvroom.nl */
 :root{--wv-font:-apple-system,BlinkMacSystemFont,system-ui,"Segoe UI",Roboto,sans-serif}
-html:not(.dark){--color-bg:#f6f6f6;--color-background:#f6f6f6;--color-surface:#fff;--color-fg:#111;--color-fg-muted:#555;--color-fg-subtle:#888;--color-border:#e6e6e6}
+html:not(.dark){--color-bg:#f6f6f6;--color-background:#f6f6f6;--color-surface:#fff;--color-fg:#111;--color-fg-muted:#555;--color-fg-subtle:#6e6e6e;--color-border:#e6e6e6}
 html.dark{--color-bg:#0b0b0b;--color-background:#0b0b0b;--color-surface:#151515;--color-fg:#eee;--color-fg-muted:#aaa;--color-fg-subtle:#8a8a8a;--color-border:#262626}
 html,body{background:var(--color-bg)!important}
 body,body *:not(svg):not(path){font-family:var(--wv-font)!important}
