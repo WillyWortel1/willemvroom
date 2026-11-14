@@ -9,3 +9,6 @@ s=s.replace('data-current-language>NL','data-current-language>EN').replace('aria
 target.parent.mkdir(exist_ok=True)
 target.write_text(s)
 print(target)
+# Pre-fill the initial UI text in both locales (prevents layout shift on load).
+import subprocess
+subprocess.run(['node',str(root/'tools/prerender-foilcoach.mjs')],check=True)

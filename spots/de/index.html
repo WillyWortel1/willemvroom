@@ -14,6 +14,10 @@ const T=(nl,en,de)=>LANG=='de'?de:LANG=='en'?en:nl;</script>
 *{box-sizing:border-box}body{margin:0;font:15px/1.4 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
 header{padding:14px 14px 4px}h1{font-size:1.3rem;margin:0}header p{margin:4px 0;color:var(--m);font-size:.85rem}
 .days{display:flex;gap:6px;overflow-x:auto;padding:8px 14px;position:sticky;top:0;background:var(--bg);z-index:2}
+/* Reserve the height of the land/day button rows while data loads (prevents layout shift). */
+#lands:empty,#days:empty{min-height:calc(1.4em + 30px)}#dm:empty{min-height:calc(.78rem * 1.4 + 8px)}
+/* Keep the footer below the fold while the spot list is still loading. */
+#main:has(> p.nl:first-child){min-height:100vh}
 .days button{flex:0 0 auto;border:1px solid #2b5675;background:#0f2a3e;color:var(--t);border-radius:18px;padding:6px 12px;font:inherit}
 .days button.on{background:var(--a);color:#032;border-color:var(--a);font-weight:600}
 main{padding:6px 10px 20px;display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(310px,1fr))}
