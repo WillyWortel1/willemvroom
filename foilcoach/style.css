@@ -164,3 +164,6 @@ progress{width:100%;height:6px;accent-color:var(--accent);margin:0 0 12px}
 .export-actions{display:flex;justify-content:flex-end;margin:16px}
 .capture-reference{margin-top:12px}
 .captured-reference{overflow-wrap:anywhere}
+
+/* Dark mode: --accent is lighter for text contrast; keep the original red behind white text */
+html.dark .wrap button.primary:hover:not(:disabled),html.dark .wrap .review-tabs button[aria-selected=true]{background:#d62828;border-color:#d62828}

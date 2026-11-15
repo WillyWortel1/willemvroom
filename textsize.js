@@ -16,12 +16,15 @@ function css(){if(document.getElementById("ts-css"))return;var s=document.create
 '#ts button:focus-visible{outline:3px solid #ff2a3a;outline-offset:2px;border-radius:8px}'+
 '#top>header.wv-head,#top>header.wv-head *{white-space:nowrap}';
 document.head.appendChild(s);}
-function ui(){var head=document.querySelector(".wv-head");if(!head||document.getElementById("ts"))return;
- var nav=head.querySelector("nav");if(!nav){nav=document.createElement("nav");head.appendChild(nav);}
+function ui(){var head=document.querySelector(".wv-head");if(!head)return;
+ // Normally the control and its CSS (site.css) are already in the page, so nothing shifts; build them only when missing.
+ var w=document.getElementById("ts");if(w&&w.dataset.ready)return;
+ if(!w){var nav=head.querySelector("nav");if(!nav){nav=document.createElement("nav");head.appendChild(nav);}
  css();
- var w=document.createElement("span");w.id="ts";w.setAttribute("role","group");w.setAttribute("aria-label",L[0]);
+ w=document.createElement("span");w.id="ts";w.setAttribute("role","group");w.setAttribute("aria-label",L[0]);
  w.innerHTML='<button type="button" data-d="-1" aria-label="'+L[1]+'" class="ts-s">A</button><span class="ts-sep" aria-hidden="true">|</span><button type="button" data-d="1" aria-label="'+L[2]+'" class="ts-l">A</button>';
- nav.insertBefore(w,nav.firstChild);
+ nav.insertBefore(w,nav.firstChild);}
+ w.dataset.ready="1";
  function upd(){var i=S.indexOf(get());w.children[0].disabled=i<=0;w.children[2].disabled=i>=S.length-1;}
  w.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var i=S.indexOf(get())+ +b.getAttribute("data-d");if(i<0||i>=S.length)return;set(S[i]);upd();});
  upd();}

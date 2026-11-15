@@ -64,3 +64,8 @@ a.dl,html.dark a.dl,a.dl svg{color:#d62828!important}
 a.dl.hs-btn{border-color:#d62828!important}
 a.dl.hs-btn.solid,html.dark a.dl.hs-btn.solid{background:#d62828!important;color:#fff!important}
 a.dl.hs-btn.solid svg{color:#fff!important}
+
+/* Text-size control (#ts) is in the HTML; its CSS lives here so the header does not shift on load (same rules textsize.js injects as fallback) */
+body{font-size:.9375rem}#top>header.wv-head{font-size:14.4px}#ts{display:inline-flex;align-items:center;margin-right:12px;gap:0}#ts button{background:none;border:0;color:#111;font-weight:700;cursor:pointer;line-height:1.5;padding:0 1px;min-width:0;min-height:0;position:relative;display:inline-flex;align-items:center;justify-content:center}#ts button::after{content:"";position:absolute;inset:-12px -6px}#ts .ts-s{font-size:11px}#ts .ts-l{font-size:15px}#ts .ts-sep{padding:0 4px;color:#111;font-size:14.4px}html.dark #ts button,html.dark #ts .ts-sep{color:#fff}#ts button:disabled{opacity:.35;cursor:default}#ts button:focus-visible{outline:3px solid #ff2a3a;outline-offset:2px;border-radius:8px}#top>header.wv-head,#top>header.wv-head *{white-space:nowrap}
+/* WCAG AA in dark mode: slightly lighter red for small text (same value as willemvroom.com) */
+html.dark{--accent:#e64545}html.dark .wv-head nav a{color:#e64545}html.dark dl.rise dt{color:#e64545!important}html.dark a.dl,html.dark a.dl svg{color:#e64545!important}
