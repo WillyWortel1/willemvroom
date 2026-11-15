@@ -80,3 +80,7 @@ html.dark .sb li{border-top-color:#262626}html.dark .pb li{background:#222}html.
 .lpi{font-size:.8rem;color:#111;font-weight:700;margin:8px 0 0;text-align:center}.lpi span{white-space:nowrap}
 html.dark .lpi{color:#fff}
 .sb .resall{margin-top:6px}.sb .resall summary{font-size:.8rem;cursor:pointer;color:#d62828;padding:4px 0}html.dark .sb .resall summary{color:#ff6b6b}
+/* CLS: footer onder de vouw houden zolang de kalender laadt */
+#list:has(>#listload){min-height:100vh}
+#sw:empty::before{content:"\00a0";padding:6px 0;border:1px solid transparent}
+.f1cal #cal:empty::before{content:"\00a0";display:inline-flex;font-size:.88rem;font-weight:600;padding:8px 0;border:1px solid transparent}

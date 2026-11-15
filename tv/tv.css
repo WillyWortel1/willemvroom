@@ -48,3 +48,7 @@ html,body{background:#000!important;overflow:hidden;height:100%}
 .mini.show{opacity:1;pointer-events:auto}
 .mini button{width:48px;height:48px;border-radius:50%;border:0;background:rgba(0,0,0,.6);color:#fff;font-size:20px;touch-action:manipulation;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 }
+/* CLS: ruimte voor zendertelling en zenderlijst zolang ze laden */
+#count:empty::before{content:"\00a0"}
+#count:empty+.chlist:empty{height:420px}
+@media(max-width:600px){#count:empty+.chlist:empty{height:360px}}

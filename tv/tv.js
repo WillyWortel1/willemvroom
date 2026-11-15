@@ -20,7 +20,7 @@ Promise.all([j("channels"),j("streams"),j("logos"),j("categories"),j("countries"
  d[3].forEach(function(c){selK.appendChild(opt(c.id,c.name))});
  selC.value=LS.get("tv-country")||"NL";selK.value=LS.get("tv-cat")||"";
  $("load").hidden=true;filter(LS.get("tv-last"));
-}).catch(function(){$("load").textContent="Zenders konden niet geladen worden."});
+}).catch(function(){$("load").textContent="Zenders konden niet geladen worden.";$("count").textContent="\u00a0"});
 function filter(keep,noTune){
  var c=selC.value,k=selK.value,s=q.value.trim().toLowerCase();
  view=all.filter(function(x){return(!c||x.country===c)&&(!k||x.cats.indexOf(k)>=0)&&(!s||x.name.toLowerCase().indexOf(s)>=0)});
