@@ -53,3 +53,6 @@ header.sticky button[aria-label$="thema"]{display:none!important}
 
 /* bloktitels zoals op de site */
 h2.font-serif{font-size:1.3rem!important;line-height:1.25!important;font-weight:750!important;letter-spacing:-.015em!important}
+/* CLS: ruimte voor de site-kop die willem.js toevoegt (14+36+6px), footer pas tonen als de app er staat, lege plek van de app-themaknop niet tonen */
+@media (scripting:enabled){body>div.min-h-screen:not(:has(>.wv-head)){padding-top:56px}main:has(>.animate-pulse:only-child)+footer{visibility:hidden}}
+header.sticky span.inline-flex.size-11[aria-hidden=true]{display:none}
