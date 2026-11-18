@@ -1,7 +1,8 @@
 /* Technics SL-1200 MKII demo — Boccaccio / Flesh 33⅓ +8. Audio via YouTube IFrame API, no audio files in repo. */
 (function(){
 var root=document.getElementById('tt');if(!root)return;
-var VID='-FDy-RVeI-A',BPM0=130;
+var RECS=[{vid:'-FDy-RVeI-A',bpm:130,a:'A SPLIT-SECOND',t:'FLESH',sub:'45 RPM · ANTLER',s3:'12" MAXI · ANTLER',name:'A Split-Second – Flesh',credit:'Video: A Split Second – Flesh (Full 12" Version), officiële video op YouTube (kanaal Abstructure).'},{vid:'FHRUPhPNKGA',bpm:null,a:'PHANTASIA',t:'INNER LIGHT',sub:'1991',s3:'1991',name:'Phantasia – Inner Light',credit:'Video: Phantasia - Inner Light [1991], op YouTube (kanaal statenhal).'}];
+var rec=0,VID=RECS[0].vid,BPM0=RECS[0].bpm;
 var S='http://www.w3.org/2000/svg';
 var dots='';for(var i=0;i<4;i++){dots+='<circle cx="235" cy="205" r="'+(181-i*4)+'" fill="none" stroke="#c9c9c9" stroke-width="2.2" stroke-dasharray="1.6 '+(2*Math.PI*(181-i*4)/180-1.6).toFixed(3)+'"/>';}
 var grooves='';for(var r=64;r<158;r+=5)grooves+='<circle cx="235" cy="205" r="'+r+'" fill="none" stroke="#222" stroke-width="'+(r%15?0.6:1.4)+'"/>';
@@ -17,9 +18,9 @@ root.innerHTML=
 '<circle cx="235" cy="205" r="158" fill="url(#ttRec)"/>'+grooves+
 '<path d="M235 47 A158 158 0 0 1 380 140" stroke="rgba(255,255,255,.08)" stroke-width="40" fill="none"/>'+
 '<circle cx="235" cy="205" r="50" fill="#e8e2d0"/><circle cx="235" cy="205" r="50" fill="none" stroke="#111" stroke-width="1"/>'+
-'<text x="235" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#111">A SPLIT-SECOND</text>'+
-'<text x="235" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#c8102e">FLESH</text>'+
-'<text x="235" y="243" text-anchor="middle" font-family="Arial,sans-serif" font-size="6.5" fill="#333">45 RPM · ANTLER</text></g>'+
+'<text x="235" y="190" text-anchor="middle" font-family="Arial,sans-serif" font-size="9" font-weight="700" fill="#111" id="ttLa1">A SPLIT-SECOND</text>'+
+'<text x="235" y="230" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#c8102e" id="ttLa2">FLESH</text>'+
+'<text x="235" y="243" text-anchor="middle" font-family="Arial,sans-serif" font-size="6.5" fill="#333" id="ttLa3">45 RPM · ANTLER</text></g>'+
 '<circle cx="235" cy="205" r="4" fill="#ddd" stroke="#777"/>'+
 '<defs><clipPath id="ttLitC"><circle cx="73" cy="286" r="28"/></clipPath><radialGradient id="ttBeamG" cx="73" cy="286" r="34" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff2a3a" stop-opacity=".55"/><stop offset="1" stop-color="#ff2a3a" stop-opacity="0"/></radialGradient><linearGradient id="ttConeG" x1="44" y1="300" x2="78" y2="283" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ff3b4a" stop-opacity=".85"/><stop offset="1" stop-color="#ff2a3a" stop-opacity=".15"/></linearGradient></defs>'+'<g id="ttBeam" style="pointer-events:none"><polygon points="41.3,294.6 61.4,262.7 84.6,309.3 46.7,305.4" fill="url(#ttConeG)"/><circle cx="73" cy="286" r="34" fill="url(#ttBeamG)"/><g clip-path="url(#ttLitC)"><g id="ttLit">'+dots.replace(/#c9c9c9/g,'#ff3b4a')+'</g></g></g>'+'<circle id="ttStrobe" cx="44" cy="300" r="20" fill="url(#ttRed)" opacity=".35"/><circle cx="44" cy="300" r="9" fill="#333" stroke="#777"/><circle cx="44" cy="300" r="3.5" fill="#ff2a3a"/>'+
 '<g id="ttStart" class="tt-btn" role="button" tabindex="0" aria-label="Start / stop"><rect x="18" y="335" width="58" height="50" rx="3" fill="#f4f4f4" stroke="#777"/><text x="47" y="377" text-anchor="middle" font-size="7" font-family="Arial" fill="#333">START·STOP</text></g>'+
@@ -35,14 +36,14 @@ root.innerHTML=
 '<g id="ttArm" style="transform-origin:455px 85px"><rect x="449" y="40" width="12" height="34" rx="3" fill="#555"/><line x1="455" y1="85" x2="455" y2="300" stroke="#cfcfcf" stroke-width="6" stroke-linecap="round"/><line x1="455" y1="85" x2="455" y2="300" stroke="#8a8a8a" stroke-width="1.5"/><g transform="rotate(18 455 312)"><rect x="446" y="296" width="18" height="34" rx="2" fill="#1d1d1d"/><rect x="451" y="318" width="8" height="8" fill="#777"/></g></g>'+
 '<circle cx="455" cy="85" r="12" fill="#999" stroke="#666"/><rect x="483" y="140" width="8" height="40" rx="2" fill="#ccc" stroke="#888"/>'+
 '<rect id="ttPitchHit" x="440" y="218" width="60" height="154" fill="transparent" role="slider" tabindex="0" aria-label="Pitch-schuif op de draaitafel" aria-valuemin="-8" aria-valuemax="8" aria-valuenow="0"/>'+'</svg></div>'+
-'<div class="tt-sleeve-box" aria-hidden="true"><div class="tt-sleeve-rec"></div><div class="tt-sleeve"><span class="tt-s1">A SPLIT-SECOND</span><span class="tt-s2">FLESH</span><span class="tt-s3">12" MAXI · ANTLER</span></div></div></div>'+
-'<div class="tt-ctrl"><div class="tt-row"><button type="button" id="ttPlay" class="tt-b">▶ Start</button><button type="button" id="ttB33" class="tt-b">33⅓</button><button type="button" id="ttB45" class="tt-b">45</button></div>'+
+'<div class="tt-sleeve-box" aria-hidden="true"><div class="tt-sleeve-rec"></div><div class="tt-sleeve"><span class="tt-s1" id="ttS1">A SPLIT-SECOND</span><span class="tt-s2" id="ttS2">FLESH</span><span class="tt-s3" id="ttS3">12" MAXI · ANTLER</span></div></div></div>'+
+'<div class="tt-ctrl"><div class="tt-row" role="group" aria-label="Kies een plaat"><button type="button" class="tt-b ttRec" data-rec="0" aria-pressed="true">A Split-Second – Flesh</button><button type="button" class="tt-b ttRec" data-rec="1" aria-pressed="false">Phantasia – Inner Light</button></div><div class="tt-row"><button type="button" id="ttPlay" class="tt-b">▶ Start</button><button type="button" id="ttB33" class="tt-b">33⅓</button><button type="button" id="ttB45" class="tt-b">45</button></div>'+
 '<label class="tt-lab" for="ttPitch">Pitch <b id="ttPv">+0,0%</b></label><input id="ttPitch" type="range" min="-8" max="8" step="0.1" value="0" aria-label="Pitch van −8 tot +8 procent"><p class="tt-note" id="ttStep" aria-live="polite">Druk op Start; daarna test de pagina welke snelheden YouTube op dit apparaat toestaat.</p>'+
 '<div class="tt-row"><button type="button" id="ttZ" class="tt-b">0</button><button type="button" id="ttBoc" class="tt-b tt-hot">Boccaccio-stand: 33⅓ +8</button><button type="button" id="ttOrig" class="tt-b">45 origineel</button><button type="button" id="ttReset" class="tt-b">Reset</button></div>'+
 '<dl class="tt-dl"><div><dt>Toerental</dt><dd id="ttRpm">45</dd></div><div><dt>Pitch</dt><dd id="ttPp">+0,0%</dd></div><div><dt>Echte draaitafel</dt><dd id="ttReal">1,000×</dd></div><div><dt>YouTube speelt af op</dt><dd id="ttYt">—</dd></div><div><dt>BPM (draaitafel)</dt><dd id="ttBpm">≈130</dd></div><div><dt>BPM (wat je hoort)</dt><dd id="ttBpmYt">—</dd></div></dl>'+
 '<p class="tt-note">YouTube-snelheden in de lijst: <span id="ttRates">nog niet geladen</span>; je hoort de dichtstbijzijnde stap. YouTube houdt de toonhoogte gelijk; op een echte draaitafel zakt de toon mee, daardoor klonk Flesh in Boccaccio zo zwaar en donker.</p>'+
 
-'<div class="tt-yt"><div id="ttPlayer"></div></div><p class="tt-note">Video: A Split Second – Flesh (Full 12" Version), officiële video op YouTube (kanaal Abstructure).</p></div>';
+'<div class="tt-yt"><div id="ttPlayer"></div></div><p class="tt-note" id="ttCredit">Video: A Split Second – Flesh (Full 12" Version), officiële video op YouTube (kanaal Abstructure).</p></div>';
 
 var $=function(id){return document.getElementById(id)};
 var st={on:false,rpm:45,pitch:0,ang:0,cur:0,arm:0},ARM_OUT=25,ARM_IN=46,player=null,ready=false,rates=[1];
@@ -54,9 +55,10 @@ function nl(n,d){return n.toFixed(d).replace('.',',')}
 function upd(){
   var s=speed(),ap=nearest(s),p=(st.pitch>=0?'+':'−')+nl(Math.abs(st.pitch),1)+'%';
   $('ttRpm').textContent=st.rpm===45?'45':'33⅓';$('ttPp').textContent=p;$('ttPv').textContent=p;
-  $('ttReal').textContent=nl(s,3)+'×';$('ttBpm').textContent='≈'+Math.round(BPM0*s);
+  $('ttReal').textContent=nl(s,3)+'×';$('ttBpm').textContent=BPM0?'≈'+Math.round(BPM0*s):'—';
   $('ttYt').textContent=(ready?nl(ap,2)+'×':'—');
-  $('ttBpmYt').textContent=(ready?'≈'+Math.round(BPM0*ap):'—');
+  $('ttBpmYt').textContent=(ready&&BPM0?'≈'+Math.round(BPM0*ap):'—');
+  $('ttBoc').hidden=!BPM0;
   $('ttKnob').setAttribute('transform','translate(0,'+(-st.pitch/8*63)+')');
   $('ttPitchHit').setAttribute('aria-valuenow',st.pitch);$('ttZero').style.opacity=st.pitch===0?1:.2;
   $('tt33l').style.opacity=st.rpm!==45?1:0;$('tt45l').style.opacity=st.rpm===45?1:0;
@@ -78,6 +80,11 @@ act($('ttStart'),toggle);act($('tt33'),function(){rpm(100/3)});act($('tt45'),fun
 $('ttPlay').onclick=toggle;$('ttB33').onclick=function(){rpm(100/3)};$('ttB45').onclick=function(){rpm(45)};
 $('ttPitch').addEventListener('input',function(){pitch(+this.value)});$('ttPitch').addEventListener('change',function(){pitch(+this.value)});$('ttZ').onclick=function(){pitch(0)};
 $('ttBoc').onclick=function(){st.rpm=100/3;pitch(8);if(!st.on)toggle()};
+function pick(i){if(i===rec)return;rec=i;var r=RECS[i];VID=r.vid;BPM0=r.bpm;if(st.on)toggle();st.arm=0;st.rpm=45;
+  $('ttLa1').textContent=r.a;$('ttLa2').textContent=r.t;$('ttLa3').textContent=r.sub;$('ttS1').textContent=r.a;$('ttS2').textContent=r.t;$('ttS3').textContent=r.s3;$('ttCredit').textContent=r.credit;
+  Array.prototype.forEach.call(root.querySelectorAll('.ttRec'),function(b){b.setAttribute('aria-pressed',+b.getAttribute('data-rec')===i)});
+  pitch(0);if(ready){try{player.cueVideoById(r.vid)}catch(e){}}}
+Array.prototype.forEach.call(root.querySelectorAll('.ttRec'),function(b){b.onclick=function(){pick(+b.getAttribute('data-rec'))}});
 $('ttOrig').onclick=function(){st.rpm=45;pitch(0);if(!st.on)toggle()};
 $('ttReset').onclick=function(){if(st.on)toggle();st.arm=0;upd();st.rpm=45;pitch(0);if(ready){try{player.seekTo(0,true);player.pauseVideo()}catch(e){}}};
 (function(){var h=$('ttPitchHit'),svg=h.ownerSVGElement,drag=false;
