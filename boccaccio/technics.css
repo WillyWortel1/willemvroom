@@ -13,10 +13,13 @@
 .tt-s3{font-size:clamp(.4rem,1.1vw,.55rem);opacity:.6;margin-top:.3rem;letter-spacing:.1em}
 .tt-sleeve-rec{position:absolute;left:8%;right:8%;top:0;aspect-ratio:1;border-radius:50%;background:repeating-radial-gradient(circle,#111 0 2px,#1c1c1c 2px 3px);box-shadow:inset 0 0 0 30% #000}
 .tt-sleeve-rec::after{content:"";position:absolute;inset:34%;border-radius:50%;background:#e8e2d0;box-shadow:0 0 0 1px #000}
-.tt-sleeves{flex:0 0 40%;display:flex;gap:4%;box-sizing:border-box;padding:0 4px}
+.tt-sleeves{flex:0 0 40%;display:flex;align-items:flex-start;gap:4%;box-sizing:border-box;padding:0 4px}
 .tt-sleeves .tt-sleeve-box{flex:1 1 0;min-width:0}
-.tt-sleeve-img{display:block;width:100%;object-fit:cover;aspect-ratio:320/312;height:auto;padding:0;border:1px solid #333;box-shadow:0 10px 20px rgba(0,0,0,.4)}
+button.tt-sleeve-box{display:block;margin:0;padding:0;border:0;background:none;color:inherit;font:inherit;text-align:left;cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
+.tt-sleeve-box:focus-visible{outline:3px solid #ff2a3a;outline-offset:4px;border-radius:2px}
 .tt-sleeve-box.on .tt-sleeve{outline:2px solid #ff2a3a;outline-offset:2px}
+.tt-sleeve-pic{display:block;padding:0;overflow:hidden}
+.tt-sleeve-pic picture,.tt-sleeve-pic img{position:absolute;top:0;left:0;width:100%;height:100%;display:block;object-fit:cover}
 .tt-ctrl{margin-top:1rem}
 .tt-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.75rem}
 .tt-b{min-height:44px;padding:.5rem .9rem;border-radius:999px;border:1px solid var(--color-line);background:transparent;color:inherit;font:inherit;font-weight:600;cursor:pointer}
