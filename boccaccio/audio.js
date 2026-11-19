@@ -12,6 +12,7 @@ function setPlayingUI(on){
     tracks.forEach(function(b,i){b.setAttribute('aria-pressed',on&&i===cur?'true':'false');if(i===cur)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
 }
 var rowCur=null,tm=null,sk=null;
+window.BocAudio={isPlaying:function(){try{return !!(ready&&player&&player.getPlayerState()===1)}catch(e){return false}},time:function(){try{return ready&&player?player.getCurrentTime():0}catch(e){return 0}},track:function(){return cur}};
 function meta(){
   if(cur<0)return;
   if(rowCur){rowCur.classList.remove('ap-act');rowCur.style.removeProperty('--ap-p');if(tm)tm.remove();if(sk)sk.remove()}
