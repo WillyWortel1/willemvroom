@@ -10,7 +10,7 @@ var bar=root.querySelector('.ap-bar'),yl=$('apYl'),chT=$('apCh');
 var playBtn=$('apPlay'),seek=$('apSeek'),now=$('apNow'),curT=$('apCur'),durT=$('apDur'),vidBtn=$('apVid'),yt=$('apYt');
 function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
 function setPlayingUI(on){
-  playBtn.textContent=on?'❚❚':'▶\ufe0e';playBtn.setAttribute('aria-label',on?L.pause:L.play);
+  playBtn.textContent=on?'❚❚':'▶\ufe0e';playBtn.classList.toggle('on',!!on);playBtn.setAttribute('aria-label',on?L.pause:L.play);
   tracks.forEach(function(b,i){b.setAttribute('aria-pressed',on&&i===cur?'true':'false');if(i===cur)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
 }
 function meta(){
@@ -60,8 +60,6 @@ $('apPrev').addEventListener('click',function(){if(ready&&cur>=0){try{if(player.
 $('apNext').addEventListener('click',function(){if(cur<0)start(0);else step(1)});
 vidBtn.addEventListener('click',function(){var on=!yt.classList.contains('on');yt.classList.toggle('on',on);vidBtn.setAttribute('aria-expanded',on);vidBtn.textContent=on?vidBtn.getAttribute('data-hide'):vidBtn.getAttribute('data-show')});
 try{if('mediaSession' in navigator){var ms=navigator.mediaSession;ms.setActionHandler('play',toggle);ms.setActionHandler('pause',toggle);ms.setActionHandler('previoustrack',function(){step(-1)});ms.setActionHandler('nexttrack',function(){step(1)})}}catch(e){}
-/* Keep the page clear of the pinned bar: expose its height to CSS (also changes when the video is shown). */
-if('ResizeObserver' in window){new ResizeObserver(function(){document.documentElement.style.setProperty('--ap-h',bar.offsetHeight+'px')}).observe(bar)}else{document.documentElement.style.setProperty('--ap-h','7rem')}
 /* Preload the YouTube API shortly before the list scrolls into view so the first tap can start playback inside the user gesture. */
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){if(en[0].isIntersecting){io.disconnect();load()}},{rootMargin:'800px 0px'});io.observe(root)}
 })();

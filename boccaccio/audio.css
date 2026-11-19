@@ -1,14 +1,16 @@
-.ap{margin-top:1.5rem}
-.ap-bar{position:fixed;z-index:50;left:.5rem;right:.5rem;bottom:max(.5rem,env(safe-area-inset-bottom,0px));max-width:44rem;margin:0 auto;max-height:calc(100dvh - 1rem);overflow:auto;background:var(--color-bg);border:1px solid var(--color-line);border-radius:16px;padding:.5rem .8rem;box-shadow:0 -6px 18px -8px rgba(0,0,0,.35)}
+.ap{--ap-idle:#000;margin-top:1.5rem}
+html.dark .ap{--ap-idle:#fff}
+.ap-bar{background:var(--color-bg);border:1px solid var(--color-line);border-radius:16px;padding:.5rem .8rem;margin:1rem 0 .5rem}
 .ap-now{font-size:.85rem;line-height:1.3;min-height:1.5rem;display:flex;gap:.6rem;align-items:center}
 .ap-nl{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
 .ap-title{flex:1 1 auto;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .ap-ctl{display:flex;align-items:center;gap:.4rem;margin-top:.2rem}
 .ap-b{min-width:44px;min-height:44px;padding:.35rem .7rem;border-radius:999px;border:1px solid var(--color-line);background:transparent;color:inherit;font:inherit;font-weight:600;cursor:pointer;line-height:1}
-.ap-b:hover,.ap-b[aria-pressed=true]{border-color:#ff2a3a;box-shadow:0 0 12px -2px rgba(255,42,58,.7)}
-.ap-main{border-color:#ff2a3a;color:#ff2a3a}
+.ap-b:hover{background:rgba(127,127,127,.14)}
+.ap-main{border:2px solid var(--ap-idle);color:var(--ap-idle)}
+.ap-main.on{border-color:#ff2a3a;color:#ff2a3a;box-shadow:0 0 12px -2px rgba(255,42,58,.7)}
 .ap-sm{flex:none;background:none;border:0;color:inherit;font:inherit;font-size:.8rem;text-decoration:underline;text-underline-offset:.2em;cursor:pointer;min-height:32px;padding:.2rem .3rem}
-.ap-b:focus-visible,.ap-t:focus-visible,.ap-seek:focus-visible,.ap-d summary:focus-visible{outline:3px solid #ff2a3a;outline-offset:2px}
+.ap-b:focus-visible,.ap-t:focus-visible,.ap-seek:focus-visible,.ap-d summary:focus-visible,.ap-sm:focus-visible{outline:3px solid var(--color-fg);outline-offset:3px}
 .ap-time{font-size:.8rem;font-variant-numeric:tabular-nums;opacity:.8;min-width:2.4rem;text-align:center}
 .ap-seek{flex:1 1 7rem;min-width:5rem;accent-color:#ff2a3a;height:44px;touch-action:pan-y}
 .ap-yt{position:fixed;left:-9999px;top:0;width:200px;height:200px;overflow:hidden}
@@ -17,10 +19,11 @@
 .ap-l{list-style:none;padding:0;margin:0}
 .ap-l li{display:flex;align-items:center;gap:.6rem;border-bottom:1px solid var(--color-line);padding:.2rem 0 .2rem .4rem;cursor:pointer;border-radius:8px}
 .ap-l li:hover{background:rgba(127,127,127,.1)}
-.ap-t{flex:none;position:relative;width:44px;height:44px;border-radius:50%;border:1px solid var(--color-line);background:transparent;color:#ff2a3a;padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
+.ap-t{flex:none;position:relative;width:44px;height:44px;border-radius:50%;border:2px solid var(--ap-idle);background:transparent;color:var(--ap-idle);padding:0;cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent}
 .ap-t::before{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;transform:translate(-38%,-50%);background:currentColor;clip-path:polygon(0 0,100% 50%,0 100%)}
 .ap-t[aria-pressed=true]::before{transform:translate(-50%,-50%);clip-path:none;background:linear-gradient(90deg,currentColor 0 35%,transparent 35% 65%,currentColor 65% 100%)}
-.ap-t:hover,.ap-t[aria-pressed=true]{border-color:#ff2a3a;box-shadow:0 0 12px -2px rgba(255,42,58,.7)}
+.ap-t:hover{background:rgba(127,127,127,.18)}
+.ap-t[aria-pressed=true]{border-color:#ff2a3a;color:#ff2a3a;box-shadow:0 0 12px -2px rgba(255,42,58,.7)}
 .ap-t.bad{opacity:.5}
 .ap-l li:has(.bad) .ap-name{text-decoration:line-through;opacity:.6}
 .ap-num{flex:none;width:1.8rem;text-align:right;font-variant-numeric:tabular-nums;opacity:.7}
@@ -32,5 +35,7 @@
 .ap-ch{opacity:.7}
 .ap-d summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center}
 @media (max-width:520px){.ap-yl .ap-ch{display:none}}
-body:has(#ap){padding-bottom:calc(var(--ap-h,7rem) + max(.5rem,env(safe-area-inset-bottom,0px)) + 1rem)}
-html:has(#ap){scroll-padding-bottom:calc(var(--ap-h,7rem) + max(.5rem,env(safe-area-inset-bottom,0px)) + 1rem)}
+#apPrev,#apNext{position:relative;color:var(--ap-idle)}
+#apPrev::before,#apNext::before{content:"";position:absolute;left:50%;top:50%;width:14px;height:14px;transform:translate(-50%,-50%);background:currentColor}
+#apPrev::before{clip-path:polygon(0 0,14% 0,14% 42%,100% 0,100% 100%,14% 58%,14% 100%,0 100%)}
+#apNext::before{clip-path:polygon(100% 0,86% 0,86% 42%,0 0,0 100%,86% 58%,86% 100%,100% 100%)}
