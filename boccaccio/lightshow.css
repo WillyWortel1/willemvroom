@@ -9,7 +9,6 @@ html.dark .ls{--ap-idle:#fff}
 .ls-b:active{background:rgba(255,42,58,.2);border-color:#ff2a3a}
 .ls-b:disabled{opacity:.4;cursor:not-allowed}
 .ls-b:focus-visible,.ls-vol input:focus-visible{outline:3px solid var(--color-fg);outline-offset:3px}
-.ls-bpm{font-variant-numeric:tabular-nums;opacity:.8;margin-left:.35rem}
 .ls-vol{display:flex;align-items:center;gap:.6rem;flex:1 1 12rem;min-height:44px;font-size:.9rem;font-weight:600}
 .ls-vol input{flex:1;min-width:6rem;accent-color:#ff2a3a;height:44px}
 @media (max-width:520px){.ls-stage{aspect-ratio:16/11}}
