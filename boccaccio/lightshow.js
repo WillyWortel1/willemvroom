@@ -98,8 +98,8 @@ function frame(now,still){
   fog=Math.max(.1,fog-dt*.05);
   var beatPulse=pl&&n!==lastBeatN;if(pl)lastBeatN=n;
   /* mega box */
-  drawBox(kick,ph,n,{cx:W*.2,by:H*.86,bw:W*.15,bh:H*.34,sh:.7,dim:.45});
-  drawBox(kick,ph,n,{cx:W*.8,by:H*.86,bw:W*.15,bh:H*.34,sh:.7,dim:.45});
+  drawBox(kick,ph,n,{cx:W*.2,by:H*.86,bw:W*.15,bh:H*.34,sh:.7,dim:.45,lamp:1});
+  drawBox(kick,ph,n,{cx:W*.8,by:H*.86,bw:W*.15,bh:H*.34,sh:.7,dim:.45,lamp:-1});
   drawBox(kick,ph,n,{cx:W/2,by:H*.9,bw:W*.275,bh:H*.5,sh:1,dim:0,main:true});
   /* lamps */
   var inten=lvl*(S.lamps&&S.show?1:0);
@@ -148,6 +148,15 @@ function drawBox(kick,ph,n,o){
   /* logo strip */
   ctx.fillStyle='rgba(255,42,58,'+(on?.55+pump*.4:.18)+')';ctx.fillRect(bx+bw*.38,top+bh*.93,bw*.24,Math.max(2,bh*.012));
   if(o.dim){ctx.fillStyle='rgba(4,4,12,'+o.dim+')';ctx.fillRect(bx,top,bw,bh);var hz=ctx.createLinearGradient(0,top,0,by);hz.addColorStop(0,'rgba(120,130,160,0)');hz.addColorStop(1,'rgba(120,130,160,'+(o.dim*.4)+')');ctx.fillStyle=hz;ctx.fillRect(bx,top,bw,bh)}
+  if(o.lamp&&S.lamps&&S.show&&lvl>.01){
+    var rm=RM.matches,I=Math.min(1,(rm?.3+.5*kick:.15+1.25*kick)*(.35+.65*lvl)),lr=bw*.07,ly=top-lr;
+    rrect(cx-bw*.15,top-bw*.12,bw*.3,bw*.12,2);ctx.fillStyle='#16161d';ctx.fill();
+    ctx.globalCompositeOperation='lighter';
+        cone(cx,ly,Math.PI-o.lamp*.38,H*.62,W*.05,'#ffffff',.3*I);
+    var gg=ctx.createRadialGradient(cx,ly,0,cx,ly,bw*(.55+.5*I));gg.addColorStop(0,'rgba(255,255,255,'+(.75*I).toFixed(3)+')');gg.addColorStop(.35,'rgba(255,255,255,'+(.22*I).toFixed(3)+')');gg.addColorStop(1,'rgba(255,255,255,0)');ctx.fillStyle=gg;ctx.fillRect(cx-bw*1.1,ly-bw*1.1,bw*2.2,bw*2.2);
+    ctx.globalCompositeOperation='source-over';
+    ctx.beginPath();ctx.arc(cx,ly,lr,0,6.2832);ctx.fillStyle='rgba(255,255,255,'+(.12+.88*I).toFixed(3)+')';ctx.fill();
+  }
   ctx.restore();
   if(o.main){
   ctx.fillStyle='#101015';ctx.fillRect(W*.86,H*.84,W*.1,H*.06);ctx.fillStyle='#1d1d25';ctx.fillRect(W*.84,H*.855,W*.03,H*.02);ctx.fillStyle='rgba(255,42,58,'+((S.hold||performance.now()<S.burstUntil)?.9:.3)+')';ctx.fillRect(W*.88,H*.86,W*.012,H*.008);
