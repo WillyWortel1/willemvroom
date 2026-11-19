@@ -63,7 +63,15 @@ var parts=[],fog=.12,crowd=null;
 function emit(n,burst){
   for(var i=0;i<n&&parts.length<110;i++){
     var fromMachine=burst||Math.random()<.35;
-    parts.push({x:fromMachine?W*.93:Math.random()*W,y:fromMachine?H*.86:H*(.78+Math.random()*.14),vx:fromMachine?-(18+Math.random()*60):(Math.random()-.5)*14,vy:-(6+Math.random()*(fromMachine?46:14)),r:W*(.05+Math.random()*.05),g:W*(.02+Math.random()*.03),a:0,life:0,max:5+Math.random()*5,s:(Math.random()*4)|0,k:(Math.random()-.5)*.4});
+    parts.push({x:fromMachine?W*.93:Math.random()*W,y:fromMachine?H*.86:H*(.78+Math.random()*.14),vx:fromMachine?-(18+Math.random()*60):(Math.random()-.5)*14,vy:-(6+Math.random()*(fromMachine?46:14)),r:W*(.05+Math.random()*.05),g:W*(.02+Math.random()*.03),a:0,life:0,max:5+Math.random()*5,s:(Math.random()*4)|0,k:(Math.random()-.5)*.4,ay:-2});
+  }
+}
+/* extra smoke sources: left machine (blows inward) and the truss (sinks down) */
+function emitSide(n,side,burst){
+  for(var i=0;i<n&&parts.length<170;i++){
+    var left=side===1,sp=burst?1:.55;
+    parts.push(left?{x:W*.115,y:H*(.845+Math.random()*.02),vx:(22+Math.random()*58)*sp,vy:-(4+Math.random()*34*sp),r:W*(.05+Math.random()*.05),g:W*(.02+Math.random()*.03),a:0,life:0,max:5+Math.random()*5,s:(Math.random()*4)|0,k:(Math.random()-.5)*.4,ay:-2,am:1.5}
+      :{x:W*(.04+Math.random()*.92),y:H*.09,vx:(Math.random()-.5)*10,vy:3+Math.random()*12*sp,r:W*(.06+Math.random()*.06),g:W*(.03+Math.random()*.03),a:0,life:0,max:7+Math.random()*5,s:(Math.random()*4)|0,k:(Math.random()-.5)*.4,ay:9,am:2.2});
   }
 }
 function mkCrowd(){
@@ -94,6 +102,9 @@ function frame(now,still){
   if(S.show){
     if(rate2){var k=dt*34*(rm?.5:1);emitAcc+=k;var m=Math.floor(emitAcc);emitAcc-=m;emit(m,true);fog=Math.min(1,fog+dt*.35)}
     else{emitAcc2+=dt*3;var m2=Math.floor(emitAcc2);emitAcc2-=m2;emit(m2,false)}
+    var kx=(rm?.5:1);
+    accL+=dt*(rate2?24:4.5)*kx;var mL=Math.floor(accL);accL-=mL;emitSide(mL,1,!!rate2);
+    accT+=dt*(rate2?18:4)*kx;var mT=Math.floor(accT);accT-=mT;emitSide(mT,2,!!rate2);
   }
   fog=Math.max(.1,fog-dt*.05);
   var beatPulse=pl&&n!==lastBeatN;if(pl)lastBeatN=n;
@@ -118,7 +129,7 @@ function frame(now,still){
   /* vignette */
   var vg=ctx.createRadialGradient(W/2,H*.55,H*.2,W/2,H*.55,H*.95);vg.addColorStop(0,'rgba(0,0,0,0)');vg.addColorStop(1,'rgba(0,0,0,.55)');ctx.globalCompositeOperation='source-over';ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);
 }
-var emitAcc=0,emitAcc2=0;
+var emitAcc=0,emitAcc2=0,accL=0,accT=0;
 function rrect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath()}
 function drawBox(kick,ph,n,o){
   var on=S.mega&&S.show;var pump=on?kick*S.vol*lvl:0;
@@ -159,6 +170,7 @@ function drawBox(kick,ph,n,o){
   }
   ctx.restore();
   if(o.main){
+  ctx.fillStyle='#101015';ctx.fillRect(W*.04,H*.84,W*.08,H*.06);ctx.fillStyle='#1d1d25';ctx.fillRect(W*.115,H*.845,W*.025,H*.02);ctx.fillStyle='rgba(255,42,58,'+((S.hold||performance.now()<S.burstUntil)?.9:.3)+')';ctx.fillRect(W*.06,H*.86,W*.012,H*.008);
   ctx.fillStyle='#101015';ctx.fillRect(W*.86,H*.84,W*.1,H*.06);ctx.fillStyle='#1d1d25';ctx.fillRect(W*.84,H*.855,W*.03,H*.02);ctx.fillStyle='rgba(255,42,58,'+((S.hold||performance.now()<S.burstUntil)?.9:.3)+')';ctx.fillRect(W*.88,H*.86,W*.012,H*.008);
   }
 }
@@ -211,9 +223,9 @@ function stepSmoke(dt){
   ctx.globalCompositeOperation='screen';
   for(var i=parts.length-1;i>=0;i--){
     var p=parts[i];p.life+=dt;if(p.life>p.max){parts.splice(i,1);continue}
-    p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=Math.pow(.6,dt);p.vy=p.vy*Math.pow(.7,dt)-2*dt;p.vx+=Math.sin(p.life*.8+p.k*9)*3*dt;
+    p.x+=p.vx*dt;p.y+=p.vy*dt;p.vx*=Math.pow(.6,dt);p.vy=p.vy*Math.pow(.7,dt)+p.ay*dt;p.vx+=Math.sin(p.life*.8+p.k*9)*3*dt;
     var u=p.life/p.max,r=p.r+(p.g*4)*u,al=Math.sin(Math.PI*Math.min(1,u))*.95*(.5+.5*Math.min(1,lvl+.3));
-    ctx.globalAlpha=al*.3;ctx.drawImage(SPR[p.s],p.x-r,p.y-r,r*2,r*2);
+    ctx.globalAlpha=Math.min(1,al*.3*(p.am||1));ctx.drawImage(SPR[p.s],p.x-r,p.y-r,r*2,r*2);
   }
   ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
 }
