@@ -2,10 +2,11 @@
 (function(){
 var root=document.getElementById('ap');if(!root)return;
 var EN=root.getAttribute('data-lang')==='en';
-var L=EN?{play:'Play',pause:'Pause',none:'Pick a track',bad:'This track is not available, skipping to the next one.'}:{play:'Afspelen',pause:'Pauzeren',none:'Kies een nummer',bad:'Dit nummer is niet beschikbaar, door naar het volgende.'};
+var L=EN?{play:'Play',pause:'Pause',none:'Pick a track',on:'on YouTube',bad:'This track is not available, skipping to the next one.'}:{play:'Afspelen',pause:'Pauzeren',none:'Kies een nummer',on:'op YouTube',bad:'Dit nummer is niet beschikbaar, door naar het volgende.'};
 var $=function(id){return document.getElementById(id)};
 var tracks=Array.prototype.slice.call(root.querySelectorAll('.ap-t'));
-var cur=-1,player=null,ready=false,apiLoading=false,pending=null,timer=null,errSkips=0;
+var cur=-1,player=null,ready=false,apiLoading=false,pending=null,timer=null,errSkips=0,retried={};
+var bar=root.querySelector('.ap-bar'),yl=$('apYl'),chT=$('apCh');
 var playBtn=$('apPlay'),seek=$('apSeek'),now=$('apNow'),curT=$('apCur'),durT=$('apDur'),vidBtn=$('apVid'),yt=$('apYt');
 function fmt(s){s=Math.max(0,Math.floor(s||0));return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
 function setPlayingUI(on){
@@ -13,7 +14,8 @@ function setPlayingUI(on){
   tracks.forEach(function(b,i){b.setAttribute('aria-pressed',on&&i===cur?'true':'false');if(i===cur)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current')});
 }
 function meta(){
-  if(cur<0)return;now.textContent=tracks[cur].getAttribute('data-title');
+  if(cur<0)return;var tb=tracks[cur],ti=tb.getAttribute('data-title'),ch=tb.getAttribute('data-ch');now.textContent=ti;
+  yl.href='https://www.youtube.com/watch?v='+tb.getAttribute('data-id');yl.setAttribute('aria-label',ti+' '+L.on+' ('+ch+')');yl.title=ch;chT.textContent=' · '+ch;yl.hidden=false;
   try{if('mediaSession' in navigator)navigator.mediaSession.metadata=new MediaMetadata({title:tracks[cur].getAttribute('data-title'),artist:'Boccaccio Life',album:EN?'Listen to Boccaccio Life':'Luister naar Boccaccio Life'})}catch(e){}
 }
 function load(){
@@ -30,19 +32,14 @@ function create(){
       else if(e.data===2){setPlayingUI(false)}
       else if(e.data===0){setPlayingUI(false);step(1)}
     },
-    onError:function(e){var c=e&&e.data;if(cur>=0&&(c===100||c===101||c===150||c===153)){tracks[cur].classList.add('bad');tracks[cur].setAttribute('title',L.bad)}if(++errSkips<=3)setTimeout(function(){step(1)},600);else setPlayingUI(false)}}});
+    onError:function(e){var c=e&&e.data;if(cur>=0&&(c===100||c===101||c===150||c===153)){if(!retried[cur]){retried[cur]=1;var r=cur;setTimeout(function(){if(cur===r)start(r)},900);return}tracks[cur].classList.add('bad');tracks[cur].setAttribute('title',L.bad)}if(++errSkips<=3)setTimeout(function(){step(1)},600);else setPlayingUI(false)}}});
 }
 function tick(){if(!ready||!player)return;try{var d=player.getDuration(),t=player.getCurrentTime();if(d>0){seek.max=Math.floor(d);if(!seeking)seek.value=Math.floor(t);durT.textContent=fmt(d);curT.textContent=fmt(t)}}catch(e){}}
 var seeking=false;
 seek.addEventListener('input',function(){seeking=true;curT.textContent=fmt(seek.value)});
 seek.addEventListener('change',function(){seeking=false;try{player.seekTo(+seek.value,true)}catch(e){}});
-function dock(){
-  if(root.classList.contains('ap-on'))return;
-  var bar=root.querySelector('.ap-bar'),sp=document.createElement('div');sp.className='ap-slot';sp.style.height=bar.offsetHeight+'px';bar.parentNode.insertBefore(sp,bar);
-  root.classList.add('ap-on');document.documentElement.classList.add('ap-open');
-}
 function start(i){
-  if(i<0||i>=tracks.length)return;dock();cur=i;meta();seek.value=0;curT.textContent='0:00';durT.textContent='0:00';
+  if(i<0||i>=tracks.length)return;cur=i;meta();seek.value=0;curT.textContent='0:00';durT.textContent='0:00';
   if(!ready){pending=i;load();setPlayingUI(false);return}
   try{var tt=document.getElementById('tt');if(tt&&tt._tt&&tt._tt.player&&tt._tt.player())tt._tt.player().pauseVideo()}catch(e){}
   try{player.loadVideoById(tracks[i].getAttribute('data-id'))}catch(e){}
@@ -55,7 +52,7 @@ function toggle(){
   if(!ready){return}
   try{var s=player.getPlayerState();if(s===1)player.pauseVideo();else player.playVideo()}catch(e){}
 }
-tracks.forEach(function(b,i){b.addEventListener('click',function(){
+tracks.forEach(function(b,i){b.parentNode.addEventListener('click',function(e){if(e.target!==b)b.click()});b.addEventListener('click',function(){
   if(i===cur&&ready){try{var s=player.getPlayerState();if(s===1){player.pauseVideo()}else{player.playVideo()}}catch(e){}return}
   start(i)})});
 playBtn.addEventListener('click',toggle);
@@ -63,6 +60,8 @@ $('apPrev').addEventListener('click',function(){if(ready&&cur>=0){try{if(player.
 $('apNext').addEventListener('click',function(){if(cur<0)start(0);else step(1)});
 vidBtn.addEventListener('click',function(){var on=!yt.classList.contains('on');yt.classList.toggle('on',on);vidBtn.setAttribute('aria-expanded',on);vidBtn.textContent=on?vidBtn.getAttribute('data-hide'):vidBtn.getAttribute('data-show')});
 try{if('mediaSession' in navigator){var ms=navigator.mediaSession;ms.setActionHandler('play',toggle);ms.setActionHandler('pause',toggle);ms.setActionHandler('previoustrack',function(){step(-1)});ms.setActionHandler('nexttrack',function(){step(1)})}}catch(e){}
+/* Keep the page clear of the pinned bar: expose its height to CSS (also changes when the video is shown). */
+if('ResizeObserver' in window){new ResizeObserver(function(){document.documentElement.style.setProperty('--ap-h',bar.offsetHeight+'px')}).observe(bar)}else{document.documentElement.style.setProperty('--ap-h','7rem')}
 /* Preload the YouTube API shortly before the list scrolls into view so the first tap can start playback inside the user gesture. */
 if('IntersectionObserver' in window){var io=new IntersectionObserver(function(en){if(en[0].isIntersecting){io.disconnect();load()}},{rootMargin:'800px 0px'});io.observe(root)}
 })();
