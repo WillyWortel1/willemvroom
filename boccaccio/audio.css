@@ -26,7 +26,7 @@ html.dark .ap{--ap-idle:#fff}
 .ap-t[aria-pressed=true]{border-color:#ff2a3a;color:#ff2a3a;box-shadow:0 0 12px -2px rgba(255,42,58,.7)}
 .ap-t.bad{opacity:.5}
 .ap-l li:has(.bad) .ap-name{text-decoration:line-through;opacity:.6}
-.ap-num{flex:none;width:1.8rem;text-align:right;font-variant-numeric:tabular-nums;opacity:.7}
+.ap-num{flex:none;width:2.2rem;text-align:right;font-variant-numeric:tabular-nums;opacity:.7}
 .ap-l li:has([aria-current]) .ap-name{color:#ff2a3a;font-weight:600}
 .ap-l li:has([aria-current]) .ap-num::before{content:"♪ "}
 .ap-name{flex:1 1 auto;min-width:0;overflow-wrap:anywhere}
