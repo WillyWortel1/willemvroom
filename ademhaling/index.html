@@ -448,40 +448,54 @@
     ac.onstatechange=()=>{ if(ac.state!=='running' && mode!=='uit' && !document.hidden) needResume=true; };
     for(const m of ['regen','zee','gong']){ const g=ac.createGain(); g.gain.value=0; g.connect(master); buses[m]=g; }
     // regen: zacht gefilterde ruis
-    const hp=ac.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=500;
-    const r=loop(hp,'lowpass',6500,.4,.8); hp.connect(buses.regen);
+    const hp=ac.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=280;
+    const r=loop(hp,'lowpass',3000,.3,.42); hp.connect(buses.regen);
+    loop(buses.regen,'lowpass',900,.3,.28); // rustige, constante ruis eronder
     // zee: lage branding + zacht ruisende golf
-    const zr=loop(buses.zee,'lowpass',520,.5,.4); const zs=loop(buses.zee,'bandpass',900,.5,.2);
+    const zr=loop(buses.zee,'lowpass',480,.4,.46); const zs=loop(buses.zee,'bandpass',700,.4,.06);
     buses.zee.rumble=zr.gn; buses.zee.surf=zs;
     return true;
   }
   function drops(){ // fijne druppeltikjes
     const t=ac.currentTime;
-    for(let i=0;i<3;i++){ if(Math.random()>.55) continue;
+    for(let i=0;i<1;i++){ if(Math.random()>.45) continue;
       const at=t+Math.random()*.1, src=ac.createBufferSource(); src.buffer=noise;
-      const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=2200+Math.random()*4200; bp.Q.value=6+Math.random()*8;
-      const g=ac.createGain(), pk=.08+Math.random()*.16; g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(pk,at+.002); g.gain.exponentialRampToValueAtTime(.0001,at+.03+Math.random()*.05);
+      const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=1600+Math.random()*2400; bp.Q.value=3+Math.random()*4;
+      const g=ac.createGain(), pk=.025+Math.random()*.05; g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(pk,at+.005); g.gain.exponentialRampToValueAtTime(.0001,at+.06+Math.random()*.08);
       const pan=ac.createStereoPanner?ac.createStereoPanner():null;
       if(pan){ pan.pan.value=Math.random()*1.6-.8; src.connect(bp).connect(g).connect(pan).connect(buses.regen); } else src.connect(bp).connect(g).connect(buses.regen);
       src.start(at,Math.random()*7,.09); }
   }
   function waves(){
     tick+=.1;
-    const target = running ? (window.__breath||0) : .5+.5*Math.sin(tick*2*Math.PI/10); // zwelt bij inademen, ebt bij uitademen
-    swell += (target-swell)*.25; const t=ac.currentTime, z=buses.zee;
-    z.surf.gn.gain.setTargetAtTime(.08+swell*.62,t,.35); z.surf.f.frequency.setTargetAtTime(700+swell*1100,t,.5);
-    z.rumble.gain.setTargetAtTime(.38+swell*.32,t,.5);
+    const target = running ? (window.__breath||0) : .5+.5*Math.sin(tick*2*Math.PI/14); // zwelt bij inademen, ebt bij uitademen
+    swell += (target-swell)*.06; const t=ac.currentTime, z=buses.zee;
+    z.surf.gn.gain.setTargetAtTime(.05+swell*.2,t,1.2); z.surf.f.frequency.setTargetAtTime(600+swell*420,t,1.5);
+    z.rumble.gain.setTargetAtTime(.46+swell*.14,t,1.5);
   }
-  function gong(soft){ // warme, diepe gong: inharmonische boventonen, lange uitklank
+  const strikes=[];
+  const hold=(prm,t)=>{ if(prm.cancelAndHoldAtTime) prm.cancelAndHoldAtTime(t); else { const v=prm.value; prm.cancelScheduledValues(t); prm.setValueAtTime(v,t); } };
+  function gong(soft){ // diepe, lang doorklinkende gong met zacht zwevende boventonen, zonder tik
     if(!ac||mode!=='gong') return;
-    const t=ac.currentTime+.02, base=131, P=[[1,.8,9],[1.003,.5,9],[1.47,.55,7.5],[1.98,.5,6.5],[2.44,.38,5.5],[2.9,.28,4.5],[3.55,.18,3.5],[4.21,.12,2.8],[5.4,.07,2]];
-    const out=ac.createGain(); out.gain.value=(soft?.6:.9)*.22; out.connect(buses.gong);
-    const lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.frequency.setValueAtTime(2600,t); lp.frequency.exponentialRampToValueAtTime(500,t+6); lp.connect(out);
+    const t=ac.currentTime+.03, base=78;
+    // eerdere slagen zacht terugnemen zodat ze niet opstapelen (zonder sprong in volume)
+    while(strikes.length && strikes[0].end<t) strikes.shift();
+    const recent = strikes.length && t-strikes[strikes.length-1].start < 4; // snel achter elkaar: zachter
+    for(const st of strikes){ hold(st.g.gain,t); st.g.gain.setTargetAtTime(0,t,.9); }
+    // [verhouding, sterkte, uitklinktijd]; paren vlak naast elkaar geven een trage zweving
+    const P=[[1,.75,24],[1.0045,.55,24],[1.52,.32,19],[1.526,.22,19],[2.0,.42,17],[2.007,.3,17],[2.76,.32,14],[2.768,.22,14],[3.42,.2,11],[4.2,.16,9],[5.1,.09,6.5],[6.3,.05,4.5]];
+    const out=ac.createGain(), lvl=(soft?.6:.9)*.2*(recent?.45:1); out.gain.value=lvl; out.connect(buses.gong);
+    const trem=ac.createGain(); trem.gain.value=1; trem.connect(out);
+    const lfo=ac.createOscillator(), depth=ac.createGain(); lfo.frequency.value=.33;
+    depth.gain.setValueAtTime(0,t); depth.gain.linearRampToValueAtTime(.12,t+2); // trage, zachte zweving
+    depth.gain.linearRampToValueAtTime(0,t+36); lfo.connect(depth).connect(trem.gain); lfo.start(t); lfo.stop(t+40);
+    const lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.Q.value=.5; lp.frequency.setValueAtTime(1800,t); lp.frequency.exponentialRampToValueAtTime(600,t+14); lp.connect(trem);
     for(const [r,a,d] of P){ const o=ac.createOscillator(); o.type='sine'; o.frequency.value=base*r;
-      const g=ac.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(a,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+d);
-      o.connect(g).connect(lp); o.start(t); o.stop(t+d+.1); }
-    const src=ac.createBufferSource(); src.buffer=noise; const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=300; bp.Q.value=2; // zachte aanslag
-    const ng=ac.createGain(); ng.gain.setValueAtTime(.25,t); ng.gain.exponentialRampToValueAtTime(.0001,t+.12); src.connect(bp).connect(ng).connect(lp); src.start(t,1,.2);
+      const g=ac.createGain(); g.gain.setValueAtTime(0,t);
+      g.gain.linearRampToValueAtTime(a,t+.08);            // zachte aanslag (80 ms)
+      g.gain.setTargetAtTime(0,t+.08,d/4);                // lange, gladde uitklank
+      o.connect(g).connect(lp); o.start(t); o.stop(t+d*1.6+1); }
+    strikes.push({g:out,start:t,end:t+40});
   }
   window.__onPhase = key => { if(key==='in') gong(false); else if(key==='start') gong(true); };
   window.__onFinish = () => gong(true);
