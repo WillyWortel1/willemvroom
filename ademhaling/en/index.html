@@ -53,11 +53,10 @@
 .stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;padding-top:8px}
 .guide{position:relative;width:min(78vw,340px);aspect-ratio:1}
 .guide svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.enso{transform-origin:50% 50%;scale:calc(.9 + var(--breath)*.1);filter:drop-shadow(0 0 18px rgba(226,197,143,.35))}
-.halo{position:absolute;inset:14%;border-radius:50%;background:radial-gradient(circle,rgba(243,223,180,.20),rgba(243,223,180,0) 68%);
+.enso{filter:drop-shadow(0 0 calc(8px + var(--breath)*22px) rgba(243,214,160,calc(.35 + var(--breath)*.45)))}
+.disc{transform-box:fill-box;transform-origin:50% 50%;scale:calc(.62 + var(--breath)*.38);opacity:calc(.35 + var(--breath)*.65);@media (prefers-reduced-motion:reduce){scale:1}}
+.halo{position:absolute;inset:4%;border-radius:50%;background:radial-gradient(circle,rgba(243,223,180,.20),rgba(243,223,180,0) 68%);
   scale:calc(.75 + var(--breath)*.45);opacity:calc(.5 + var(--breath)*.5);pointer-events:none}
-.edge{font-family:var(--sans);font-size:9px;letter-spacing:.2em;text-transform:uppercase;fill:var(--muted)}
-.edge.on{fill:var(--gold-2)}
 .readout{position:relative;isolation:isolate;padding:4px 28px 2px}
 .readout::before{content:"";position:absolute;inset:-30px -60px;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(11,16,38,.38),rgba(11,16,38,0));filter:blur(8px)}
 .phase{font-family:var(--serif);font-size:clamp(2.2rem,10vw,3rem);font-weight:500;margin:6px 0 0;line-height:1;min-height:1em;color:var(--ink);
@@ -171,30 +170,19 @@
             <linearGradient id="goud" x1="0" y1="0" x2="1" y2="1">
               <stop offset="0" stop-color="#f6e4bd"/><stop offset=".55" stop-color="#e2c58f"/><stop offset="1" stop-color="#a8824c"/>
             </linearGradient>
-            <clipPath id="longclip"><path id="longpad" d="M141 118 C128 112 112 120 106 140 C99 164 100 188 108 198 C116 206 136 202 141 192 Z M159 118 C172 112 188 120 194 140 C201 164 200 188 192 198 C184 206 164 202 159 192 Z"/></clipPath>
+            <radialGradient id="schijf" cx="50%" cy="45%" r="55%">
+              <stop offset="0" stop-color="#ffe7b8" stop-opacity=".6"/><stop offset=".5" stop-color="#f0c27e" stop-opacity=".3"/><stop offset="1" stop-color="#e2a96a" stop-opacity="0"/>
+            </radialGradient>
             <radialGradient id="dotg"><stop offset="0" stop-color="#fff8e6"/><stop offset=".45" stop-color="#f3dfb4"/><stop offset="1" stop-color="#f3dfb4" stop-opacity="0"/></radialGradient>
           </defs>
-          <!-- enso -->
+          <circle class="disc" cx="150" cy="150" r="124" fill="url(#schijf)"/>
           <g class="enso">
-            <path d="M150 18 C226 16 284 74 282 150 C280 226 222 284 148 282 C74 280 18 222 20 148 C22 92 54 48 104 28"
-              fill="none" stroke="url(#goud)" stroke-width="7" stroke-linecap="round" opacity=".9"/>
-            <path d="M150 24 C222 24 276 78 276 150 C276 222 222 276 150 276 C80 276 26 224 26 152"
-              fill="none" stroke="#f3dfb4" stroke-width="1" opacity=".35"/>
+            <circle cx="150" cy="150" r="132" fill="none" stroke="url(#goud)" stroke-width="5" opacity=".9"/>
+            <circle cx="150" cy="150" r="124" fill="none" stroke="#f3dfb4" stroke-width=".8" opacity=".3"/>
           </g>
-          <!-- driehoek: links omhoog = in, boven = vast, rechts omlaag = uit -->
-          <path id="tri" d="M150 232 L66 86 L234 86 Z" fill="none" stroke="rgba(243,223,180,.28)" stroke-width="1.4"/>
-          <path id="trail" d="M150 232 L66 86 L234 86 L150 232" fill="none" stroke="url(#goud)" stroke-width="2.2" stroke-linecap="round"/>
-          <text class="edge" id="e-uit" x="0" y="0" transform="translate(212 171) rotate(-60)" text-anchor="middle">out · 8 counts</text>
-          <text class="edge" id="e-in" x="0" y="0" transform="translate(88 171) rotate(60)" text-anchor="middle">in · 4 counts</text>
-          <text class="edge" id="e-vast" x="150" y="76" text-anchor="middle">hold · 7 counts</text>
-          <!-- longen -->
-          <rect x="146.5" y="100" width="7" height="34" rx="3.5" fill="rgba(243,223,180,.35)"/>
-          <use href="#longpad" fill="rgba(243,223,180,.13)" stroke="rgba(243,223,180,.4)" stroke-width="1"/>
-          <g clip-path="url(#longclip)">
-            <rect id="vul" x="96" y="112" width="108" height="96" fill="url(#goud)" opacity=".85" transform-origin="150 208" style="transform:scaleY(0)"/>
-          </g>
-          <circle id="dot" cx="150" cy="232" r="13" fill="url(#dotg)"/>
-          <circle id="dotc" cx="150" cy="232" r="4" fill="#fff8e6"/>
+          <circle id="trail" cx="150" cy="150" r="132" fill="none" stroke="#fff6e0" stroke-width="2" stroke-linecap="round" opacity=".75" transform="rotate(-90 150 150)"/>
+          <circle id="dot" cx="150" cy="18" r="13" fill="url(#dotg)"/>
+          <circle id="dotc" cx="150" cy="18" r="3.5" fill="#fff8e6"/>
         </svg>
       </div>
 
@@ -309,8 +297,8 @@
   const root = document.documentElement;
   const $ = id => document.getElementById(id);
   const els = { fase:$('fase'), tel:$('tel'), hint:$('hint'), live:$('live'), start:$('start'), reset:$('reset'),
-    aantal:$('aantal'), tempo:$('tempo'), voortgang:$('voortgang'), dots:$('dots'), dot:$('dot'), dotc:$('dotc'), vul:$('vul'), trail:$('trail'),
-    eIn:$('e-in'), eVast:$('e-vast'), eUit:$('e-uit') };
+    aantal:$('aantal'), tempo:$('tempo'), voortgang:$('voortgang'), dots:$('dots'), dot:$('dot'), dotc:$('dotc'), trail:$('trail'),
+    };
 
   const PHASES = [
     { key:'in',   naam:'Breathe in', hint:'quietly through your nose',        dur:4 },
@@ -320,8 +308,8 @@
   const CYCLE = 19, INTRO = 4;
   const INTRO_PH = { key:'start', naam:'Breathe out fully', hint:'through your mouth, with a soft ‘whoosh’', dur:INTRO };
   // triangle vertices
-  const B=[150,232], L=[66,86], R=[234,86];
-  const lerp=(a,b,t)=>[a[0]+(b[0]-a[0])*t, a[1]+(b[1]-a[1])*t];
+  const B=[150,18];
+  const ring=f=>{ const a=-Math.PI/2+f*2*Math.PI; return [150+132*Math.cos(a), 150+132*Math.sin(a)]; };
   const ease=t=>.5-.5*Math.cos(Math.PI*t);
   const trailLen = els.trail.getTotalLength();
   els.trail.style.strokeDasharray = trailLen;
@@ -345,7 +333,6 @@
       root.style.setProperty('--breath', breath.toFixed(3));
       root.style.setProperty('--lean', Math.sin(Math.PI*p).toFixed(3));
       window.__breath = breath;
-      els.vul.style.transform = `scaleY(${breath.toFixed(3)})`;
       const cnt = INTRO - Math.floor(T);
       if (lastPhase!==-2){ lastPhase=-2; els.fase.textContent=INTRO_PH.naam; els.hint.textContent=INTRO_PH.hint;
         els.live.textContent='First breathe out fully through your mouth'; setProgress(0); window.__onPhase&&window.__onPhase('start'); }
@@ -360,15 +347,15 @@
     let p = c / ph.dur;
     if (RM.matches) p = Math.floor(c) / ph.dur; // stepwise, no smooth motion
     let breath, pos, trailFrac;
-    if (ph.key==='in'){ breath=ease(p); pos=lerp(B,L,p); trailFrac=(p*4)/CYCLE; }
-    else if (ph.key==='vast'){ breath=1; pos=lerp(L,R,p); trailFrac=(4+p*7)/CYCLE; }
-    else { breath=1-ease(p); pos=lerp(R,B,p); trailFrac=(11+p*8)/CYCLE; }
+    if (ph.key==='in'){ breath=ease(p); trailFrac=(p*4)/CYCLE; }
+    else if (ph.key==='vast'){ breath=1; trailFrac=(4+p*7)/CYCLE; }
+    else { breath=1-ease(p); trailFrac=(11+p*8)/CYCLE; }
+    pos=ring(trailFrac);
     root.style.setProperty('--breath', breath.toFixed(3));
     root.style.setProperty('--lean', ph.key==='uit' ? Math.sin(Math.PI*p).toFixed(3) : '0');
     window.__breath = breath; window.__uit = ph.key==='uit';
     els.dot.setAttribute('cx',pos[0]); els.dot.setAttribute('cy',pos[1]);
     els.dotc.setAttribute('cx',pos[0]); els.dotc.setAttribute('cy',pos[1]);
-    els.vul.style.transform = `scaleY(${breath.toFixed(3)})`;
     els.trail.style.strokeDashoffset = trailLen*(1-trailFrac);
     const cnt = ph.dur - Math.floor(c);
     const gi = round*3+pi;
@@ -376,7 +363,6 @@
       lastPhase=gi;
       els.fase.textContent = ph.naam; els.hint.textContent = ph.hint;
       els.live.textContent = `${ph.naam}, ${ph.dur} counts` + (pi===0 ? `, round ${round+1} of ${rounds}` : '');
-      els.eIn.classList.toggle('on',ph.key==='in'); els.eVast.classList.toggle('on',ph.key==='vast'); els.eUit.classList.toggle('on',ph.key==='uit');
       setProgress(round);
       if(running) window.__onPhase&&window.__onPhase(ph.key);
     }
@@ -403,7 +389,7 @@
   function finish(){
     running=false; finished=true; window.__onFinish&&window.__onFinish();
     root.style.setProperty('--breath','0'); root.style.setProperty('--lean','0'); window.__breath=0;
-    els.vul.style.transform='scaleY(0)'; els.dot.setAttribute('cx',B[0]); els.dot.setAttribute('cy',B[1]);
+    els.dot.setAttribute('cx',B[0]); els.dot.setAttribute('cy',B[1]);
     els.dotc.setAttribute('cx',B[0]); els.dotc.setAttribute('cy',B[1]); els.trail.style.strokeDashoffset=0;
     els.fase.textContent='Sleep well'; els.tel.innerHTML='&nbsp;'; els.hint.textContent='Breathe normally again and let go.';
     els.live.textContent=`Done, ${rounds} rounds. Breathe normally again.`;
@@ -413,9 +399,8 @@
   function resetAll(){
     running=false; finished=false; cancelAnimationFrame(raf); elapsed=0; lastPhase=-1; lastCount=-1;
     root.style.setProperty('--breath','0'); root.style.setProperty('--lean','0'); window.__breath=0;
-    els.vul.style.transform='scaleY(0)'; els.trail.style.strokeDashoffset=trailLen;
+    els.trail.style.strokeDashoffset=trailLen;
     els.dot.setAttribute('cx',B[0]); els.dot.setAttribute('cy',B[1]); els.dotc.setAttribute('cx',B[0]); els.dotc.setAttribute('cy',B[1]);
-    [els.eIn,els.eVast,els.eUit].forEach(e=>e.classList.remove('on'));
     els.fase.textContent='Ready?'; els.tel.innerHTML='&nbsp;'; els.hint.textContent='Sit or lie down comfortably.';
     els.start.textContent='Start'; els.reset.hidden=true; els.aantal.disabled=false; els.tempo.disabled=false;
     els.voortgang.firstChild.nodeValue=`Round 0 of ${rounds}`; renderDots(0);
@@ -436,12 +421,12 @@
 
   /* ---------- Geluid: regen, zeegolven, gong (Web Audio, geen bestanden) ---------- */
   const seg=$('geluid'), vol=$('volume'), KEY='wv-adem-geluid';
-  let ac=null, master=null, noise=null, mode='uit', buses={}, waveIv=0, rainIv=0, swell=0, tick=0, unlocked=false;
+  let needResume=false, silentEl=null, ac=null, master=null, noise=null, mode='uit', buses={}, waveIv=0, rainIv=0, swell=0, tick=0, unlocked=false;
   try{ const st=JSON.parse(localStorage.getItem(KEY)||'{}'); if(['uit','regen','zee','gong'].includes(st.m)) mode=st.m; if(st.v>=0&&st.v<=100) vol.value=st.v; }catch(e){}
   const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify({m:mode,v:+vol.value})); }catch(e){} };
   const paintSeg=()=>{ seg.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===mode))); vol.disabled = mode==='uit'; vol.style.setProperty('--v',vol.value+'%'); };
   paintSeg();
-  const level=()=>.9*Math.pow(vol.value/100,1.6);
+  const level=()=>1.6*Math.pow(vol.value/100,1.3);
   function pink(ctx,sec){
     const len=Math.floor(ctx.sampleRate*sec), buf=ctx.createBuffer(2,len,ctx.sampleRate);
     for(let ch=0;ch<2;ch++){ const d=buf.getChannelData(ch); let b0=0,b1=0,b2=0,b3=0,b4=0,b5=0,b6=0;
@@ -457,13 +442,16 @@
   function init(){
     const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return false;
     ac=new AC(); noise=pink(ac,8);
-    master=ac.createGain(); master.gain.value=level(); master.connect(ac.destination);
+    master=ac.createGain(); master.gain.value=level();
+    const comp=ac.createDynamicsCompressor(); comp.threshold.value=-14; comp.knee.value=12; comp.ratio.value=4; comp.attack.value=.01; comp.release.value=.3;
+    master.connect(comp).connect(ac.destination);
+    ac.onstatechange=()=>{ if(ac.state!=='running' && mode!=='uit' && !document.hidden) needResume=true; };
     for(const m of ['regen','zee','gong']){ const g=ac.createGain(); g.gain.value=0; g.connect(master); buses[m]=g; }
     // regen: zacht gefilterde ruis
     const hp=ac.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=500;
-    const r=loop(hp,'lowpass',5200,.4,.5); hp.connect(buses.regen);
+    const r=loop(hp,'lowpass',6500,.4,.8); hp.connect(buses.regen);
     // zee: lage branding + zacht ruisende golf
-    const zr=loop(buses.zee,'lowpass',380,.5,.45); const zs=loop(buses.zee,'bandpass',900,.6,.1);
+    const zr=loop(buses.zee,'lowpass',520,.5,.4); const zs=loop(buses.zee,'bandpass',900,.5,.2);
     buses.zee.rumble=zr.gn; buses.zee.surf=zs;
     return true;
   }
@@ -481,13 +469,13 @@
     tick+=.1;
     const target = running ? (window.__breath||0) : .5+.5*Math.sin(tick*2*Math.PI/10); // zwelt bij inademen, ebt bij uitademen
     swell += (target-swell)*.25; const t=ac.currentTime, z=buses.zee;
-    z.surf.gn.gain.setTargetAtTime(.04+swell*.4,t,.35); z.surf.f.frequency.setTargetAtTime(650+swell*900,t,.5);
+    z.surf.gn.gain.setTargetAtTime(.08+swell*.62,t,.35); z.surf.f.frequency.setTargetAtTime(700+swell*1100,t,.5);
     z.rumble.gain.setTargetAtTime(.38+swell*.32,t,.5);
   }
   function gong(soft){ // warme, diepe gong: inharmonische boventonen, lange uitklank
-    if(!ac||mode!=='gong'||ac.state!=='running') return;
-    const t=ac.currentTime+.02, base=87, P=[[1,1,9],[1.002,.6,9],[1.47,.45,7],[1.98,.35,6],[2.44,.22,5],[2.9,.16,4],[3.55,.1,3],[4.21,.06,2.5],[5.4,.035,1.8]];
-    const out=ac.createGain(); out.gain.value=(soft?.5:.8)*.16; out.connect(buses.gong);
+    if(!ac||mode!=='gong') return;
+    const t=ac.currentTime+.02, base=131, P=[[1,.8,9],[1.003,.5,9],[1.47,.55,7.5],[1.98,.5,6.5],[2.44,.38,5.5],[2.9,.28,4.5],[3.55,.18,3.5],[4.21,.12,2.8],[5.4,.07,2]];
+    const out=ac.createGain(); out.gain.value=(soft?.6:.9)*.22; out.connect(buses.gong);
     const lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.frequency.setValueAtTime(2600,t); lp.frequency.exponentialRampToValueAtTime(500,t+6); lp.connect(out);
     for(const [r,a,d] of P){ const o=ac.createOscillator(); o.type='sine'; o.frequency.value=base*r;
       const g=ac.createGain(); g.gain.setValueAtTime(0,t); g.gain.linearRampToValueAtTime(a,t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+d);
@@ -497,10 +485,26 @@
   }
   window.__onPhase = key => { if(key==='in') gong(false); else if(key==='start') gong(true); };
   window.__onFinish = () => gong(true);
+  function silentLoop(){ // iOS: stil <audio> zodat Web Audio als media speelt, ook met stilknop
+    if(silentEl) return silentEl.play().catch(()=>{});
+    const sr=8000,n=sr/2,b=new ArrayBuffer(44+n*2),v=new DataView(b),w=(o,t)=>{for(let i=0;i<t.length;i++)v.setUint8(o+i,t.charCodeAt(i))};
+    w(0,'RIFF');v.setUint32(4,36+n*2,true);w(8,'WAVE');w(12,'fmt ');v.setUint32(16,16,true);v.setUint16(20,1,true);v.setUint16(22,1,true);
+    v.setUint32(24,sr,true);v.setUint32(28,sr*2,true);v.setUint16(32,2,true);v.setUint16(34,16,true);w(36,'data');v.setUint32(40,n*2,true);
+    silentEl=document.createElement('audio'); silentEl.src=URL.createObjectURL(new Blob([b],{type:'audio/wav'}));
+    silentEl.loop=true; silentEl.setAttribute('playsinline',''); silentEl.setAttribute('aria-hidden','true'); silentEl.preload='auto';
+    silentEl.play().catch(()=>{});
+  }
+  function unlockAudio(){ // altijd synchroon binnen de klik/tik aanroepen
+    try{ if(navigator.audioSession) navigator.audioSession.type='playback'; }catch(e){}
+    silentLoop();
+    if(!ac && !init()) return false;
+    if(ac.state!=='running') ac.resume().catch(()=>{});
+    needResume=false; return true;
+  }
   function apply(fade=1){
-    if(mode==='uit'){ if(ac){ for(const m in buses) buses[m].gain.setTargetAtTime(0,ac.currentTime,.4); clearTimeout(apply.to); apply.to=setTimeout(()=>{ if(mode==='uit'){ clearInterval(waveIv); clearInterval(rainIv); ac.suspend(); } },2500);} return; }
-    if(!ac && !init()) return;
-    ac.resume().then(()=>{ if(mode==='gong' && !running) gong(true); });
+    if(mode==='uit'){ if(ac){ for(const m in buses) buses[m].gain.setTargetAtTime(0,ac.currentTime,.4); clearTimeout(apply.to); apply.to=setTimeout(()=>{ if(mode==='uit'){ clearInterval(waveIv); clearInterval(rainIv); ac.suspend(); if(silentEl) silentEl.pause(); } },2500);} return; }
+    if(!unlockAudio()) return;
+    if(mode==='gong' && !running) gong(true);
     const t=ac.currentTime;
     for(const m in buses) buses[m].gain.setTargetAtTime(m===mode?1:0,t,m===mode?fade:.4); // zacht in- en uitfaden
     clearInterval(waveIv); clearInterval(rainIv);
@@ -510,12 +514,16 @@
   seg.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; mode=b.dataset.m; unlocked=true; paintSeg(); save(); apply(); });
   vol.addEventListener('input',()=>{ vol.style.setProperty('--v',vol.value+'%'); save(); if(ac) master.gain.setTargetAtTime(level(),ac.currentTime,.15); });
   // bewaarde keuze start pas na een eerste klik/toets (browsers blokkeren autoplay)
-  const unlock=()=>{ if(unlocked) return; unlocked=true; if(mode!=='uit') apply(1.5); };
-  addEventListener('pointerdown',unlock,{once:true}); addEventListener('keydown',unlock,{once:true});
+  const unlock=e=>{
+    if(e && e.target && e.target.closest && e.target.closest('#geluid')) return; // de knoppen regelen het zelf
+    if(!unlocked){ unlocked=true; if(mode!=='uit') apply(1.5); return; }
+    if(needResume && mode!=='uit' && !document.hidden) unlockAudio();
+  };
+  for (const ev of ['touchend','click','keydown']) addEventListener(ev,unlock,{passive:true});
   document.addEventListener('visibilitychange',()=>{
     if(!ac||mode==='uit') return;
-    if(document.hidden){ master.gain.setTargetAtTime(0,ac.currentTime,.1); setTimeout(()=>{ if(document.hidden) ac.suspend(); },400); }
-    else ac.resume().then(()=>master.gain.setTargetAtTime(level(),ac.currentTime,.8));
+    if(document.hidden){ master.gain.setTargetAtTime(0,ac.currentTime,.1); setTimeout(()=>{ if(document.hidden){ ac.suspend(); if(silentEl) silentEl.pause(); } },400); }
+    else { if(silentEl) silentEl.play().catch(()=>{}); ac.resume().then(()=>master.gain.setTargetAtTime(level(),ac.currentTime,.8)).catch(()=>{ needResume=true; }); }
   });
 
   /* ---------- Zee & ondergaande zon ---------- */
