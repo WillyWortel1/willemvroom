@@ -32,8 +32,6 @@
 .ad-top>header.wv-head nav a{color:var(--gold-2)!important}
 .ad-top>header.wv-head :focus-visible{outline-color:var(--gold-2)}
 #zee{position:absolute;top:0;left:0;width:100%;height:100svh;display:block;z-index:0}
-.grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .ad-main{position:relative;z-index:3}
 .hero{isolation:isolate;position:relative;overflow:hidden;font-family:var(--sans);color:var(--ink);line-height:1.6;min-height:calc(100svh - 56px);display:grid;grid-template-rows:auto 1fr auto;justify-items:center;padding:16px 20px 0;text-align:center}
 .eyebrow{font-size:.68rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin:0 0 .5rem}
@@ -45,12 +43,13 @@
 .stage{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;width:100%;padding-top:8px}
 .guide{position:relative;width:min(78vw,340px);aspect-ratio:1}
 .guide svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-.enso{filter:drop-shadow(0 0 calc(8px + var(--breath)*22px) rgba(243,214,160,calc(.35 + var(--breath)*.45)))}
+.enso{filter:drop-shadow(0 0 8px rgba(243,214,160,.35))}
+.glowring{position:absolute;inset:6%;border-radius:50%;pointer-events:none;box-shadow:0 0 30px 4px rgba(243,214,160,.55),inset 0 0 26px 2px rgba(243,214,160,.3);opacity:calc(var(--breath)*.9)}
 .disc{transform-box:fill-box;transform-origin:50% 50%;scale:calc(.62 + var(--breath)*.38);opacity:calc(.35 + var(--breath)*.65);@media (prefers-reduced-motion:reduce){scale:1}}
 .halo{position:absolute;inset:4%;border-radius:50%;background:radial-gradient(circle,rgba(243,223,180,.20),rgba(243,223,180,0) 68%);
   scale:calc(.75 + var(--breath)*.45);opacity:calc(.5 + var(--breath)*.5);pointer-events:none}
 .readout{position:relative;isolation:isolate;padding:4px 28px 2px}
-.readout::before{content:"";position:absolute;inset:-30px -60px;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(11,16,38,.38),rgba(11,16,38,0));filter:blur(8px)}
+.readout::before{content:"";position:absolute;inset:-30px -60px;z-index:-1;border-radius:50%;background:radial-gradient(closest-side,rgba(11,16,38,.38),rgba(11,16,38,0))}
 .phase{font-family:var(--serif);font-size:clamp(2.2rem,10vw,3rem);font-weight:500;margin:6px 0 0;line-height:1;min-height:1em;color:var(--ink);
   text-shadow:0 2px 24px rgba(11,16,38,.6)}
 .count{font-family:var(--serif);font-size:2.1rem;line-height:1.1;color:var(--gold);min-height:1.1em;margin:4px 0 0;font-variant-numeric:lining-nums tabular-nums}
@@ -60,12 +59,12 @@
   background:linear-gradient(180deg,var(--gold-2),var(--gold));border:0;border-radius:999px;padding:14px 30px;min-width:150px;
   box-shadow:0 0 0 1px rgba(255,240,210,.5) inset,0 10px 30px -10px rgba(226,197,143,.6);transition:box-shadow .3s,background-color .3s}
 .btn:hover{box-shadow:0 0 0 1px rgba(255,240,210,.8) inset,0 10px 36px -8px rgba(226,197,143,.85)}
-.btn.ghost{background:rgba(11,16,38,.35);color:var(--ink);box-shadow:0 0 0 1px rgba(226,197,143,.45) inset;min-width:0;padding:14px 20px;backdrop-filter:blur(6px)}
+.btn.ghost{background:rgba(11,16,38,.55);color:var(--ink);box-shadow:0 0 0 1px rgba(226,197,143,.45) inset;min-width:0;padding:14px 20px}
 .hero :focus-visible{outline:2px solid var(--gold-2);outline-offset:4px}
 .rounds{display:flex;align-items:center;gap:8px;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 .rounds select{font:inherit;letter-spacing:.05em;color:var(--ink);background:#151a38;border:1px solid rgba(226,197,143,.45);border-radius:999px;padding:8px 12px}
 .sound{display:flex;flex-direction:column;align-items:center;gap:6px;margin:12px 0 0}
-.seg{display:inline-flex;flex-wrap:wrap;justify-content:center;padding:3px;border-radius:999px;background:rgba(11,16,38,.5);box-shadow:0 0 0 1px rgba(226,197,143,.4) inset;backdrop-filter:blur(6px)}
+.seg{display:inline-flex;flex-wrap:wrap;justify-content:center;padding:3px;border-radius:999px;background:rgba(11,16,38,.62);box-shadow:0 0 0 1px rgba(226,197,143,.4) inset}
 .seg button{font:inherit;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);background:transparent;border:0;border-radius:999px;padding:9px 11px;cursor:pointer;min-height:36px;transition:background-color .3s,color .3s,box-shadow .3s}
 .seg button:hover{color:var(--gold-2)}
 .seg button[aria-pressed="true"]{background:linear-gradient(180deg,var(--gold-2),var(--gold));color:#1a1408;box-shadow:0 0 16px -4px rgba(243,223,180,.7)}
@@ -80,23 +79,28 @@
 .dots{display:inline-flex;gap:7px;vertical-align:middle;margin-left:8px}
 .dots i{width:7px;height:7px;border-radius:50%;border:1px solid var(--gold);display:block}
 .dots i.done{background:var(--gold);box-shadow:0 0 8px var(--gold)}
-.fire{width:min(80vw,340px);height:auto;margin-top:0;display:block;overflow:visible}
-.fire .flames{transform-box:fill-box;transform-origin:50% 100%;rotate:calc(var(--lean)*-5deg)}
-.fire .fl{transform-box:fill-box;transform-origin:50% 100%}
-.fire .sparks{opacity:0}
+.fire{position:relative;width:min(80vw,340px);aspect-ratio:360/160;contain:layout paint;overflow:visible}
+.fire>svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.fire>i{position:absolute;display:block;pointer-events:none}
+.fglow{left:1%;top:-7.5%;width:98%;height:97.5%;border-radius:50%;background:radial-gradient(closest-side at 50% 55%,rgba(255,184,98,.5),rgba(255,138,61,.16) 45%,rgba(255,138,61,0))}
+.refl{left:23%;top:83.75%;width:54%;height:15%;border-radius:50%;background:radial-gradient(farthest-side at 50% 0,rgba(255,154,74,.26),rgba(255,154,74,.08) 60%,rgba(255,154,74,0))}
+.fire .flames{position:absolute;left:30%;top:-2.5%;width:40%;height:65%;transform-origin:50% 95%;rotate:calc(var(--lean)*-5deg)}
+.fire .fl{position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 92%}
+.fire .f1{opacity:.85}.fire .f4{opacity:.8}
+.sp{width:2px;height:2px;border-radius:50%;background:#ffd28a;opacity:0}
+.s1{left:47%;top:24%}.s2{left:53%;top:18%;--dx:6px}.s3{left:50.3%;top:29.5%;--dx:-5px}
 @media (prefers-reduced-motion:no-preference){
   .fire .flames{transition:rotate 1.2s ease-in-out}
   .fire .fl{animation:lick 2.4s ease-in-out infinite}
   .fire .f2{animation-duration:3.1s;animation-delay:-1.3s}
   .fire .f3{animation-duration:2s;animation-delay:-.7s}
   .fire .f4{animation-duration:1.7s;animation-delay:-.4s}
-  .fire .f5{animation-duration:2.7s;animation-delay:-2s}
-  .fire .fglow{animation:fglow 3.2s ease-in-out infinite}
-  .fire .refl{animation:fglow 2.6s ease-in-out -1s infinite}
-  .fire .sparks{opacity:1}
-  .fire .sparks circle{animation:rise 4.5s ease-out infinite;opacity:0}
-  .fire .sparks circle:nth-child(2){animation-delay:-1.6s;animation-duration:5.2s;--dx:6px}
-  .fire .sparks circle:nth-child(3){animation-delay:-3.1s;animation-duration:3.9s;--dx:-5px}
+  .fglow{animation:fglow 3.2s ease-in-out infinite}
+  .refl{animation:fglow 2.6s ease-in-out -1s infinite}
+  .sp{animation:rise 4.5s ease-out infinite}
+  .s2{animation-delay:-1.6s;animation-duration:5.2s}
+  .s3{animation-delay:-3.1s;animation-duration:3.9s}
+  .uit-beeld .fire *,.uit-beeld .halo{animation-play-state:paused}
 }
 @keyframes lick{0%,100%{scale:1 1;translate:0 0}22%{scale:.95 1.06;translate:-.6px 0}48%{scale:1.04 .95;translate:.4px 0}74%{scale:.97 1.04;translate:.8px 0}}
 @keyframes fglow{0%,100%{opacity:.82}50%{opacity:1}}
@@ -122,7 +126,6 @@
 </style>
 </head>
 <body>
-<div class="grain" aria-hidden="true"></div>
 
 
 <div id="top" class="ad-top text-fg">
@@ -139,6 +142,7 @@
     <div class="stage">
       <div class="guide" aria-hidden="true">
         <div class="halo"></div>
+        <div class="glowring"></div>
         <svg viewBox="0 0 300 300">
           <defs>
             <linearGradient id="goud" x1="0" y1="0" x2="1" y2="1">
@@ -196,37 +200,26 @@
       </div>
       <p class="progress" id="voortgang">Ronde 0 van 4<span class="dots" id="dots" aria-hidden="true"></span></p>
 
-<svg class="fire" viewBox="0 0 360 160" aria-hidden="true">
-        <defs>
-          <filter id="fb3" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.6"/></filter><filter id="fb2" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="1.5"/></filter><filter id="fb1" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation=".9"/></filter>
-          <radialGradient id="fgl" cx=".5" cy=".55" r=".5"><stop offset="0" stop-color="#ffb862" stop-opacity=".5"/><stop offset=".45" stop-color="#ff8a3d" stop-opacity=".16"/><stop offset="1" stop-color="#ff8a3d" stop-opacity="0"/></radialGradient>
-          <linearGradient id="fo" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#d9481a"/><stop offset=".55" stop-color="#f27a2c"/><stop offset="1" stop-color="#ffb35c" stop-opacity=".05"/></linearGradient>
-          <linearGradient id="fm" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff8f35"/><stop offset=".6" stop-color="#ffc066"/><stop offset="1" stop-color="#ffe0a0" stop-opacity=".2"/></linearGradient>
-          <linearGradient id="fi" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#fff1c8"/><stop offset=".7" stop-color="#ffe7a8"/><stop offset="1" stop-color="#fff6dc" stop-opacity=".3"/></linearGradient>
-          <linearGradient id="bowl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a302a"/><stop offset=".5" stop-color="#1f1a17"/><stop offset="1" stop-color="#0e0c0b"/></linearGradient>
-          <radialGradient id="sheen" cx=".5" cy="0" r=".7"><stop offset="0" stop-color="#ff9a4a" stop-opacity=".45"/><stop offset=".5" stop-color="#ff9a4a" stop-opacity=".08"/><stop offset="1" stop-color="#ff9a4a" stop-opacity="0"/></radialGradient>
-          <radialGradient id="ember" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffcf7a"/><stop offset=".35" stop-color="#f06a24"/><stop offset=".75" stop-color="#5a1d0c"/><stop offset="1" stop-color="#1a0f0a"/></radialGradient>
-          <linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6b5444" stop-opacity=".3"/><stop offset=".5" stop-color="#ffc583"/><stop offset="1" stop-color="#6b5444" stop-opacity=".3"/></linearGradient>
-          <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#151214"/><stop offset=".45" stop-color="#2c2524"/><stop offset="1" stop-color="#121013"/></linearGradient>
-          <radialGradient id="refl" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#ff9a4a" stop-opacity=".26"/><stop offset=".6" stop-color="#ff9a4a" stop-opacity=".08"/><stop offset="1" stop-color="#ff9a4a" stop-opacity="0"/></radialGradient>
-        </defs>
-        <ellipse class="fglow" cx="180" cy="66" rx="176" ry="78" fill="url(#fgl)"/>
-        <g class="refl"><ellipse cx="180" cy="146" rx="96" ry="12" fill="url(#refl)"/>
-          <rect x="150" y="144" width="60" height="1.4" rx=".7" fill="#ffc583" opacity=".35"/><rect x="162" y="149" width="36" height="1.2" rx=".6" fill="#ffc583" opacity=".25"/><rect x="170" y="154" width="20" height="1" rx=".5" fill="#ffc583" opacity=".18"/></g>
-        <path d="M156 118 L204 118 L214 140 L146 140Z" fill="url(#stone)"/>
-        <ellipse cx="180" cy="140" rx="36" ry="3" fill="#0b0a0c"/>
-        <ellipse cx="180" cy="90" rx="96" ry="11" fill="url(#ember)"/>
-        <g class="flames">
-          <g filter="url(#fb3)"><path class="fl f1" d="M122 95 C120 82 130 72 137 61 C140 70 145 74 150 70 C154 58 157 45 166 30 C167 44 172 52 177 47 C181 35 184 21 193 7 C193 25 200 37 205 49 C209 43 211 35 217 29 C219 43 227 55 233 66 C238 75 240 86 238 95Z" fill="url(#fo)" opacity=".85"/></g>
-          <g filter="url(#fb2)"><path class="fl f2" d="M139 95 C137 85 145 76 150 68 C154 74 158 74 162 66 C166 56 170 47 178 35 C180 49 184 56 189 51 C193 43 197 37 203 31 C205 46 212 60 216 72 C220 82 221 90 219 95Z" fill="url(#fm)"/></g>
-          <g filter="url(#fb1)"><path class="fl f3" d="M157 95 C155 85 162 76 166 66 C170 72 174 70 176 62 C180 54 184 48 189 41 C191 55 196 64 200 74 C204 83 204 90 202 95Z" fill="url(#fi)"/></g>
-          <g filter="url(#fb2)" opacity=".8"><path class="fl f4" d="M150 72 C146 62 152 52 150 42 C158 50 160 60 156 72Z" fill="url(#fm)"/><path class="fl f5" d="M208 66 C205 55 212 46 211 36 C218 45 218 56 214 66Z" fill="url(#fm)"/></g>
-        </g>
-        <g class="sparks" fill="#ffd28a"><circle cx="170" cy="40" r="1.1"/><circle cx="192" cy="30" r=".9"/><circle cx="182" cy="48" r=".8"/></g>
-        <path d="M84 90 A96 11 0 0 0 276 90 C272 112 236 124 180 124 C124 124 88 112 84 90Z" fill="url(#bowl)"/>
-        <path d="M84 90 A96 11 0 0 0 276 90 C272 112 236 124 180 124 C124 124 88 112 84 90Z" fill="url(#sheen)"/>
-        <path d="M84 90 A96 11 0 0 0 276 90" fill="none" stroke="url(#rim)" stroke-width="1.6"/>
-      </svg>
+<div class="fire" aria-hidden="true">
+        <i class="fglow"></i><i class="refl"></i>
+        <svg class="fire-back" viewBox="0 0 360 160"><defs><radialGradient id="ember" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ffcf7a"/><stop offset=".35" stop-color="#f06a24"/><stop offset=".75" stop-color="#5a1d0c"/><stop offset="1" stop-color="#1a0f0a"/></radialGradient><linearGradient id="stone" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#151214"/><stop offset=".45" stop-color="#2c2524"/><stop offset="1" stop-color="#121013"/></linearGradient></defs>
+          <rect x="150" y="144" width="60" height="1.4" rx=".7" fill="#ffc583" opacity=".35"/><rect x="162" y="149" width="36" height="1.2" rx=".6" fill="#ffc583" opacity=".25"/><rect x="170" y="154" width="20" height="1" rx=".5" fill="#ffc583" opacity=".18"/>
+          <path d="M156 118 L204 118 L214 140 L146 140Z" fill="url(#stone)"/><ellipse cx="180" cy="140" rx="36" ry="3" fill="#0b0a0c"/>
+          <ellipse cx="180" cy="90" rx="96" ry="11" fill="url(#ember)"/>
+        </svg>
+        <div class="flames">
+          <img class="fl f1" src="/ademhaling/vuur-1.webp" alt="" width="432" height="312" decoding="async">
+          <img class="fl f2" src="/ademhaling/vuur-2.webp" alt="" width="432" height="312" decoding="async">
+          <img class="fl f3" src="/ademhaling/vuur-3.webp" alt="" width="432" height="312" decoding="async">
+          <img class="fl f4" src="/ademhaling/vuur-4.webp" alt="" width="432" height="312" decoding="async">
+        </div>
+        <i class="sp s1"></i><i class="sp s2"></i><i class="sp s3"></i>
+        <svg class="fire-front" viewBox="0 0 360 160"><defs><linearGradient id="bowl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3a302a"/><stop offset=".5" stop-color="#1f1a17"/><stop offset="1" stop-color="#0e0c0b"/></linearGradient><radialGradient id="sheen" cx=".5" cy="0" r=".7"><stop offset="0" stop-color="#ff9a4a" stop-opacity=".45"/><stop offset=".5" stop-color="#ff9a4a" stop-opacity=".08"/><stop offset="1" stop-color="#ff9a4a" stop-opacity="0"/></radialGradient><linearGradient id="rim" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6b5444" stop-opacity=".3"/><stop offset=".5" stop-color="#ffc583"/><stop offset="1" stop-color="#6b5444" stop-opacity=".3"/></linearGradient></defs>
+          <path d="M84 90 A96 11 0 0 0 276 90 C272 112 236 124 180 124 C124 124 88 112 84 90Z" fill="url(#bowl)"/>
+          <path d="M84 90 A96 11 0 0 0 276 90 C272 112 236 124 180 124 C124 124 88 112 84 90Z" fill="url(#sheen)"/>
+          <path d="M84 90 A96 11 0 0 0 276 90" fill="none" stroke="url(#rim)" stroke-width="1.6"/>
+        </svg>
+      </div>
     </div>
 
     <a class="scroll" href="#over">Over deze ademhaling ↓</a>
@@ -539,9 +532,9 @@
     // horizon: op smalle schermen net boven de knoppen, zodat zon en tekst elkaar niet raken
     const ctr=document.querySelector('.controls').getBoundingClientRect(), top=cv.getBoundingClientRect().top;
     hzY = Math.min(H*.66, ctr.top-top-12); // nooit onder de knoppen (ook iPad staand)
-    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    if (RM.matches || !bgRaf) paint(performance.now());
+    const cw=Math.round(W*dpr), ch=Math.round(H*dpr);
+    if (cv.width!==cw || cv.height!==ch){ cv.width=cw; cv.height=ch; ctx.setTransform(dpr,0,0,dpr,0,0); }
+    paint(performance.now()); // direct tekenen: een gewist canvas mag nooit zichtbaar zijn
   }
   const mix=(a,b,t)=>a.map((v,i)=>Math.round(v+(b[i]-v)*t));
   const rgb=(c,a=1)=>`rgba(${c[0]},${c[1]},${c[2]},${a})`;
@@ -612,9 +605,11 @@
     if (Math.abs(tgt-sunS)<.0005) sunS=tgt;
     paint(now);
   }
-  function startBg(){ if(!RM.matches && !bgRaf && !document.hidden) bgRaf=requestAnimationFrame(bgLoop); }
+  let inView=true;
+  function startBg(){ if(!RM.matches && !bgRaf && !document.hidden && inView) bgRaf=requestAnimationFrame(bgLoop); }
   function stopBg(){ cancelAnimationFrame(bgRaf); bgRaf=0; }
   addEventListener('resize',resize);
+  if ('IntersectionObserver' in window) new IntersectionObserver(([e])=>{ inView=e.isIntersecting; document.documentElement.classList.toggle('uit-beeld',!inView); inView ? startBg() : stopBg(); }).observe(document.querySelector('.hero'));
   if ('ResizeObserver' in window) new ResizeObserver(()=>resize()).observe(document.querySelector('.hero'));
   document.addEventListener('visibilitychange',()=> document.hidden ? stopBg() : startBg());
   RM.addEventListener('change',()=>{ stopBg(); resize(); startBg(); });
