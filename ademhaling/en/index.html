@@ -337,6 +337,7 @@
       if (lastPhase!==-2){ lastPhase=-2; els.fase.textContent=INTRO_PH.naam; els.hint.textContent=INTRO_PH.hint;
         els.live.textContent='First breathe out fully through your mouth'; setProgress(0); window.__onPhase&&window.__onPhase('start'); }
       if (cnt!==lastCount){ lastCount=cnt; els.tel.textContent=cnt; }
+      sunTo(T/(INTRO+rounds*CYCLE));
       return;
     }
     const t = T - INTRO;
@@ -367,6 +368,7 @@
       if(running) window.__onPhase&&window.__onPhase(ph.key);
     }
     if (cnt!==lastCount){ lastCount=cnt; els.tel.textContent = cnt; }
+    sunTo(T/(INTRO+rounds*CYCLE));
   }
 
   function frame(now){
@@ -386,8 +388,9 @@
     running=false; cancelAnimationFrame(raf);
     els.start.textContent='Resume'; els.live.textContent='Paused'; els.hint.textContent='Paused';
   }
+  function sunTo(v){ window.__sunTarget=Math.max(0,Math.min(1,v)); window.__sunStep&&window.__sunStep(); }
   function finish(){
-    running=false; finished=true; window.__onFinish&&window.__onFinish();
+    running=false; finished=true; sunTo(1); window.__onFinish&&window.__onFinish();
     root.style.setProperty('--breath','0'); root.style.setProperty('--lean','0'); window.__breath=0;
     els.dot.setAttribute('cx',B[0]); els.dot.setAttribute('cy',B[1]);
     els.dotc.setAttribute('cx',B[0]); els.dotc.setAttribute('cy',B[1]); els.trail.style.strokeDashoffset=0;
@@ -397,6 +400,7 @@
     els.start.textContent='Again'; els.aantal.disabled=false; els.tempo.disabled=false;
   }
   function resetAll(){
+    sunTo(0);
     running=false; finished=false; cancelAnimationFrame(raf); elapsed=0; lastPhase=-1; lastCount=-1;
     root.style.setProperty('--breath','0'); root.style.setProperty('--lean','0'); window.__breath=0;
     els.trail.style.strokeDashoffset=trailLen;
@@ -416,7 +420,7 @@
   });
   document.addEventListener('visibilitychange',()=>{ if(document.hidden && running) pause(); });
   // test hook for screenshots
-  window.__seek = s => { elapsed=s; draw(s); };
+  window.__seek = s => { elapsed=s; draw(s); sunTo(s/(INTRO+rounds*CYCLE)); };
   resetAll();
 
   /* ---------- Geluid: regen, zeegolven, gong (Web Audio, geen bestanden) ---------- */
@@ -543,7 +547,7 @@
   /* ---------- Zee & ondergaande zon ---------- */
   const cv = $('zee'), ctx = cv.getContext('2d');
   let W=0,H=0,dpr=1, t0=performance.now(), bgRaf=0;
-  const SUNSET_SECONDS = 600; // zon zakt in ~10 minuten
+  let sunS=0; // getoonde zonsondergang 0 → 1, volgt de voortgang van de sessie
   let wave=0; // smoothed breath for waves
   let hzY=0;
   function resize(){
@@ -565,20 +569,20 @@
   const DUSK1=[[10,14,36],[46,34,74],[150,74,74]];
   function paint(now){
     const T = (now - t0)/1000;
-    const s = RM.matches ? .35 : Math.min(1, T/SUNSET_SECONDS); // 0 → 1 voortgang zonsondergang
+    const s = sunS, d = s*.6; // d: lucht wordt maar licht donkerder
     const hz = hzY || H*.66; // horizon
-    const sky = DUSK0.map((c,i)=>mix(c,DUSK1[i],s));
+    const sky = DUSK0.map((c,i)=>mix(c,DUSK1[i],d));
     let g = ctx.createLinearGradient(0,0,0,hz);
     g.addColorStop(0,rgb(sky[0])); g.addColorStop(.55,rgb(sky[1])); g.addColorStop(1,rgb(sky[2]));
     ctx.fillStyle=g; ctx.fillRect(0,0,W,hz+1);
     // stars as it darkens
-    if (s>.25){
-      ctx.fillStyle=`rgba(255,244,220,${(s-.25)*.6})`;
+    if (d>.2){
+      ctx.fillStyle=`rgba(255,244,220,${(d-.2)*.8})`;
       for(let i=0;i<70;i++){ const x=(i*733.1%1)*W, y=((i*421.7)%1)*hz*.6; const r=(i%3? .6:1); ctx.fillRect((x+i*37)%W,(y+i*13)%(hz*.6),r,r); }
     }
     // sun
     const R = W<700 ? W*.055 : Math.min(W,H)*.085;
-    const sy = hz - R*1.1 + s*R*2.6; // zakt onder de horizon
+    const sy = hz - R*1.1 + s*R*1.95; // aan het eind steekt alleen een smal randje boven de horizon
     const sx = W*(W>=700 ? .74 : .9);
     const halo = ctx.createRadialGradient(sx,sy,R*.3,sx,sy,R*6);
     halo.addColorStop(0,`rgba(255,214,150,${.55*(1-s*.7)})`); halo.addColorStop(1,'rgba(255,170,110,0)');
@@ -588,16 +592,16 @@
     sg.addColorStop(0,'#fff1cf'); sg.addColorStop(1,rgb(mix([255,170,96],[226,96,70],s)));
     ctx.fillStyle=sg; ctx.beginPath(); ctx.arc(sx,sy,R,0,Math.PI*2); ctx.fill(); ctx.restore();
     // sea
-    const seaTop=mix([70,52,84],[18,20,44],s), seaBot=mix([14,18,44],[6,8,22],s);
+    const seaTop=mix([70,52,84],[18,20,44],d), seaBot=mix([14,18,44],[6,8,22],d);
     g = ctx.createLinearGradient(0,hz,0,H); g.addColorStop(0,rgb(seaTop)); g.addColorStop(1,rgb(seaBot));
     ctx.fillStyle=g; ctx.fillRect(0,hz,W,H-hz);
     // reflection shimmer
-    const vis = Math.max(0, 1 - s*1.15);
+    const vis = Math.max(0, 1 - s*.92);
     const amp = 1 + wave*1.6;
     for(let i=0;i<46;i++){
       const y = hz + 3 + Math.pow(i/46,1.5)*(H-hz)*.92;
       const k = i/46;
-      const w0 = R*(1.1 + k*2.2) * (0.55+0.45*Math.sin(T*0.9 + i*1.7));
+      const w0 = R*(1.1 + k*2.2) * (1 - s*.65) * (0.55+0.45*Math.sin(T*0.9 + i*1.7));
       const off = Math.sin(T*0.6 + i*0.8)*R*0.25*k;
       ctx.fillStyle=`rgba(255,${200-k*40},${140-k*40},${(.55-.45*k)*vis})`;
       ctx.fillRect(sx - w0/2 + off, y, w0, 1.2 + k*2.2);
@@ -623,6 +627,8 @@
     if (now-lastBg < 33) return; // ~30 fps is genoeg voor rust
     lastBg=now;
     wave += ((window.__breath||0) - wave)*0.08;
+    const tgt=window.__sunTarget||0; sunS += (tgt-sunS)*(tgt<sunS ? .025 : .12); // terug omhoog: rustig in ~3 s
+    if (Math.abs(tgt-sunS)<.0005) sunS=tgt;
     paint(now);
   }
   function startBg(){ if(!RM.matches && !bgRaf && !document.hidden) bgRaf=requestAnimationFrame(bgLoop); }
@@ -632,7 +638,9 @@
   document.addEventListener('visibilitychange',()=> document.hidden ? stopBg() : startBg());
   RM.addEventListener('change',()=>{ stopBg(); resize(); startBg(); });
   resize(); startBg();
-  window.__paintAt = sec => { t0 = performance.now() - sec*1000; paint(performance.now()); };
+  window.__paintAt = sec => { t0 = performance.now() - sec*1000; sunS = window.__sunTarget||0; paint(performance.now()); };
+  // reduced motion: zon verspringt per tel, geen vloeiende beweging
+  window.__sunStep = () => { if (RM.matches){ sunS = window.__sunTarget||0; paint(performance.now()); } };
 })();
 </script>
 <script src="/site.js?v=20261020-n2"></script>
