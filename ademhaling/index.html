@@ -455,33 +455,26 @@
     for(const m of ['regen','zee','gong']){ const g=ac.createGain(); g.gain.value=0; g.connect(master); buses[m]=g; }
     // regen: zacht gefilterde ruis
     const hp=ac.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=280;
-    const r=loop(hp,'lowpass',1200,.3,.04); hp.connect(buses.regen);
-    loop(buses.regen,'lowpass',650,.3,.06); // rustige, constante ruis eronder
+    const r=loop(hp,'lowpass',1400,.3,.054); hp.connect(buses.regen); buses.regen.main=r.gn;
+    loop(buses.regen,'lowpass',900,.3,.065); // rustige, constante ruis eronder
     // zee: lage branding + zacht ruisende golf
     const zr=loop(buses.zee,'lowpass',450,.4,.07); const zs=loop(buses.zee,'lowpass',700,.4,.006);
     buses.zee.rumble=zr.gn; buses.zee.surf=zs;
     return true;
   }
-  function drops(){ // druppelende regen: zachte, ronde 'plip'-toontjes, rustig en onregelmatig (~1,5 per seconde)
-    if(Math.random()>.15) return;
-    const at=ac.currentTime+.02+Math.random()*.08, f0=650+Math.random()*900;
-    const o=ac.createOscillator(); o.type='sine';
-    o.frequency.setValueAtTime(f0,at); o.frequency.exponentialRampToValueAtTime(f0*.62,at+.09); // lichte glijtoon omlaag
-    const g=ac.createGain(), pk=.025+Math.random()*.03;
-    g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(pk,at+.008); // zachte aanslag, geen tik
-    g.gain.setTargetAtTime(0,at+.008,.035+Math.random()*.03);
-    const lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=2200;
-    const pan=ac.createStereoPanner?ac.createStereoPanner():null;
-    o.connect(g).connect(lp); if(pan){ pan.pan.value=Math.random()*1.4-.7; lp.connect(pan).connect(buses.regen); } else lp.connect(buses.regen);
-    o.start(at); o.stop(at+.5);
+  let rainT=0;
+  function rainDrift(){ // regen: alleen zachte ruis, met een heel trage, lichte variatie in sterkte (geen toontjes)
+    rainT+=.1; const v=1+.12*Math.sin(rainT*2*Math.PI/23)+.06*Math.sin(rainT*2*Math.PI/9.7);
+    buses.regen.main.gain.setTargetAtTime(.054*v,ac.currentTime,2);
   }
-  function waves(){
+  function waves(){ // zee: elke golf zwelt aan, ebt daarna traag weg tot bijna stil (~12% van de top) en zwelt weer aan
     tick+=.1;
-    const target = running ? (window.__breath||0) : .5+.5*Math.sin(tick*2*Math.PI/14); // zwelt bij inademen, ebt bij uitademen
-    swell += (target-swell)*.06; const t=ac.currentTime, z=buses.zee;
-    z.surf.gn.gain.setTargetAtTime(.003+swell*.005,t,2.5); z.surf.f.frequency.setTargetAtTime(600+swell*150,t,2.5);
-    z.rumble.gain.setTargetAtTime(.066+swell*.017,t,2.5);
+    const target = running ? (window.__breath||0) : .5-.5*Math.cos(tick*2*Math.PI/13); // in sessie: mee met de adem
+    swell += (target-swell)*.1; const t=ac.currentTime, z=buses.zee, sh=swell*swell*(3-2*swell); // gladde S-curve
+    z.rumble.gain.setTargetAtTime(.105*(.12+.88*sh),t,.6);
+    z.surf.gn.gain.setTargetAtTime(.0005+.006*sh,t,.6); z.surf.f.frequency.setTargetAtTime(560+sh*160,t,.8);
   }
+
   const strikes=[];
   const hold=(prm,t)=>{ if(prm.cancelAndHoldAtTime) prm.cancelAndHoldAtTime(t); else { const v=prm.value; prm.cancelScheduledValues(t); prm.setValueAtTime(v,t); } };
   function gong(soft){ // diepe, lang doorklinkende gong met zacht zwevende boventonen, zonder tik
@@ -532,7 +525,7 @@
     for(const m in buses) buses[m].gain.setTargetAtTime(m===mode?1:0,t,m===mode?fade:.4); // zacht in- en uitfaden
     clearInterval(waveIv); clearInterval(rainIv);
     waveIv=setInterval(()=>{ if(buses.zee.gain.value>.001||mode==='zee') waves(); },100);
-    rainIv=setInterval(()=>{ if(mode==='regen') drops(); },100);
+    rainIv=setInterval(()=>{ if(mode==='regen') rainDrift(); },100);
   }
   seg.addEventListener('click',e=>{ const b=e.target.closest('button'); if(!b) return; mode=b.dataset.m; unlocked=true; paintSeg(); save(); apply(); });
   vol.addEventListener('input',()=>{ vol.style.setProperty('--v',vol.value+'%'); save(); if(ac) master.gain.setTargetAtTime(level(),ac.currentTime,.15); });
