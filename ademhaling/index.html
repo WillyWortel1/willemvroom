@@ -455,29 +455,32 @@
     for(const m of ['regen','zee','gong']){ const g=ac.createGain(); g.gain.value=0; g.connect(master); buses[m]=g; }
     // regen: zacht gefilterde ruis
     const hp=ac.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=280;
-    const r=loop(hp,'lowpass',1500,.3,.12); hp.connect(buses.regen);
-    loop(buses.regen,'lowpass',700,.3,.16); // rustige, constante ruis eronder
+    const r=loop(hp,'lowpass',1200,.3,.04); hp.connect(buses.regen);
+    loop(buses.regen,'lowpass',650,.3,.06); // rustige, constante ruis eronder
     // zee: lage branding + zacht ruisende golf
-    const zr=loop(buses.zee,'lowpass',360,.4,.24); const zs=loop(buses.zee,'bandpass',600,.4,.015);
+    const zr=loop(buses.zee,'lowpass',450,.4,.07); const zs=loop(buses.zee,'lowpass',700,.4,.006);
     buses.zee.rumble=zr.gn; buses.zee.surf=zs;
     return true;
   }
-  function drops(){ // fijne druppeltikjes
-    const t=ac.currentTime;
-    for(let i=0;i<1;i++){ if(Math.random()>.05) continue; // ~0,5 druppel per seconde
-      const at=t+Math.random()*.1, src=ac.createBufferSource(); src.buffer=noise;
-      const bp=ac.createBiquadFilter(); bp.type='bandpass'; bp.frequency.value=900+Math.random()*900; bp.Q.value=3+Math.random()*3;
-      const g=ac.createGain(), pk=.012+Math.random()*.018; g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(pk,at+.005); g.gain.exponentialRampToValueAtTime(.0001,at+.06+Math.random()*.08);
-      const pan=ac.createStereoPanner?ac.createStereoPanner():null;
-      if(pan){ pan.pan.value=Math.random()*1.6-.8; src.connect(bp).connect(g).connect(pan).connect(buses.regen); } else src.connect(bp).connect(g).connect(buses.regen);
-      src.start(at,Math.random()*7,.09); }
+  function drops(){ // druppelende regen: zachte, ronde 'plip'-toontjes, rustig en onregelmatig (~1,5 per seconde)
+    if(Math.random()>.15) return;
+    const at=ac.currentTime+.02+Math.random()*.08, f0=650+Math.random()*900;
+    const o=ac.createOscillator(); o.type='sine';
+    o.frequency.setValueAtTime(f0,at); o.frequency.exponentialRampToValueAtTime(f0*.62,at+.09); // lichte glijtoon omlaag
+    const g=ac.createGain(), pk=.025+Math.random()*.03;
+    g.gain.setValueAtTime(0,at); g.gain.linearRampToValueAtTime(pk,at+.008); // zachte aanslag, geen tik
+    g.gain.setTargetAtTime(0,at+.008,.035+Math.random()*.03);
+    const lp=ac.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=2200;
+    const pan=ac.createStereoPanner?ac.createStereoPanner():null;
+    o.connect(g).connect(lp); if(pan){ pan.pan.value=Math.random()*1.4-.7; lp.connect(pan).connect(buses.regen); } else lp.connect(buses.regen);
+    o.start(at); o.stop(at+.5);
   }
   function waves(){
     tick+=.1;
     const target = running ? (window.__breath||0) : .5+.5*Math.sin(tick*2*Math.PI/14); // zwelt bij inademen, ebt bij uitademen
     swell += (target-swell)*.06; const t=ac.currentTime, z=buses.zee;
-    z.surf.gn.gain.setTargetAtTime(.01+swell*.04,t,1.5); z.surf.f.frequency.setTargetAtTime(520+swell*260,t,1.8);
-    z.rumble.gain.setTargetAtTime(.22+swell*.07,t,1.8);
+    z.surf.gn.gain.setTargetAtTime(.003+swell*.005,t,2.5); z.surf.f.frequency.setTargetAtTime(600+swell*150,t,2.5);
+    z.rumble.gain.setTargetAtTime(.066+swell*.017,t,2.5);
   }
   const strikes=[];
   const hold=(prm,t)=>{ if(prm.cancelAndHoldAtTime) prm.cancelAndHoldAtTime(t); else { const v=prm.value; prm.cancelScheduledValues(t); prm.setValueAtTime(v,t); } };
