@@ -34,16 +34,6 @@
 #zee{position:absolute;top:0;left:0;width:100%;height:100svh;display:block;z-index:0}
 .grain{position:fixed;inset:-50%;z-index:1;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.plant{position:absolute;bottom:0;z-index:2;width:clamp(130px,30vw,300px);height:auto;overflow:visible;pointer-events:none;opacity:.94}
-.plant.l{left:-14px}
-.plant.r{right:-14px;scale:-1 1}
-.plant .sway{transform-box:view-box;transform-origin:30% 100%}
-.plant .bank{fill:#070a17}
-@media (prefers-reduced-motion:no-preference){
-  .plant.l .sway{animation:sway 11s ease-in-out infinite}
-  .plant.r .sway{animation:sway 13s ease-in-out -4s infinite}
-}
-@keyframes sway{0%,100%{rotate:-1.2deg}50%{rotate:1.4deg}}
 .ad-main{position:relative;z-index:3}
 .hero{isolation:isolate;position:relative;overflow:hidden;font-family:var(--sans);color:var(--ink);line-height:1.6;min-height:calc(100svh - 56px);display:grid;grid-template-rows:auto 1fr auto;justify-items:center;padding:16px 20px 0;text-align:center}
 .eyebrow{font-size:.68rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold);margin:0 0 .5rem}
@@ -119,7 +109,7 @@
 @media (min-width:900px){
   .guide{width:380px}
 }
-#inhoud>section.hero{max-width:none!important;padding:16px 20px 0!important;gap:0!important;grid-template-columns:none!important}#inhoud>section.hero>*{grid-column:auto!important}#inhoud>section.hero>:not(.plant){position:relative;z-index:3}#inhoud>section.info{max-width:none!important;width:100%;padding-left:0!important;padding-right:0!important}.info .ad-wrap{max-width:46rem;margin-left:auto!important;margin-right:auto!important}#inhoud>.hero p.eyebrow{font-size:.68rem;line-height:1.6}#inhoud>.hero p.ratio{font-size:.72rem;line-height:1.6}#inhoud>.hero p.phase{font-size:clamp(2.2rem,10vw,3rem);line-height:1}#inhoud>.hero p.count{font-size:2.1rem;line-height:1.1}#inhoud>.hero p.hint{font-size:.95rem;line-height:1.6}#inhoud>.hero p.progress{font-size:.75rem;line-height:1.6}
+#inhoud>section.hero{max-width:none!important;padding:16px 20px 0!important;gap:0!important;grid-template-columns:none!important}#inhoud>section.hero>*{grid-column:auto!important}#inhoud>section.info{max-width:none!important;width:100%;padding-left:0!important;padding-right:0!important}.info .ad-wrap{max-width:46rem;margin-left:auto!important;margin-right:auto!important}#inhoud>.hero p.eyebrow{font-size:.68rem;line-height:1.6}#inhoud>.hero p.ratio{font-size:.72rem;line-height:1.6}#inhoud>.hero p.phase{font-size:clamp(2.2rem,10vw,3rem);line-height:1}#inhoud>.hero p.count{font-size:2.1rem;line-height:1.1}#inhoud>.hero p.hint{font-size:.95rem;line-height:1.6}#inhoud>.hero p.progress{font-size:.75rem;line-height:1.6}
 </style>
 </head>
 <body>
@@ -131,34 +121,6 @@
 <header class="wv-head"><a href="/" class="home">willemvroom.nl</a><nav><span id="ts" role="group" aria-label="Text size"><button type="button" data-d="-1" aria-label="Smaller text" class="ts-s">A</button><span class="ts-sep" aria-hidden="true">|</span><button type="button" data-d="1" aria-label="Larger text" class="ts-l">A</button></span><a href="/ademhaling/">NL</a> | <b>EN</b> <button id="thm" type="button" aria-label=""><svg class="moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button></nav></header>
 <main id="inhoud" class="ad-main">
   <section class="hero" aria-labelledby="titel">
-<svg class="plant l" viewBox="0 0 300 480" aria-hidden="true">
-  <defs><linearGradient id="pl" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="480"><stop offset="0" stop-color="#141b36"/><stop offset=".7" stop-color="#0a0e20"/><stop offset="1" stop-color="#070a17"/></linearGradient></defs>
-  <g class="sway" fill="url(#pl)">
-    <path d="M66 480 Q56 250 90 36 Q60 252 74 480Z"/>
-    <path d="M111 480 Q106 290 152 104 Q110 292 117 480Z"/>
-    <path d="M54 480 Q120 330 246 326 Q132 335 70 480Z"/>
-    <path d="M75 480 Q41 370 36 292 Q51 374 89 480Z"/>
-    <path d="M90 480 Q114 300 204 236 Q122 304 102 480Z"/>
-    <path d="M67 480 Q58 290 40 178 Q66 293 77 480Z"/>
-    <path d="M115 480 Q191 396 272 404 Q201 400 129 480Z"/>
-    <path d="M76 210 Q121 160 170 150 Q127 163 84 210Z"/>
-    <path d="M72 300 Q45 258 34 236 Q51 260 80 300Z"/>
-    <path d="M126 250 Q168 206 206 196 Q172 208 134 250Z"/>
-  </g>
-  <path class="bank" d="M-60 520 L-60 452 C30 432 120 434 196 452 C250 465 290 482 330 520Z"/>
-</svg>
-<svg class="plant r" viewBox="0 0 300 480" aria-hidden="true">
-  <g class="sway" fill="url(#pl)">
-    <path d="M80 480 Q72 280 104 84 Q76 282 88 480Z"/>
-    <path d="M62 480 Q115 350 232 346 Q125 354 78 480Z"/>
-    <path d="M84 480 Q47 350 38 262 Q57 354 96 480Z"/>
-    <path d="M94 480 Q116 280 190 214 Q124 283 106 480Z"/>
-    <path d="M92 200 Q137 158 184 150 Q143 160 100 200Z"/>
-    <path d="M88 290 Q53 252 40 236 Q59 254 96 290Z"/>
-    <path d="M112 480 Q185 410 262 418 Q195 414 124 480Z"/>
-  </g>
-  <path class="bank" d="M-60 520 L-60 452 C30 432 120 434 196 452 C250 465 290 482 330 520Z"/>
-</svg>
     <header>
       <p class="eyebrow">Breathing for the night</p>
       <h1 id="titel">4-7-8 breathing</h1>
