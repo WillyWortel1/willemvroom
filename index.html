@@ -43,7 +43,7 @@
 <section id="werk" class="mx-auto max-w-6xl px-5 pt-16 pb-8 sm:px-8 sm:pt-24">
 <div class="flex items-baseline justify-between gap-4 border-b border-line pb-4">
 <h2 class="section-title">Werk</h2>
-<p class="text-sm text-subtle">23</p>
+<p class="text-sm text-subtle" id="werk-aantal">25</p>
 </div>
 <div>
 <article class="grid gap-4 border-b border-line py-8 sm:grid-cols-12 sm:gap-6 sm:py-10">
@@ -220,5 +220,13 @@
 </footer>
 </div>
 <script src="/site.js?v=20261020-n2"></script>
+<script>
+(function(){
+  var el=document.getElementById("werk-aantal");
+  if(!el)return;
+  var n=document.querySelectorAll("#werk article").length;
+  if(n)el.textContent=String(n);
+})();
+</script>
 </body>
 </html>
