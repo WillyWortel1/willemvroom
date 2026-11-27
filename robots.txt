@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /tellers/
 
 Sitemap: https://willemvroom.nl/sitemap.xml
