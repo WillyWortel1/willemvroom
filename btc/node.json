@@ -1,13 +1,13 @@
 {
   "source": "umbrel",
-  "updated_at": "2026-11-27T07:30:07+01:00",
-  "updated_nl": "27 nov 2026, 07:30",
-  "height": 977770,
+  "updated_at": "2026-11-28T07:30:07+01:00",
+  "updated_nl": "28 nov 2026, 07:30",
+  "height": 977909,
   "block": {
-    "hash": "00000000000000000001b416e0c07920c6b355964f6d5a438527068ec925b21b",
-    "timestamp": 1795760622,
-    "time_nl": "27 nov 2026, 07:23",
-    "tx_count": 4952
+    "hash": "000000000000000000007748592c23d7fef5b9f96caa5e365b3f07f5c3eaf2a6",
+    "timestamp": 1795847119,
+    "time_nl": "28 nov 2026, 07:25",
+    "tx_count": 5179
   },
   "fees": {
     "fastest": 1,
@@ -16,20 +16,20 @@
     "economy": 1
   },
   "mempool": {
-    "count": 63231,
-    "vsize": 29261193,
-    "total_fee": 4411404
+    "count": 59014,
+    "vsize": 28760763,
+    "total_fee": 3960604
   },
   "difficulty": {
-    "progress_percent": 0.496031746031746,
-    "change_percent": -4.858222535842316,
-    "remaining_blocks": 2006,
+    "progress_percent": 7.390873015873016,
+    "change_percent": -3.439724475401551,
+    "remaining_blocks": 1867,
     "next_height": 979776,
-    "estimated_retarget_ms": 1797028580346,
-    "estimated_nl": "11 dec 2026, 23:36"
+    "estimated_retarget_ms": 1797009816136,
+    "estimated_nl": "11 dec 2026, 18:23"
   },
   "hashrate": {
-    "eh_s": 1036.1,
+    "eh_s": 1009.4,
     "window": "3d"
   }
 }
